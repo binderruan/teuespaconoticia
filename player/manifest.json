@@ -1,15 +1,15 @@
 {
-  "name": "Jailson Webradio",
-  "short_name": "Jailson Webradio",
-  "description": "Música sem Gospel sem parar!",
+  "name": "Rádio e Jornal Teu Espaço",
+  "short_name": "Rádio e Jornal Teu Espaço",
+  "description": "A Rádio feita pra você!",
   "icons": [
     {
-      "src": "assets/jailson_cover.png",
+      "src": "https://teuespaco.com.br/images/logo.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "assets/jailson_cover.png",
+      "src": "https://teuespaco.com.br/images/radio%204.png",
       "type": "image/png",
       "sizes": "512x512"
     }
@@ -29,19 +29,19 @@
   ],
   "screenshots": [
     {
-      "src": "assets/jailson_cover.png",
+      "src": "https://teuespaco.com.br/images/radio%204.png",
       "type": "image/png",
       "sizes": "540x720",
       "form_factor": "narrow"
     },
     {
-      "src": "assets/jailson_cover.png",
+      "src": "https://teuespaco.com.br/images/radio%204.png",
       "type": "image/png",
       "sizes": "540x720",
       "form_factor": "narrow"
     },
     {
-      "src": "assets/jailson.png",
+      "src": "https://teuespaco.com.br/images/radio%204.png",
       "type": "image/png",
       "sizes": "720x540",
       "form_factor": "wide"
