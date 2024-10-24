@@ -421,7 +421,7 @@
             const $span = document.createElement("span");
             $div.classList.add("player-program-time-container");
             $span.classList.add("player-program-badge");
-            $span.textContent = "On Air";
+            $span.textContent = "AO VIVO // NO AR";
             $div.appendChild($span);
             const $time = document.createElement("span");
             $time.classList.add("player-program-time");
@@ -851,6 +851,8 @@
         }
     }
 
+    
+
     // --- [POP-UP DE INÍCIO E HANDLERS] --------------------------------
 
     const pixel = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P//PxcACQYDCF0ysWYAAAAASUVORK5CYII=";
@@ -882,6 +884,8 @@
                 }
             });
         });
+
+        
 
     // --- [INICIALIZA A APLICAÇÃO] -------------------------------------
     initApp();
