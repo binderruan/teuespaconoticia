@@ -3,6 +3,13 @@ div.wpcf7 {
     padding: 0;
 }
 
+.carousel .carousel-item img {
+    width: 1080px;
+    height: 1080px;
+    object-fit: cover; /* mantém a proporção e corta partes que extrapolam */
+}
+
+
 .col-lg-2.player-rd {
     background-color: #dedede;
 }
