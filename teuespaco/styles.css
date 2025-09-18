@@ -4,10 +4,14 @@ div.wpcf7 {
 }
 
 .carousel .carousel-item img {
-    width: 1080px;
-    height: 1080px;
-    object-fit: cover; /* mantém a proporção e corta partes que extrapolam */
+    width: 100%;        /* ocupa toda a largura da coluna */
+    height: 1080px;     /* força altura fixa */
+    object-fit: cover;  /* mantém a proporção, corta excesso */
+    object-position: center; /* centraliza o corte */
 }
+
+
+
 
 
 .col-lg-2.player-rd {
