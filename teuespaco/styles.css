@@ -3,14 +3,14 @@ div.wpcf7 {
     padding: 0;
 }
 
-
-
 .carousel .carousel-item img {
-    width: 100%;        /* ocupa toda a largura da coluna */
-    height: 1080px;     /* força altura fixa */
-    object-fit: cover;  /* mantém a proporção, corta excesso */
-    object-position: center; /* centraliza o corte */
+    width: 100%;            /* ocupa toda a largura do card */
+    aspect-ratio: 1 / 1;    /* mantém sempre quadrado */
+    object-fit: cover;      /* corta proporcionalmente sem esticar */
+    object-position: center;/* centraliza a imagem */
 }
+
+
 
 
 
