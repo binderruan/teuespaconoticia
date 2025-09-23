@@ -890,4 +890,53 @@
     // --- [INICIALIZA A APLICAÇÃO] -------------------------------------
     initApp();
 
+    // ---- Carrossel de patrocinadores/capas ----
+(function startSponsorsCarousel() {
+  // alvo 1: imagem de fundo grande (blur) do player
+  const bg = document.querySelector('.player-cover-image.song-cover');
+  // alvo 2 (opcional): a imagem da arte central
+  const artworkImg = document.querySelector('.player-artwork img');
+
+  // usa as imagens definidas em window.streams (todas que tiverem album)
+  const albums = (window.streams?.stations || [])
+    .map(s => s.album)
+    .filter(Boolean);
+
+  // se não tiver imagens, não faz nada
+  if (!albums.length || !bg) return;
+
+  let i = 0;
+  const INTERVALO = 8000; // 8s por imagem
+
+  // função que troca as imagens
+  const setSlide = (src) => {
+    // troca a imagem de fundo do player
+    bg.style.opacity = 0;
+    const onEnd = () => {
+      bg.removeEventListener('transitionend', onEnd);
+      bg.src = src;
+      // reativa o fade-in
+      requestAnimationFrame(() => {
+        bg.style.opacity = 1;
+      });
+    };
+    bg.addEventListener('transitionend', onEnd);
+
+    // opcional: troca a arte central também
+    if (artworkImg) {
+      artworkImg.src = src;
+    }
+  };
+
+  // inicia com a primeira
+  setSlide(albums[i]);
+
+  // loop
+  setInterval(() => {
+    i = (i + 1) % albums.length;
+    setSlide(albums[i]);
+  }, INTERVALO);
+})();
+
+
 })();
