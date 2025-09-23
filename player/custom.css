@@ -1,3 +1,11 @@
+/* Deixa a capa e a arte quadradas e sem esticar */
+.player-artwork img,
+.player-cover-image.song-cover {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+}
+
 .station-description {
     color: #fff;
     opacity: 0.6;
