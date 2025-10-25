@@ -54,19 +54,7 @@
 
     <h1>Galeria de Imagens</h1>
     
-    <div class="gallery">
-        <!-- Gerar as imagens de 1 a 10 como exemplo -->
-        <img src="https://teuespaco.com.br/casamento/1%20(1).jpg" alt="Imagem 1" onclick="openModal(this)">
-        <img src="https://teuespaco.com.br/casamento/1%20(2).jpg" alt="Imagem 2" onclick="openModal(this)">
-        <img src="https://teuespaco.com.br/casamento/1%20(3).jpg" alt="Imagem 3" onclick="openModal(this)">
-        <img src="https://teuespaco.com.br/casamento/1%20(4).jpg" alt="Imagem 4" onclick="openModal(this)">
-        <img src="https://teuespaco.com.br/casamento/1%20(5).jpg" alt="Imagem 5" onclick="openModal(this)">
-        <img src="https://teuespaco.com.br/casamento/1%20(6).jpg" alt="Imagem 6" onclick="openModal(this)">
-        <img src="https://teuespaco.com.br/casamento/1%20(7).jpg" alt="Imagem 7" onclick="openModal(this)">
-        <img src="https://teuespaco.com.br/casamento/1%20(8).jpg" alt="Imagem 8" onclick="openModal(this)">
-        <img src="https://teuespaco.com.br/casamento/1%20(9).jpg" alt="Imagem 9" onclick="openModal(this)">
-        <img src="https://teuespaco.com.br/casamento/1%20(10).jpg" alt="Imagem 10" onclick="openModal(this)">
-    </div>
+    <div class="gallery" id="gallery"></div>
 
     <!-- Modal -->
     <div id="myModal" class="modal" onclick="closeModal()">
@@ -76,6 +64,17 @@
     </div>
 
     <script>
+        // Função para gerar as imagens automaticamente
+        for (let i = 1; i <= 1380; i++) {
+            const img = document.createElement("img");
+            img.src = `https://teuespaco.com.br/casamento/1%20(${i}).jpg`;
+            img.alt = `Imagem ${i}`;
+            img.onclick = function() {
+                openModal(img);
+            };
+            document.getElementById("gallery").appendChild(img);
+        }
+
         // Função para abrir o modal e mostrar a imagem ampliada
         function openModal(img) {
             const modal = document.getElementById('myModal');
