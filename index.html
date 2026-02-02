@@ -77,6 +77,19 @@
     <meta name="generator" content="WordPress 5.2.9">
 
     <head>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", user => {
+    if (!user) {
+      window.netlifyIdentity.on("login", () => {
+        window.location.href = "/admin/";
+      });
+    }
+  });
+}
+</script>
 
     <body data-rsssl="1" class="sfsi_2.43">
 
