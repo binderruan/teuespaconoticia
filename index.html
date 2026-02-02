@@ -74,7 +74,6 @@
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
     <meta name="generator" content="WordPress 5.2.9">
 
-    <head>
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
 <script>
@@ -610,8 +609,6 @@ if (window.netlifyIdentity) {
                 </div>
             </div>
 
-</head>
-
 </section>
 
 
@@ -724,7 +721,7 @@ if (window.netlifyIdentity) {
 <script src="./teuespaco/popper.js.download"></script>
 <script src="./teuespaco/bootstrap.js.download"></script>
 
-    <script>
+<script>
 fetch('/noticias/')
   .then(res => res.text())
   .then(html => {
@@ -737,17 +734,15 @@ fetch('/noticias/')
     return Promise.all(links.map(link => fetch(link).then(r => r.json())));
   })
   .then(noticias => {
-
     noticias.sort((a, b) => new Date(b.data) - new Date(a.data));
-
     const container = document.getElementById('lista-noticias');
 
     noticias.slice(0,3).forEach(n => {
       container.innerHTML += `
         <div class="col-lg-4 mb-4 d-inline-flex">
           <div class="card m-2 videos">
-            <a href="/noticia.html?post=${encodeURIComponent(n.titulo)}">
-              <img class="card-img img-fluid" src="${n.imagem}">
+            <a href="#">
+              <img class="card-img img-fluid" src="${n.imagem}" alt="${n.titulo}">
             </a>
             <div class="card-block">
               <h4 class="card-nome">${n.titulo}</h4>
@@ -761,6 +756,7 @@ fetch('/noticias/')
     });
   });
 </script>
+
 
         
 </body>
