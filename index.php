@@ -260,78 +260,54 @@
         </section>
 
 
-        <section id="two-set">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 nomes">
-                        <h3>Noticias </h3>
-                    </div>
-
-
-                    <div class="col-lg-4 mb-4 d-inline-flex">
-                        <div class="card m-2 videos">
-                            <a
-                                href="https://online.pubhtml5.com/knrgh/tamz/">
-                                <img width="800" height="578"
-                                    src="https://teuespaco.com.br/101225.jpg"
-                                    class="card-img img-fluid wp-post-image" alt=""></a>
-                            <div class="card-block">
-                                <h4 class="card-nome">   OS MATA COLADA: A HISTÓRIA DO TIME QUE NASCEU DE UMA BRINCADEIRA E VIROU REFERÊNCIA EM UNIÃO, DISCIPLINA E SOLIDARIEDADE   </h4>
-
-                            </div>
-                            <div class="card-body data">
-                                <strong>Esporte</strong>
-                                <a href="https://online.pubhtml5.com/knrgh/tamz/"
-                                    nome="   OS MATA COLADA: A HISTÓRIA DO TIME QUE NASCEU DE UMA BRINCADEIRA E VIROU REFERÊNCIA EM UNIÃO, DISCIPLINA E SOLIDARIEDADE  "
-                                    class="btn btn-primary btn-sm mtn">» Leia mais...</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 mb-4 d-inline-flex">
-                        <div class="card m-2 videos">
-                            <a
-                                href="https://online.pubhtml5.com/knrgh/hzzm/">
-                                <img width="800" height="578"
-                                    src="https://teuespaco.com.br/2909251.jpg"
-                                    class="card-img img-fluid wp-post-image" alt=""></a>
-                            <div class="card-block">
-                                <h4 class="card-nome">  Jovem de Canoinhas transforma desafios em conquistas no karatê 
-                                </h4>
-
-                            </div>
-                            <div class="card-body data">
-                                <strong>Esporte</strong>
-                                <a href="https://online.pubhtml5.com/knrgh/hzzm/"
-                                    nome=" Jovem de Canoinhas transforma desafios em conquistas no karatê "                                        
-                                    class="btn btn-primary btn-sm mtn">» Leia mais...</a>
-                            </div>
-                        </div>
-                    </div>
-
-                     <div class="col-lg-4 mb-4 d-inline-flex">
-                        <div class="card m-2 videos">
-                            <a
-                                href="https://teuespaco.com.br/jovem-de-canoinhas-atravessa-a-cordilheira-dos-andes-em-carro-rebaixado">
-                                <img width="800" height="578"
-                                    src="https://teuespaco.com.br/images/viagem/19.jpg"
-                                    class="card-img img-fluid wp-post-image" alt=""></a>
-                            <div class="card-block">
-                                <h4 class="card-nome">  Jovem de Canoinhas atravessa a Cordilheira dos Andes em carro rebaixado </h4>
-                            </div>
-                            <div class="card-body data">
-                                <strong>Municipal</strong>
-                                <a href="https://teuespaco.com.br/jovem-de-canoinhas-atravessa-a-cordilheira-dos-andes-em-carro-rebaixado"
-                                    nome="  Jovem de Canoinhas atravessa a Cordilheira dos Andes em carro rebaixado "
-                                    class="btn btn-primary btn-sm mtn">» Leia mais...</a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+   
+<section id="two-set">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 nomes">
+                <h3>Noticias </h3>
             </div>
 
-    </section>
+<?php
+$pasta = "noticias/";
+$arquivos = glob($pasta . "*.html");
+
+usort($arquivos, function($a, $b) {
+    return filemtime($b) - filemtime($a);
+});
+
+$total = min(3, count($arquivos)); // quantidade de cards
+
+for ($i = 0; $i < $total; $i++) {
+
+    $arquivo = $arquivos[$i];
+    $conteudo = file_get_contents($arquivo);
+
+    preg_match("/<title>(.*?)<\/title>/", $conteudo, $titulo);
+    preg_match('/property="og:image" content="(.*?)"/', $conteudo, $imagem);
+
+    echo '
+    <div class="col-lg-4 mb-4 d-inline-flex">
+        <div class="card m-2 videos">
+            <a href="'.$arquivo.'">
+                <img class="card-img img-fluid wp-post-image" src="'.$imagem[1].'" alt="'.$titulo[1].'">
+            </a>
+            <div class="card-block">
+                <h4 class="card-nome">'.$titulo[1].'</h4>
+            </div>
+            <div class="card-body data">
+                <strong>Notícia</strong>
+                <a href="'.$arquivo.'" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
+            </div>
+        </div>
+    </div>
+    ';
+}
+?>
+
+        </div>
+    </div>
+</section>
 
 
 
