@@ -11,9 +11,12 @@ collections:
     folder: "noticias"
     create: true
     slug: "{{slug}}"
+    format: "json"
+    extension: "json"
     fields:
-      - {label: "Título", name: "title", widget: "string"}
-      - {label: "Data", name: "date", widget: "datetime"}
-      - {label: "Imagem de Capa", name: "thumbnail", widget: "image"}
-      - {label: "Categoria", name: "categoria", widget: "string"}
-      - {label: "Conteúdo", name: "body", widget: "markdown"}
+      - { label: "Título", name: "titulo", widget: "string" }
+      - { label: "Data", name: "data", widget: "datetime" }
+      - { label: "Imagem", name: "imagem", widget: "image" }
+      - { label: "Categoria", name: "categoria", widget: "string" }
+      - { label: "Conteúdo", name: "conteudo", widget: "markdown" }
+
