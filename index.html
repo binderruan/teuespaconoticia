@@ -727,40 +727,50 @@ if (window.netlifyIdentity) {
 <script src="./teuespaco/bootstrap.js.download"></script>
 
 <script>
-fetch('/noticias/')
-  .then(res => res.text())
-  .then(html => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    const links = [...doc.querySelectorAll('a')]
-      .map(a => a.href)
-      .filter(href => href.endsWith('.json'));
+const repo = "binderruan/teuespaconoticia"; // seu repositório
+const pasta = "content/noticias"; // pasta onde o CMS salva
 
-    return Promise.all(links.map(link => fetch(link).then(r => r.json())));
-  })
-  .then(noticias => {
-    noticias.sort((a, b) => new Date(b.data) - new Date(a.data));
-    const container = document.getElementById('lista-noticias');
+async function carregarNoticias() {
+  const res = await fetch(`https://api.github.com/repos/${repo}/contents/${pasta}`);
+  const arquivos = await res.json();
 
-    noticias.slice(0,3).forEach(n => {
-      container.innerHTML += `
-        <div class="col-lg-4 mb-4 d-inline-flex">
-          <div class="card m-2 videos">
-            <a href="#">
-              <img class="card-img img-fluid" src="${n.imagem}" alt="${n.titulo}">
-            </a>
-            <div class="card-block">
-              <h4 class="card-nome">${n.titulo}</h4>
-            </div>
-            <div class="card-body data">
-              <strong>${n.categoria}</strong>
-            </div>
+  const posts = await Promise.all(
+    arquivos.map(async file => {
+      const conteudo = await fetch(file.download_url).then(r => r.text());
+
+      const titulo = conteudo.match(/titulo:\s*"(.*?)"/)?.[1] || "Sem título";
+      const data = conteudo.match(/data:\s*"(.*?)"/)?.[1] || "";
+      const imagem = conteudo.match(/imagem:\s*"(.*?)"/)?.[1] || "images/padrao.jpg";
+      const categoria = conteudo.match(/categoria:\s*"(.*?)"/)?.[1] || "Notícia";
+
+      return { titulo, data, imagem, categoria };
+    })
+  );
+
+  posts.sort((a, b) => new Date(b.data) - new Date(a.data));
+
+  const container = document.getElementById("lista-noticias");
+
+  posts.slice(0,3).forEach(n => {
+    container.innerHTML += `
+      <div class="col-lg-4 mb-4 d-inline-flex">
+        <div class="card m-2 videos">
+          <img class="card-img img-fluid" src="${n.imagem}" alt="${n.titulo}">
+          <div class="card-block">
+            <h4 class="card-nome">${n.titulo}</h4>
+          </div>
+          <div class="card-body data">
+            <strong>${n.categoria}</strong>
           </div>
         </div>
-      `;
-    });
+      </div>
+    `;
   });
+}
+
+carregarNoticias();
 </script>
+
 
 
         
