@@ -226,6 +226,7 @@ if (window.netlifyIdentity) {
                         </div>
                     </div>
 
+<div class="row" id="lista-noticias"></div>
 
                     <div class="col-sm-5 mvistos">
                         <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="4000">
@@ -723,6 +724,45 @@ if (window.netlifyIdentity) {
 <script src="./teuespaco/popper.js.download"></script>
 <script src="./teuespaco/bootstrap.js.download"></script>
 
+    <script>
+fetch('/noticias/')
+  .then(res => res.text())
+  .then(html => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const links = [...doc.querySelectorAll('a')]
+      .map(a => a.href)
+      .filter(href => href.endsWith('.json'));
+
+    return Promise.all(links.map(link => fetch(link).then(r => r.json())));
+  })
+  .then(noticias => {
+
+    noticias.sort((a, b) => new Date(b.data) - new Date(a.data));
+
+    const container = document.getElementById('lista-noticias');
+
+    noticias.slice(0,3).forEach(n => {
+      container.innerHTML += `
+        <div class="col-lg-4 mb-4 d-inline-flex">
+          <div class="card m-2 videos">
+            <a href="/noticia.html?post=${encodeURIComponent(n.titulo)}">
+              <img class="card-img img-fluid" src="${n.imagem}">
+            </a>
+            <div class="card-block">
+              <h4 class="card-nome">${n.titulo}</h4>
+            </div>
+            <div class="card-body data">
+              <strong>${n.categoria}</strong>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  });
+</script>
+
+        
 </body>
 
 </html>
