@@ -1,20 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
   <meta charset="UTF-8">
   <title>Notícia</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Bootstrap (mesmo visual do site) -->
   <link rel="stylesheet" href="/teuespaco/bootstrap.css">
-
-  <!-- Biblioteca que converte Markdown em HTML -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
-
 <body>
 
-<div id="post"></div> <!-- 🔥 AQUI FICA A NOTÍCIA -->
+<div id="post"></div>
 
 <script>
 async function carregarPost() {
@@ -27,9 +21,10 @@ async function carregarPost() {
       `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${arquivo}`
     );
 
+    if (!resposta.ok) throw new Error("Arquivo não encontrado");
+
     const markdown = await resposta.text();
 
-    // Remove a primeira imagem (já usada como capa no card)
     const conteudo = markdown.replace(/!\[.*?\]\(.*?\)/, "");
 
     document.getElementById("post").innerHTML = `
@@ -39,7 +34,7 @@ async function carregarPost() {
     `;
 
   } catch (erro) {
-    document.getElementById("post").innerHTML = "Erro ao carregar a notícia.";
+    document.getElementById("post").innerHTML = "<h3>Notícia não encontrada.</h3>";
     console.error(erro);
   }
 }
