@@ -431,8 +431,34 @@ var sfsi_icon_ajax_object = {"ajax_url":"https:\/\/teuespaco.com.br\/wp-admin\/a
    <script src="./teuespaco/jquery.js(1).download"></script>
    <script src="./teuespaco/popper.js.download"></script>
    <script src="./teuespaco/bootstrap.js.download"></script>
+
+
+                    
    
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+                    <script>
+function formatarDataPtBr(dataStr) {
+  if (!dataStr) return "";
+
+  const meses = [
+    "janeiro", "fevereiro", "março", "abril", "maio", "junho",
+    "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+  ];
+
+  // espera formato DD/MM/AAAA
+  const partes = dataStr.split("/");
+  if (partes.length !== 3) return dataStr;
+
+  const dia = partes[0];
+  const mes = parseInt(partes[1], 10) - 1;
+  const ano = partes[2];
+
+  if (mes < 0 || mes > 11) return dataStr;
+
+  return `${dia} de ${meses[mes]} de ${ano}`;
+}
+</script>
 
 <script>
 function parseFrontmatter(md) {
@@ -495,7 +521,7 @@ async function carregarPost() {
     document.title = titulo + " - Teu Espaço";
 
     // 3) Data e Categoria
-    document.getElementById("data-post").innerText = data.date || "";
+    document.getElementById("data-post").innerText = formatarDataPtBr(data.date);
     document.getElementById("categoria-post").innerText = data.category || "";
 
     // 4) Imagem (thumbnail do frontmatter)
