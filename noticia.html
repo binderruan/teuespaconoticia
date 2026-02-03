@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Notícia</title>
-  <link rel="stylesheet" href="/teuespaco/bootstrap.css">
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-</head>
-<body>
-
-<div id="post"></div>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
 async function carregarPost() {
@@ -17,15 +7,14 @@ async function carregarPost() {
   if (!arquivo) return;
 
   try {
-    const resposta = await fetch(
-      `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${arquivo}`
-    );
+    const resposta = await fetch("/noticias/" + arquivo);
 
     if (!resposta.ok) throw new Error("Arquivo não encontrado");
 
-    const markdown = await resposta.text();
+    const texto = await resposta.text();
 
-    const conteudo = markdown.replace(/!\[.*?\]\(.*?\)/, "");
+    // Remove o frontmatter (parte entre ---)
+    const conteudo = texto.replace(/---[\s\S]*?---/, "");
 
     document.getElementById("post").innerHTML = `
       <div class="container mt-4">
@@ -34,13 +23,10 @@ async function carregarPost() {
     `;
 
   } catch (erro) {
-    document.getElementById("post").innerHTML = "<h3>Notícia não encontrada.</h3>";
+    document.getElementById("post").innerHTML = "<h2>Notícia não encontrada.</h2>";
     console.error(erro);
   }
 }
 
 carregarPost();
 </script>
-
-</body>
-</html>
