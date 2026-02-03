@@ -8,26 +8,24 @@ async function carregarPost() {
   const arquivo = params.get("post");
   if (!arquivo) return;
 
+  const url = `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${arquivo}`;
+  console.log("Buscando:", url);
+
   try {
-    const resposta = await fetch(
-      `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/teuespaconoticia/noticias/${arquivo}`
-    );
+    const resposta = await fetch(url);
 
     if (!resposta.ok) throw new Error("404");
 
     const texto = await resposta.text();
 
+    // remove bloco do CMS --- ---
     const conteudo = texto.replace(/---[\s\S]*?---/, "");
 
-    document.getElementById("post").innerHTML = `
-      <div class="container mt-4">
-        ${marked.parse(conteudo)}
-      </div>
-    `;
+    document.getElementById("post").innerHTML = marked.parse(conteudo);
 
   } catch (erro) {
     document.getElementById("post").innerHTML = "<h2>Notícia não encontrada.</h2>";
-    console.error(erro);
+    console.error("ERRO REAL:", erro);
   }
 }
 
