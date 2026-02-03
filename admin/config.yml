@@ -14,8 +14,13 @@ collections:
     extension: "md"
     format: "frontmatter"
     fields:
-      - { label: "Título", name: "", widget: "string" }
-      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Título", name: "title", widget: "string" } # Adicionado name: "title"
+      - label: "Data"
+        name: "date"
+        widget: "datetime"
+        format: "DD/MM/YYYY"          # Como a data será salva no arquivo .md
+        date_format: "DD/MM/YYYY"     # Formato da data na interface do CMS
+        time_format: false            # Se não precisar de hora, deixe false
       - { label: "Imagem de Capa", name: "thumbnail", widget: "image" }
       - { label: "Categoria", name: "categoria", widget: "string" }
       - { label: "Conteúdo", name: "body", widget: "markdown" }
