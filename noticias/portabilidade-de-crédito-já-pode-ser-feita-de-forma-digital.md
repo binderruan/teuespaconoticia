@@ -1,7 +1,7 @@
 ---
 title: Portabilidade de crédito já pode ser feita de forma digital
-date: 2026-02-03T20:18:06.489Z
-thumbnail: https://imagens.ebc.com.br/uhi8jVXlX0rOZnadJ9oXv-bMVVU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/real_moedadinheiro_jfcrz_abr_1701220042_1.jpg?itok=mSjB1oFb
+date: 2026-02-03T20:28:51.148Z
+thumbnail: /images/uploads/01.png
 categoria: Economia | Repórter da Agência Brasil
 ---
 A partir desta semana, os correntistas podem pedir a portabilidade de crédito via open finance, com a transferência de empréstimos entre instituições financeiras de forma totalmente digital, diretamente pelos aplicativos dos bancos. Lançada dias após o open finance completar cinco anos, a novidade marca um novo passo na ampliação da concorrência no mercado de crédito.![](https://agenciabrasil.ebc.com.br/ebc.png?id=1676935&o=node)![](https://agenciabrasil.ebc.com.br/ebc.gif?id=1676935&o=node)
