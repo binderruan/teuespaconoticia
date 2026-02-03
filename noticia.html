@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Notícia</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="/teuespaco/bootstrap.css">
+</head>
+<body>
+
+<div class="container" style="margin-top:40px">
+  <div id="post"></div>
+</div>
+
+<script>
+async function carregarPost() {
+  const params = new URLSearchParams(window.location.search);
+  const arquivo = params.get("post");
+
+  if (!arquivo) return;
+
+  const resposta = await fetch("/noticias/" + arquivo);
+  const markdown = await resposta.text();
+
+  document.getElementById("post").innerHTML = marked.parse(markdown);
+}
+
+carregarPost();
+</script>
+
+</body>
+</html>
