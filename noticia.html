@@ -1,3 +1,7 @@
+<body>
+
+<div id="post"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
@@ -7,13 +11,15 @@ async function carregarPost() {
   if (!arquivo) return;
 
   try {
-    const resposta = await fetch("/noticias/" + arquivo);
+    const resposta = await fetch(
+      `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${arquivo}`
+    );
 
-    if (!resposta.ok) throw new Error("Arquivo não encontrado");
+    if (!resposta.ok) throw new Error("404");
 
     const texto = await resposta.text();
 
-    // Remove o frontmatter (parte entre ---)
+    // remove cabeçalho do Netlify CMS
     const conteudo = texto.replace(/---[\s\S]*?---/, "");
 
     document.getElementById("post").innerHTML = `
@@ -30,3 +36,5 @@ async function carregarPost() {
 
 carregarPost();
 </script>
+
+</body>
