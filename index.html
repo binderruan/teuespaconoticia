@@ -611,10 +611,14 @@ async function carregarNoticias() {
       const resposta = await fetch(arquivo);
       const noticia = await resposta.json();
 
+      const imagem = noticia.thumbnail.startsWith('/')
+        ? noticia.thumbnail
+        : '/' + noticia.thumbnail;
+
       const card = `
         <div class="col-lg-4 mb-4 d-inline-flex">
           <div class="card m-2 videos h-100">
-            <img src="${noticia.thumbnail}" class="card-img-top img-fluid">
+            <img src="${imagem}" class="card-img-top img-fluid">
             <div class="card-block">
               <h4 class="card-nome">${noticia.title}</h4>
             </div>
