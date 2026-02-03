@@ -767,7 +767,50 @@ async function carregarNoticias() {
 carregarNoticias();
 </script>
 
+<script>
+async function carregarNoticias() {
+  const pasta = "/noticias/";
+  
+  try {
+    const resposta = await fetch(pasta);
+    const texto = await resposta.text();
 
+    // Pega todos os arquivos .json da pasta
+    const arquivos = [...texto.matchAll(/href="(.*?\.json)"/g)].map(a => a[1]);
+
+    const container = document.getElementById("lista-noticias");
+    container.innerHTML = "";
+
+    for (let arquivo of arquivos.reverse()) {
+      const post = await fetch(pasta + arquivo).then(r => r.json());
+
+      const card = `
+        <div class="col-lg-4 mb-4 d-inline-flex">
+          <div class="card m-2 videos">
+            <a href="/noticias/${arquivo.replace('.json','.html')}">
+              <img src="${post.thumbnail}" class="card-img img-fluid">
+            </a>
+            <div class="card-block">
+              <h4 class="card-nome">${post.title}</h4>
+            </div>
+            <div class="card-body data">
+              <strong>${post.categoria}</strong>
+              <a href="/noticias/${arquivo.replace('.json','.html')}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML += card;
+    }
+
+  } catch (erro) {
+    console.error("Erro ao carregar notícias", erro);
+  }
+}
+
+carregarNoticias();
+</script>
         
 </body>
 
