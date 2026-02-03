@@ -598,28 +598,39 @@ if (window.netlifyIdentity) {
 <script src="./teuespaco/popper.js.download"></script>
 <script src="./teuespaco/bootstrap.js.download"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 <script>
 async function carregarNoticias() {
   const container = document.getElementById("lista-noticias");
+  container.innerHTML = ""; // Limpa antes
 
   try {
     const resposta = await fetch(
-      "https://api.github.com/repos/binderruan/teuespaconoticia/contents/noticias"
+      "https://api.github.com/repos/binderruan/teuespaconoticia/contents/noticias?ref=main"
     );
+
+    if (!resposta.ok) {
+      console.error("GitHub API falhou:", resposta.status);
+      return;
+    }
+
     const arquivos = await resposta.json();
 
-    container.innerHTML = "";
+    // Filtra só os .md válidos
+    const posts = arquivos.filter(item => item.name.endsWith(".md"));
 
-    for (const file of arquivos.reverse()) {
-      if (!file.name.endsWith(".md")) continue;
+    for (const arquivo of posts.reverse()) {
+      const markdown = await fetch(arquivo.download_url).then(r => r.text());
 
-      const postResp = await fetch(file.download_url);
-      const texto = await postResp.text();
+      // pega o título (primeira linha "# …")
+      const titulo = markdown.split("\n")[0].replace(/^#\s+/, "").trim();
 
-      const titulo = texto.match(/^# (.*)/m)?.[1] || "Sem título";
-      const imagem = texto.match(/!\[.*?\]\((.*?)\)/)?.[1] || "images/logo.png";
+      // primeira imagem se existir
+      const imgMatch = markdown.match(/!\[.*?\]\((.*?)\)/);
+      const imagem = imgMatch ? imgMatch[1] : "images/logo.png";
 
-      const card = `
+      container.innerHTML += `
         <div class="col-lg-4 mb-4 d-inline-flex">
           <div class="card m-2 videos h-100">
             <img src="${imagem}" class="card-img-top img-fluid">
@@ -627,14 +638,12 @@ async function carregarNoticias() {
               <h4 class="card-nome">${titulo}</h4>
             </div>
             <div class="card-body data">
-              <a href="/noticia.html?post=${file.name}" 
+              <a href="/noticia.html?post=${arquivo.name}"
                  class="btn btn-primary btn-sm mtn">» Leia mais...</a>
             </div>
           </div>
         </div>
       `;
-
-      container.innerHTML += card;
     }
 
   } catch (erro) {
@@ -644,6 +653,7 @@ async function carregarNoticias() {
 
 carregarNoticias();
 </script>
+
 
 
 </script>
