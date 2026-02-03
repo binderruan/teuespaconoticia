@@ -5,6 +5,9 @@ backend:
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
+site_url: https://teuespaco.com.br
+display_url: https://teuespaco.com.br
+
 collections:
   - name: "noticias"
     label: "Notícias"
@@ -13,14 +16,32 @@ collections:
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
+
+    meta:
+      path:
+        widget: "string"
+        label: "Caminho do arquivo"
+        index_file: "index"
+
     fields:
-      - { label: "Título", name: "title", widget: "string" } # Adicionado name: "title"
+      - label: "Título"
+        name: "title"
+        widget: "string"
+
       - label: "Data"
         name: "date"
-        widget: "datetime"
-        format: "DD/MM/YYYY"          # Como a data será salva no arquivo .md
-        date_format: "DD/MM/YYYY"     # Formato da data na interface do CMS
-        time_format: false            # Se não precisar de hora, deixe false
-      - { label: "Imagem de Capa", name: "thumbnail", widget: "image" }
-      - { label: "Categoria", name: "categoria", widget: "string" }
-      - { label: "Conteúdo", name: "body", widget: "markdown" }
+        widget: "string"
+        default: "{{now | date('DD/MM/YYYY')}}"
+
+      - label: "Categoria"
+        name: "category"
+        widget: "string"
+
+      - label: "Imagem de capa"
+        name: "thumbnail"
+        widget: "image"
+        required: false
+
+      - label: "Conteúdo da notícia"
+        name: "body"
+        widget: "markdown"
