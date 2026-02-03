@@ -601,31 +601,26 @@ if (window.netlifyIdentity) {
 <script>
 async function carregarNoticias() {
 
-    <!-- Converte Markdown para HTML -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
 async function carregarNoticias() {
   const container = document.getElementById("lista-noticias");
 
-  const arquivos = [
-    "teste.md",
-    "oi.md"
-  ];
+  try {
+    const resposta = await fetch("/noticias/noticias.json");
+    const arquivos = await resposta.json();
 
-  for (const arquivo of arquivos.reverse()) {
-    try {
-      const resposta = await fetch("/noticias/" + arquivo);
-      const textoMD = await resposta.text();
+    container.innerHTML = "";
 
-      // título = primeira linha do markdown
-      const titulo = textoMD.split("\n")[0].replace("#", "").trim();
+    for (const arquivo of arquivos.reverse()) {
+      const md = await fetch("/noticias/" + arquivo).then(r => r.text());
 
-      // imagem = primeira imagem do markdown
-      const imgMatch = textoMD.match(/!\[.*?\]\((.*?)\)/);
+      const titulo = md.split("\n")[0].replace("#", "").trim();
+      const imgMatch = md.match(/!\[.*?\]\((.*?)\)/);
       const imagem = imgMatch ? imgMatch[1] : "images/logo.png";
 
-      const card = `
+      container.innerHTML += `
         <div class="col-lg-4 mb-4 d-inline-flex">
           <div class="card m-2 videos h-100">
             <img src="${imagem}" class="card-img-top img-fluid">
@@ -639,17 +634,16 @@ async function carregarNoticias() {
           </div>
         </div>
       `;
-
-      container.innerHTML += card;
-
-    } catch (e) {
-      console.log("Erro ao carregar", arquivo);
     }
+
+  } catch (e) {
+    console.error("Erro ao carregar notícias", e);
   }
 }
 
 carregarNoticias();
-    </script>
+</script>
+
 </script>
         
 </body>
