@@ -727,50 +727,45 @@ if (window.netlifyIdentity) {
 <script src="./teuespaco/bootstrap.js.download"></script>
 
 <script>
-const repo = "binderruan/teuespaconoticia"; // seu repositório
-const pasta = "content/noticias"; // pasta onde o CMS salva
-
 async function carregarNoticias() {
-  const res = await fetch(`https://api.github.com/repos/${repo}/contents/${pasta}`);
-  const arquivos = await res.json();
-
-  const posts = await Promise.all(
-    arquivos.map(async file => {
-      const conteudo = await fetch(file.download_url).then(r => r.text());
-
-      const titulo = conteudo.match(/titulo:\s*"(.*?)"/)?.[1] || "Sem título";
-      const data = conteudo.match(/data:\s*"(.*?)"/)?.[1] || "";
-      const imagem = conteudo.match(/imagem:\s*"(.*?)"/)?.[1] || "images/padrao.jpg";
-      const categoria = conteudo.match(/categoria:\s*"(.*?)"/)?.[1] || "Notícia";
-
-      return { titulo, data, imagem, categoria };
-    })
-  );
-
-  posts.sort((a, b) => new Date(b.data) - new Date(a.data));
-
   const container = document.getElementById("lista-noticias");
 
-  posts.slice(0,3).forEach(n => {
-    container.innerHTML += `
-      <div class="col-lg-4 mb-4 d-inline-flex">
-        <div class="card m-2 videos">
-          <img class="card-img img-fluid" src="${n.imagem}" alt="${n.titulo}">
-          <div class="card-block">
-            <h4 class="card-nome">${n.titulo}</h4>
-          </div>
-          <div class="card-body data">
-            <strong>${n.categoria}</strong>
+  try {
+    // Lista de notícias manual (provisório até automatizar 100%)
+    const arquivos = [
+      "/noticias/teste.json"
+    ];
+
+    for (const arquivo of arquivos) {
+      const resposta = await fetch(arquivo);
+      const noticia = await resposta.json();
+
+      const card = `
+        <div class="col-lg-4 mb-4 d-inline-flex">
+          <div class="card m-2 videos h-100">
+            <img src="${noticia.thumbnail}" class="card-img-top img-fluid">
+            <div class="card-block">
+              <h4 class="card-nome">${noticia.title}</h4>
+            </div>
+            <div class="card-body data">
+              <strong>${noticia.categoria}</strong><br>
+              <a href="/noticias/${arquivo.split('/').pop().replace('.json','.html')}" 
+                 class="btn btn-primary btn-sm mtn">» Leia mais...</a>
+            </div>
           </div>
         </div>
-      </div>
-    `;
-  });
+      `;
+
+      container.innerHTML += card;
+    }
+
+  } catch (erro) {
+    console.error("Erro ao carregar notícias:", erro);
+  }
 }
 
 carregarNoticias();
 </script>
-
 
 
         
