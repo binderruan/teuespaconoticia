@@ -20,9 +20,10 @@ async function carregarPost() {
   if (!arquivo) return;
 
   try {
-    const resposta = await fetch(
-      `https://cdn.jsdelivr.net/gh/binderruan/teuespaconoticia@main/noticias/${arquivo}`
-    );
+      const resposta = await fetch(
+        `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/teuespaconoticia/noticias/${arquivo}`
+      );
+
 
     if (!resposta.ok) throw new Error("404");
 
