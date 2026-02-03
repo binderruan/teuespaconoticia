@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Notícia</title>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <link rel="stylesheet" href="/teuespaco/bootstrap.css">
-</head>
+<div id="post"></div>
 
-<body>
-
-<div class="container" style="margin-top:40px">
-  <div id="post">Carregando notícia...</div>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
 async function carregarPost() {
@@ -20,19 +9,21 @@ async function carregarPost() {
   if (!arquivo) return;
 
   try {
-      const resposta = await fetch(
-        `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/teuespaconoticia/noticias/${arquivo}`
-      );
-
+    const resposta = await fetch(
+      `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/teuespaconoticia/noticias/${arquivo}`
+    );
 
     if (!resposta.ok) throw new Error("404");
 
     const texto = await resposta.text();
 
-    // remove cabeçalho do Netlify CMS (---)
     const conteudo = texto.replace(/---[\s\S]*?---/, "");
 
-    document.getElementById("post").innerHTML = marked.parse(conteudo);
+    document.getElementById("post").innerHTML = `
+      <div class="container mt-4">
+        ${marked.parse(conteudo)}
+      </div>
+    `;
 
   } catch (erro) {
     document.getElementById("post").innerHTML = "<h2>Notícia não encontrada.</h2>";
@@ -40,8 +31,5 @@ async function carregarPost() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", carregarPost);
+carregarPost();
 </script>
-
-</body>
-</html>
