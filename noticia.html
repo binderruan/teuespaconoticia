@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="pt-BR" class=" js csstransforms csstransforms3d csstransitions">
 
@@ -439,6 +435,43 @@ var sfsi_icon_ajax_object = {"ajax_url":"https:\/\/teuespaco.com.br\/wp-admin\/a
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
+function parseFrontmatter(md) {
+  // Pega bloco YAML entre --- e ---
+  const match = md.match(/^---\s*[\r\n]+([\s\S]*?)\s*[\r\n]+---\s*[\r\n]*/);
+  if (!match) return { data: {}, body: md };
+
+  const yaml = match[1];
+  const body = md.replace(match[0], "");
+
+  const data = {};
+  yaml.split(/\r?\n/).forEach((line) => {
+    const m = line.match(/^([^:]+):\s*(.*)$/);
+    if (!m) return;
+    const key = m[1].trim();
+    let value = m[2].trim();
+
+    // remove aspas se tiver
+    value = value.replace(/^"(.*)"$/, "$1").replace(/^'(.*)'$/, "$1");
+
+    data[key] = value;
+  });
+
+  return { data, body };
+}
+
+function normalizarUrlImagem(url) {
+  if (!url) return "images/logo.png";
+
+  // Se veio do CMS como /images/uploads/...
+  if (url.startsWith("/")) return "https://teuespaco.com.br" + url;
+
+  // Se já é absoluta (http/https)
+  if (url.startsWith("http")) return url;
+
+  // Se é relativa tipo images/uploads/...
+  return "https://teuespaco.com.br/" + url.replace(/^\.\//, "");
+}
+
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
   const arquivo = params.get("post");
@@ -453,40 +486,34 @@ async function carregarPost() {
 
     const texto = await resposta.text();
 
-    // === TÍTULO ===
-    const tituloMatch = texto.match(/^#\s*(.*)/m);
-    const titulo = tituloMatch ? tituloMatch[1] : "Notícia";
+    // 1) separa frontmatter e corpo
+    const { data, body } = parseFrontmatter(texto);
+
+    // 2) Título
+    const titulo = data.title || "Notícia";
     document.getElementById("titulo-post").innerText = titulo;
-    document.title = titulo;
+    document.title = titulo + " - Teu Espaço";
 
-    // === DATA ===
-    const dataMatch = texto.match(/Data:\s*(.*)/i);
-    document.getElementById("data-post").innerText = dataMatch ? dataMatch[1] : "";
+    // 3) Data e Categoria
+    document.getElementById("data-post").innerText = data.date || "";
+    document.getElementById("categoria-post").innerText = data.category || "";
 
-    // === CATEGORIA ===
-    const catMatch = texto.match(/Categoria:\s*(.*)/i);
-    document.getElementById("categoria-post").innerText = catMatch ? catMatch[1] : "";
+    // 4) Imagem (thumbnail do frontmatter)
+    const imagem = normalizarUrlImagem(data.thumbnail);
+    const imgEl = document.getElementById("imagem-post");
 
-    // === IMAGEM ===
-    const imgMatch = texto.match(/!\[.*?\]\((.*?)\)/);
-    let imagem = imgMatch ? imgMatch[1] : "images/logo.png";
-
-    // Se NÃO for link completo, vira link do site
-    if (!imagem.startsWith("http")) {
-      imagem = "https://teuespaco.com.br/" + imagem.replace(/^\//, "");
+    if (data.thumbnail) {
+      imgEl.src = imagem;
+      imgEl.style.display = "block";
+      document.getElementById("og-image").setAttribute("content", imagem);
+    } else {
+      // se não tiver thumbnail, esconde a imagem
+      imgEl.style.display = "none";
+      document.getElementById("og-image").setAttribute("content", "https://teuespaco.com.br/images/logo.png");
     }
 
-    document.getElementById("imagem-post").src = imagem;
-    document.getElementById("og-image").setAttribute("content", imagem);
-
-    // === CONTEÚDO (remove título, data, categoria e imagem do corpo) ===
-    let conteudo = texto
-      .replace(/^#\s.*\n/, "")
-      .replace(/Data:.*\n/i, "")
-      .replace(/Categoria:.*\n/i, "")
-      .replace(/!\[.*?\]\(.*?\)/, "");
-
-    document.getElementById("conteudo-post").innerHTML = marked.parse(conteudo);
+    // 5) Conteúdo (somente o corpo sem frontmatter)
+    document.getElementById("conteudo-post").innerHTML = marked.parse(body);
 
   } catch (erro) {
     document.getElementById("conteudo-post").innerHTML = "<h2>Notícia não encontrada.</h2>";
@@ -496,6 +523,7 @@ async function carregarPost() {
 
 carregarPost();
 </script>
+
 
 
 </body></html>
