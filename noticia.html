@@ -21,7 +21,7 @@ async function carregarPost() {
 
   try {
     const resposta = await fetch(
-      `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${arquivo}`
+      `https://cdn.jsdelivr.net/gh/binderruan/teuespaconoticia@main/noticias/${arquivo}`
     );
 
     if (!resposta.ok) throw new Error("404");
