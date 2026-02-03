@@ -600,27 +600,26 @@ if (window.netlifyIdentity) {
 
 <script>
 async function carregarNoticias() {
-
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-<script>
-async function carregarNoticias() {
   const container = document.getElementById("lista-noticias");
 
   try {
-    const resposta = await fetch("/noticias/noticias.json");
+    const resposta = await fetch(
+      "https://api.github.com/repos/binderruan/teuespaconoticia/contents/noticias"
+    );
     const arquivos = await resposta.json();
 
     container.innerHTML = "";
 
-    for (const arquivo of arquivos.reverse()) {
-      const md = await fetch("/noticias/" + arquivo).then(r => r.text());
+    for (const file of arquivos.reverse()) {
+      if (!file.name.endsWith(".md")) continue;
 
-      const titulo = md.split("\n")[0].replace("#", "").trim();
-      const imgMatch = md.match(/!\[.*?\]\((.*?)\)/);
-      const imagem = imgMatch ? imgMatch[1] : "images/logo.png";
+      const postResp = await fetch(file.download_url);
+      const texto = await postResp.text();
 
-      container.innerHTML += `
+      const titulo = texto.match(/^# (.*)/m)?.[1] || "Sem título";
+      const imagem = texto.match(/!\[.*?\]\((.*?)\)/)?.[1] || "images/logo.png";
+
+      const card = `
         <div class="col-lg-4 mb-4 d-inline-flex">
           <div class="card m-2 videos h-100">
             <img src="${imagem}" class="card-img-top img-fluid">
@@ -628,21 +627,24 @@ async function carregarNoticias() {
               <h4 class="card-nome">${titulo}</h4>
             </div>
             <div class="card-body data">
-              <strong>Notícia</strong><br>
-              <a href="/noticia.html?post=${arquivo}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
+              <a href="/noticia.html?post=${file.name}" 
+                 class="btn btn-primary btn-sm mtn">» Leia mais...</a>
             </div>
           </div>
         </div>
       `;
+
+      container.innerHTML += card;
     }
 
-  } catch (e) {
-    console.error("Erro ao carregar notícias", e);
+  } catch (erro) {
+    console.error("Erro ao carregar notícias:", erro);
   }
 }
 
 carregarNoticias();
 </script>
+
 
 </script>
         
