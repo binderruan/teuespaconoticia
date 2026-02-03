@@ -537,6 +537,9 @@ async function carregarPost() {
       imgEl.style.display = "none";
       document.getElementById("og-image").setAttribute("content", "https://teuespaco.com.br/images/logo.png");
     }
+      // === CATEGORIA (aceita Categoria: ou category:) ===
+const catMatch = texto.match(/^(?:Categoria|category)\s*:\s*(.*)$/im);
+document.getElementById("categoria-post").innerText = catMatch ? catMatch[1].trim() : "";
 
     // 5) Conteúdo (somente o corpo sem frontmatter)
     document.getElementById("conteudo-post").innerHTML = marked.parse(body);
@@ -548,7 +551,7 @@ async function carregarPost() {
 }
 
 carregarPost();
-</script>
+    </script>
 
 
 
