@@ -3,30 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <title>Notícia</title>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <link rel="stylesheet" href="/teuespaco/bootstrap.css">
-</head>
-<body>
-
-<div class="container" style="margin-top:40px">
-  <div id="post"></div>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
-async function carregarPost() {
-  const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+async function carregarNoticias() {
+  const container = document.getElementById("lista-noticias");
 
-  if (!arquivo) return;
+  try {
+    const resposta = await fetch("/noticias/noticias.json");
+    const arquivos = await resposta.json();
 
-  const resposta = await fetch("/noticias/" + arquivo);
-  const markdown = await resposta.text();
+    container.innerHTML = "";
 
-  document.getElementById("post").innerHTML = marked.parse(markdown);
+    for (const arquivo of arquivos.reverse()) {
+      const markdown = await fetch("/noticias/" + arquivo).then(r => r.text());
+
+      const titulo = markdown.split("\n")[0].replace("#", "").trim();
+      const imgMatch = markdown.match(/!\[.*?\]\((.*?)\)/);
+      const imagem = imgMatch ? imgMatch[1] : "images/logo.png";
+
+      const card = `
+        <div class="col-lg-4 mb-4 d-inline-flex">
+          <div class="card m-2 videos h-100">
+            <img src="${imagem}" class="card-img-top img-fluid">
+            <div class="card-block">
+              <h4 class="card-nome">${titulo}</h4>
+            </div>
+            <div class="card-body data">
+              <strong>Notícia</strong><br>
+              <a href="/noticia.html?post=${arquivo}" 
+                 class="btn btn-primary btn-sm mtn">» Leia mais...</a>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML += card;
+    }
+
+  } catch (erro) {
+    console.error("Erro ao carregar notícias:", erro);
+  }
 }
 
-carregarPost();
+carregarNoticias();
 </script>
+
+  
 
 </body>
 </html>
