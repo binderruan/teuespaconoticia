@@ -6,48 +6,36 @@
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
-async function carregarNoticias() {
-  const container = document.getElementById("lista-noticias");
+async function carregarPost() {
+  const params = new URLSearchParams(window.location.search);
+  const arquivo = params.get("post");
+  if (!arquivo) return;
 
   try {
-    const resposta = await fetch("/noticias/noticias.json");
-    const arquivos = await resposta.json();
+    const resposta = await fetch(
+      `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${arquivo}`
+    );
 
-    container.innerHTML = "";
+    const markdown = await resposta.text();
 
-    for (const arquivo of arquivos.reverse()) {
-      const markdown = await fetch("/noticias/" + arquivo).then(r => r.text());
+    // Remove primeira imagem do corpo (ela já é capa no card)
+    const conteudo = markdown.replace(/!\[.*?\]\(.*?\)/, "");
 
-      const titulo = markdown.split("\n")[0].replace("#", "").trim();
-      const imgMatch = markdown.match(/!\[.*?\]\((.*?)\)/);
-      const imagem = imgMatch ? imgMatch[1] : "images/logo.png";
-
-      const card = `
-        <div class="col-lg-4 mb-4 d-inline-flex">
-          <div class="card m-2 videos h-100">
-            <img src="${imagem}" class="card-img-top img-fluid">
-            <div class="card-block">
-              <h4 class="card-nome">${titulo}</h4>
-            </div>
-            <div class="card-body data">
-              <strong>Notícia</strong><br>
-              <a href="/noticia.html?post=${arquivo}" 
-                 class="btn btn-primary btn-sm mtn">» Leia mais...</a>
-            </div>
-          </div>
-        </div>
-      `;
-
-      container.innerHTML += card;
-    }
+    document.getElementById("post").innerHTML = `
+      <div class="container mt-4">
+        ${marked.parse(conteudo)}
+      </div>
+    `;
 
   } catch (erro) {
-    console.error("Erro ao carregar notícias:", erro);
+    document.getElementById("post").innerHTML = "Erro ao carregar a notícia.";
+    console.error(erro);
   }
 }
 
-carregarNoticias();
+carregarPost();
 </script>
+
 
   
 
