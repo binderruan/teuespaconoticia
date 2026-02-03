@@ -600,46 +600,56 @@ if (window.netlifyIdentity) {
 
 <script>
 async function carregarNoticias() {
+
+    <!-- Converte Markdown para HTML -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<script>
+async function carregarNoticias() {
   const container = document.getElementById("lista-noticias");
 
-  try {
-    const arquivos = [
-      "/noticias/teste.json"
-    ];
+  const arquivos = [
+    "teste.md",
+    "oi.md"
+  ];
 
-    for (const arquivo of arquivos) {
-      const resposta = await fetch(arquivo);
-      const noticia = await resposta.json();
+  for (const arquivo of arquivos.reverse()) {
+    try {
+      const resposta = await fetch("/noticias/" + arquivo);
+      const textoMD = await resposta.text();
 
-      const imagem = noticia.thumbnail.startsWith('/')
-        ? noticia.thumbnail
-        : '/' + noticia.thumbnail;
+      // título = primeira linha do markdown
+      const titulo = textoMD.split("\n")[0].replace("#", "").trim();
+
+      // imagem = primeira imagem do markdown
+      const imgMatch = textoMD.match(/!\[.*?\]\((.*?)\)/);
+      const imagem = imgMatch ? imgMatch[1] : "images/logo.png";
 
       const card = `
         <div class="col-lg-4 mb-4 d-inline-flex">
           <div class="card m-2 videos h-100">
             <img src="${imagem}" class="card-img-top img-fluid">
             <div class="card-block">
-              <h4 class="card-nome">${noticia.title}</h4>
+              <h4 class="card-nome">${titulo}</h4>
             </div>
             <div class="card-body data">
-              <strong>${noticia.categoria}</strong><br>
-              <a href="/noticias/${arquivo.split('/').pop().replace('.json','.html')}" 
-                 class="btn btn-primary btn-sm mtn">» Leia mais...</a>
+              <strong>Notícia</strong><br>
+              <a href="/noticia.html?post=${arquivo}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
             </div>
           </div>
         </div>
       `;
 
       container.innerHTML += card;
-    }
 
-  } catch (erro) {
-    console.error("Erro ao carregar notícias:", erro);
+    } catch (e) {
+      console.log("Erro ao carregar", arquivo);
+    }
   }
 }
 
 carregarNoticias();
+    
 </script>
         
 </body>
