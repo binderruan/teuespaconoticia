@@ -1,7 +1,7 @@
 ---
 title: Programa Defesa Civil na Escola 2026 abre última etapa de inscrições
 date: 04/02/2026
-category: "ASCOM | SDC "
+category: ASCOM | SDC
 thumbnail: https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/IMG_5373.JPG-1.jpeg
 ---
 <!--StartFragment-->
