@@ -594,37 +594,7 @@ if (window.netlifyIdentity) {
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-<script>
-async function carregarNoticias() {
-  const container = document.getElementById("lista-noticias");
 
-  const lista = await fetch("/noticias/posts.json").then(r => r.json());
-
-  for (const nome of lista) {
-    const markdown = await fetch("/noticias/" + nome).then(r => r.text());
-
-    const titulo = markdown.split("\n")[0].replace("# ", "");
-    const imgMatch = markdown.match(/!\[.*?\]\((.*?)\)/);
-    const imagem = imgMatch ? imgMatch[1] : "images/logo.png";
-
-    container.innerHTML += `
-      <div class="col-lg-4 mb-4 d-inline-flex">
-        <div class="card m-2 videos h-100">
-          <img src="${imagem}" class="card-img-top img-fluid">
-          <div class="card-block">
-            <h4 class="card-nome">${titulo}</h4>
-          </div>
-          <div class="card-body data">
-            <a href="/noticia.html?post=${nome}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-}
-
-carregarNoticias();
-</script>
 <script>
 function parseFrontmatter(md) {
   const match = md.match(/^---([\s\S]*?)---/);
