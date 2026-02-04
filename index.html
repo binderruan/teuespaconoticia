@@ -629,6 +629,58 @@ async function carregarNoticias() {
 
 carregarNoticias();
 </script>
+<script>
+function parseFrontmatter(md) {
+  const match = md.match(/^---([\s\S]*?)---/);
+  if (!match) return { body: md };
+
+  const lines = match[1].split("\n");
+  const data = {};
+
+  lines.forEach(line => {
+    const [key, ...rest] = line.split(":");
+    if (!key || !rest.length) return;
+    data[key.trim()] = rest.join(":").trim();
+  });
+
+  return {
+    ...data,
+    body: md.replace(match[0], "").trim()
+  };
+}
+
+async function carregarNoticias() {
+  const container = document.getElementById("lista-noticias");
+
+  const lista = await fetch("/noticias/posts.json").then(r => r.json());
+
+  for (const nome of lista) {
+    const markdown = await fetch("/noticias/" + nome).then(r => r.text());
+    const post = parseFrontmatter(markdown);
+
+    const titulo = post.title || "Sem título";
+    const imagem = post.thumbnail || "images/logo.png";
+    const categoria = post.category || "";
+
+    container.innerHTML += `
+      <div class="col-lg-4 mb-4 d-inline-flex">
+        <div class="card m-2 videos h-100">
+          <img src="${imagem}" class="card-img-top img-fluid">
+          <div class="card-block">
+            <h4 class="card-nome">${titulo}</h4>
+          </div>
+          <div class="card-body data">
+            <strong>${categoria}</strong><br>
+            <a href="/noticia.html?post=${nome}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+carregarNoticias();
+</script>
 
 
 
