@@ -17,12 +17,6 @@ collections:
     extension: "md"
     format: "frontmatter"
 
-    meta:
-      path:
-        widget: "string"
-        label: "Caminho do arquivo"
-        index_file: "index"
-
     fields:
       - label: "Título"
         name: "title"
@@ -30,8 +24,10 @@ collections:
 
       - label: "Data"
         name: "date"
-        widget: "string"
-        default: "{{now | date('DD/MM/YYYY')}}"
+        widget: "datetime"
+        default: "{{now}}"
+        format: "DD/MM/YYYY"
+        time_format: false
 
       - label: "Categoria"
         name: "category"
