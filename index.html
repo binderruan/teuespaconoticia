@@ -272,10 +272,9 @@ if (window.netlifyIdentity) {
       <div class="col-lg-12 nomes">
         <h3>Últimas Notícias</h3>
       </div
-        
-    
+           
       <div class="row" id="lista-noticias"></div>
-    <section id="for-set"> <div class="container"> <div class="row"> <div class="col-lg-12 nomes"> <h3></h3> </div> <div class="col-lg-3 mb-4 d-inline-flex"> <div id="carouselClientes" class="carousel slide m-2" data-ride="carousel" data-interval="6000"> <div class="carousel-inner"> <div class="carousel-item active"> <img src="images/clients/1.png" class="d-block w-100" alt="Cliente 1"> </div> <div class="carousel-item"> <img src="images/clients/2.png" class="d-block w-100" alt="Cliente 2"> </div> <div class="carousel-item"> <img src="images/clients/3.png" class="d-block w-100" alt="Cliente 3"> </div> <div class="carousel-item"> <img src="images/clients/4.png" class="d-block w-100" alt="Cliente 4"> </div> <div class="carousel-item"> <img src="images/clients/17.png" class="d-block w-100" alt="Cliente 17"> </div> </div> </div> </div> <div class="col-lg-3 mb-4 d-inline-flex"> <div id="carouselClientes" class="carousel slide m-2" data-ride="carousel" data-interval="6000"> <div class="carousel-inner"> <div class="carousel-item active"> <img src="images/clients/5.png" class="d-block w-100" alt="Cliente 1"> </div> <div class="carousel-item"> <img src="images/clients/6.png" class="d-block w-100" alt="Cliente 2"> </div> <div class="carousel-item"> <img src="images/clients/7.png" class="d-block w-100" alt="Cliente 3"> </div> <div class="carousel-item"> <img src="images/clients/8.png" class="d-block w-100" alt="Cliente 4"> </div> <div class="carousel-item"> <img src="images/clients/18.png" class="d-block w-100" alt="Cliente 17"> </div> <div class="carousel-item"> <img src="images/clients/21.png" class="d-block w-100" alt="Cliente 17"> </div> </div> </div> </div> <div class="col-lg-3 mb-4 d-inline-flex"> <div id="carouselClientes" class="carousel slide m-2" data-ride="carousel" data-interval="6000"> <div class="carousel-inner"> <div class="carousel-item active"> <img src="images/clients/9.png" class="d-block w-100" alt="Cliente 1"> </div> <div class="carousel-item"> <img src="images/clients/10.png" class="d-block w-100" alt="Cliente 2"> </div> <div class="carousel-item"> <img src="images/clients/11.png" class="d-block w-100" alt="Cliente 3"> </div> <div class="carousel-item"> <img src="images/clients/12.png" class="d-block w-100" alt="Cliente 4"> </div> <div class="carousel-item"> <img src="images/clients/19.png" class="d-block w-100" alt="Cliente 17"> </div> </div> </div> </div> <div class="col-lg-3 mb-4 d-inline-flex"> <div id="carouselClientes" class="carousel slide m-2" data-ride="carousel" data-interval="6000"> <div class="carousel-inner"> <div class="carousel-item active"> <img src="images/clients/13.png" class="d-block w-100" alt="Cliente 1"> </div> <div class="carousel-item"> <img src="images/clients/14.png" class="d-block w-100" alt="Cliente 2"> </div> <div class="carousel-item"> <img src="images/clients/15.png" class="d-block w-100" alt="Cliente 3"> </div> <div class="carousel-item"> <img src="images/clients/16.png" class="d-block w-100" alt="Cliente 4"> </div> <div class="carousel-item"> <img src="images/clients/20.png" class="d-block w-100" alt="Cliente 17"> </div> </div> </div> </div> </div> </div> </section>
+        
         
       <div class="col-lg-12 nomes mt-4">
         <h4>Destaque</h4>
@@ -551,6 +550,15 @@ if (window.netlifyIdentity) {
 <script type="text/javascript" src="./teuespaco/random-shuffle-min.js.download"></script>
 
 <script>
+/**
+ * Lê frontmatter YAML simples do Netlify CMS:
+ * ---
+ * title: ...
+ * date: 03/02/2026
+ * category: ...
+ * thumbnail: /images/uploads/...
+ * ---
+ */
 function parseFrontmatter(md) {
   const match = md.match(/^---([\s\S]*?)---/);
   if (!match) return { body: md };
@@ -558,13 +566,13 @@ function parseFrontmatter(md) {
   const lines = match[1].split("\n");
   const data = {};
 
-  lines.forEach(line => {
+  for (const line of lines) {
     const idx = line.indexOf(":");
-    if (idx === -1) return;
+    if (idx === -1) continue;
     const key = line.slice(0, idx).trim();
     const value = line.slice(idx + 1).trim();
     if (key) data[key] = value;
-  });
+  }
 
   return {
     ...data,
@@ -573,19 +581,19 @@ function parseFrontmatter(md) {
 }
 
 function parseDateBR(d) {
-  // Aceita "03/02/2026" ou "2026-02-03"
   if (!d) return new Date(0);
 
+  // "03/02/2026"
   if (/^\d{2}\/\d{2}\/\d{4}$/.test(d)) {
     const [dd, mm, yyyy] = d.split("/");
     return new Date(`${yyyy}-${mm}-${dd}T00:00:00`);
   }
 
+  // "2026-02-03"
   if (/^\d{4}-\d{2}-\d{2}/.test(d)) {
-    return new Date(`${d}T00:00:00`);
+    return new Date(`${d.slice(0,10)}T00:00:00`);
   }
 
-  // fallback
   const tmp = new Date(d);
   return isNaN(tmp) ? new Date(0) : tmp;
 }
@@ -593,6 +601,8 @@ function parseDateBR(d) {
 function toAbsoluteUrl(url) {
   if (!url) return "images/logo.png";
   if (url.startsWith("http")) return url;
+
+  // garante https://teuespaco.com.br/...
   return "https://teuespaco.com.br/" + url.replace(/^\//, "");
 }
 
@@ -600,40 +610,53 @@ async function carregarNoticias(limit = 6) {
   const container = document.getElementById("lista-noticias");
   if (!container) return;
 
-  container.innerHTML = ""; // limpa (evita duplicar)
+  // limpa para não duplicar
+  container.innerHTML = "";
 
-  // ⚠️ Ajuste aqui se seu json estiver em outro caminho
-  const lista = await fetch("/noticias/noticias.json", { cache: "no-store" })
-    .then(r => r.json());
+  // ✅ seu arquivo JSON (está em /noticias/noticias.json)
+  let lista = [];
+  try {
+    lista = await fetch("/noticias/noticias.json", { cache: "no-store" }).then(r => r.json());
+  } catch (e) {
+    console.error("Erro ao ler /noticias/noticias.json", e);
+    return;
+  }
+
+  // se vier vazio, não renderiza nada
+  if (!Array.isArray(lista) || lista.length === 0) return;
 
   const noticias = [];
 
   for (const nome of lista) {
-    const md = await fetch("/noticias/" + nome, { cache: "no-store" })
-      .then(r => r.text());
+    try {
+      const md = await fetch("/noticias/" + nome, { cache: "no-store" }).then(r => r.text());
+      const fm = parseFrontmatter(md);
 
-    const fm = parseFrontmatter(md);
+      const titulo = (fm.title || "Sem título").trim();
+      const data = (fm.date || "").trim();
 
-    const titulo = (fm.title || "Sem título").trim();
-    const data = (fm.date || "").trim();
-    const imagem = toAbsoluteUrl((fm.thumbnail || "").trim());
+      // thumbnail pode vir vazio — cai pro logo
+      const imagem = toAbsoluteUrl((fm.thumbnail || "").trim());
 
-    noticias.push({
-      nome,
-      titulo,
-      data,
-      imagem,
-      dateObj: parseDateBR(data)
-    });
+      noticias.push({
+        nome,
+        titulo,
+        data,
+        imagem,
+        dateObj: parseDateBR(data)
+      });
+    } catch (e) {
+      console.warn("Falha ao carregar:", nome, e);
+    }
   }
 
-  // ✅ Ordena por data (mais recente primeiro)
+  // ✅ ordena por data (mais recente primeiro)
   noticias.sort((a, b) => b.dateObj - a.dateObj);
 
-  // ✅ Limita quantidade (só as 6 mais recentes)
+  // ✅ pega só as N mais recentes
   const top = noticias.slice(0, limit);
 
-  // ✅ Renderiza SEM categoria (como você pediu)
+  // ✅ renderiza SEM categoria (como você pediu)
   for (const n of top) {
     container.innerHTML += `
       <div class="col-lg-4 mb-4 d-inline-flex">
@@ -651,193 +674,8 @@ async function carregarNoticias(limit = 6) {
   }
 }
 
-// chama com 6 (ou troque pra outro número)
+// ✅ chama com 6 (mude aqui se quiser 8, 10 etc.)
 carregarNoticias(6);
-</script>
-<script type="text/javascript">
-    /* <![CDATA[ */
-    var sfsi_icon_ajax_object = {
-        "ajax_url": "https:\/\/teuespaco.com.br\/wp-admin\/admin-ajax.php"
-    };
-    var sfsi_icon_ajax_object = {
-        "ajax_url": "https:\/\/teuespaco.com.br\/wp-admin\/admin-ajax.php",
-        "plugin_url": "https:\/\/teuespaco.com.br\/wp-content\/plugins\/ultimate-social-media-icons\/"
-    };
-    /* ]]> */
-</script>
-
-<script>
-    // Função para embaralhar os itens do carrossel
-    function shuffleCarouselItems(carouselId) {
-        var carouselItems = document.querySelectorAll('#' + carouselId + ' .carousel-inner .carousel-item');
-        var parent = carouselItems[0].parentNode;
-        for (var i = carouselItems.length; i >= 0; i--) {
-            parent.appendChild(carouselItems[Math.random() * i | 0]);
-        }
-    }
-
-    // Embaralhar os itens do primeiro carrossel
-    document.addEventListener('DOMContentLoaded', function() {
-        shuffleCarouselItems('carouselExampleIndicators');
-        $('#carouselExampleIndicators').carousel();
-    });
-
-    // Embaralhar os itens do segundo carrossel
-    document.addEventListener('DOMContentLoaded', function() {
-        shuffleCarouselItems('carouselExample');
-        $('#carouselExample').carousel();
-    });
-</script>
-
-<script type="text/javascript" src="./teuespaco/custom.js.download"></script>
-<script type="text/javascript" src="./teuespaco/wp-embed.min.js.download"></script>
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="./teuespaco/jquery.js(1).download"></script>
-<script src="./teuespaco/bootstrap.js.download"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-
-<script>
-function parseFrontmatter(md) {
-  const match = md.match(/^---([\s\S]*?)---/);
-  if (!match) return { body: md };
-
-  const lines = match[1].split("\n");
-  const data = {};
-
-  lines.forEach(line => {
-    const [key, ...rest] = line.split(":");
-    if (!key || !rest.length) return;
-    data[key.trim()] = rest.join(":").trim();
-  });
-
-  return {
-    ...data,
-    body: md.replace(match[0], "").trim()
-  };
-}
-
-<script>
-async function carregarNoticias() {
-  const container = document.getElementById("lista-noticias");
-
-  const lista = await fetch("/noticias/posts.json").then(r => r.json());
-
-  let noticias = [];
-
-  for (const nome of lista) {
-    const markdown = await fetch("/noticias/" + nome).then(r => r.text());
-
-    const tituloMatch = markdown.match(/^title:\s*(.*)/m);
-    const titulo = tituloMatch ? tituloMatch[1].trim() : "Sem título";
-
-    const dataMatch = markdown.match(/^date:\s*(.*)/m);
-    const data = dataMatch ? dataMatch[1].trim() : "";
-
-    const imgMatch = markdown.match(/^thumbnail:\s*(.*)/m);
-    const imagem = imgMatch ? imgMatch[1].trim() : "images/logo.png";
-
-    noticias.push({
-      nome,
-      titulo,
-      data,
-      imagem
-    });
-  }
-
-  // 🔥 Ordenar por data (mais recente primeiro)
-  noticias.sort((a, b) => {
-    const da = new Date(a.data.split("/").reverse().join("-"));
-    const db = new Date(b.data.split("/").reverse().join("-"));
-    return db - da;
-  });
-
-  // 🔥 Pega só as 6 mais recentes
-  noticias = noticias.slice(0, 6);
-
-  // Renderiza
-  for (const n of noticias) {
-    container.innerHTML += `
-      <div class="col-lg-4 mb-4 d-inline-flex">
-        <div class="card m-2 videos h-100">
-          <img src="${n.imagem}" class="card-img-top img-fluid">
-          <div class="card-block">
-            <h4 class="card-nome">${n.titulo}</h4>
-          </div>
-          <div class="card-body data">
-            <a href="/noticia.html?post=${n.nome}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-}
-
-carregarNoticias();
-</script>
-</script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-<script>
-async function carregarNoticias() {
-  const container = document.getElementById("lista-noticias");
-  if (!container) return;
-
-  const lista = await fetch("/noticias/posts.json").then(r => r.json());
-
-  let noticias = [];
-
-  for (const nome of lista) {
-    const md = await fetch("/noticias/" + nome).then(r => r.text());
-
-    // pega do frontmatter do Netlify CMS
-    const tituloMatch = md.match(/^title:\s*(.*)$/m);
-    const titulo = tituloMatch ? tituloMatch[1].trim() : "Sem título";
-
-    const dataMatch = md.match(/^date:\s*(.*)$/m);
-    const data = dataMatch ? dataMatch[1].trim() : "";
-
-    const imgMatch = md.match(/^thumbnail:\s*(.*)$/m);
-    const imagem = imgMatch ? imgMatch[1].trim() : "images/logo.png";
-
-    noticias.push({ nome, titulo, data, imagem });
-  }
-
-  // Ordena por data (DD/MM/YYYY) - mais recente primeiro
-  noticias.sort((a, b) => {
-    const da = new Date(a.data.split("/").reverse().join("-"));
-    const db = new Date(b.data.split("/").reverse().join("-"));
-    return db - da;
-  });
-
-  // pega só as 6 mais recentes
-  noticias = noticias.slice(0, 6);
-
-  // limpa e renderiza
-  container.innerHTML = "";
-  for (const n of noticias) {
-    container.innerHTML += `
-      <div class="col-lg-4 mb-4 d-inline-flex">
-        <div class="card m-2 videos h-100">
-          <img src="${n.imagem}" class="card-img-top img-fluid" alt="">
-          <div class="card-block">
-            <h4 class="card-nome">${n.titulo}</h4>
-          </div>
-          <div class="card-body data">
-            <a href="/noticia.html?post=${n.nome}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-}
-
-carregarNoticias();
 </script>
 
 
