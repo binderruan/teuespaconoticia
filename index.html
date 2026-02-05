@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR" class=" js csstransforms csstransforms3d csstransitions">
 
@@ -271,13 +272,12 @@ if (window.netlifyIdentity) {
     <div class="row">
       <div class="col-lg-12 nomes">
         <h3>Últimas Notícias</h3>
-      </div
-        
+      </div>
     
       <div class="row" id="lista-noticias"></div>
     
       <div class="col-lg-12 nomes mt-4">
-        <h4>Destaque</h4>
+        <h4>Outras Notícias</h4>
       </div>
 
 
@@ -548,111 +548,6 @@ if (window.netlifyIdentity) {
 <script type="text/javascript" src="./teuespaco/modernizr.custom.min.js.download"></script>
 <script type="text/javascript" src="./teuespaco/jquery.shuffle.min.js.download"></script>
 <script type="text/javascript" src="./teuespaco/random-shuffle-min.js.download"></script>
-
-<script>
-function parseFrontmatter(md) {
-  const match = md.match(/^---([\s\S]*?)---/);
-  if (!match) return { body: md };
-
-  const lines = match[1].split("\n");
-  const data = {};
-
-  lines.forEach(line => {
-    const idx = line.indexOf(":");
-    if (idx === -1) return;
-    const key = line.slice(0, idx).trim();
-    const value = line.slice(idx + 1).trim();
-    if (key) data[key] = value;
-  });
-
-  return {
-    ...data,
-    body: md.replace(match[0], "").trim()
-  };
-}
-
-function parseDateBR(d) {
-  // Aceita "03/02/2026" ou "2026-02-03"
-  if (!d) return new Date(0);
-
-  if (/^\d{2}\/\d{2}\/\d{4}$/.test(d)) {
-    const [dd, mm, yyyy] = d.split("/");
-    return new Date(`${yyyy}-${mm}-${dd}T00:00:00`);
-  }
-
-  if (/^\d{4}-\d{2}-\d{2}/.test(d)) {
-    return new Date(`${d}T00:00:00`);
-  }
-
-  // fallback
-  const tmp = new Date(d);
-  return isNaN(tmp) ? new Date(0) : tmp;
-}
-
-function toAbsoluteUrl(url) {
-  if (!url) return "images/logo.png";
-  if (url.startsWith("http")) return url;
-  return "https://teuespaco.com.br/" + url.replace(/^\//, "");
-}
-
-async function carregarNoticias(limit = 6) {
-  const container = document.getElementById("lista-noticias");
-  if (!container) return;
-
-  container.innerHTML = ""; // limpa (evita duplicar)
-
-  // ⚠️ Ajuste aqui se seu json estiver em outro caminho
-  const lista = await fetch("/noticias/noticias.json", { cache: "no-store" })
-    .then(r => r.json());
-
-  const noticias = [];
-
-  for (const nome of lista) {
-    const md = await fetch("/noticias/" + nome, { cache: "no-store" })
-      .then(r => r.text());
-
-    const fm = parseFrontmatter(md);
-
-    const titulo = (fm.title || "Sem título").trim();
-    const data = (fm.date || "").trim();
-    const imagem = toAbsoluteUrl((fm.thumbnail || "").trim());
-
-    noticias.push({
-      nome,
-      titulo,
-      data,
-      imagem,
-      dateObj: parseDateBR(data)
-    });
-  }
-
-  // ✅ Ordena por data (mais recente primeiro)
-  noticias.sort((a, b) => b.dateObj - a.dateObj);
-
-  // ✅ Limita quantidade (só as 6 mais recentes)
-  const top = noticias.slice(0, limit);
-
-  // ✅ Renderiza SEM categoria (como você pediu)
-  for (const n of top) {
-    container.innerHTML += `
-      <div class="col-lg-4 mb-4 d-inline-flex">
-        <div class="card m-2 videos h-100">
-          <img src="${n.imagem}" class="card-img-top img-fluid" alt="">
-          <div class="card-block">
-            <h4 class="card-nome">${n.titulo}</h4>
-          </div>
-          <div class="card-body data">
-            <a href="/noticia.html?post=${n.nome}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-}
-
-// chama com 6 (ou troque pra outro número)
-carregarNoticias(6);
-</script>
 <script type="text/javascript">
     /* <![CDATA[ */
     var sfsi_icon_ajax_object = {
