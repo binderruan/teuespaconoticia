@@ -566,24 +566,15 @@ async function carregarRelacionadas() {
 
   const atual = getQueryParam("post");
 
-<script>
-async function carregarRelacionadas() {
-  const container = document.getElementById("relacionadas");
-  if (!container) return;
-
-  const atual = getQueryParam("post");
-
   const urlLista = "https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/posts.json";
   const resp = await fetch(urlLista);
-
-  const txt = await resp.text(); // <-- pega como TEXTO primeiro
-  console.log("posts.json retornou:", txt.slice(0, 200));
+  const txt = await resp.text();
 
   let lista;
   try {
     lista = JSON.parse(txt);
   } catch (e) {
-    console.error("posts.json não é JSON válido. Veja o conteúdo acima no console.");
+    console.error("posts.json não é JSON válido:", txt.slice(0, 200));
     container.innerHTML = "<p>Não foi possível carregar notícias relacionadas.</p>";
     return;
   }
@@ -604,42 +595,7 @@ async function carregarRelacionadas() {
     noticias.push({ nome, titulo, imagem });
   }
 
-  noticias.sort(() => Math.random() - 0.5);
-  noticias = noticias.slice(0, 3);
-
-  container.innerHTML = "";
-  for (const n of noticias) {
-    container.innerHTML += `
-      <div class="col-lg-4 mb-4 d-inline-flex">
-        <div class="card m-2 videos h-100 w-100">
-          <img src="${n.imagem}" class="card-img-top img-fluid" alt="">
-          <div class="card-block">
-            <h4 class="card-nome">${n.titulo}</h4>
-          </div>
-          <div class="card-body data">
-            <a href="/noticia.html?post=${n.nome}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-}
-
-carregarRelacionadas();
-</script>
-
-    const md = await fetch(`https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${nome}`)
-      .then(r => r.text());
-
-    const { data } = parseFrontmatter(md);
-
-    const titulo = (data.title || "Sem título").trim();
-    const imagem = normalizarUrlImagem(data.thumbnail);
-
-    noticias.push({ nome, titulo, imagem });
-  }
-
-  // aleatório
+  // aleatórias
   noticias.sort(() => Math.random() - 0.5);
 
   // só 3
@@ -665,6 +621,6 @@ carregarRelacionadas();
 
 carregarRelacionadas();
 </script>
-
+                    
 
 </body></html>
