@@ -560,21 +560,6 @@ function getQueryParam(name) {
   return url.searchParams.get(name);
 }
 
-<script>
-function getQueryParam(name) {
-  const url = new URL(window.location.href);
-  return url.searchParams.get(name);
-}
-
-function dateToISO(d) {
-  if (!d) return "1970-01-01";
-  if (d.includes("/")) {
-    const [dd, mm, yyyy] = d.split("/");
-    return `${yyyy}-${mm.padStart(2,"0")}-${dd.padStart(2,"0")}`;
-  }
-  return d;
-}
-
 async function carregarRelacionadas() {
   const container = document.getElementById("relacionadas");
   if (!container) return;
@@ -600,10 +585,10 @@ async function carregarRelacionadas() {
     noticias.push({ nome, titulo, imagem });
   }
 
-  // 🔥 embaralha aleatório
+  // aleatório
   noticias.sort(() => Math.random() - 0.5);
 
-  // 🔥 pega só 3
+  // só 3
   noticias = noticias.slice(0, 3);
 
   container.innerHTML = "";
