@@ -1,6 +1,5 @@
 ---
-title: Curso de Noções de Primeiros Socorros para Profissionais da Educação do
-  CBMSC abre inscrições
+title: CBMSC abre inscrições para curso de primeiros socorros na educação
 date: 06/02/2026
 category: CBMSC | Imprensa
 thumbnail: https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/Banner-CBAE-e-Lei-Lucas_Banner-site-LEI-LUCAS-1138x519-1.png
