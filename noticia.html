@@ -596,13 +596,41 @@ async function carregarRelacionadas() {
 
   let noticias = [];
 
-  for (const nome of lista) {
-    if (!nome || nome === atual) continue;
+<script>
+for (let item of lista) {
+  // aceita ["a.md"] ou [{file:"a.md"}] ou {slug:"a.md"}
+  let nome = item;
 
-    const md = await fetch(
-      `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${nome}`,
-      { cache: "no-store" }
-    ).then(r => r.text());
+  if (typeof item === "object" && item) {
+    nome = item.file || item.nome || item.slug || item.path || "";
+  }
+
+  if (!nome) continue;
+
+  // limpa espaços / \r / e tira "noticias/" se vier junto
+  nome = String(nome).trim().replace(/^noticias\//, "");
+
+  // pula a atual (também normalizando)
+  const atualLimpo = (atual || "").trim().replace(/^noticias\//, "");
+  if (nome === atualLimpo) continue;
+
+  const urlMd = `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${nome}`;
+  const respMd = await fetch(urlMd, { cache: "no-store" });
+
+  // se não achou o arquivo, ignora
+  if (!respMd.ok) continue;
+
+  const md = await respMd.text();
+
+  const fm = parseFrontmatter(md);
+  const data = fm.data || fm;
+
+  const titulo = (data.title || "Sem título").trim();
+  const imagem = normalizarUrlImagem(data.thumbnail);
+
+  noticias.push({ nome, titulo, imagem });
+}
+</script>
 
     // usa suas funções já existentes na página:
     // parseFrontmatter(md) -> { data, body }
