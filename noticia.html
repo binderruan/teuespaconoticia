@@ -560,21 +560,10 @@ function getQueryParam(name) {
   return url.searchParams.get(name);
 }
 
-function parseFrontmatter(md) {
-  const match = md.match(/^---([\s\S]*?)---/);
-  if (!match) return { body: md };
-
-  const lines = match[1].split("\n");
-  const data = {};
-  lines.forEach(line => {
-    const idx = line.indexOf(":");
-    if (idx === -1) return;
-    const key = line.slice(0, idx).trim();
-    const value = line.slice(idx + 1).trim();
-    if (key) data[key] = value;
-  });
-
-  return { ...data, body: md.replace(match[0], "").trim() };
+<script>
+function getQueryParam(name) {
+  const url = new URL(window.location.href);
+  return url.searchParams.get(name);
 }
 
 function dateToISO(d) {
@@ -591,21 +580,27 @@ async function carregarRelacionadas() {
   if (!container) return;
 
   const atual = getQueryParam("post"); // ex: "arquivo.md"
-  const lista = await fetch("/noticias/posts.json").then(r => r.json());
+
+  // ⚠️ Aqui é melhor puxar do GitHub também (igual você faz na notícia)
+  const lista = await fetch("https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/posts.json")
+    .then(r => r.json());
 
   let noticias = [];
 
   for (const nome of lista) {
     if (nome === atual) continue;
 
-    const md = await fetch("/noticias/" + nome).then(r => r.text());
-    const fm = parseFrontmatter(md);
+    const md = await fetch(`https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${nome}`)
+      .then(r => r.text());
 
-    const titulo = (fm.title || "Sem título").trim();
-    const data = (fm.date || "").trim();
-    const imagem = (fm.thumbnail || "images/logo.png").trim();
+    // usa a SUA parseFrontmatter (a primeira), que retorna { data, body }
+    const { data } = parseFrontmatter(md);
 
-    noticias.push({ nome, titulo, data, imagem });
+    const titulo = (data.title || "Sem título").trim();
+    const dataPub = (data.date || "").trim();
+    const imagem = normalizarUrlImagem(data.thumbnail);
+
+    noticias.push({ nome, titulo, data: dataPub, imagem });
   }
 
   noticias.sort((a, b) => new Date(dateToISO(b.data)) - new Date(dateToISO(a.data)));
