@@ -555,6 +555,14 @@ document.getElementById("categoria-post").innerText = catMatch ? catMatch[1].tri
 carregarPost();
     </script>
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+  carregarRelacionadas().catch(err => {
+    const container = document.getElementById("relacionadas");
+    if (container) container.innerHTML = "<p>Erro ao carregar notícias relacionadas.</p>";
+    console.error("carregarRelacionadas falhou:", err);
+  });
+});
+
 function getQueryParam(name) {
   const url = new URL(window.location.href);
   return url.searchParams.get(name);
@@ -564,20 +572,43 @@ async function carregarRelacionadas() {
   const container = document.getElementById("relacionadas");
   if (!container) return;
 
+  // mensagem enquanto carrega (pra você ver que rodou)
+  container.innerHTML = "<p>Carregando...</p>";
+
   const atual = getQueryParam("post");
 
   const urlLista = "https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/noticias.json";
-  const lista = await fetch(urlLista).then(r => r.json());
+  const resp = await fetch(urlLista, { cache: "no-store" });
+  const dataJson = await resp.json();
+
+  // ✅ aceita vários formatos
+  const lista =
+    Array.isArray(dataJson) ? dataJson :
+    Array.isArray(dataJson.posts) ? dataJson.posts :
+    Array.isArray(dataJson.noticias) ? dataJson.noticias :
+    null;
+
+  if (!lista) {
+    container.innerHTML = "<p>Formato do noticias.json inválido.</p>";
+    console.error("noticias.json veio assim:", dataJson);
+    return;
+  }
 
   let noticias = [];
 
   for (const nome of lista) {
-    if (nome === atual) continue;
+    if (!nome || nome === atual) continue;
 
-    const md = await fetch(`https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${nome}`)
-      .then(r => r.text());
+    const md = await fetch(
+      `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${nome}`,
+      { cache: "no-store" }
+    ).then(r => r.text());
 
-    const { data } = parseFrontmatter(md);
+    // usa suas funções já existentes na página:
+    // parseFrontmatter(md) -> { data, body }
+    // normalizarUrlImagem(url)
+    const fm = parseFrontmatter(md);
+    const data = fm.data || fm; // caso alguma versão antiga retorne direto
 
     const titulo = (data.title || "Sem título").trim();
     const imagem = normalizarUrlImagem(data.thumbnail);
@@ -585,11 +616,14 @@ async function carregarRelacionadas() {
     noticias.push({ nome, titulo, imagem });
   }
 
-  // aleatório
+  // 3 aleatórias
   noticias.sort(() => Math.random() - 0.5);
-
-  // só 3
   noticias = noticias.slice(0, 3);
+
+  if (noticias.length === 0) {
+    container.innerHTML = "<p>Sem notícias para mostrar.</p>";
+    return;
+  }
 
   container.innerHTML = "";
   for (const n of noticias) {
@@ -608,8 +642,6 @@ async function carregarRelacionadas() {
     `;
   }
 }
-
-carregarRelacionadas();
 </script>
                     
 
