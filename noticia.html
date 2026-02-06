@@ -179,8 +179,9 @@
 
     <p><b>Categoria: </b><span id="categoria-post"></span></p>
 
-      <div class="row" id="lista-noticias"></div>
-
+<hr style="opacity:.2; margin:40px 0;"> <div class="container mt-4 mb-5"> <h3 class="mb-3">Veja também</h3> <div class="row" id="relacionadas"></div> </div>
+    
+                                    
 </div>
 
 <!--PATROCINIOS -->
@@ -553,7 +554,83 @@ document.getElementById("categoria-post").innerText = catMatch ? catMatch[1].tri
 
 carregarPost();
     </script>
+<script>
+function getQueryParam(name) {
+  const url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
 
+function parseFrontmatter(md) {
+  const match = md.match(/^---([\s\S]*?)---/);
+  if (!match) return { body: md };
+
+  const lines = match[1].split("\n");
+  const data = {};
+  lines.forEach(line => {
+    const idx = line.indexOf(":");
+    if (idx === -1) return;
+    const key = line.slice(0, idx).trim();
+    const value = line.slice(idx + 1).trim();
+    if (key) data[key] = value;
+  });
+
+  return { ...data, body: md.replace(match[0], "").trim() };
+}
+
+function dateToISO(d) {
+  if (!d) return "1970-01-01";
+  if (d.includes("/")) {
+    const [dd, mm, yyyy] = d.split("/");
+    return `${yyyy}-${mm.padStart(2,"0")}-${dd.padStart(2,"0")}`;
+  }
+  return d;
+}
+
+async function carregarRelacionadas() {
+  const container = document.getElementById("relacionadas");
+  if (!container) return;
+
+  const atual = getQueryParam("post"); // ex: "arquivo.md"
+  const lista = await fetch("/noticias/posts.json").then(r => r.json());
+
+  let noticias = [];
+
+  for (const nome of lista) {
+    if (nome === atual) continue;
+
+    const md = await fetch("/noticias/" + nome).then(r => r.text());
+    const fm = parseFrontmatter(md);
+
+    const titulo = (fm.title || "Sem título").trim();
+    const data = (fm.date || "").trim();
+    const imagem = (fm.thumbnail || "images/logo.png").trim();
+
+    noticias.push({ nome, titulo, data, imagem });
+  }
+
+  noticias.sort((a, b) => new Date(dateToISO(b.data)) - new Date(dateToISO(a.data)));
+  noticias = noticias.slice(0, 6);
+
+  container.innerHTML = "";
+  for (const n of noticias) {
+    container.innerHTML += `
+      <div class="col-lg-4 mb-4 d-inline-flex">
+        <div class="card m-2 videos h-100 w-100">
+          <img src="${n.imagem}" class="card-img-top img-fluid" alt="">
+          <div class="card-block">
+            <h4 class="card-nome">${n.titulo}</h4>
+          </div>
+          <div class="card-body data">
+            <a href="/noticia.html?post=${n.nome}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+carregarRelacionadas();
+</script>
 
 
 </body></html>
