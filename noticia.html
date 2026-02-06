@@ -567,17 +567,7 @@ async function carregarRelacionadas() {
   const atual = getQueryParam("post");
 
   const urlLista = "https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/noticias.json";
-  const resp = await fetch(urlLista);
-  const txt = await resp.text();
-
-  let lista;
-  try {
-    lista = JSON.parse(txt);
-  } catch (e) {
-    console.error("posts.json não é JSON válido:", txt.slice(0, 200));
-    container.innerHTML = "<p>Não foi possível carregar notícias relacionadas.</p>";
-    return;
-  }
+  const lista = await fetch(urlLista).then(r => r.json());
 
   let noticias = [];
 
@@ -595,7 +585,7 @@ async function carregarRelacionadas() {
     noticias.push({ nome, titulo, imagem });
   }
 
-  // aleatórias
+  // aleatório
   noticias.sort(() => Math.random() - 0.5);
 
   // só 3
