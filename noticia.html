@@ -579,9 +579,8 @@ async function carregarRelacionadas() {
   const container = document.getElementById("relacionadas");
   if (!container) return;
 
-  const atual = getQueryParam("post"); // ex: "arquivo.md"
+  const atual = getQueryParam("post");
 
-  // ⚠️ Aqui é melhor puxar do GitHub também (igual você faz na notícia)
   const lista = await fetch("https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/posts.json")
     .then(r => r.json());
 
@@ -593,18 +592,19 @@ async function carregarRelacionadas() {
     const md = await fetch(`https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${nome}`)
       .then(r => r.text());
 
-    // usa a SUA parseFrontmatter (a primeira), que retorna { data, body }
     const { data } = parseFrontmatter(md);
 
     const titulo = (data.title || "Sem título").trim();
-    const dataPub = (data.date || "").trim();
     const imagem = normalizarUrlImagem(data.thumbnail);
 
-    noticias.push({ nome, titulo, data: dataPub, imagem });
+    noticias.push({ nome, titulo, imagem });
   }
 
-  noticias.sort((a, b) => new Date(dateToISO(b.data)) - new Date(dateToISO(a.data)));
-  noticias = noticias.slice(0, 6);
+  // 🔥 embaralha aleatório
+  noticias.sort(() => Math.random() - 0.5);
+
+  // 🔥 pega só 3
+  noticias = noticias.slice(0, 3);
 
   container.innerHTML = "";
   for (const n of noticias) {
