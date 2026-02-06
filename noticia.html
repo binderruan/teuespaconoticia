@@ -566,7 +566,7 @@ async function carregarRelacionadas() {
 
   const atual = getQueryParam("post");
 
-  const urlLista = "https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/posts.json";
+  const urlLista = "https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/noticias.json";
   const resp = await fetch(urlLista);
   const txt = await resp.text();
 
