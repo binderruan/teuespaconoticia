@@ -572,16 +572,27 @@ async function carregarRelacionadas() {
   const container = document.getElementById("relacionadas");
   if (!container) return;
 
-  // mensagem enquanto carrega (pra você ver que rodou)
   container.innerHTML = "<p>Carregando...</p>";
 
-  const atual = getQueryParam("post");
+  const atual = (getQueryParam("post") || "").trim().replace(/^noticias\//, "");
 
+  // ✅ caminho certo
   const urlLista = "https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/noticias.json";
   const resp = await fetch(urlLista, { cache: "no-store" });
-  const dataJson = await resp.json();
 
-  // ✅ aceita vários formatos
+  // lê como texto primeiro (evita erro quando não vem JSON)
+  const txt = await resp.text();
+
+  let dataJson;
+  try {
+    dataJson = JSON.parse(txt);
+  } catch (e) {
+    console.error("noticias.json não é JSON válido:", txt.slice(0, 200));
+    container.innerHTML = "<p>Formato do noticias.json inválido.</p>";
+    return;
+  }
+
+  // aceita vários formatos
   const lista =
     Array.isArray(dataJson) ? dataJson :
     Array.isArray(dataJson.posts) ? dataJson.posts :
@@ -589,54 +600,35 @@ async function carregarRelacionadas() {
     null;
 
   if (!lista) {
-    container.innerHTML = "<p>Formato do noticias.json inválido.</p>";
     console.error("noticias.json veio assim:", dataJson);
+    container.innerHTML = "<p>Formato do noticias.json inválido.</p>";
     return;
   }
 
   let noticias = [];
 
-<script>
-for (let item of lista) {
-  // aceita ["a.md"] ou [{file:"a.md"}] ou {slug:"a.md"}
-  let nome = item;
+  for (let item of lista) {
+    let nome = item;
 
-  if (typeof item === "object" && item) {
-    nome = item.file || item.nome || item.slug || item.path || "";
-  }
+    // se vier objeto, tenta pegar campos comuns
+    if (typeof item === "object" && item) {
+      nome = item.file || item.nome || item.slug || item.path || "";
+    }
 
-  if (!nome) continue;
+    if (!nome) continue;
 
-  // limpa espaços / \r / e tira "noticias/" se vier junto
-  nome = String(nome).trim().replace(/^noticias\//, "");
+    nome = String(nome).trim().replace(/^noticias\//, "");
+    if (nome === atual) continue;
 
-  // pula a atual (também normalizando)
-  const atualLimpo = (atual || "").trim().replace(/^noticias\//, "");
-  if (nome === atualLimpo) continue;
+    const urlMd = `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${nome}`;
+    const respMd = await fetch(urlMd, { cache: "no-store" });
+    if (!respMd.ok) continue;
 
-  const urlMd = `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${nome}`;
-  const respMd = await fetch(urlMd, { cache: "no-store" });
+    const md = await respMd.text();
 
-  // se não achou o arquivo, ignora
-  if (!respMd.ok) continue;
-
-  const md = await respMd.text();
-
-  const fm = parseFrontmatter(md);
-  const data = fm.data || fm;
-
-  const titulo = (data.title || "Sem título").trim();
-  const imagem = normalizarUrlImagem(data.thumbnail);
-
-  noticias.push({ nome, titulo, imagem });
-}
-</script>
-
-    // usa suas funções já existentes na página:
-    // parseFrontmatter(md) -> { data, body }
-    // normalizarUrlImagem(url)
+    // usa sua função existente parseFrontmatter(md)
     const fm = parseFrontmatter(md);
-    const data = fm.data || fm; // caso alguma versão antiga retorne direto
+    const data = fm.data || fm;
 
     const titulo = (data.title || "Sem título").trim();
     const imagem = normalizarUrlImagem(data.thumbnail);
@@ -648,12 +640,12 @@ for (let item of lista) {
   noticias.sort(() => Math.random() - 0.5);
   noticias = noticias.slice(0, 3);
 
-if (noticias.length === 0) {
-  container.innerHTML = "<p>Sem notícias para mostrar. (ver console)</p>";
-  console.log("ATUAL (post):", atual);
-  console.log("LISTA (noticias.json):", lista);
-  return;
-}
+  if (noticias.length === 0) {
+    container.innerHTML = "<p>Sem notícias para mostrar.</p>";
+    console.log("ATUAL:", atual);
+    console.log("LISTA:", lista);
+    return;
+  }
 
   container.innerHTML = "";
   for (const n of noticias) {
