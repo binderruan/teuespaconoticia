@@ -648,10 +648,12 @@ for (let item of lista) {
   noticias.sort(() => Math.random() - 0.5);
   noticias = noticias.slice(0, 3);
 
-  if (noticias.length === 0) {
-    container.innerHTML = "<p>Sem notícias para mostrar.</p>";
-    return;
-  }
+if (noticias.length === 0) {
+  container.innerHTML = "<p>Sem notícias para mostrar. (ver console)</p>";
+  console.log("ATUAL (post):", atual);
+  console.log("LISTA (noticias.json):", lista);
+  return;
+}
 
   container.innerHTML = "";
   for (const n of noticias) {
