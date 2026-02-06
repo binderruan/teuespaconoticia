@@ -555,17 +555,17 @@ document.getElementById("categoria-post").innerText = catMatch ? catMatch[1].tri
 carregarPost();
     </script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  carregarRelacionadas().catch(err => {
-    const container = document.getElementById("relacionadas");
-    if (container) container.innerHTML = "<p>Erro ao carregar notícias relacionadas.</p>";
-    console.error("carregarRelacionadas falhou:", err);
-  });
-});
-
 function getQueryParam(name) {
   const url = new URL(window.location.href);
   return url.searchParams.get(name);
+}
+
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
 
 async function carregarRelacionadas() {
@@ -576,57 +576,51 @@ async function carregarRelacionadas() {
 
   const atual = (getQueryParam("post") || "").trim().replace(/^noticias\//, "");
 
-  // ✅ caminho certo
   const urlLista = "https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/noticias.json";
   const resp = await fetch(urlLista, { cache: "no-store" });
 
-  // lê como texto primeiro (evita erro quando não vem JSON)
-  const txt = await resp.text();
-
-  let dataJson;
-  try {
-    dataJson = JSON.parse(txt);
-  } catch (e) {
-    console.error("noticias.json não é JSON válido:", txt.slice(0, 200));
-    container.innerHTML = "<p>Formato do noticias.json inválido.</p>";
+  if (!resp.ok) {
+    container.innerHTML = "<p>Não foi possível carregar notícias relacionadas.</p>";
     return;
   }
 
-  // aceita vários formatos
+  const dataJson = await resp.json();
+
+  // aceita: ["a.md", "b.md"] OU {noticias:[...]} OU {posts:[...]}
   const lista =
     Array.isArray(dataJson) ? dataJson :
-    Array.isArray(dataJson.posts) ? dataJson.posts :
     Array.isArray(dataJson.noticias) ? dataJson.noticias :
-    null;
+    Array.isArray(dataJson.posts) ? dataJson.posts :
+    [];
 
-  if (!lista) {
-    console.error("noticias.json veio assim:", dataJson);
-    container.innerHTML = "<p>Formato do noticias.json inválido.</p>";
+  if (!lista.length) {
+    container.innerHTML = "<p>Sem notícias para mostrar.</p>";
+    console.log("noticias.json vazio ou formato inválido:", dataJson);
     return;
   }
 
   let noticias = [];
 
-  for (let item of lista) {
+  for (const item of lista) {
     let nome = item;
 
-    // se vier objeto, tenta pegar campos comuns
     if (typeof item === "object" && item) {
       nome = item.file || item.nome || item.slug || item.path || "";
     }
 
+    nome = String(nome || "").trim().replace(/^noticias\//, "");
     if (!nome) continue;
-
-    nome = String(nome).trim().replace(/^noticias\//, "");
     if (nome === atual) continue;
 
-    const urlMd = `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${nome}`;
-    const respMd = await fetch(urlMd, { cache: "no-store" });
-    if (!respMd.ok) continue;
+    const urlMd = `https://raw.githubusercontent.com/binderruan/teuespaconoticia/main/noticias/${encodeURIComponent(nome)}`;
+    const r = await fetch(urlMd, { cache: "no-store" });
+    if (!r.ok) continue;
 
-    const md = await respMd.text();
+    const md = await r.text();
 
-    // usa sua função existente parseFrontmatter(md)
+    // usa suas funções já existentes no arquivo:
+    // parseFrontmatter(md) -> { data, body }
+    // normalizarUrlImagem(url)
     const fm = parseFrontmatter(md);
     const data = fm.data || fm;
 
@@ -636,16 +630,16 @@ async function carregarRelacionadas() {
     noticias.push({ nome, titulo, imagem });
   }
 
-  // 3 aleatórias
-  noticias.sort(() => Math.random() - 0.5);
-  noticias = noticias.slice(0, 3);
-
   if (noticias.length === 0) {
     container.innerHTML = "<p>Sem notícias para mostrar.</p>";
     console.log("ATUAL:", atual);
     console.log("LISTA:", lista);
     return;
   }
+
+  // 3 aleatórias
+  shuffleArray(noticias);
+  noticias = noticias.slice(0, 3);
 
   container.innerHTML = "";
   for (const n of noticias) {
@@ -664,7 +658,14 @@ async function carregarRelacionadas() {
     `;
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  carregarRelacionadas().catch(err => {
+    console.error("Erro carregarRelacionadas:", err);
+    const container = document.getElementById("relacionadas");
+    if (container) container.innerHTML = "<p>Não foi possível carregar notícias relacionadas.</p>";
+  });
+});
 </script>
-                    
 
 </body></html>
