@@ -1,6 +1,5 @@
 ---
-title: Plano Estadual de Políticas Públicas para Mulheres será colocado em
-  consulta pública no dia 14 de fevereiro
+title: Plano Estadual para Mulheres entra em consulta pública dia 14
 date: 06/02/2026
 category: "Desenvolvimento Social |Secretaria de Estado da Assistência Social,
   Mulher e Família "
