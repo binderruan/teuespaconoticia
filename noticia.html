@@ -49,6 +49,20 @@
         .image {
             width: 48%; /* Ajusta el ancho de las imágenes según tu preferencia */
         }
+        .noticia-conteudo img,
+.post-content img,
+article img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 15px auto;
+  border-radius: 8px;
+}
+.noticia-conteudo,
+.post-content,
+article {
+  overflow: hidden;
+}
 
     </style>
     <link rel="stylesheet" id="wp-block-library-css" href="./teuespaco/style.min.css" type="text/css" media="all">
@@ -175,7 +189,7 @@
         </figure>
     </div>
 
-<div id="conteudo-post"></div>
+<div id="conteudo-post" class="noticia-conteudo"></div>
 
     <p><b>Categoria: </b><span id="categoria-post"></span></p>
 <hr style="opacity:.2; margin:40px 0;"> <div class="container mt-4 mb-5"> <h3 class="mb-3">Veja também</h3> <div class="row" id="relacionadas"></div> </div>
