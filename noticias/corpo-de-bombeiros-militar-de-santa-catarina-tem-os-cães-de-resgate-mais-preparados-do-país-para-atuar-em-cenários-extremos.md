@@ -1,6 +1,5 @@
 ---
-title: Corpo de Bombeiros Militar de Santa Catarina tem os cães de resgate mais
-  preparados do país para atuar em cenários extremos
+title: Bombeiros de SC têm os cães de resgate mais preparados do Brasil
 date: 09/02/2026
 category: CBMSC | Imprensa
 thumbnail: https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/WhatsApp-Image-2026-02-09-at-10.19.28.jpg
