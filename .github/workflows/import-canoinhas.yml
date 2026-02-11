@@ -1,9 +1,8 @@
-{
-  "urls": []
-}
+name: Import Atende.net (Canoinhas)
+
 on:
   schedule:
-    - cron: "0 11 * * *" # roda todo dia 11:00 UTC (08:00 no BR - ajuste se quiser)
+    - cron: "0 11 * * *"
   workflow_dispatch:
 
 jobs:
@@ -28,6 +27,6 @@ jobs:
         run: |
           git config user.name "teuespaco-bot"
           git config user.email "bot@teuespaco.com.br"
-          git add noticias/posts.json noticias/_imports_atende.json noticias/*.md
+          git add noticias/noticias.json noticias/_imports_atende.json noticias/*.md
           git commit -m "Import: Atende.net (Canoinhas)" || echo "Nada novo"
           git push
