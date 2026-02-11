@@ -105,17 +105,54 @@ async function main() {
   const $ = cheerio.load(listHtml);
 
   // ✅ tenta achar links de notícia (bem tolerante)
-  let links = [];
-  $("a[href]").each((_, a) => {
-    const href = $(a).attr("href");
-    if (!href) return;
-    if (href.includes("/cidadao/noticia/")) {
-      const abs = href.startsWith("http") ? href : `${BASE}${href}`;
+let links = [];
+
+// 1) Pega href normais (com ou sem barra no início)
+$("a[href]").each((_, a) => {
+  const href = ($(a).attr("href") || "").trim();
+  if (!href) return;
+
+  // aceita "cidadao/noticia/..." e "/cidadao/noticia/..."
+  if (href.includes("cidadao/noticia/")) {
+    const abs = href.startsWith("http")
+      ? href
+      : href.startsWith("/")
+        ? `${BASE}${href}`
+        : `${BASE}/${href}`;
+    links.push(abs);
+  }
+});
+
+// 2) Fallback: alguns sites usam data-href / data-url / onclick
+$("[data-href],[data-url],[onclick]").each((_, el) => {
+  const dh = ($(el).attr("data-href") || "").trim();
+  const du = ($(el).attr("data-url") || "").trim();
+  const oc = ($(el).attr("onclick") || "").trim();
+
+  const candidates = [dh, du, oc];
+
+  for (const c of candidates) {
+    if (!c) continue;
+    if (c.includes("cidadao/noticia/")) {
+      // tenta extrair uma URL “limpa” de dentro do onclick
+      const m = c.match(/(https?:\/\/[^\s"'()]+|\/?cidadao\/noticia\/[^\s"'()]+)/i);
+      const raw = (m?.[1] || c).trim();
+
+      const abs = raw.startsWith("http")
+        ? raw
+        : raw.startsWith("/")
+          ? `${BASE}${raw}`
+          : `${BASE}/${raw}`;
       links.push(abs);
     }
-  });
+  }
+});
 
-  links = [...new Set(links)].slice(0, 12); // pega as mais recentes
+// 3) Fallback final por regex no HTML inteiro
+const rx = /(?:https?:\/\/canoinhas\.atende\.net)?\/?cidadao\/noticia\/[a-z0-9\-_%]+/gi;
+const found = listHtml.match(rx) || [];
+for (cons
+::contentReference[oaicite:0]{index=0}
   console.log("LINKS ENCONTRADOS:", links.length);
   console.log(links);
   
