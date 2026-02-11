@@ -2,13 +2,16 @@ import fs from "fs";
 import path from "path";
 import crypto from "crypto";
 import * as cheerio from "cheerio";
+import iconv from "iconv-lite";
 
-const LIST_URL = "https://canoinhas.atende.net/cidadao/noticia";
+const BASE = "https://canoinhas.atende.net";
+const LIST_URL = `${BASE}/cidadao/noticia`;
+
 const OUT_DIR = path.join(process.cwd(), "noticias");
 const POSTS_JSON = path.join(OUT_DIR, "posts.json");
+const IMPORTS_JSON = path.join(OUT_DIR, "_imports_atende.json");
 
-// util
-const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const sha1 = (s) => crypto.createHash("sha1").update(s).digest("hex").slice(0, 10);
 
 function slugify(str) {
@@ -16,113 +19,162 @@ function slugify(str) {
     .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+    .replace(/(^-|-$)/g, "")
+    .slice(0, 90);
 }
 
-function loadPostsList() {
-  if (!fs.existsSync(POSTS_JSON)) return [];
-  return JSON.parse(fs.readFileSync(POSTS_JSON, "utf8"));
+function loadJson(file, fallback) {
+  if (!fs.existsSync(file)) return fallback;
+  return JSON.parse(fs.readFileSync(file, "utf8"));
 }
 
-function savePostsList(list) {
-  fs.writeFileSync(POSTS_JSON, JSON.stringify(list, null, 2));
+function saveJson(file, data) {
+  fs.writeFileSync(file, JSON.stringify(data, null, 2));
 }
 
-async function fetchHtml(url) {
+async function fetchHtmlRobusto(url) {
   const res = await fetch(url, {
     headers: {
       "user-agent": "teuespaco-bot/1.0 (+https://teuespaco.com.br)",
       "accept-language": "pt-BR,pt;q=0.9",
-    }
+    },
   });
   if (!res.ok) throw new Error(`HTTP ${res.status} em ${url}`);
-  return await res.text();
+
+  // pega bytes e decodifica (evita treta de charset)
+  const buf = Buffer.from(await res.arrayBuffer());
+
+  // tenta detectar charset no HTML
+  const head = buf.slice(0, 4000).toString("ascii");
+  const m =
+    head.match(/charset=["']?([\w-]+)["']?/i) ||
+    head.match(/content=["'][^"']*charset=([\w-]+)[^"']*["']/i);
+
+  const charset = (m?.[1] || "utf-8").toLowerCase();
+
+  try {
+    return iconv.decode(buf, charset);
+  } catch {
+    return iconv.decode(buf, "utf-8");
+  }
+}
+
+function frontmatter({ title, date, thumbnail, category, source }) {
+  const esc = (s) => (s || "").replace(/"/g, '\\"');
+  return `---\n` +
+    `title: "${esc(title)}"\n` +
+    `date: "${esc(date)}"\n` +
+    `thumbnail: "${esc(thumbnail)}"\n` +
+    `category: "${esc(category)}"\n` +
+    `source: "${esc(source)}"\n` +
+    `---\n\n`;
 }
 
 async function main() {
   if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
 
-  const existing = new Set(loadPostsList());
+  const postsList = loadJson(POSTS_JSON, []);
+  const imported = loadJson(IMPORTS_JSON, { urls: [] });
+  const importedSet = new Set(imported.urls);
 
-  // 1) pega lista
-  const listHtml = await fetchHtml(LIST_URL);
+  // 1) Lista de notícias
+  const listHtml = await fetchHtmlRobusto(LIST_URL);
   const $ = cheerio.load(listHtml);
 
-  // ⚠️ AJUSTE O SELETOR:
-  // Aqui você precisa inspecionar o HTML da página de lista do Atende.net e trocar pelo seletor correto.
-  // Exemplo comum: links dentro de cards/lista:
-  const links = [];
-  $("a").each((_, a) => {
+  // ✅ tenta achar links de notícia (bem tolerante)
+  let links = [];
+  $("a[href]").each((_, a) => {
     const href = $(a).attr("href");
     if (!href) return;
-
-    // pega apenas links de notícia
     if (href.includes("/cidadao/noticia/")) {
-      const abs = href.startsWith("http") ? href : `https://canoinhas.atende.net${href}`;
+      const abs = href.startsWith("http") ? href : `${BASE}${href}`;
       links.push(abs);
     }
   });
 
-  // remove duplicados
-  const uniqueLinks = [...new Set(links)].slice(0, 10); // pega só as 10 mais recentes (ajustável)
+  links = [...new Set(links)].slice(0, 12); // pega as mais recentes
 
-  let newCount = 0;
+  let novos = 0;
 
-  for (const url of uniqueLinks) {
+  for (const url of links) {
+    if (importedSet.has(url)) continue;
+
+    const html = await fetchHtmlRobusto(url);
+    const $$ = cheerio.load(html);
+
+    // 2) Extrair título
+    const title =
+      ($$("h1").first().text() || $$("title").text() || "Notícia").trim();
+
+    // 3) Data (se não achar, usa hoje pt-BR)
+    let date =
+      $$("time").first().text().trim() ||
+      $$("[datetime]").first().attr("datetime") ||
+      "";
+    if (!date) date = new Date().toLocaleDateString("pt-BR");
+
+    // 4) Imagem principal (tenta og:image primeiro)
+    let thumbnail =
+      $$('meta[property="og:image"]').attr("content") ||
+      $$("article img").first().attr("src") ||
+      $$("img").first().attr("src") ||
+      "";
+    if (thumbnail && thumbnail.startsWith("/")) thumbnail = `${BASE}${thumbnail}`;
+
+    // 5) Conteúdo: tenta pegar um “article”; se falhar, pega o maior bloco de texto
+    let content = "";
+    const article = $$("article").first();
+    if (article.length) {
+      // remove coisas que atrapalham
+      article.find("script, style, noscript").remove();
+      content = article.text().trim();
+    } else {
+      const candidates = ["main", ".container", ".content", ".conteudo", ".noticia"];
+      let best = "";
+      for (const sel of candidates) {
+        const t = $$(sel).text().trim();
+        if (t.length > best.length) best = t;
+      }
+      content = best || $$.text().trim();
+    }
+
+    // (opcional) limitar tamanho pra não virar “textão” e evitar copyright
+    // content = content.slice(0, 2500) + "\n\n(continua na fonte)";
+
     const id = sha1(url);
-    // evita baixar de novo usando um "fingerprint" no nome do arquivo
-    // (ou você pode manter um banco/arquivo de urls importadas)
-    const articleHtml = await fetchHtml(url);
-    const $$ = cheerio.load(articleHtml);
-
-    // ⚠️ AJUSTE OS SELETORES DO DETALHE:
-    // (você vai ajustar com o “Inspecionar” no navegador)
-    const title = ($$("h1").first().text() || "Notícia").trim();
-    const dateText = ($$("[datetime], time").first().text() || "").trim();
-
-    // tenta achar imagem principal
-    let img = $$("img").first().attr("src") || "";
-    if (img && img.startsWith("/")) img = `https://canoinhas.atende.net${img}`;
-
-    // corpo (exemplo: pega o container principal do texto)
-    const contentEl = $$("article, .conteudo, .noticia, .content").first();
-    const contentText = contentEl.text().trim();
-
-    // monta markdown (melhor: criar resumo + link)
-    const fonte = url;
-
-    const slug = slugify(title).slice(0, 80) || `noticia-${id}`;
+    const slug = slugify(title) || `noticia-${id}`;
     const filename = `${slug}-${id}.md`;
-    const filePath = path.join(OUT_DIR, filename);
+    const filepath = path.join(OUT_DIR, filename);
 
-    if (fs.existsSync(filePath)) continue;
+    const md =
+      frontmatter({
+        title,
+        date,
+        thumbnail,
+        category: "Canoinhas (Atende.net)",
+        source: url,
+      }) +
+      `> Fonte: ${url}\n\n` +
+      content +
+      `\n`;
 
-    const md = `---
-title: "${title.replace(/"/g, '\\"')}"
-date: "${new Date().toLocaleDateString("pt-BR")}"
-thumbnail: "${img || ""}"
-category: "Canoinhas (Atende.net)"
-source: "${fonte}"
----
+    fs.writeFileSync(filepath, md, "utf8");
 
-> Fonte: ${fonte}
+    postsList.unshift(filename);
+    importedSet.add(url);
+    novos++;
 
-${contentText}
-`;
-
-    fs.writeFileSync(filePath, md, "utf8");
-    existing.add(filename);
-    newCount++;
-
-    // evita “martelar” o site
-    await sleep(800);
+    await sleep(900);
   }
 
-  // atualiza posts.json (ordem: mais novos primeiro)
-  const finalList = Array.from(existing);
-  savePostsList(finalList);
+  // remove duplicados no posts.json
+  const finalPosts = [...new Set(postsList)];
+  saveJson(POSTS_JSON, finalPosts);
 
-  console.log(`Importação OK. Novas: ${newCount}`);
+  imported.urls = [...importedSet];
+  saveJson(IMPORTS_JSON, imported);
+
+  console.log(`OK: ${novos} novas notícias importadas.`);
 }
 
 main().catch((e) => {
