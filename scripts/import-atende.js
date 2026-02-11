@@ -6,7 +6,7 @@ import * as cheerio from "cheerio";
 import iconv from "iconv-lite";
 
 const BASE = "https://canoinhas.atende.net";
-const LIST_URL = `${BASE}/cidadao/noticia`;
+const LIST_URL = `${BASE}/cidadao/noticia/rss`;
 
 const OUT_DIR = path.join(process.cwd(), "noticias");
 const POSTS_JSON = path.join(OUT_DIR, "noticias.json"); // seu arquivo
