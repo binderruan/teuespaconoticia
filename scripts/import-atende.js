@@ -78,7 +78,9 @@ async function fetchText(url, { retries = 4, timeoutMs = 45000 } = {}) {
       clearTimeout(t);
       if (attempt === retries) throw err;
       const wait = 2000 * attempt;
-      console.log(`⚠️ Falhou (${attempt}/${retries}) ${url}. Tentando em ${wait}ms...`);
+      console.log(
+        `⚠️ Falhou (${attempt}/${retries}) ${url}. Tentando em ${wait}ms...`
+      );
       await sleep(wait);
     }
   }
@@ -100,14 +102,40 @@ function frontmatter({ title, date, thumbnail, category, source }) {
 async function getLinksFromRss() {
   const xml = await fetchText(RSS_URL);
 
-  const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: "@_" });
+  // DEBUG: mostra o começo do RSS no log do Actions
+  console.log("RSS (inicio):", xml.slice(0, 500));
+
+  const parser = new XMLParser({
+    ignoreAttributes: false,
+    attributeNamePrefix: "@_",
+    trimValues: true,
+    cdataPropName: "__cdata",
+  });
+
   const obj = parser.parse(xml);
 
-  const items = obj?.rss?.channel?.item || [];
+  const items = obj?.rss?.channel?.item || obj?.feed?.entry || [];
   const arr = Array.isArray(items) ? items : [items];
 
   const links = arr
-    .map((it) => (typeof it?.link === "string" ? it.link.trim() : null))
+    .map((it) => {
+      // RSS2: <link>...</link>
+      if (typeof it?.link === "string") return it.link.trim();
+      if (it?.link?.__cdata) return String(it.link.__cdata).trim();
+
+      // RSS2: <guid>...</guid> (muito comum vir aqui)
+      if (typeof it?.guid === "string") return it.guid.trim();
+      if (it?.guid?.__cdata) return String(it.guid.__cdata).trim();
+
+      // Atom: <link href="..."/>
+      if (it?.link?.["@_href"]) return String(it.link["@_href"]).trim();
+      if (Array.isArray(it?.link)) {
+        const first = it.link.find((x) => x?.["@_href"])?.["@_href"];
+        if (first) return String(first).trim();
+      }
+
+      return null;
+    })
     .filter(Boolean)
     .map((u) => {
       if (u.startsWith("//")) return "https:" + u;
@@ -141,7 +169,6 @@ async function main() {
 
     const title = ($$("h1").first().text() || $$("title").text() || "Notícia").trim();
 
-    // tenta data (muito site não tem no html; então cai pro dia de hoje)
     let date =
       $$("time").first().text().trim() ||
       $$("[datetime]").first().attr("datetime") ||
