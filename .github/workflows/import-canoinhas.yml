@@ -19,7 +19,7 @@ jobs:
 
       - run: npm init -y
       - run: npm pkg set type=module
-      - run: npm i cheerio iconv-lite
+      - run: npm i cheerio iconv-lite fast-xml-parser
 
       - run: node scripts/import-atende.js
 
