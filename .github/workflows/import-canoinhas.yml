@@ -17,8 +17,6 @@ jobs:
         with:
           node-version: "20"
 
-      - run: npm init -y
-      - run: npm pkg set type=module
       - run: npm i cheerio iconv-lite fast-xml-parser
 
       - run: node scripts/import-atende.js
@@ -27,6 +25,4 @@ jobs:
         run: |
           git config user.name "teuespaco-bot"
           git config user.email "bot@teuespaco.com.br"
-          git add noticias/noticias.json noticias/_imports_atende.json noticias/*.md
-          git commit -m "Import: Atende.net (Canoinhas)" || echo "Nada novo"
-          git push
+          git add noticias/noticias.json noticias/_imports_atende.json noticias/*.m*
