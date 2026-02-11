@@ -1,5 +1,6 @@
-name: Import Atende.net (Canoinhas)
-
+{
+  "urls": []
+}
 on:
   schedule:
     - cron: "0 11 * * *" # roda todo dia 11:00 UTC (08:00 no BR - ajuste se quiser)
