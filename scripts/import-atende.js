@@ -8,7 +8,7 @@ const BASE = "https://canoinhas.atende.net";
 const LIST_URL = `${BASE}/cidadao/noticia`;
 
 const OUT_DIR = path.join(process.cwd(), "noticias");
-const POSTS_JSON = path.join(OUT_DIR, "posts.json");
+const POSTS_JSON = path.join(OUT_DIR, "noticias.json");
 const IMPORTS_JSON = path.join(OUT_DIR, "_imports_atende.json");
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -32,30 +32,52 @@ function saveJson(file, data) {
   fs.writeFileSync(file, JSON.stringify(data, null, 2));
 }
 
-async function fetchHtmlRobusto(url) {
-  const res = await fetch(url, {
-    headers: {
-      "user-agent": "teuespaco-bot/1.0 (+https://teuespaco.com.br)",
-      "accept-language": "pt-BR,pt;q=0.9",
-    },
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status} em ${url}`);
+async function fetchHtmlRobusto(url, { retries = 3, timeoutMs = 30000 } = {}) {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    const controller = new AbortController();
+    const t = setTimeout(() => controller.abort(), timeoutMs);
 
-  // pega bytes e decodifica (evita treta de charset)
-  const buf = Buffer.from(await res.arrayBuffer());
+    try {
+      const res = await fetch(url, {
+        signal: controller.signal,
+        headers: {
+          "user-agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122 Safari/537.36",
+          "accept":
+            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "accept-language": "pt-BR,pt;q=0.9,en;q=0.8",
+          "cache-control": "no-cache",
+          "pragma": "no-cache",
+        },
+      });
 
-  // tenta detectar charset no HTML
-  const head = buf.slice(0, 4000).toString("ascii");
-  const m =
-    head.match(/charset=["']?([\w-]+)["']?/i) ||
-    head.match(/content=["'][^"']*charset=([\w-]+)[^"']*["']/i);
+      clearTimeout(t);
+      if (!res.ok) throw new Error(`HTTP ${res.status} em ${url}`);
 
-  const charset = (m?.[1] || "utf-8").toLowerCase();
+      const buf = Buffer.from(await res.arrayBuffer());
 
-  try {
-    return iconv.decode(buf, charset);
-  } catch {
-    return iconv.decode(buf, "utf-8");
+      const head = buf.slice(0, 4000).toString("ascii");
+      const m =
+        head.match(/charset=["']?([\w-]+)["']?/i) ||
+        head.match(/content=["'][^"']*charset=([\w-]+)[^"']*["']/i);
+
+      const charset = (m?.[1] || "utf-8").toLowerCase();
+
+      try {
+        return iconv.decode(buf, charset);
+      } catch {
+        return iconv.decode(buf, "utf-8");
+      }
+    } catch (err) {
+      clearTimeout(t);
+      if (attempt === retries) throw err;
+
+      const wait = 2000 * attempt;
+      console.log(
+        `⚠️ Falhou (${attempt}/${retries}) ${url}. Tentando em ${wait}ms...`
+      );
+      await sleep(wait);
+    }
   }
 }
 
