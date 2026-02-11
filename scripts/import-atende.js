@@ -1,3 +1,4 @@
+import { XMLParser } from "fast-xml-parser";
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
@@ -8,14 +9,14 @@ const BASE = "https://canoinhas.atende.net";
 const LIST_URL = `${BASE}/cidadao/noticia`;
 
 const OUT_DIR = path.join(process.cwd(), "noticias");
-const POSTS_JSON = path.join(OUT_DIR, "noticias.json");
+const POSTS_JSON = path.join(OUT_DIR, "noticias.json"); // seu arquivo
 const IMPORTS_JSON = path.join(OUT_DIR, "_imports_atende.json");
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const sha1 = (s) => crypto.createHash("sha1").update(s).digest("hex").slice(0, 10);
 
 function slugify(str) {
-  return str
+  return (str || "")
     .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
@@ -73,23 +74,73 @@ async function fetchHtmlRobusto(url, { retries = 3, timeoutMs = 30000 } = {}) {
       if (attempt === retries) throw err;
 
       const wait = 2000 * attempt;
-      console.log(
-        `⚠️ Falhou (${attempt}/${retries}) ${url}. Tentando em ${wait}ms...`
-      );
+      console.log(`⚠️ Falhou (${attempt}/${retries}) ${url}. Tentando em ${wait}ms...`);
       await sleep(wait);
     }
   }
 }
 
+function acharRssNoHtml(html) {
+  // <link rel="alternate" type="application/rss+xml" href="...">
+  const m = html.match(
+    /<link[^>]+type=["']application\/rss\+xml["'][^>]+href=["']([^"']+)["']/i
+  );
+  if (!m) return null;
+
+  let href = (m[1] || "").trim();
+  if (!href) return null;
+
+  if (href.startsWith("//")) href = "https:" + href;
+  if (href.startsWith("/")) href = `${BASE}${href}`;
+  if (!href.startsWith("http")) href = `${BASE}/${href}`;
+  return href;
+}
+
+async function linksViaRss(rssUrl) {
+  const xml = await fetchHtmlRobusto(rssUrl, { timeoutMs: 45000, retries: 4 });
+
+  const parser = new XMLParser({
+    ignoreAttributes: false,
+    attributeNamePrefix: "@_",
+  });
+
+  const obj = parser.parse(xml);
+
+  const items = obj?.rss?.channel?.item || obj?.feed?.entry || [];
+  const arr = Array.isArray(items) ? items : [items];
+
+  const links = arr
+    .map((it) => {
+      if (typeof it?.link === "string") return it.link;        // RSS2
+      if (it?.link?.["@_href"]) return it.link["@_href"];      // Atom
+      if (Array.isArray(it?.link)) {
+        const first = it.link.find((x) => x?.["@_href"])?.["@_href"];
+        if (first) return first;
+      }
+      return null;
+    })
+    .filter(Boolean)
+    .map((u) => {
+      if (u.startsWith("//")) return "https:" + u;
+      if (u.startsWith("/")) return `${BASE}${u}`;
+      if (!u.startsWith("http")) return `${BASE}/${u}`;
+      return u;
+    });
+
+  return [...new Set(links)];
+}
+
 function frontmatter({ title, date, thumbnail, category, source }) {
   const esc = (s) => (s || "").replace(/"/g, '\\"');
-  return `---\n` +
+  return (
+    `---\n` +
     `title: "${esc(title)}"\n` +
     `date: "${esc(date)}"\n` +
     `thumbnail: "${esc(thumbnail)}"\n` +
     `category: "${esc(category)}"\n` +
     `source: "${esc(source)}"\n` +
-    `---\n\n`;
+    `---\n\n`
+  );
 }
 
 async function main() {
@@ -97,85 +148,84 @@ async function main() {
 
   const postsList = loadJson(POSTS_JSON, []);
   const imported = loadJson(IMPORTS_JSON, { urls: [] });
-  const importedSet = new Set(imported.urls);
+  const importedSet = new Set(imported.urls || []);
 
   // 1) Lista de notícias
   const listHtml = await fetchHtmlRobusto(LIST_URL);
-  console.log("HTML LISTA (inicio):", listHtml.slice(0, 500));
+  console.log("HTML LISTA (inicio):", listHtml.slice(0, 300));
+
   const $ = cheerio.load(listHtml);
 
-  // ✅ tenta achar links de notícia (bem tolerante)
-let links = [];
+  let links = [];
 
-// 1) Pega href normais (com ou sem barra no início)
-$("a[href]").each((_, a) => {
-  const href = ($(a).attr("href") || "").trim();
-  if (!href) return;
-
-  // aceita "cidadao/noticia/..." e "/cidadao/noticia/..."
-  if (href.includes("cidadao/noticia/")) {
-    const abs = href.startsWith("http")
-      ? href
-      : href.startsWith("/")
-        ? `${BASE}${href}`
-        : `${BASE}/${href}`;
-    links.push(abs);
+  // 1) tenta RSS primeiro
+  const rssUrl = acharRssNoHtml(listHtml);
+  if (rssUrl) {
+    console.log("RSS encontrado:", rssUrl);
+    try {
+      links = await linksViaRss(rssUrl);
+    } catch (e) {
+      console.log("Falha ao ler RSS, voltando pro HTML:", e?.message || e);
+    }
+  } else {
+    console.log("RSS não encontrado no HTML.");
   }
-});
 
-// 2) Fallback: alguns sites usam data-href / data-url / onclick
-$("[data-href],[data-url],[onclick]").each((_, el) => {
-  const dh = ($(el).attr("data-href") || "").trim();
-  const du = ($(el).attr("data-url") || "").trim();
-  const oc = ($(el).attr("onclick") || "").trim();
+  // 2) fallback HTML
+  if (links.length === 0) {
+    $("a[href]").each((_, a) => {
+      const href = ($(a).attr("href") || "").trim();
+      if (!href) return;
 
-  const candidates = [dh, du, oc];
+      if (href.includes("cidadao/noticia/")) {
+        const abs = href.startsWith("http")
+          ? href
+          : href.startsWith("/")
+            ? `${BASE}${href}`
+            : `${BASE}/${href}`;
+        links.push(abs);
+      }
+    });
 
-  for (const c of candidates) {
-    if (!c) continue;
-    if (c.includes("cidadao/noticia/")) {
-      // tenta extrair uma URL “limpa” de dentro do onclick
-      const m = c.match(/(https?:\/\/[^\s"'()]+|\/?cidadao\/noticia\/[^\s"'()]+)/i);
-      const raw = (m?.[1] || c).trim();
-
-      const abs = raw.startsWith("http")
-        ? raw
-        : raw.startsWith("/")
-          ? `${BASE}${raw}`
-          : `${BASE}/${raw}`;
+    // fallback regex no HTML inteiro
+    const rx =
+      /(?:https?:\/\/canoinhas\.atende\.net)?\/?cidadao\/noticia\/[a-z0-9\-_%]+/gi;
+    const found = listHtml.match(rx) || [];
+    for (const f of found) {
+      const abs = f.startsWith("http")
+        ? f
+        : f.startsWith("/")
+          ? `${BASE}${f}`
+          : `${BASE}/${f}`;
       links.push(abs);
     }
-  }
-});
 
-// 3) Fallback final por regex no HTML inteiro
-const rx = /(?:https?:\/\/canoinhas\.atende\.net)?\/?cidadao\/noticia\/[a-z0-9\-_%]+/gi;
-const found = listHtml.match(rx) || [];
-for (cons
-::contentReference[oaicite:0]{index=0}
+    links = [...new Set(links)];
+  }
+
+  links = links.slice(0, 20);
   console.log("LINKS ENCONTRADOS:", links.length);
-  console.log(links);
-  
+  console.log("PRIMEIROS LINKS:", links.slice(0, 5));
+
   let novos = 0;
 
   for (const url of links) {
-    if (importedSet.has(url)) continue;
+    if (importedSet.has(url)) {
+      console.log("PULANDO (já importado):", url);
+      continue;
+    }
 
     const html = await fetchHtmlRobusto(url);
     const $$ = cheerio.load(html);
 
-    // 2) Extrair título
-    const title =
-      ($$("h1").first().text() || $$("title").text() || "Notícia").trim();
+    const title = ($$("h1").first().text() || $$("title").text() || "Notícia").trim();
 
-    // 3) Data (se não achar, usa hoje pt-BR)
     let date =
       $$("time").first().text().trim() ||
       $$("[datetime]").first().attr("datetime") ||
       "";
     if (!date) date = new Date().toLocaleDateString("pt-BR");
 
-    // 4) Imagem principal (tenta og:image primeiro)
     let thumbnail =
       $$('meta[property="og:image"]').attr("content") ||
       $$("article img").first().attr("src") ||
@@ -183,11 +233,9 @@ for (cons
       "";
     if (thumbnail && thumbnail.startsWith("/")) thumbnail = `${BASE}${thumbnail}`;
 
-    // 5) Conteúdo: tenta pegar um “article”; se falhar, pega o maior bloco de texto
     let content = "";
     const article = $$("article").first();
     if (article.length) {
-      // remove coisas que atrapalham
       article.find("script, style, noscript").remove();
       content = article.text().trim();
     } else {
@@ -199,9 +247,6 @@ for (cons
       }
       content = best || $$.text().trim();
     }
-
-    // (opcional) limitar tamanho pra não virar “textão” e evitar copyright
-    // content = content.slice(0, 2500) + "\n\n(continua na fonte)";
 
     const id = sha1(url);
     const slug = slugify(title) || `noticia-${id}`;
@@ -229,12 +274,10 @@ for (cons
     await sleep(900);
   }
 
-  // remove duplicados no posts.json
   const finalPosts = [...new Set(postsList)];
   saveJson(POSTS_JSON, finalPosts);
 
-  imported.urls = [...importedSet];
-  saveJson(IMPORTS_JSON, imported);
+  saveJson(IMPORTS_JSON, { urls: [...importedSet] });
 
   console.log(`OK: ${novos} novas notícias importadas.`);
 }
