@@ -623,7 +623,7 @@ function parseFrontmatter(md) {
 async function carregarNoticias() {
   const container = document.getElementById("lista-noticias");
 
-  const lista = await fetch("/noticias/noticias.json").then(r => r.json());
+  const lista = await fetch("/noticias/posts.json").then(r => r.json());
 
   let noticias = [];
 
@@ -685,7 +685,7 @@ async function carregarNoticias() {
   const container = document.getElementById("lista-noticias");
   if (!container) return;
 
-  const lista = await fetch("/noticias/noticias.json").then(r => r.json());
+  const lista = await fetch("/noticias/posts.json").then(r => r.json());
 
   let noticias = [];
 
@@ -736,9 +736,6 @@ async function carregarNoticias() {
 
 carregarNoticias();
 </script>
-
-
-
         
 </body>
 
