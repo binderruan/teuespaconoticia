@@ -18,6 +18,7 @@ jobs:
           node-version: "20"
 
       - run: npm init -y
+      - run: npm pkg set type=module
       - run: npm i cheerio iconv-lite
 
       - run: node scripts/import-atende.js
