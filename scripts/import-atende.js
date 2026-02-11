@@ -101,6 +101,7 @@ async function main() {
 
   // 1) Lista de notícias
   const listHtml = await fetchHtmlRobusto(LIST_URL);
+  console.log("HTML LISTA (inicio):", listHtml.slice(0, 500));
   const $ = cheerio.load(listHtml);
 
   // ✅ tenta achar links de notícia (bem tolerante)
@@ -115,7 +116,9 @@ async function main() {
   });
 
   links = [...new Set(links)].slice(0, 12); // pega as mais recentes
-
+  console.log("LINKS ENCONTRADOS:", links.length);
+  console.log(links);
+  
   let novos = 0;
 
   for (const url of links) {
