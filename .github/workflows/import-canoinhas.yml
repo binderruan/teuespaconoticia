@@ -1,8 +1,8 @@
-name: Import Canoinhas Atende
+name: Import Atende.net (Canoinhas)
 
 on:
   schedule:
-    - cron: "0 9 * * *" # 09:00 UTC (ajuste p/ seu horário)
+    - cron: "0 11 * * *" # roda todo dia 11:00 UTC (08:00 no BR - ajuste se quiser)
   workflow_dispatch:
 
 jobs:
@@ -18,14 +18,14 @@ jobs:
           node-version: "20"
 
       - run: npm init -y
-      - run: npm i cheerio
+      - run: npm i cheerio iconv-lite
 
-      - run: node scripts/import-canoinhas.js
+      - run: node scripts/import-atende.js
 
-      - name: Commit changes
+      - name: Commit & push
         run: |
           git config user.name "teuespaco-bot"
           git config user.email "bot@teuespaco.com.br"
-          git add noticias/posts.json noticias/*.md
-          git commit -m "Import notícias Canoinhas" || echo "Nada novo"
+          git add noticias/posts.json noticias/_imports_atende.json noticias/*.md
+          git commit -m "Import: Atende.net (Canoinhas)" || echo "Nada novo"
           git push
