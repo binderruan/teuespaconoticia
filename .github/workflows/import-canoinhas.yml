@@ -25,4 +25,6 @@ jobs:
         run: |
           git config user.name "teuespaco-bot"
           git config user.email "bot@teuespaco.com.br"
-          git add noticias/noticias.json noticias/_imports_atende.json noticias/*.m*
+          git add noticias/noticias.json noticias/_imports_atende.json noticias/*.md
+          git commit -m "Import: Atende.net (Canoinhas)" || echo "Nada novo"
+          git push
