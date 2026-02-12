@@ -1,4 +1,3 @@
-// scripts/import-atende.js
 import { XMLParser } from "fast-xml-parser";
 import fs from "fs";
 import path from "path";
@@ -7,17 +6,21 @@ import * as cheerio from "cheerio";
 import iconv from "iconv-lite";
 
 const BASE = "https://canoinhas.atende.net";
-const SITEMAP_INDEX_URL = `${BASE}/sitemap/sitemap.xml`;
+
+// Páginas que normalmente dão “conteúdo estático” (sem depender de sessão/JS)
+const LIST_CANDIDATES = [
+  `${BASE}/cidadao/noticia/rss?output=1`,
+  `${BASE}/cidadao/noticia?output=1`,
+  `${BASE}/cidadao/noticia/rss`,
+  `${BASE}/cidadao/noticia`,
+];
 
 const OUT_DIR = path.join(process.cwd(), "noticias");
-const POSTS_JSON = path.join(OUT_DIR, "noticias.json"); // seu arquivo
+const POSTS_JSON = path.join(OUT_DIR, "noticias.json"); // ✅ seu arquivo
 const IMPORTS_JSON = path.join(OUT_DIR, "_imports_atende.json");
 
-// robots.txt: Crawl-delay: 10
-const CRAWL_DELAY_MS = 10_000;
-
-// quantas notícias puxar por execução (pra não pesar)
-const MAX_PER_RUN = 15;
+const CRAWL_DELAY_MS = 11000; // robots.txt fala 10s -> uso 11s
+const MAX_LINKS_PER_RUN = 12;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const sha1 = (s) => crypto.createHash("sha1").update(s).digest("hex").slice(0, 10);
@@ -45,6 +48,7 @@ function saveJson(file, data) {
   fs.writeFileSync(file, JSON.stringify(data, null, 2));
 }
 
+// fetch com decode de charset + retry + timeout
 async function fetchText(url, { retries = 4, timeoutMs = 45000 } = {}) {
   for (let attempt = 1; attempt <= retries; attempt++) {
     const controller = new AbortController();
@@ -54,8 +58,10 @@ async function fetchText(url, { retries = 4, timeoutMs = 45000 } = {}) {
       const res = await fetch(url, {
         signal: controller.signal,
         headers: {
-          "user-agent": "teuespaco-bot/1.0 (+https://www.teuespaco.com.br)",
-          accept:
+          // user-agent “real” costuma evitar bloqueios/versões estranhas
+          "user-agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122 Safari/537.36",
+          "accept":
             "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
           "accept-language": "pt-BR,pt;q=0.9,en;q=0.8",
           "cache-control": "no-cache",
@@ -68,7 +74,7 @@ async function fetchText(url, { retries = 4, timeoutMs = 45000 } = {}) {
 
       const buf = Buffer.from(await res.arrayBuffer());
 
-      // detecta charset
+      // detecta charset no início do HTML/XML
       const head = buf.slice(0, 5000).toString("ascii");
       const m =
         head.match(/charset=["']?([\w-]+)["']?/i) ||
@@ -91,6 +97,135 @@ async function fetchText(url, { retries = 4, timeoutMs = 45000 } = {}) {
   }
 }
 
+function pareceXml(texto) {
+  const t = (texto || "").trim().toLowerCase();
+  return t.startsWith("<?xml") || t.startsWith("<rss") || t.startsWith("<feed");
+}
+
+function cleanAbsUrl(u) {
+  if (!u) return null;
+  let url = String(u).trim();
+
+  // remove aspas/perfis comuns
+  url = url.replace(/^["']|["']$/g, "");
+
+  if (url.startsWith("//")) url = "https:" + url;
+  if (url.startsWith("/")) url = `${BASE}${url}`;
+  if (!url.startsWith("http")) url = `${BASE}/${url}`;
+
+  // evita pegar a própria lista (/rss) como “notícia”
+  if (url.includes("/cidadao/noticia/rss")) return null;
+
+  // garante que é link de notícia
+  if (!url.includes("/cidadao/noticia/")) return null;
+
+  return url;
+}
+
+async function fetchListPage() {
+  let last = "";
+
+  for (const url of LIST_CANDIDATES) {
+    const txt = await fetchText(url);
+    last = txt;
+
+    console.log("Tentando LISTA:", url);
+    console.log("Inicio:", txt.slice(0, 120).replace(/\s+/g, " "));
+
+    // Se for XML, já serve como “lista”
+    if (pareceXml(txt)) return { kind: "xml", url, body: txt };
+
+    // Se for HTML, também serve (a gente extrai links)
+    // Só evita quando vem a tela de sessão expirada
+    if (!txt.toLowerCase().includes("sessão do usuário expirada")) {
+      return { kind: "html", url, body: txt };
+    }
+
+    console.log("⚠️ Veio tela de sessão expirada nessa URL, tentando outra...");
+  }
+
+  console.log("❌ Nenhuma URL de lista funcionou. Último início:", last.slice(0, 200));
+  return { kind: "none", url: null, body: null };
+}
+
+function extractLinksFromHtml(html) {
+  const links = [];
+  const $ = cheerio.load(html);
+
+  // 1) href normal
+  $("a[href]").each((_, a) => {
+    const href = ($(a).attr("href") || "").trim();
+    const abs = cleanAbsUrl(href);
+    if (abs) links.push(abs);
+  });
+
+  // 2) data-href / data-url / onclick
+  $("[data-href],[data-url],[onclick]").each((_, el) => {
+    const dh = ($(el).attr("data-href") || "").trim();
+    const du = ($(el).attr("data-url") || "").trim();
+    const oc = ($(el).attr("onclick") || "").trim();
+
+    for (const c of [dh, du, oc]) {
+      if (!c) continue;
+
+      const m = c.match(/(https?:\/\/[^\s"'()]+|\/cidadao\/noticia\/[^\s"'()]+)/i);
+      const raw = (m?.[1] || "").trim();
+      const abs = cleanAbsUrl(raw);
+      if (abs) links.push(abs);
+    }
+  });
+
+  // 3) regex no HTML inteiro (às vezes vem “escondido” em JS/JSON)
+  const rx = /(?:https?:\/\/canoinhas\.atende\.net)?\/cidadao\/noticia\/[a-z0-9\-_%]+/gi;
+  const found = html.match(rx) || [];
+  for (const f of found) {
+    const abs = cleanAbsUrl(f);
+    if (abs) links.push(abs);
+  }
+
+  return [...new Set(links)];
+}
+
+function extractLinksFromXml(xml) {
+  const parser = new XMLParser({
+    ignoreAttributes: false,
+    attributeNamePrefix: "@_",
+    trimValues: true,
+    cdataPropName: "__cdata",
+  });
+
+  const obj = parser.parse(xml);
+
+  // RSS2: rss.channel.item
+  // Atom: feed.entry
+  const items = obj?.rss?.channel?.item || obj?.feed?.entry || [];
+  const arr = Array.isArray(items) ? items : [items];
+
+  const links = arr
+    .map((it) => {
+      // RSS2: <link>...</link>
+      if (typeof it?.link === "string") return it.link.trim();
+      if (it?.link?.__cdata) return String(it.link.__cdata).trim();
+
+      // RSS2: às vezes usam guid como URL
+      if (typeof it?.guid === "string") return it.guid.trim();
+      if (it?.guid?.__cdata) return String(it.guid.__cdata).trim();
+
+      // Atom: <link href="..."/>
+      if (it?.link?.["@_href"]) return String(it.link["@_href"]).trim();
+      if (Array.isArray(it?.link)) {
+        const first = it.link.find((x) => x?.["@_href"])?.["@_href"];
+        if (first) return String(first).trim();
+      }
+
+      return null;
+    })
+    .map(cleanAbsUrl)
+    .filter(Boolean);
+
+  return [...new Set(links)];
+}
+
 function frontmatter({ title, date, thumbnail, category, source }) {
   const esc = (s) => (s || "").replace(/"/g, '\\"');
   return (
@@ -104,91 +239,6 @@ function frontmatter({ title, date, thumbnail, category, source }) {
   );
 }
 
-const parser = new XMLParser({
-  ignoreAttributes: false,
-  attributeNamePrefix: "@_",
-  trimValues: true,
-});
-
-function asArray(x) {
-  if (!x) return [];
-  return Array.isArray(x) ? x : [x];
-}
-
-async function parseSitemapUrlsFromXml(xml) {
-  const obj = parser.parse(xml);
-
-  // sitemap index: <sitemapindex><sitemap><loc>...</loc>
-  if (obj?.sitemapindex?.sitemap) {
-    const maps = asArray(obj.sitemapindex.sitemap)
-      .map((s) => s?.loc)
-      .filter(Boolean);
-    return { type: "index", urls: maps };
-  }
-
-  // url set: <urlset><url><loc>...</loc>
-  if (obj?.urlset?.url) {
-    const urls = asArray(obj.urlset.url)
-      .map((u) => u?.loc)
-      .filter(Boolean);
-    return { type: "urlset", urls };
-  }
-
-  return { type: "unknown", urls: [] };
-}
-
-async function getAllNewsLinksViaSitemap() {
-  console.log("SITEMAP INDEX:", SITEMAP_INDEX_URL);
-
-  const indexXml = await fetchText(SITEMAP_INDEX_URL);
-  const indexParsed = await parseSitemapUrlsFromXml(indexXml);
-
-  let allUrls = [];
-
-  if (indexParsed.type === "index") {
-    // varre sitemaps do índice
-    for (const smUrl of indexParsed.urls) {
-      // opcional: só baixa sitemaps que parecem conter "noticia"
-      // (se quiser mais amplo, remove esse if)
-      if (!String(smUrl).includes("noticia") && !String(smUrl).includes("not")) {
-        continue;
-      }
-
-      console.log("Baixando sitemap:", smUrl);
-      const smXml = await fetchText(smUrl);
-      const smParsed = await parseSitemapUrlsFromXml(smXml);
-
-      if (smParsed.type === "urlset") {
-        allUrls.push(...smParsed.urls);
-      }
-
-      // respeita crawl-delay também no sitemap
-      await sleep(CRAWL_DELAY_MS);
-    }
-  } else if (indexParsed.type === "urlset") {
-    allUrls = indexParsed.urls;
-  }
-
-  // filtra URLs que são notícias
-  const news = allUrls
-    .map((u) => String(u).trim())
-    .filter(Boolean)
-    .filter((u) => u.includes("/cidadao/noticia/"))
-    .filter((u) => !u.endsWith("/rss"))
-    .filter((u) => !u.includes("?output="));
-
-  // remove duplicados
-  return [...new Set(news)];
-}
-
-function extractDateFromPage($$) {
-  // tenta achar algo tipo "11/02/2026 09:04:53"
-  const txt = $$("body").text();
-  const m = txt.match(/\b(\d{2}\/\d{2}\/\d{4})\b/);
-  if (m?.[1]) return m[1];
-  return new Date().toLocaleDateString("pt-BR");
-}
-
 async function main() {
   if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
 
@@ -196,29 +246,57 @@ async function main() {
   const imported = loadJson(IMPORTS_JSON, { urls: [] });
   const importedSet = new Set(imported.urls || []);
 
-  const linksAll = await getAllNewsLinksViaSitemap();
-  console.log("TOTAL LINKS NOTÍCIA NO SITEMAP:", linksAll.length);
+  // 1) Pega “lista” (XML ou HTML)
+  const list = await fetchListPage();
+  if (list.kind === "none") {
+    console.log("OK: 0 novas notícias importadas (nenhuma lista disponível).");
+    return;
+  }
 
-  // pega só as mais recentes (normalmente sitemap já vem “meio ordenado”, mas não garantido)
-  const links = linksAll.slice(0, 60);
+  let links = [];
+  if (list.kind === "xml") {
+    console.log("✅ Lista veio em XML:", list.url);
+    console.log("XML (inicio):", list.body.slice(0, 200).replace(/\s+/g, " "));
+    links = extractLinksFromXml(list.body);
+  } else {
+    console.log("✅ Lista veio em HTML:", list.url);
+    console.log("HTML (inicio):", list.body.slice(0, 200).replace(/\s+/g, " "));
+    links = extractLinksFromHtml(list.body);
+  }
+
+  links = links.slice(0, MAX_LINKS_PER_RUN);
+
+  console.log("LINKS ENCONTRADOS:", links.length);
+  console.log("PRIMEIROS LINKS:", links.slice(0, 5));
 
   let novos = 0;
 
   for (const url of links) {
-    if (novos >= MAX_PER_RUN) break;
     if (importedSet.has(url)) continue;
 
-    console.log("Importando:", url);
+    // tenta versão “output=1” da notícia também (quando existir)
+    const urlOutput = url.includes("?") ? `${url}&output=1` : `${url}?output=1`;
 
-    const html = await fetchText(url);
+    let html = "";
+    try {
+      html = await fetchText(urlOutput);
+      if (html.toLowerCase().includes("sessão do usuário expirada")) {
+        html = await fetchText(url); // fallback
+      }
+    } catch {
+      html = await fetchText(url); // fallback
+    }
+
     const $$ = cheerio.load(html);
 
     const title =
-      ($$("h1").first().text() ||
-        $$("title").text() ||
-        "Notícia").trim();
+      ($$("h1").first().text() || $$("title").text() || "Notícia").trim();
 
-    const date = extractDateFromPage($$);
+    let date =
+      $$("time").first().text().trim() ||
+      $$("[datetime]").first().attr("datetime") ||
+      "";
+    if (!date) date = new Date().toLocaleDateString("pt-BR");
 
     let thumbnail =
       $$('meta[property="og:image"]').attr("content") ||
@@ -227,20 +305,30 @@ async function main() {
       "";
     if (thumbnail && thumbnail.startsWith("/")) thumbnail = `${BASE}${thumbnail}`;
 
-    // conteúdo: tenta um container de notícia
     let content = "";
-    const candidates = ["article", ".noticia", ".conteudo", "main", ".container"];
-    let best = "";
-    for (const sel of candidates) {
-      const el = $$(sel).first();
-      if (!el.length) continue;
-      el.find("script, style, noscript").remove();
-      const t = el.text().trim();
-      if (t.length > best.length) best = t;
+    const article = $$("article").first();
+    if (article.length) {
+      article.find("script, style, noscript").remove();
+      content = article.text().trim();
+    } else {
+      // fallback: pega o maior bloco
+      const candidates = ["main", ".container", ".content", ".conteudo", ".noticia"];
+      let best = "";
+      for (const sel of candidates) {
+        const t = $$(sel).text().trim();
+        if (t.length > best.length) best = t;
+      }
+      content = best || $$.text().trim();
     }
-    content = best || $$("body").text().trim();
 
-    // monta arquivo
+    // evita salvar “vazio”
+    if (!content || content.length < 50) {
+      console.log("⚠️ Conteúdo muito pequeno, pulando:", url);
+      importedSet.add(url); // marca como visto pra não ficar tentando sempre
+      await sleep(CRAWL_DELAY_MS);
+      continue;
+    }
+
     const id = sha1(url);
     const slug = slugify(title) || `noticia-${id}`;
     const filename = `${slug}-${id}.md`;
@@ -264,7 +352,7 @@ async function main() {
     importedSet.add(url);
     novos++;
 
-    // robots.txt: crawl-delay 10
+    console.log("✅ Importado:", title);
     await sleep(CRAWL_DELAY_MS);
   }
 
