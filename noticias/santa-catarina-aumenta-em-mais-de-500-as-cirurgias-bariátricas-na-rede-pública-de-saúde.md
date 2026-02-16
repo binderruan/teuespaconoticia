@@ -1,6 +1,5 @@
 ---
-title: Santa Catarina aumenta em mais de 500% as cirurgias bariátricas na rede
-  pública de saúde
+title: Cirurgias bariátricas crescem mais de 500% na rede pública de SC
 date: 16/02/2026
 category: ASCOM | SES
 thumbnail: https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/OJR_8542-1.jpg
