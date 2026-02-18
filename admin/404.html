@@ -171,9 +171,8 @@
           <div class="box-404">
             <h1>404</h1>
             <p>
-              Essa página não existe ou foi removida.  
-              Se você veio por um link de notícia, pode ser que o endereço esteja incorreto.
-            </p>
+              Essa página não existe ou foi removida.              </p>
+            <p> Você será redirecionado automaticamente em <b><span id="contador-redirecionamento">8</span> segundos</b>. </p>
 
             <p style="margin-bottom:10px;">
               <b>Endereço acessado:</b><br>
@@ -353,6 +352,25 @@
 
     document.addEventListener("DOMContentLoaded", carregarRelacionadas);
   </script>
+
+  <script>
+  let tempo = 8;
+  const destino = "/";
+
+  function atualizarContador() {
+    const el = document.getElementById("contador-redirecionamento");
+    if (el) el.innerText = tempo;
+
+    if (tempo <= 0) {
+      window.location.href = destino;
+    }
+
+    tempo--;
+  }
+
+  atualizarContador();
+  setInterval(atualizarContador, 1000);
+</script>
 
 </body>
 </html>
