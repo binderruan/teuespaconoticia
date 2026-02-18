@@ -2,6 +2,9 @@ backend:
   name: git-gateway
   branch: main
 
+identity_url: https://teuespaco.com.br/.netlify/identity
+gateway_url: https://teuespaco.com.br/.netlify/git
+
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
@@ -16,28 +19,23 @@ collections:
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
-
     fields:
       - label: "Título"
         name: "title"
         widget: "string"
-
       - label: "Data"
         name: "date"
         widget: "datetime"
         default: "{{now}}"
         format: "DD/MM/YYYY"
         time_format: false
-
       - label: "Categoria"
         name: "category"
         widget: "string"
-
       - label: "Imagem de capa"
         name: "thumbnail"
         widget: "image"
         required: false
-
       - label: "Conteúdo da notícia"
         name: "body"
         widget: "markdown"
