@@ -1,3 +1,7 @@
 [build]
   command = "node gerar-posts.js"
   publish = "."
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
