@@ -39,4 +39,3 @@ collections:
       - label: "Conteúdo da notícia"
         name: "body"
         widget: "markdown"
-        editor_components: []
