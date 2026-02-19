@@ -584,11 +584,10 @@ async function carregarRelacionadas() {
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());
 
-    const tituloMatch = md.match(/^title:\s*(.*)$/m);
-    const titulo = tituloMatch ? tituloMatch[1].trim() : "Sem título";
-
-    const imgMatch = md.match(/^thumbnail:\s*(.*)$/m);
-    const imagem = imgMatch ? imgMatch[1].trim() : "images/logo.png";
+    const { data } = parseFrontmatter(md);
+    
+    const titulo = (data.title || "Sem título").trim();
+    const imagem = data.thumbnail ? normalizarUrlImagem(data.thumbnail.trim()) : "images/logo.png";
 
     noticias.push({ nome, titulo, imagem });
   }
