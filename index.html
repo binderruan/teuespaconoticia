@@ -710,14 +710,13 @@ async function carregarNoticias() {
     const md = await fetch("/noticias/" + nome).then(r => r.text());
 
     // pega do frontmatter do Netlify CMS
-    const tituloMatch = md.match(/^title:\s*(.*)$/m);
-    const titulo = tituloMatch ? tituloMatch[1].trim() : "Sem título";
+    const { data } = parseFrontmatter(md);
+    const titulo = (data.title || "Sem título").trim();
 
     const dataMatch = md.match(/^date:\s*(.*)$/m);
     const data = dataMatch ? dataMatch[1].trim() : "";
 
-    const imgMatch = md.match(/^thumbnail:\s*(.*)$/m);
-    const imagem = imgMatch ? imgMatch[1].trim() : "images/logo.png";
+    const imagem = (data.thumbnail || "images/logo.png").trim();
 
     noticias.push({ nome, titulo, data, imagem });
   }
