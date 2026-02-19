@@ -477,7 +477,6 @@ function formatarDataPtBr(dataStr) {
 
 <script>
 function parseFrontmatter(md) {
-  // Pega bloco YAML entre --- e ---
   const match = md.match(/^---\s*[\r\n]+([\s\S]*?)\s*[\r\n]+---\s*[\r\n]*/);
   if (!match) return { data: {}, body: md };
 
@@ -485,16 +484,29 @@ function parseFrontmatter(md) {
   const body = md.replace(match[0], "");
 
   const data = {};
+  let currentKey = null;
+
   yaml.split(/\r?\n/).forEach((line) => {
+    if (!line.trim()) return;
+
+    // Se a linha começa com espaços, é continuação do valor anterior
+    if (/^\s+/.test(line) && currentKey) {
+      data[currentKey] = (data[currentKey] + " " + line.trim())
+        .replace(/\s+/g, " ")
+        .trim();
+      return;
+    }
+
     const m = line.match(/^([^:]+):\s*(.*)$/);
     if (!m) return;
+
     const key = m[1].trim();
     let value = m[2].trim();
 
-    // remove aspas se tiver
     value = value.replace(/^"(.*)"$/, "$1").replace(/^'(.*)'$/, "$1");
 
     data[key] = value;
+    currentKey = key;
   });
 
   return { data, body };
