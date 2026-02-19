@@ -601,22 +601,39 @@ if (window.netlifyIdentity) {
 
 <script>
 function parseFrontmatter(md) {
-  const match = md.match(/^---([\s\S]*?)---/);
-  if (!match) return { body: md };
+  const match = md.match(/^---\s*[\r\n]+([\s\S]*?)\s*[\r\n]+---\s*[\r\n]*/);
+  if (!match) return { data: {}, body: md };
 
-  const lines = match[1].split("\n");
+  const yaml = match[1];
+  const body = md.replace(match[0], "");
+
   const data = {};
+  let currentKey = null;
 
-  lines.forEach(line => {
-    const [key, ...rest] = line.split(":");
-    if (!key || !rest.length) return;
-    data[key.trim()] = rest.join(":").trim();
+  yaml.split(/\r?\n/).forEach((line) => {
+    if (!line.trim()) return;
+
+    // Se a linha começa com espaços, é continuação do valor anterior
+    if (/^\s+/.test(line) && currentKey) {
+      data[currentKey] = (data[currentKey] + " " + line.trim())
+        .replace(/\s+/g, " ")
+        .trim();
+      return;
+    }
+
+    const m = line.match(/^([^:]+):\s*(.*)$/);
+    if (!m) return;
+
+    const key = m[1].trim();
+    let value = m[2].trim();
+
+    value = value.replace(/^"(.*)"$/, "$1").replace(/^'(.*)'$/, "$1");
+
+    data[key] = value;
+    currentKey = key;
   });
 
-  return {
-    ...data,
-    body: md.replace(match[0], "").trim()
-  };
+  return { data, body };
 }
 
 <script>
