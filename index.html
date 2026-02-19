@@ -594,9 +594,9 @@ if (window.netlifyIdentity) {
 <script src="./teuespaco/jquery.js(1).download"></script>
 <script src="./teuespaco/bootstrap.js.download"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+
 
 
 <script>
@@ -695,7 +695,7 @@ async function carregarNoticias() {
 carregarNoticias();
 </script>
 </script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 
 <script>
 async function carregarNoticias() {
@@ -710,8 +710,13 @@ async function carregarNoticias() {
     const md = await fetch("/noticias/" + nome).then(r => r.text());
 
     // pega do frontmatter do Netlify CMS
-    const tituloMatch = md.match(/^title:\s*(.*)$/m);
-    const titulo = tituloMatch ? tituloMatch[1].trim() : "Sem título";
+    const tituloMatch = md.match(/^title:\s*(.*)(?:\r?\n\s+(.*))?/m);
+    let titulo = "Sem título";
+    if (tituloMatch) {
+      titulo = ((tituloMatch[1] || "") + " " + (tituloMatch[2] || ""))
+        .replace(/\s+/g, " ")
+        .trim();
+}
 
     const dataMatch = md.match(/^date:\s*(.*)$/m);
     const data = dataMatch ? dataMatch[1].trim() : "";
