@@ -1,6 +1,6 @@
 ---
 title: Com presença permanente nos municípios, Polícia Militar reduz furtos e
-  roubos na Operação Alegria 2026
+  roubos na Operação Alegria 2026.
 date: 19/02/2026
 category: "ASCOM | PMSC "
 thumbnail: https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/WhatsApp-Image-2026-02-18-at-15.52.14-2.jpeg
