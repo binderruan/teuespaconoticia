@@ -15,7 +15,7 @@ Ao longo desta quarta-feira (18/02), mais de 300 pessoas foram atendidas na unid
 
 Na Capital, as entregas seguem ao longo da semana, das 13h às 19h, na Av. Pref. Osmar Cunha, 263 – Centro, sede da 1ª DP. A Polícia Civil orienta que vítimas de furto durante o Carnaval procurem a unidade responsável pelo registro da ocorrência para verificar a possibilidade de recuperação do aparelho, mediante conferência e comprovação de titularidade.
 
-Proteção às mulheres durante o Carnaval
+**Proteção às mulheres durante o Carnaval**
 
 Além do trabalho de repressão e restituição de bens, a Polícia Civil também atuou de forma preventiva durante o período carnavalesco em diversas regiões do Estado. No dia 12 de fevereiro, na Passarela Nego Querido, em Florianópolis, foi realizada uma ação de conscientização dentro da operação “Voz Ativa”, reforçando o programa “A Mulher Tem Voz”, voltado ao enfrentamento do constrangimento e da violência contra mulheres em ambientes de entretenimento.
 
