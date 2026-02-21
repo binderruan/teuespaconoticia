@@ -2,6 +2,7 @@
 title: Jaraguá bate o Atético-PI na prorrogação e é o primeiro supercampeão do Brasil
 date: 21/02/2026
 category: Esporte | GE
+thumbnail: https://www.jdv.com.br/wp-content/uploads/2026/02/Jaragua-futsal-atletico-pi-20.02.2026-supercampeao-brasil.jpeg
 ---
 <!--StartFragment-->
 
