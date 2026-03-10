@@ -39,3 +39,12 @@ collections:
       - label: "Conteúdo da notícia"
         name: "body"
         widget: "markdown"
+
+    - name: "edicoes"
+  label: "Edições"
+  folder: "edicoes"
+  create: true
+  slug: "{{slug}}"
+  fields:
+    - { label: "Título", name: "titulo", widget: "string" }
+    - { label: "Link da edição", name: "link", widget: "string" }
