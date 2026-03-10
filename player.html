@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover" />
-        <title>Rádio E Jornal Teu Espaço</title>
+        <title>Rádio e Jornal Teu Espaço</title>
         <link rel="preconnect" href="https://fonts.googleapis.com/" />
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
         <meta name="theme-color" content="dark light" />
@@ -20,41 +20,139 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js" defer=""></script>
         <script src="player/js/main.js" defer></script>
         <link href="player/manifest.json" rel="manifest" />
+
         <script>
+            // Informações padrão (que se aplicam a todas as estações)
+            const defaultStationData = {
+                album: "https://teuespaco.com.br/images/radio%204.png",
+                cover: "https://teuespaco.com.br/images/radio%204.png",
+                api: "",
+                stream_url: "https://stm10.voxhd.com.br:8148/stream",
+                server: "",
+                program: {
+                    time: "   ",
+                    name: "",
+                    description: "",
+                },
+                social: {
+                    whatsapp: "",
+                    twitter: "https://www.facebook.com/teuespaconoticias",
+                    instagram: "https://instagram.com/TEUESPACONOTICIA",
+                },
+                apps: {
+                    android: "https://play.google.com/store/apps/details?id=com.shoutcast.stm.radioejornalteupsellbixp5",
+                },
+            };
+        
+            // Lista de estações com informações personalizadas
             window.streams = {
                 timeRefresh: 10000,
                 stations: [
                     {
-                        name: "Rádio E Jornal Teu Espaço",
-                        hash: "jailson",
-                        description: " A rádio feita para você",
+                        ...defaultStationData, // Usa os dados padrão
+                        name: "Rádio e Jornal Teu Espaço",
+                        hash: "Rádio e Jornal Teu Espaço",
+                        description: "A rádio feita para você",
                         logo: "https://teuespaco.com.br/images/logo.png",
-                        album:
-                            "https://teuespaco.com.br/images/radio%204.png",
-                        cover:
-                            "https://teuespaco.com.br/images/radio%204.png",
-                        api: "",
-                        stream_url: "https://stm10.voxhd.com.br:8148/stream",
-                        //tv_url: "https://eu1.servers10.com:2020/VideoPlayer/8106?autoplay=1",
-                        server: "",
-                        program: {
-                            time: "24/7",
-                            name: "Rádio e Jornal Teu Espaço",
-                            description: "AO VIVO // NO AR",
-                        },
-                        social: {
-                            whatsapp: "",
-                            twitter: "https://www.facebook.com/teuespaconoticias",
-                            instagram: "https://instagram.com/TEUESPACONOTICIA",
-                        },
-                        apps: {
-                            android: "https://play.google.com/store/apps/details?id=com.shoutcast.stm.radioejornalteupsellbixp5",
-                            //ios: "",
-                        },
-                    },    
-                ],
-            };
-        </script>
+                    },
+                    {
+                ...defaultStationData,
+
+
+                album: "https://teuespaco.com.br/images/clients/1.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/banner4.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/banner2.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/2.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/3.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/4.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/5.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/6.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/7.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/8.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/9.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/10.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/11.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/12.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/13.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/14.png",
+            },
+            {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/15.png",
+            },
+             {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/16.png",
+            },
+             {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/17.png",
+            },
+             {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/18.png",
+            },
+             {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/19.png",
+            },
+             {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/20.png",
+            },
+             {
+                ...defaultStationData,
+                album: "https://teuespaco.com.br/images/clients/21.png",
+            },
+        ],
+    };
+</script>        
+
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&amp;display=swap" rel="stylesheet" />
         <link href="https://fonts.cdnfonts.com/css/akira-expanded" rel="stylesheet" />
     </head>
@@ -64,7 +162,7 @@
 
             <header class="header">
                 <div class="header-wrapper flex justify-between">
-                    <a class="header-logo" href="#site">
+                    <a class="header-logo" href="index.html">
                         <img class="header-logo-img" src="assets/radioplayer.svg" alt="logo" />
                     </a>
 
@@ -77,12 +175,11 @@
                             </svg>
                             Historico
                         </button>
-                        <!--button class="btn" data-outside="offcanvas-stations">
-                            <svg class="i i-list" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="2"></circle>
-                                <path d="M5 4.9a10 10 0 0 0 0 14.2M7.8 7.7a6 6 0 0 0 0 8.6m8.4 0a6 6 0 0 0 0-8.6M19 19.1a10 10 0 0 0 0-14.2"></path>
-                            </svg>
-                            Multiradio
+                        <button class="btn" data-outside="offcanvas-stations">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-signpost" viewBox="0 0 16 16">
+                                <path d="M7 1.414V4H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h5v6h2v-6h3.532a1 1 0 0 0 .768-.36l1.933-2.32a.5.5 0 0 0 0-.64L13.3 4.36a1 1 0 0 0-.768-.36H9V1.414a1 1 0 0 0-2 0M12.532 5l1.666 2-1.666 2H2V5z"/>
+                              </svg>
+                                 Patrocinadores
                         </button-->
                         <button class="btn l:none" data-outside="mobile-menu">
                             <svg class="i i-bars" viewBox="0 0 24 24">
