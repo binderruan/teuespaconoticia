@@ -1032,6 +1032,46 @@
                 <script src="./teuespaco/popper.js.download"></script>
                 <script src="./teuespaco/bootstrap.js.download"></script>
 
+                <script>
+
+async function carregarEdicaoAtual(){
+
+const container = document.getElementById("edicao-atual");
+
+const edicoes = await fetch("edicoes/novas-edicoes.json")
+.then(r => r.json());
+
+edicoes.forEach(edicao => {
+
+container.innerHTML += `
+<div class="card">
+<div class="card-body">
+
+<h5 class="card-title">
+<a href="${edicao.link}" target="_blank">
+${edicao.titulo}
+</a>
+</h5>
+
+<p>Clique aqui para ler ${edicao.titulo} do Jornal Teu Espaço</p>
+
+<a href="${edicao.link}" target="_blank"
+class="btn btn-primary btn-sm mtsg">
+» Ler
+</a>
+
+</div>
+</div>
+`;
+
+});
+
+}
+
+document.addEventListener("DOMContentLoaded", carregarEdicaoAtual);
+
+</script>
+
         </body>
 
 </html>
