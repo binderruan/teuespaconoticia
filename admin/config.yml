@@ -12,6 +12,7 @@ site_url: https://teuespaco.com.br
 display_url: https://teuespaco.com.br
 
 collections:
+
   - name: "noticias"
     label: "Notícias"
     folder: "noticias"
@@ -40,11 +41,17 @@ collections:
         name: "body"
         widget: "markdown"
 
-    - name: "edicoes"
-  label: "Edições"
-  folder: "edicoes"
-  create: true
-  slug: "{{slug}}"
-  fields:
-    - { label: "Título", name: "titulo", widget: "string" }
-    - { label: "Link da edição", name: "link", widget: "string" }
+  - name: "edicoes"
+    label: "Edições"
+    folder: "edicoes"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - label: "Título"
+        name: "titulo"
+        widget: "string"
+      - label: "Link da edição"
+        name: "link"
+        widget: "string"
