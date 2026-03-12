@@ -133,9 +133,16 @@
                                 </div>
                             </h4>
 
-<div id="edicao-atual"></div>
-
-<!-- EDIÇÕES ANTIGAS (SEU HTML ATUAL) -->
+                             <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="https://online.pubhtml5.com/knrgh/tqxy/"> Edição 68 - Março de 2026</a></h1>
+                                    </h5>
+                                    <p class="card-text">
+                                        <p>Clique aqui para ler a Edição 68 do Jornal Teu Espaço</p>
+                                    </p>
+                                    <a href="https://online.pubhtml5.com/knrgh/tqxy/" title= Edição 68 - Março de 2026" class="btn btn-primary btn-sm mtsg">&raquo; Ler</a>
+                                </div>
+                            </div>
 
                             <div class="card">
                                 <div class="card-body">
@@ -1031,46 +1038,6 @@
                 <script src="./teuespaco/jquery.js(1).download"></script>
                 <script src="./teuespaco/popper.js.download"></script>
                 <script src="./teuespaco/bootstrap.js.download"></script>
-
-                <script>
-
-async function carregarEdicaoAtual(){
-
-const container = document.getElementById("edicao-atual");
-
-const edicoes = await fetch("edicoes/novas-edicoes.json")
-.then(r => r.json());
-
-edicoes.forEach(edicao => {
-
-container.innerHTML += `
-<div class="card">
-<div class="card-body">
-
-<h5 class="card-title">
-<a href="${edicao.link}" target="_blank">
-${edicao.titulo}
-</a>
-</h5>
-
-<p>Clique aqui para ler ${edicao.titulo} do Jornal Teu Espaço</p>
-
-<a href="${edicao.link}" target="_blank"
-class="btn btn-primary btn-sm mtsg">
-» Ler
-</a>
-
-</div>
-</div>
-`;
-
-});
-
-}
-
-document.addEventListener("DOMContentLoaded", carregarEdicaoAtual);
-
-</script>
 
         </body>
 
