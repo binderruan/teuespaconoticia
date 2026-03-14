@@ -20,5 +20,3 @@ Dentre os objetivos da política estão:
 Já os princípios que norteiam a política incluem prevenção, precaução, poluidor pagador (mecanismo de proteção do direito ambiental brasileiro), guarda responsável e manejo ecossistêmico integrado.
 
 Entre as diretrizes, o texto cita o respeito às políticas, às normas e aos princípios relativos à biossegurança e à proteção ambiental; o cumprimento e o fortalecimento da Convenção sobre Diversidade Biológica; e a garantia de participação da sociedade civil atuante na área de proteção animal.
-
-<!--EndFragment-->
