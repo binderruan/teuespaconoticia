@@ -1,0 +1,30 @@
+name: Gerar posts.json
+
+on:
+  push:
+    paths:
+      - "noticias/*.md"
+
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v3
+
+      - name: Instalar Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Rodar script
+        run: node gerar-posts.js
+
+      - name: Commit posts.json
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add noticias/posts.json
+          git commit -m "Atualiza posts.json automaticamente" || echo "Nada para commit"
+          git push
