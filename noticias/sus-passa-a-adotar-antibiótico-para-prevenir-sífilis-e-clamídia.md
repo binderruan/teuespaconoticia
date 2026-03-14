@@ -21,5 +21,3 @@ A transmissão ocorre por meio de relação sexual (oral, vaginal ou anal), sob
 **Já a clamídia é uma infecção sexualmente transmissível que, na maioria das vezes, causa infecção nos órgãos genitais, mas pode afetar também a garganta e os olhos. Segundo a pasta, o quadro pode atingir homens e mulheres com vida sexual ativa.**
 
 A clamídia é transmitida por meio do contato sexual (anal, oral ou vaginal) ou pela forma congênita (infecção passada da mãe para o bebê durante a gestação). A infecção não é transmitida por transfusão sanguínea, mas, caso a pessoa infectada deseje doar sangue, deve informar ao profissional de saúde a presença da infecção.
-
-<!--EndFragment-->
