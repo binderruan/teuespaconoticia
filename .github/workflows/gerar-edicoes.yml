@@ -1,0 +1,30 @@
+name: Gerar edicoes.json
+
+on:
+  push:
+    paths:
+      - "edicoes/*.md"
+
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v3
+
+      - name: Instalar Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Rodar script
+        run: node gerar-edicoes.js
+
+      - name: Commit edicoes.json
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add edicoes/edicoes.json
+          git commit -m "Atualiza edicoes.json automaticamente" || echo "Nada para commit"
+          git push
