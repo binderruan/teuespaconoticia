@@ -594,51 +594,88 @@ if (window.netlifyIdentity) {
 <script src="./teuespaco/jquery.js(1).download"></script>
 <script src="./teuespaco/bootstrap.js.download"></script>
 
+
+
+
+
+
+<script>
+function parseFrontmatter(md) {
+  const match = md.match(/^---\s*[\r\n]+([\s\S]*?)\s*[\r\n]+---\s*[\r\n]*/);
+  if (!match) return { data: {}, body: md };
+
+  const yaml = match[1];
+  const body = md.replace(match[0], "");
+
+  const data = {};
+  let currentKey = null;
+
+  yaml.split(/\r?\n/).forEach((line) => {
+    if (!line.trim()) return;
+
+    // Se a linha começa com espaços, é continuação do valor anterior
+    if (/^\s+/.test(line) && currentKey) {
+      data[currentKey] = (data[currentKey] + " " + line.trim())
+        .replace(/\s+/g, " ")
+        .trim();
+      return;
+    }
+
+    const m = line.match(/^([^:]+):\s*(.*)$/);
+    if (!m) return;
+
+    const key = m[1].trim();
+    let value = m[2].trim();
+
+    value = value.replace(/^"(.*)"$/, "$1").replace(/^'(.*)'$/, "$1");
+
+    data[key] = value;
+    currentKey = key;
+  });
+
+  return { data, body };
+}
+
 <script>
 async function carregarNoticias() {
-
   const container = document.getElementById("lista-noticias");
-  if (!container) return;
 
   const lista = await fetch("/noticias/posts.json").then(r => r.json());
 
   let noticias = [];
 
   for (const nome of lista) {
+    const markdown = await fetch("/noticias/" + nome).then(r => r.text());
 
-    const md = await fetch("/noticias/" + nome).then(r => r.text());
-
-    const tituloMatch = md.match(/^title:\s*(.*)/m);
+    const tituloMatch = markdown.match(/^title:\s*(.*)/m);
     const titulo = tituloMatch ? tituloMatch[1].trim() : "Sem título";
 
-    const dataMatch = md.match(/^date:\s*(.*)/m);
+    const dataMatch = markdown.match(/^date:\s*(.*)/m);
     const data = dataMatch ? dataMatch[1].trim() : "";
 
-    const imgMatch = md.match(/^thumbnail:\s*(.*)/m);
+    const imgMatch = markdown.match(/^thumbnail:\s*(.*)/m);
     const imagem = imgMatch ? imgMatch[1].trim() : "images/logo.png";
 
-    noticias.push({ nome, titulo, data, imagem });
-
+    noticias.push({
+      nome,
+      titulo,
+      data,
+      imagem
+    });
   }
 
-  // converter DD/MM/YYYY para Date
-  function converterData(dataStr) {
-    const [dia, mes, ano] = dataStr.split("/");
-    return new Date(ano, mes - 1, dia);
-  }
-
-  // ordenar mais recente primeiro
+  // 🔥 Ordenar por data (mais recente primeiro)
   noticias.sort((a, b) => {
-    return converterData(b.data) - converterData(a.data);
+    const da = new Date(a.data.split("/").reverse().join("-"));
+    const db = new Date(b.data.split("/").reverse().join("-"));
+    return db - da;
   });
 
-  // pegar só 6
+  // 🔥 Pega só as 6 mais recentes
   noticias = noticias.slice(0, 6);
 
-  container.innerHTML = "";
-
+  // Renderiza
   for (const n of noticias) {
-
     container.innerHTML += `
       <div class="col-lg-4 mb-4 d-inline-flex">
         <div class="card m-2 videos h-100">
@@ -653,12 +690,74 @@ async function carregarNoticias() {
       </div>
     `;
   }
-
 }
 
 carregarNoticias();
 </script>
+</script>
 
+
+<script>
+async function carregarNoticias() {
+  const container = document.getElementById("lista-noticias");
+  if (!container) return;
+
+  const lista = await fetch("/noticias/posts.json").then(r => r.json());
+
+  let noticias = [];
+
+  for (const nome of lista) {
+    const md = await fetch("/noticias/" + nome).then(r => r.text());
+
+    // pega do frontmatter do Netlify CMS
+    const tituloMatch = md.match(/^title:\s*(.*)(?:\r?\n\s+(.*))?/m);
+    let titulo = "Sem título";
+    if (tituloMatch) {
+      titulo = ((tituloMatch[1] || "") + " " + (tituloMatch[2] || ""))
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+    const dataMatch = md.match(/^date:\s*(.*)$/m);
+    const data = dataMatch ? dataMatch[1].trim() : "";
+
+    const imgMatch = md.match(/^thumbnail:\s*(.*)$/m);
+    const imagem = imgMatch ? imgMatch[1].trim() : "images/logo.png";
+
+    noticias.push({ nome, titulo, data, imagem });
+  }
+
+  // Ordena por data (DD/MM/YYYY) - mais recente primeiro
+  noticias.sort((a, b) => {
+    const da = new Date(a.data.split("/").reverse().join("-"));
+    const db = new Date(b.data.split("/").reverse().join("-"));
+    return db - da;
+  });
+
+  // pega só as 6 mais recentes
+  noticias = noticias.slice(0, 6);
+
+  // limpa e renderiza
+  container.innerHTML = "";
+  for (const n of noticias) {
+    container.innerHTML += `
+      <div class="col-lg-4 mb-4 d-inline-flex">
+        <div class="card m-2 videos h-100">
+          <img src="${n.imagem}" class="card-img-top img-fluid" alt="">
+          <div class="card-block">
+            <h4 class="card-nome">${n.titulo}</h4>
+          </div>
+          <div class="card-body data">
+            <a href="/noticia.html?post=${n.nome}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+carregarNoticias();
+</script>
         
 </body>
 
