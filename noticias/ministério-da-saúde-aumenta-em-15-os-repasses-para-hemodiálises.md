@@ -19,5 +19,3 @@ Os recursos têm como destino 781 hospitais e clínicas que já atendem os pacie
 De acordo com o ministério, além da hemodiálise, outras modalidades de tratamento passarão a ser contempladas pelo Agora Tem Especialistas: a diálise peritoneal, cujas sessões serão reajustadas em 100%, e a pré-diálise, também com 100% de aumento. A diálise peritoneal substitui a função dos rins com uso do próprio corpo para filtrar o sangue; já na pré-diálise, ocorre o acompanhamento médico do paciente antes de a diálise ser necessária.
 
 “Todos esses reajustes buscam incentivar ainda mais o aumento da oferta dessas modalidades de Terapia Renal Substitutiva pelos serviços que já atendem o SUS e pelos 48 novos serviços, que já começam a atuar com os aumentos anunciados hoje”, acrescentou o secretário.
-
-<!--EndFragment-->
