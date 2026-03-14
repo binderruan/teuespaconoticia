@@ -1,1 +1,39 @@
-[]
+<script>
+async function carregarNoticias(){
+
+ const container = document.getElementById("lista-noticias");
+
+ const noticias = await fetch("/noticias/noticias.json")
+ .then(r=>r.json());
+
+ // ordenar mais recente primeiro
+ noticias.sort((a,b)=> new Date(b.data) - new Date(a.data));
+
+ const ultimas = noticias.slice(0,6);
+
+ container.innerHTML="";
+
+ ultimas.forEach(n=>{
+
+ container.innerHTML += `
+ <div class="col-lg-4 mb-4 d-inline-flex">
+   <div class="card m-2 videos h-100">
+     <img src="${n.imagem}" class="card-img-top img-fluid">
+     <div class="card-block">
+       <h4 class="card-nome">${n.titulo}</h4>
+     </div>
+     <div class="card-body data">
+       <a href="/noticia.html?post=${n.arquivo}" class="btn btn-primary btn-sm mtn">
+       » Leia mais...
+       </a>
+     </div>
+   </div>
+ </div>
+ `;
+
+ });
+
+}
+
+carregarNoticias();
+</script>
