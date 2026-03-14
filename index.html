@@ -664,12 +664,16 @@ async function carregarNoticias() {
     });
   }
 
-  // 🔥 Ordenar por data (mais recente primeiro)
-  noticias.sort((a, b) => {
-    const da = new Date(a.data.split("/").reverse().join("-"));
-    const db = new Date(b.data.split("/").reverse().join("-"));
-    return db - da;
-  });
+// converter DD/MM/YYYY para Date
+function converterData(dataStr) {
+  const [dia, mes, ano] = dataStr.split("/");
+  return new Date(ano, mes - 1, dia);
+}
+
+// ordenar mais recente primeiro
+noticias.sort((a, b) => {
+  return converterData(b.data) - converterData(a.data);
+});
 
   // 🔥 Pega só as 6 mais recentes
   noticias = noticias.slice(0, 6);
@@ -727,12 +731,16 @@ async function carregarNoticias() {
     noticias.push({ nome, titulo, data, imagem });
   }
 
-  // Ordena por data (DD/MM/YYYY) - mais recente primeiro
-  noticias.sort((a, b) => {
-    const da = new Date(a.data.split("/").reverse().join("-"));
-    const db = new Date(b.data.split("/").reverse().join("-"));
-    return db - da;
-  });
+// converter DD/MM/YYYY para Date
+function converterData(dataStr) {
+  const [dia, mes, ano] = dataStr.split("/");
+  return new Date(ano, mes - 1, dia);
+}
+
+// ordenar mais recente primeiro
+noticias.sort((a, b) => {
+  return converterData(b.data) - converterData(a.data);
+});
 
   // pega só as 6 mais recentes
   noticias = noticias.slice(0, 6);
