@@ -1040,6 +1040,7 @@
                 <script src="./teuespaco/jquery.js(1).download"></script>
                 <script src="./teuespaco/popper.js.download"></script>
                 <script src="./teuespaco/bootstrap.js.download"></script>
+
 <script>
 async function carregarEdicoes(){
 
@@ -1055,17 +1056,18 @@ async function carregarEdicoes(){
   const res = await fetch("/edicoes/"+arquivo);
   const md = await res.text();
 
-  const titulo = md.match(/title:\s*(.*)/)?.[1] || "";
-  const link = md.match(/link:\s*(.*)/)?.[1] || "";
+  const titulo = md.match(/title:\s*(.*)/)?.[1];
+  const link = md.match(/link:\s*(.*)/)?.[1];
+
+  // se não tiver título ou link, ignora
+  if(!titulo || !link) continue;
 
   container.innerHTML += `
-  <div class="card">
+  <div class="card mb-3">
    <div class="card-body">
-    <h5 class="card-title">
-     <a href="${link}">${titulo}</a>
-    </h5>
-    <p>Clique aqui para ler ${titulo}</p>
-    <a href="${link}" class="btn btn-primary btn-sm mtsg">» Ler</a>
+    <h5 class="card-title">${titulo}</h5>
+    <p>Clique aqui para ler</p>
+    <a href="${link}" target="_blank" class="btn btn-primary btn-sm">» Ler</a>
    </div>
   </div>
   `;
@@ -1075,8 +1077,9 @@ async function carregarEdicoes(){
 }
 
 carregarEdicoes();
-</script>                
-
+</script>
+                
+                
         </body>
 
 </html>
