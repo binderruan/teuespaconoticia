@@ -133,6 +133,8 @@
                                 </div>
                             </h4>
 
+                            <div id="lista-edicoes"></div>
+
                              <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title"><a href="https://online.pubhtml5.com/knrgh/tqxy/"> Edição 68 - Março de 2026</a></h1>
@@ -1038,6 +1040,42 @@
                 <script src="./teuespaco/jquery.js(1).download"></script>
                 <script src="./teuespaco/popper.js.download"></script>
                 <script src="./teuespaco/bootstrap.js.download"></script>
+<script>
+async function carregarEdicoes(){
+
+ const container = document.getElementById("lista-edicoes");
+
+ const arquivos = await fetch("/edicoes/edicoes.json")
+  .then(r=>r.json());
+
+ container.innerHTML="";
+
+ for(const arquivo of arquivos){
+
+  const res = await fetch("/edicoes/"+arquivo);
+  const md = await res.text();
+
+  const titulo = md.match(/title:\s*(.*)/)?.[1] || "";
+  const link = md.match(/link:\s*(.*)/)?.[1] || "";
+
+  container.innerHTML += `
+  <div class="card">
+   <div class="card-body">
+    <h5 class="card-title">
+     <a href="${link}">${titulo}</a>
+    </h5>
+    <p>Clique aqui para ler ${titulo}</p>
+    <a href="${link}" class="btn btn-primary btn-sm mtsg">» Ler</a>
+   </div>
+  </div>
+  `;
+
+ }
+
+}
+
+carregarEdicoes();
+</script>                
 
         </body>
 
