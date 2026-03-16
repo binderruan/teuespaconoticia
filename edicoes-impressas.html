@@ -26,6 +26,13 @@
     <link rel="dns-prefetch" href="https://maxcdn.bootstrapcdn.com/">
     <link rel="dns-prefetch" href="https://s.w.org/">
     <style type="text/css">
+
+        .capa-edicao{
+  max-width: 350px;
+  margin: auto;
+  display: block;
+  border-radius: 6px;
+}
         img.wp-smiley,
         img.emoji {
             display: inline !important;
@@ -1072,8 +1079,8 @@ async function carregarEdicoes(){
 
    container.innerHTML += `
    <div class="card mb-4 shadow">
-    <img src="${capa}" class="card-img-top" alt="${titulo}">
-    <div class="card-body text-center">
+<img src="${capa}" class="card-img-top capa-edicao" alt="${titulo}">
+<div class="card-body text-center">
      <h4 class="card-title">${titulo}</h4>
      <p>Leia a edição mais recente do Jornal Teu Espaço</p>
      <a href="${link}" title="${titulo}" target="_blank" class="btn btn-primary btn-sm mtsg">&raquo; Ler</a>
