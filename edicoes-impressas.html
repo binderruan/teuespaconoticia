@@ -1066,6 +1066,8 @@ async function carregarEdicoes(){
  const arquivos = await fetch("/edicoes/edicoes.json")
   .then(r=>r.json());
 
+arquivos.reverse(); // última edição aparece primeiro
+
  container.innerHTML="";
 
  let primeira = true;
