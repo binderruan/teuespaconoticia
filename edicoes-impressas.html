@@ -1065,8 +1065,9 @@ async function carregarEdicoes(){
 
   if(!titulo || !link) continue;
 
-  const capa = link + "files/assets/basic-html/page1.jpg";
-
+  const base = link.replace(/\/$/, "");
+  const capa = base + "/files/shot.jpg";
+     
   if(primeira){
 
    container.innerHTML += `
