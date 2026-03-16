@@ -1051,27 +1051,49 @@ async function carregarEdicoes(){
 
  container.innerHTML="";
 
+ let primeira = true;
+
  for(const arquivo of arquivos){
 
   const res = await fetch("/edicoes/"+arquivo);
   const md = await res.text();
 
-const linhas = md.split("\n").map(l => l.trim()).filter(l => l);
+  const linhas = md.split("\n").map(l => l.trim()).filter(l => l);
 
-const titulo = linhas[1].replace("titulo:", "").trim(); // segunda linha é o título
-const link = linhas[2].replace("link:", "").trim();   // terceira linha é o link
+  const titulo = linhas[1].replace("titulo:", "").trim();
+  const link = linhas[2].replace("link:", "").trim();
 
-if(!titulo || !link) continue;
+  if(!titulo || !link) continue;
 
-  container.innerHTML += `
-  <div class="card mb-3">
-   <div class="card-body">
-    <h5 class="card-title">${titulo}</h5>
-<p>Clique aqui para ler a ${titulo} do Jornal Teu Espaço</p>
-  <a href="${link}" title="${titulo}" target="_blank" class="btn btn-primary btn-sm mtsg">&raquo; Ler</a>
+  const capa = link + "files/assets/basic-html/page1.jpg";
+
+  if(primeira){
+
+   container.innerHTML += `
+   <div class="card mb-4 shadow">
+    <img src="${capa}" class="card-img-top" alt="${titulo}">
+    <div class="card-body text-center">
+     <h4 class="card-title">${titulo}</h4>
+     <p>Leia a edição mais recente do Jornal Teu Espaço</p>
+     <a href="${link}" title="${titulo}" target="_blank" class="btn btn-primary btn-sm mtsg">&raquo; Ler</a>
+    </div>
    </div>
-  </div>
-  `;
+   `;
+
+   primeira = false;
+
+  } else {
+
+   container.innerHTML += `
+   <div class="card mb-3">
+    <div class="card-body">
+     <h5 class="card-title">${titulo}</h5>
+     <p>Clique aqui para ler a ${titulo}</p>
+     <a href="${link}" title="${titulo}" target="_blank" class="btn btn-primary btn-sm mtsg">&raquo; Ler</a>
+    </div>
+   </div>
+   `;
+  }
 
  }
 
