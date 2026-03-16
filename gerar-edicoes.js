@@ -1,14 +1,17 @@
 const fs = require("fs");
-const path = require("path");
 
-const pasta = "./edicoes";
+const pasta = "edicoes";
 
-const arquivos = fs.readdirSync(pasta)
-  .filter(file => file.endsWith(".md"));
+// ler todos arquivos
+const arquivos = fs.readdirSync(pasta);
 
+// filtrar apenas .md
+const edicoes = arquivos.filter(a => a.endsWith(".md"));
+
+// gerar JSON
 fs.writeFileSync(
-  path.join(pasta, "edicoes.json"),
-  JSON.stringify(arquivos, null, 2)
+  `${pasta}/edicoes.json`,
+  JSON.stringify(edicoes, null, 2)
 );
 
-console.log("edicoes.json gerado com sucesso!");
+console.log("edicoes.json atualizado!");
