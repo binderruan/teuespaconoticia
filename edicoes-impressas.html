@@ -1058,17 +1058,17 @@ async function carregarEdicoes(){
 
 const linhas = md.split("\n").map(l => l.trim()).filter(l => l);
 
-const titulo = linhas[1];
-const link = linhas[2];
-
+const titulo = linhas[linhas.length - 2];
+const link = linhas[linhas.length - 1].replace("link:", "").trim();
+     
 if(!titulo || !link) continue;
 
   container.innerHTML += `
   <div class="card mb-3">
    <div class="card-body">
     <h5 class="card-title">${titulo}</h5>
-    <p>Clique aqui para ler</p>
-    <a href="${link}" target="_blank" class="btn btn-primary btn-sm">» Ler</a>
+<p>Clique aqui para ler a ${titulo} do Jornal Teu Espaço</p>
+<a href="${link}" target="_blank" class="btn btn-primary btn-sm">» Ler</a>
    </div>
   </div>
   `;
