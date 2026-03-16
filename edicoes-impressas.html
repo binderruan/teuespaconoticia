@@ -1056,17 +1056,12 @@ async function carregarEdicoes(){
   const res = await fetch("/edicoes/"+arquivo);
   const md = await res.text();
 
-  const titulo = md.match(/title:\s*(.*)/)?.[1];
-  const titulo = md.match(/title:\s*(.*)/)?.[1]; 
-  const link = md.match(/link.*:\s*(.*)/)?.[1];
+const linhas = md.split("\n").map(l => l.trim()).filter(l => l);
 
-  const arquivos = await fetch("/edicoes/edicoes.json")
- .then(r=>r.json());
+const titulo = linhas[1];
+const link = linhas[2];
 
-arquivos.reverse();
-
-  // se não tiver título ou link, ignora
-  if(!titulo || !link) continue;
+if(!titulo || !link) continue;
 
   container.innerHTML += `
   <div class="card mb-3">
