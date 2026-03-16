@@ -1057,7 +1057,13 @@ async function carregarEdicoes(){
   const md = await res.text();
 
   const titulo = md.match(/title:\s*(.*)/)?.[1];
-  const link = md.match(/link:\s*(.*)/)?.[1];
+  const titulo = md.match(/title:\s*(.*)/)?.[1]; 
+  const link = md.match(/link.*:\s*(.*)/)?.[1];
+
+  const arquivos = await fetch("/edicoes/edicoes.json")
+ .then(r=>r.json());
+
+arquivos.reverse();
 
   // se não tiver título ou link, ignora
   if(!titulo || !link) continue;
