@@ -1058,9 +1058,12 @@ async function carregarEdicoes(){
 
 const linhas = md.split("\n").map(l => l.trim()).filter(l => l);
 
-const titulo = linhas[linhas.length - 2];
-const link = linhas[linhas.length - 1].replace("link:", "").trim();
-     
+// procurar a linha que contém o link
+const link = linhas.find(l => l.includes("http"));
+
+// pegar a linha anterior como título
+const titulo = linhas[linhas.indexOf(link) - 1];
+
 if(!titulo || !link) continue;
 
   container.innerHTML += `
