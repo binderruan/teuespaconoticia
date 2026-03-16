@@ -27,11 +27,21 @@
     <link rel="dns-prefetch" href="https://s.w.org/">
     <style type="text/css">
 
-        .capa-edicao{
-  max-width: 350px;
-  margin: auto;
-  display: block;
-  border-radius: 6px;
+.capa-edicao{
+ max-width:220px;
+ border-radius:6px;
+ box-shadow:0 3px 8px rgba(0,0,0,0.15);
+}
+
+.edicao-destaque{
+ border:0;
+}
+
+@media (max-width:768px){
+ .capa-edicao{
+  max-width:180px;
+  margin-bottom:15px;
+ }
 }
         img.wp-smiley,
         img.emoji {
@@ -1076,18 +1086,27 @@ let encontrou = false;
   const base = link.replace(/\/$/, "");
   const capa = base + "/files/shot.jpg";
      
-  if(primeira){
+if(primeira){
 
-   container.innerHTML += `
-   <div class="card mb-4 shadow">
-<img src="${capa}" class="card-img-top capa-edicao" alt="${titulo}">
-<div class="card-body text-center">
-     <h4 class="card-title">${titulo}</h4>
-     <p>Leia a edição mais recente do Jornal Teu Espaço</p>
-     <a href="${link}" title="${titulo}" target="_blank" class="btn btn-primary btn-sm mtsg">&raquo; Ler</a>
-    </div>
+container.innerHTML += `
+<div class="card mb-4 shadow edicao-destaque">
+ <div class="row g-0 align-items-center">
+
+  <div class="col-md-4 text-center">
+   <img src="${capa}" class="capa-edicao" alt="${titulo}">
+  </div>
+
+  <div class="col-md-8">
+   <div class="card-body">
+    <h3 class="card-title">${titulo}</h3>
+    <p class="text-muted">Leia a edição mais recente do Jornal Teu Espaço</p>
+    <a href="${link}" title="${titulo}" target="_blank" class="btn btn-primary btn-sm mtsg">&raquo; Ler edição</a>
    </div>
-   `;
+  </div>
+
+ </div>
+</div>
+`;
 
    primeira = false;
 
