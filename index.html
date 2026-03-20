@@ -749,11 +749,10 @@ async function carregarBanner(){
 
   container.innerHTML += `
   <div class="carousel-item ${ativo}">
-   <a href="${n.link}">
-    <img src="${n.imagem}" class="card-img img-fluid" alt="${n.titulo}">
-   </a>
-   <div class="carousel-caption d-none d-md-block">
-    <h5>${n.titulo}</h5>
+<a href="${n.link || '#'}">
+<img src="${n.thumbnail}" class="card-img img-fluid" alt="${n.title}">
+...
+<h5>${n.title}</h5>
    </div>
   </div>
   `;
