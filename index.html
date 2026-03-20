@@ -184,39 +184,7 @@ if (window.netlifyIdentity) {
 
                             <div class="carousel-inner">
 
-                                <div class="carousel-item">
-                                    <a
-                                        href="https://www.teuespaco.com.br/prevencao-confira-dicas-para-nao-cair-no-golpe-da-falsa-venda-pelas-redes-sociais">
-                                        <img width="859" height="450"
-                                            src="https://cdn.cgn.inf.br/cgn-cdn/fotos-cgn/2022/02/02130705/911beffca066b21a461bb9100a12d000-1200x720.jpg"
-                                            class="card-img img-fluid wp-post-image" alt=""></a>
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Prevenção: Confira dicas para não cair no golpe da falsa venda pelas redes
-                                            sociais</h5>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item active">
-                                    <a
-                                        href="https://teuespaco.com.br/nao-caia-no-golpe-do-site-falso-do-detran-sc">
-                                        <img width="859" height="450"
-                                            src="https://jornalsul.com.br/wp-content/uploads/2024/05/GOLPE-site-Falso-Detran.jpg.png"
-                                            class="card-img img-fluid wp-post-image" alt=""></a>
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Não caia no golpe do "site falso do DETRAN/SC"
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <a
-                                        href="https://www.teuespaco.com.br/dia-mundial-da-prevencao-do-afogamento-confira-as-orientacoes-do-cbmsc">
-                                        <img width="859" height="450"
-                                            src="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2023/07/D2EBCCBB-241A-4AA1-9E17-AF3B8D38C9CE.jpg"
-                                            class="card-img img-fluid wp-post-image" alt=""></a>
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5> Orientações para Prevenção do Afogamento e Segurança Aquática
-                                    </div>
-                                </div>
+<div class="carousel-inner" id="carousel-noticias"></div>
 
                             </div>
                         </div>
@@ -757,6 +725,44 @@ async function carregarNoticias() {
 }
 
 carregarNoticias();
+</script>
+
+        <script>
+async function carregarBanner(){
+
+ const container = document.getElementById("carousel-noticias");
+
+ const noticias = await fetch("/noticias/noticias.json")
+  .then(r=>r.json());
+
+ // embaralhar (aleatório)
+ noticias.sort(()=> Math.random() - 0.5);
+
+ // pegar só 3
+ const destaque = noticias.slice(0,3);
+
+ container.innerHTML = "";
+
+ destaque.forEach((n, i)=>{
+
+  const ativo = i === 0 ? "active" : "";
+
+  container.innerHTML += `
+  <div class="carousel-item ${ativo}">
+   <a href="${n.link}">
+    <img src="${n.imagem}" class="card-img img-fluid" alt="${n.titulo}">
+   </a>
+   <div class="carousel-caption d-none d-md-block">
+    <h5>${n.titulo}</h5>
+   </div>
+  </div>
+  `;
+
+ });
+
+}
+
+carregarBanner();
 </script>
         
 </body>
