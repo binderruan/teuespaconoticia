@@ -1,4 +1,4 @@
 ---
-titulo: Edição 06 - Janeiro de 2021
-link: https://drive.google.com/file/d/13TsBjcaC6OfYH1iXpcKgq7gsiuZMOFXL/view?usp=sharing
+titulo: Edição 07 - Fevereiro de 2021
+link: https://drive.google.com/file/d/1DRDg6sBYIHZsP55BKfXdeiSQ-filWVDB/view?usp=sharing
 ---
