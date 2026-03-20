@@ -182,11 +182,9 @@ if (window.netlifyIdentity) {
                                 <li data-target="#carouselExampleIndicators" data-slide-to="2" class=""></li>
                             </ol>
 
-                            <div class="carousel-inner">
 
 <div class="carousel-inner" id="carousel-noticias"></div>
 
-                            </div>
                         </div>
                     </div>
 
@@ -733,30 +731,48 @@ async function carregarBanner(){
  const container = document.getElementById("carousel-noticias");
 
  const lista = await fetch("/noticias/posts.json").then(r => r.json());
-  .then(r=>r.json());
 
- // embaralhar (aleatório)
+ let noticias = [];
+
+ for(const nome of lista){
+
+  const md = await fetch("/noticias/" + nome).then(r => r.text());
+
+  const tituloMatch = md.match(/^title:\s*(.*)/m);
+  const titulo = tituloMatch ? tituloMatch[1].trim() : "Sem título";
+
+  const imgMatch = md.match(/^thumbnail:\s*(.*)/m);
+  const imagem = imgMatch ? imgMatch[1].trim() : "images/logo.png";
+
+  noticias.push({
+    nome,
+    titulo,
+    imagem
+  });
+ }
+
+ // embaralha (aleatório)
  noticias.sort(()=> Math.random() - 0.5);
 
- // pegar só 3
- const destaque = noticias.slice(0,3);
+ // pega só 3
+ noticias = noticias.slice(0,3);
 
  container.innerHTML = "";
 
- destaque.forEach((n, i)=>{
+ noticias.forEach((n, i)=>{
 
   const ativo = i === 0 ? "active" : "";
 
   container.innerHTML += `
   <div class="carousel-item ${ativo}">
-<a href="${n.link || '#'}">
-<img src="${n.thumbnail}" class="card-img img-fluid" alt="${n.title}">
-...
-<h5>${n.title}</h5>
+   <a href="/noticia.html?post=${n.nome}">
+    <img src="${n.imagem}" class="card-img img-fluid" alt="${n.titulo}">
+   </a>
+   <div class="carousel-caption d-none d-md-block">
+    <h5>${n.titulo}</h5>
    </div>
   </div>
   `;
-
  });
 
 }
