@@ -1,6 +1,6 @@
 name: Extrair edições automaticamente
 
-on: [push]
+on: [push, workflow_dispatch]
 
 permissions:
   contents: write
