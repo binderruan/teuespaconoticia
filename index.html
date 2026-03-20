@@ -732,7 +732,7 @@ async function carregarBanner(){
 
  const container = document.getElementById("carousel-noticias");
 
- const noticias = await fetch("/noticias/noticias.json")
+ const lista = await fetch("/noticias/posts.json").then(r => r.json());
   .then(r=>r.json());
 
  // embaralhar (aleatório)
