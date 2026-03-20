@@ -301,6 +301,10 @@
                 <script src="./teuespaco/bootstrap.js.download"></script>
 
 <script>
+
+let paginaAtual = 1;
+const porPagina = 10;
+
 async function carregarEdicoes(){
 
  const container = document.getElementById("lista-edicoes");
@@ -308,50 +312,53 @@ async function carregarEdicoes(){
  const arquivos = await fetch("/edicoes/edicoes.json")
   .then(r=>r.json());
 
-arquivos.reverse(); // última edição aparece primeiro
+ arquivos.reverse(); // mais recente primeiro
 
- container.innerHTML="";
+ container.innerHTML = "";
 
  let primeira = true;
-let encontrou = false;
 
- for(const arquivo of arquivos){
+ // 🔥 PAGINAÇÃO
+ const inicio = (paginaAtual - 1) * porPagina;
+ const fim = inicio + porPagina;
+ const arquivosPagina = arquivos.slice(inicio, fim);
+
+ for(const arquivo of arquivosPagina){
 
   const res = await fetch("/edicoes/"+arquivo);
   const md = await res.text();
 
   const linhas = md.split("\n").map(l => l.trim()).filter(l => l);
 
-  const titulo = linhas[1].replace("titulo:", "").trim();
-  const link = linhas[2].replace("link:", "").trim();
+  const titulo = linhas[1]?.replace("titulo:", "").trim();
+  const link = linhas[2]?.replace("link:", "").trim();
 
   if(!titulo || !link) continue;
 
   const base = link.replace(/\/$/, "");
   const capa = base + "/files/shot.jpg";
-     
-if(primeira){
 
-container.innerHTML += `
-<div class="card mb-4 shadow edicao-destaque">
- <div class="row g-0 align-items-center">
+  if(primeira){
 
-  <div class="col-md-4 text-center">
-   <img src="${capa}" class="capa-edicao" alt="${titulo}">
-  </div>
+   container.innerHTML += `
+   <div class="card mb-4 shadow edicao-destaque">
+    <div class="row g-0 align-items-center">
 
-  <div class="col-md-8">
-   <div class="card-body">
-    <h3 class="card-title">${titulo}</h3>
-    <p class="text-muted">Leia a edição mais recente do Jornal Teu Espaço</p>
-    <a href="${link}" title="${titulo}" target="_blank" class="btn btn-primary btn-sm mtsg">&raquo; Ler</a>
-    <br>
+     <div class="col-md-4 text-center">
+      <img src="${capa}" class="capa-edicao" alt="${titulo}">
+     </div>
+
+     <div class="col-md-8">
+      <div class="card-body">
+       <h3 class="card-title">${titulo}</h3>
+       <p class="text-muted">Leia a edição mais recente do Jornal Teu Espaço</p>
+       <a href="${link}" title="${titulo}" target="_blank" class="btn btn-primary btn-sm mtsg">&raquo; Ler</a>
+      </div>
+     </div>
+
+    </div>
    </div>
-  </div>
-
- </div>
-</div>
-`;
+   `;
 
    primeira = false;
 
@@ -367,12 +374,39 @@ container.innerHTML += `
    </div>
    `;
   }
-
  }
 
+ // 🔥 BOTÕES
+ container.innerHTML += `
+ <div class="d-flex justify-content-between mt-4">
+
+  <button class="btn btn-secondary" onclick="paginaAnterior()">
+   ⬅ Anterior
+  </button>
+
+  <button class="btn btn-secondary" onclick="proximaPagina()">
+   Próxima ➡
+  </button>
+
+ </div>
+ `;
+}
+
+// 🔥 FORA da função
+function proximaPagina(){
+ paginaAtual++;
+ carregarEdicoes();
+}
+
+function paginaAnterior(){
+ if(paginaAtual > 1){
+  paginaAtual--;
+  carregarEdicoes();
+ }
 }
 
 carregarEdicoes();
+
 </script>
                 
                 
