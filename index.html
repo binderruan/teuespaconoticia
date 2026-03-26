@@ -696,11 +696,11 @@ noticias.push({
 
 // separar destaque e outras
 const destaqueNoticias = noticias.filter(n => 
- (n.category || "").toLowerCase().includes("destaque")
+ (n.category || "").toLowerCase().split("|").map(c => c.trim()).includes("destaque")
 );
 
 const outrasNoticias = noticias.filter(n => 
- !(n.category || "").toLowerCase().includes("destaque")
+ !(n.category || "").toLowerCase().split("|").map(c => c.trim()).includes("destaque")
 );
 
 // embaralha
