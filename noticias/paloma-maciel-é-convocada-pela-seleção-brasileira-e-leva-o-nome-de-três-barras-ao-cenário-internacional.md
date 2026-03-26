@@ -3,7 +3,7 @@ title: Paloma Maciel é convocada pela Seleção Brasileira e leva o nome de Tr�
   Barras ao cenário internacional
 date: 26/03/2026
 category: Esporte | Destaque
-thumbnail: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxE1k-bvFGObfXz8mFuK8EROaETndQpz59JQ&s
+thumbnail: https://gazetatresbarrense.com.br/wp-content/uploads/2026/03/foto-77-768x402.jpg
 ---
 <!--StartFragment--> 
 
