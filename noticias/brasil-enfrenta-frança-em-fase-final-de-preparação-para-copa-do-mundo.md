@@ -1,0 +1,35 @@
+---
+title: Brasil enfrenta França em fase final de preparação para Copa do Mundo
+date: 26/03/2026
+category: Esportes
+thumbnail: https://imagens.ebc.com.br/hH-8PpB6laQsoEO2mbkqtqIogBE=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/03/25/54924998637_1e909dfeed_b.jpg?itok=9tN9Buh0
+---
+<!--StartFragment-->
+
+A seleção brasileira enfrenta a França, a partir das 17h (horário de Brasília) desta quinta-feira (26), em partida amistosa que marca o início da fase final de preparação para a próxima Copa do Mundo, que será disputada no México, no Canadá e nos Estados Unidos. O confronto será realizado no Gillete Stadium, em Boston.![](https://agenciabrasil.ebc.com.br/ebc.png?id=1683624&o=node)![](https://agenciabrasil.ebc.com.br/ebc.gif?id=1683624&o=node)
+
+Um dia antes de medir forças com uma equipe que é apontada como uma das favoritas à conquista do próximo título mundial, o técnico italiano Carlo Ancelotti afirmou, em entrevista coletiva, que enxerga o confronto como um teste importante: “Para nós, é um teste importante, contra uma equipe que pode ser favorita na Copa. Queremos mostrar uma boa atitude e qualidade”.
+
+O treinador também declarou que uma das estrelas dos franceses, o atacante Mbappé, receberá atenção especial. “São jogadores que todos conhecem. Jogadores muito fortes, com muita qualidade. Mbappé marcou muitos gols ano passado. Agora é um rival. Temos que defender bem contra ele. É um jogador muito rápido, com qualidade, muito efetivo na finalização”.
+
+[X Post](https://platform.twitter.com/embed/Tweet.html?creatorScreenName=agenciabrasil&dnt=false&embedId=twitter-widget-0&features=eyJ0ZndfdGltZWxpbmVfbGlzdCI6eyJidWNrZXQiOltdLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2ZvbGxvd2VyX2NvdW50X3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9iYWNrZW5kIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19yZWZzcmNfc2Vzc2lvbiI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfZm9zbnJfc29mdF9pbnRlcnZlbnRpb25zX2VuYWJsZWQiOnsiYnVja2V0Ijoib24iLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X21peGVkX21lZGlhXzE1ODk3Ijp7ImJ1Y2tldCI6InRyZWF0bWVudCIsInZlcnNpb24iOm51bGx9LCJ0ZndfZXhwZXJpbWVudHNfY29va2llX2V4cGlyYXRpb24iOnsiYnVja2V0IjoxMjA5NjAwLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X3Nob3dfYmlyZHdhdGNoX3Bpdm90c19lbmFibGVkIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19kdXBsaWNhdGVfc2NyaWJlc190b19zZXR0aW5ncyI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdXNlX3Byb2ZpbGVfaW1hZ2Vfc2hhcGVfZW5hYmxlZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdmlkZW9faGxzX2R5bmFtaWNfbWFuaWZlc3RzXzE1MDgyIjp7ImJ1Y2tldCI6InRydWVfYml0cmF0ZSIsInZlcnNpb24iOm51bGx9LCJ0ZndfbGVnYWN5X3RpbWVsaW5lX3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9mcm9udGVuZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9fQ%3D%3D&frame=false&hideCard=false&hideThread=false&id=2036605549874147663&lang=pt&origin=https%3A%2F%2Fagenciabrasil.ebc.com.br%2Fesportes%2Fnoticia%2F2026-03%2Fbrasil-enfrenta-franca-em-fase-final-de-preparacao-para-copa-do-mundo&sessionId=806faa638d58a9dd1b251cbca1441b43589e1ed4&siteScreenName=agenciabrasil&theme=light&widgetsVersion=2615f7e52b7e0%3A1702314776716&width=550px)
+
+Mesmo diante de um adversário tão desafiador, Ancelotti deixou claro que vai apostar em uma equipe ofensiva, com quatro jogadores de ataque: “Nestes meses eu tenho pensado qual é o melhor modelo de jogo para a equipe, tendo em conta as características dos jogadores. Pensamos que o modelo de jogo que queremos planejar é com quatro na frente. Contra a França, um teste importante, queremos jogar uma boa partida, controlando o jogo, tentar defender bem, que é muito importante, ter equilíbrio e jogar bem com a bola, mostrar a qualidade que os quatro da frente têm”.
+
+Diante dos franceses o Brasil tem um desfalque certo, o zagueiro Marquinhos, que está com dores na região do quadril. Quem pode receber uma oportunidade na posição é Ibañez, do Al Ahli (Arábia Saudita). Com isso, uma possível formação para medir forças com a França é: Ederson; Wesley, Ibañez, Léo Pereira e Douglas Santos; Casemiro e Andrey Santos; Raphinha, Matheus Cunha, Vinicius Júnior e Martinelli.
+
+## Amistosos preparatórios
+
+Antes do início da Copa, a seleção brasileira fará mais três amistosos preparatórios. O primeiro será no dia 31 de março, contra a Croácia, no Camping World Stadium, em Orlando.
+
+[X Post](https://platform.twitter.com/embed/Tweet.html?creatorScreenName=agenciabrasil&dnt=false&embedId=twitter-widget-1&features=eyJ0ZndfdGltZWxpbmVfbGlzdCI6eyJidWNrZXQiOltdLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2ZvbGxvd2VyX2NvdW50X3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9iYWNrZW5kIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19yZWZzcmNfc2Vzc2lvbiI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfZm9zbnJfc29mdF9pbnRlcnZlbnRpb25zX2VuYWJsZWQiOnsiYnVja2V0Ijoib24iLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X21peGVkX21lZGlhXzE1ODk3Ijp7ImJ1Y2tldCI6InRyZWF0bWVudCIsInZlcnNpb24iOm51bGx9LCJ0ZndfZXhwZXJpbWVudHNfY29va2llX2V4cGlyYXRpb24iOnsiYnVja2V0IjoxMjA5NjAwLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X3Nob3dfYmlyZHdhdGNoX3Bpdm90c19lbmFibGVkIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19kdXBsaWNhdGVfc2NyaWJlc190b19zZXR0aW5ncyI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdXNlX3Byb2ZpbGVfaW1hZ2Vfc2hhcGVfZW5hYmxlZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdmlkZW9faGxzX2R5bmFtaWNfbWFuaWZlc3RzXzE1MDgyIjp7ImJ1Y2tldCI6InRydWVfYml0cmF0ZSIsInZlcnNpb24iOm51bGx9LCJ0ZndfbGVnYWN5X3RpbWVsaW5lX3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9mcm9udGVuZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9fQ%3D%3D&frame=false&hideCard=false&hideThread=false&id=2036210915293401554&lang=pt&origin=https%3A%2F%2Fagenciabrasil.ebc.com.br%2Fesportes%2Fnoticia%2F2026-03%2Fbrasil-enfrenta-franca-em-fase-final-de-preparacao-para-copa-do-mundo&sessionId=806faa638d58a9dd1b251cbca1441b43589e1ed4&siteScreenName=agenciabrasil&theme=light&widgetsVersion=2615f7e52b7e0%3A1702314776716&width=550px)
+
+Depois, o Brasil fará um jogo de despedida da torcida brasileira. A seleção enfrentará o Panamá no dia 31 de maio no estádio do Maracanã, no Rio de Janeiro. Por fim, no dia 6 de junho, uma semana antes da estreia do Brasil no Mundial, a seleção enfrenta o Egito em seu último amistoso antes da estreia. A partida será disputada no Huntington Bank Field, em Cleveland.
+
+## Brasil na Copa
+
+O Brasil está no Grupo C do Mundial de 2026. A estreia será contra Marrocos, no dia 13 de junho no MetLife Stadium, em Nova Jersey, às 19h (horário de Brasília). Na segunda rodada, o Brasil encara o Haiti no Lincoln Financial Field, na Filadélfia, às 22h. Já o encerramento da primeira fase está marcado para o dia 24 de junho, contra a Escócia, no Hard Rock Stadium, em Miami, às 19h.[](https://agenciabrasil.ebc.com.br/esportes/noticia/2026-03/vinicius-junior-diz-que-brasil-nao-e-favorito-para-copa-do-mundo)
+
+
+
+<!--EndFragment-->
