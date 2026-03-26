@@ -1,7 +1,7 @@
 ---
 title: Atleta de Canoinhas é selecionada por destaque do futsal feminino catarinense
 date: 23/02/2026
-category: Esporte | Redação
+category: Esporte | Destaque
 thumbnail: https://canoinhasonline.com.br/wp-content/uploads/2026/02/aluna-fmel-canoinhas.jpeg
 ---
 <!--StartFragment-->
