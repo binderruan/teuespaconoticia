@@ -1,7 +1,7 @@
 ---
 title: "“Olha a multa”: Radares estão sendo instalados nas rodovias de SC"
 date: 17/03/2026
-category: Trânsito | Rádio 105 FM
+category: Trânsito | Destaque
 thumbnail: https://www.fm105.com.br/wp-content/uploads/2026/03/radares-de-velocidade-rodovias-sc-750x375.jpg
 ---
 <!--StartFragment-->
@@ -17,5 +17,7 @@ As primeiras multas com os novos radares estão previstas para abril, depois da 
 Os limites de velocidade variam conforme o trecho: em rodovias duplicadas, geralmente 100 km/h para veículos leves e 80 km/h para pesados; em áreas urbanas ou de maior risco, pode cair para 60 km/h. Multas por excesso de velocidade variam de R$ 130,16 a R$ 880,41, além de pontos na CNH. O objetivo da retomada da fiscalização é reduzir acidentes e aumentar a segurança nas BRs catarinenses, especialmente após o aumento de ocorrências registrado desde a desativação dos radares antigos.
 
 
+
+*C﻿om informações de Rádio 105 FM*
 
 <!--EndFragment-->
