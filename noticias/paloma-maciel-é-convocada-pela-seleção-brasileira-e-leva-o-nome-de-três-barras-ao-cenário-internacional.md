@@ -5,7 +5,7 @@ date: 26/03/2026
 category: Esporte | Destaque
 thumbnail: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxE1k-bvFGObfXz8mFuK8EROaETndQpz59JQ&s
 ---
-<!--StartFragment-->
+<!--StartFragment--> 
 
 A jovem atleta Paloma Maciel, natural da localidade de São João dos Cavalheiros, em Três Barras, alcançou um dos momentos mais marcantes de sua carreira ao ser convocada, pela primeira vez, para integrar a Seleção Brasileira de futebol feminino. O chamado representa não apenas um avanço profissional, mas também um feito histórico para a região.
 
