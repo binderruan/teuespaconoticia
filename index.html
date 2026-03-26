@@ -683,18 +683,32 @@ async function carregarBanner(){
   const imgMatch = md.match(/^thumbnail:\s*(.*)/m);
   const imagem = imgMatch ? imgMatch[1].trim() : "images/logo.png";
 
-  noticias.push({
-    nome,
-    titulo,
-    imagem
-  });
+const catMatch = md.match(/^category:\s*(.*)$/m);
+const categoria = catMatch ? catMatch[1].trim() : "";
+
+noticias.push({
+  nome,
+  titulo,
+  imagem,
+  category: categoria
+});
  }
 
- // embaralha (aleatório)
- noticias.sort(()=> Math.random() - 0.5);
+// separar destaque e outras
+const destaqueNoticias = noticias.filter(n => 
+ (n.category || "").toLowerCase().includes("destaque")
+);
 
- // pega só 3
- noticias = noticias.slice(0,3);
+const outrasNoticias = noticias.filter(n => 
+ !(n.category || "").toLowerCase().includes("destaque")
+);
+
+// embaralha
+destaqueNoticias.sort(()=> Math.random() - 0.5);
+outrasNoticias.sort(()=> Math.random() - 0.5);
+
+// prioridade: destaque primeiro
+noticias = [...destaqueNoticias, ...outrasNoticias].slice(0,3);
 
  container.innerHTML = "";
 
