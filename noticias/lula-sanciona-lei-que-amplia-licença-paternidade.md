@@ -2,6 +2,7 @@
 title: Lula sanciona lei que amplia licença-paternidade
 date: 31/03/2026
 category: Direitos Humanos | Destaque
+thumbnail: https://imagens.ebc.com.br/mz-igTA2VJP5jgL2BrfkwPYMeRA=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/fathers-day-5469310.jpg?itok=SfRD_E3A
 ---
 <!--StartFragment-->
 
