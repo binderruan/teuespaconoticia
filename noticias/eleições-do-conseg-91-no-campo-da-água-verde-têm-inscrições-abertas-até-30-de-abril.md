@@ -17,4 +17,4 @@ O atual presidente, Adinor da Silva, destaca a importância do engajamento popul
 
 A organização reforça o convite para que moradores, lideranças e representantes locais participem ativamente do processo, seja compondo chapas ou comparecendo no dia da votação.
 
-O edital com todas as informações detalhadas estará disponível em anexo. Mais esclarecimentos podem ser obtidos diretamente com a diretoria atual do Conseg 91.
+O edital com todas as informações detalhadas estará disponível em anexo. Mais  esclarecimentos podem ser obtidos diretamente com a diretoria atual do Conseg 91.
