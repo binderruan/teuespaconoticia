@@ -3,7 +3,7 @@ title: Eleições do Conseg 91 no Campo da Água Verde têm inscrições abertas
   30 de abril
 date: 01/04/2026
 category: "Utilidade pública "
-thumbnail: /images/uploads/2.jpeg
+thumbnail: ""
 ---
 O edital com todas as informações detalhadas estará disponível em anexo. Mais esclarecimentos podem ser obtidos diretamente com a diretoria atual do Conseg 91.﻿
 
