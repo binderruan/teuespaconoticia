@@ -24,6 +24,4 @@ Santa Catarina conta com seis Centros Especializados em Reabilitação (CER), qu
 Em Florianópolis, a assistência aos pacientes com autismo é desempenhada pelo Serviço de Reabilitação Intelectual e Transtorno do Espectro do Autismo (RIA), do Centro Catarinense de Reabilitação (CCR), unidade própria da SES. A unidade se destaca com atendimento interdisciplinar, incluindo neurologistas, fonoaudiólogos, psicólogos e terapeutas ocupacionais.\
 A SES mantém ainda convênios com 144 serviços terapêuticos, muitos deles geridos por Associações de Pais e Amigos dos Excepcionais (APAEs), que atendem mais de 20 mil pessoas, entre elas pacientes com TEA, em todo o estado. Mensalmente, são investidos mais de R$3,8 milhões nesses serviços, sendo R$ 2,6 milhões provenientes do Governo do Estado.
 
-**Mais informações**:
-
 <!--EndFragment-->
