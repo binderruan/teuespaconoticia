@@ -564,8 +564,13 @@ async function carregarPost() {
 const catMatch = texto.match(/^(?:Categoria|category)\s*:\s*(.*)$/im);
 document.getElementById("categoria-post").innerText = catMatch ? catMatch[1].trim() : "";
 
+      let bodyFiltrado = body;
+
+// remove só o "X Post"
+bodyFiltrado = bodyFiltrado.replace(/X Post/gi, "");
+
     // 5) Conteúdo (somente o corpo sem frontmatter)
-    document.getElementById("conteudo-post").innerHTML = marked.parse(body);
+    document.getElementById("conteudo-post").innerHTML = marked.parse(bodyFiltrado);
 
   } catch (erro) {
     document.getElementById("conteudo-post").innerHTML = "<h2>Notícia não encontrada.</h2>";
