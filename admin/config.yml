@@ -1,4 +1,3 @@
-```yml
 backend:
   name: git-gateway
   branch: main
