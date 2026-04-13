@@ -1,3 +1,4 @@
+```yml
 backend:
   name: git-gateway
   branch: main
@@ -20,23 +21,37 @@ collections:
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
+
     fields:
       - label: "Título"
         name: "title"
         widget: "string"
+
       - label: "Data"
         name: "date"
         widget: "datetime"
         default: "{{now}}"
         format: "DD/MM/YYYY"
         time_format: false
+
       - label: "Categoria"
         name: "category"
         widget: "string"
+
       - label: "Imagem de capa"
         name: "thumbnail"
         widget: "image"
         required: false
+
+      - label: "Galeria de Fotos"
+        name: "gallery"
+        widget: "list"
+        required: false
+        field:
+          label: "Foto"
+          name: "image"
+          widget: "image"
+
       - label: "Conteúdo da notícia"
         name: "body"
         widget: "markdown"
@@ -52,6 +67,8 @@ collections:
       - label: "Título"
         name: "titulo"
         widget: "string"
+
       - label: "Link da edição"
         name: "link"
         widget: "string"
+
