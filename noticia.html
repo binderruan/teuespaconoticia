@@ -78,6 +78,31 @@ article {
         .epyt-gallery-thumb {
             width: 33.333%;
         }
+
+        .galeria-post{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:25px;
+}
+
+.galeria-post img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:10px;
+  transition:0.3s;
+}
+
+.galeria-post img:hover{
+  transform:scale(1.02);
+}
+
+@media(max-width:768px){
+  .galeria-post{
+    grid-template-columns:1fr;
+  }
+}
     </style>
 
     <script type="text/javascript" src="https://player.srvstm.com/inc/ajax-player.js"></script>
@@ -191,6 +216,8 @@ article {
 
 <div id="conteudo-post" class="noticia-conteudo"></div>
 
+<div id="galeria-post" class="galeria-post"></div>
+                                    
     <p><b>Categoria: </b><span id="categoria-post"></span></p>
 <hr style="opacity:.2; margin:40px 0;"> <div class="container mt-4 mb-5"> <h3 class="mb-3">Veja também</h3> <div class="row" id="relacionadas"></div> </div>
     
@@ -570,6 +597,26 @@ document.getElementById("categoria-post").innerText = catMatch ? catMatch[1].tri
 
     // 5) Conteúdo (somente o corpo sem frontmatter)
     document.getElementById("conteudo-post").innerHTML = marked.parse(body);
+
+const galeria = document.getElementById("galeria-post");
+galeria.innerHTML = "";
+
+const imagens = [];
+const regex = /-\s*image:\s*(.+)/g;
+let match;
+
+while ((match = regex.exec(texto)) !== null) {
+  imagens.push(match[1].trim());
+}
+
+if (imagens.length > 0) {
+  imagens.forEach(img => {
+    galeria.innerHTML += `
+      <img src="${normalizarUrlImagem(img)}" loading="lazy" alt="">
+    `;
+  });
+}
+
 
   } catch (erro) {
     document.getElementById("conteudo-post").innerHTML = "<h2>Notícia não encontrada.</h2>";
