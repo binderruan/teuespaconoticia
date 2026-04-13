@@ -598,7 +598,6 @@ document.getElementById("categoria-post").innerText = catMatch ? catMatch[1].tri
     // 5) Conteúdo (somente o corpo sem frontmatter)
     document.getElementById("conteudo-post").innerHTML = marked.parse(body);
 
-```javascript
 const galeria = document.getElementById("galeria-post");
 galeria.innerHTML = "";
 
@@ -609,7 +608,6 @@ let match;
 while ((match = regex.exec(texto)) !== null) {
   imagens.push(match[1].trim());
 }
-```
 
 
 if (imagens.length > 0) {
