@@ -3,6 +3,17 @@ title: IRINEÓPOLIS JÁ CONHECE OS CAMPEÕES DAS CATEGORIAS DE BASE
 date: 13/04/2026
 category: Esporte | Destaque
 thumbnail: /images/uploads/img_5905.jpg.jpeg
+gallery:
+  - /images/uploads/8a90455c-ec49-4efe-832b-d8f33a61.png
+  - /images/uploads/dd276fe6-1af3-40f0-ac03-3a67611f.png
+  - /images/uploads/358aebcc-4059-4a3c-8ab0-b901b9b4.png
+  - /images/uploads/27d58e57-10b8-42ac-9357-c897fa5e.png
+  - /images/uploads/0b5146ba-acd9-45d0-a854-ca3efe27.png
+  - /images/uploads/14327cf5-7936-46a1-90f1-9532745d.png
+  - /images/uploads/7c3f0158-4809-4865-aec1-2e1f4ee7.png
+  - /images/uploads/0bfbccfa-9070-4971-95a7-005c6abc.png
+  - /images/uploads/073807e2-bdb5-4a7e-a932-3bfacde9.png
+  - /images/uploads/5943a2ba-2507-40b0-9ff6-fdb298c9.png
 ---
 <!--StartFragment-->
 
