@@ -2,6 +2,7 @@
 title: Abono salarial começa a ser pago para nascidos em março e abril
 date: 15/04/2026
 category: Economia
+thumbnail: https://imagens.ebc.com.br/Rh4y8Er9NWIEpkGV_XzxLM5E4Qw=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/trbr0332.jpg?itok=CGTQvLb9
 ---
 <!--StartFragment-->
 
