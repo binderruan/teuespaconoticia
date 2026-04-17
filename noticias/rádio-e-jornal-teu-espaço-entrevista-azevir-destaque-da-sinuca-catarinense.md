@@ -9,3 +9,7 @@ Durante a conversa, Azevir compartilhou sua trajetória de sucesso no esporte, d
 A entrevista também abordou a importância da sinuca na região do Planalto Norte e o crescimento do esporte, incentivando novos talentos a seguirem esse caminho. Azevir ainda comentou sobre sua passagem por Canoinhas, ressaltando o carinho pelo público local e o respeito pelos atletas da região.
 Outro ponto alto foi quando ele falou sobre equipes tradicionais, como os Mata Colada, valorizando o trabalho coletivo e o fortalecimento da modalidade através da união entre os jogadores.
 A Rádio e Jornal Teu Espaço segue valorizando o esporte local, trazendo grandes nomes e histórias inspiradoras para seus ouvintes e leitores.
+
+## **Confira a entrevista completa:**
+
+## <https://www.youtube.com/live/wyEBJUYYJig?si=vJLGAVnRbHLAIP7A>
