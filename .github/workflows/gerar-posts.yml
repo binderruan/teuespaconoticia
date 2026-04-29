@@ -1,4 +1,4 @@
-name: Gerar posts.json
+name: Gerar arquivos de notícias
 
 on:
   push:
@@ -21,10 +21,11 @@ jobs:
       - name: Rodar script
         run: node gerar-posts.js
 
-      - name: Commit posts.json
+      - name: Commit arquivos
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add noticias/posts.json
-          git commit -m "Atualiza posts.json automaticamente" || echo "Nada para commit"
+          git add noticias/noticias.json
+          git commit -m "Atualiza arquivos automaticamente" || echo "Nada para commit"
           git push
