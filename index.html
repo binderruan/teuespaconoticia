@@ -501,91 +501,237 @@ if (window.netlifyIdentity) {
 
 
 
+
+
+
 <script>
-async function carregarNoticias(){
+function parseFrontmatter(md) {
+  const match = md.match(/^---\s*[\r\n]+([\s\S]*?)\s*[\r\n]+---\s*[\r\n]*/);
+  if (!match) return { data: {}, body: md };
 
- const container = document.getElementById("lista-noticias");
- if(!container) return;
+  const yaml = match[1];
+  const body = md.replace(match[0], "");
 
- const noticias = await fetch("/noticias/noticias.json")
- .then(r=>r.json());
+  const data = {};
+  let currentKey = null;
 
- noticias.sort((a,b)=>{
-   const da = new Date(a.data.split("/").reverse().join("-"));
-   const db = new Date(b.data.split("/").reverse().join("-"));
-   return db-da;
- });
+  yaml.split(/\r?\n/).forEach((line) => {
+    if (!line.trim()) return;
 
- container.innerHTML = "";
+    // Se a linha começa com espaços, é continuação do valor anterior
+    if (/^\s+/.test(line) && currentKey) {
+      data[currentKey] = (data[currentKey] + " " + line.trim())
+        .replace(/\s+/g, " ")
+        .trim();
+      return;
+    }
 
- noticias.slice(0,6).forEach(n=>{
+    const m = line.match(/^([^:]+):\s*(.*)$/);
+    if (!m) return;
 
- container.innerHTML += `
- <div class="col-lg-4 mb-4 d-inline-flex">
-   <div class="card m-2 videos h-100">
+    const key = m[1].trim();
+    let value = m[2].trim();
 
-    <img src="${n.imagem}" class="card-img-top img-fluid">
+    value = value.replace(/^"(.*)"$/, "$1").replace(/^'(.*)'$/, "$1");
 
-    <div class="card-block">
-      <h4 class="card-nome">${n.titulo}</h4>
-    </div>
+    data[key] = value;
+    currentKey = key;
+  });
 
-    <div class="card-body data">
-      <a href="/noticia.html?post=${n.nome}" class="btn btn-primary btn-sm mtn">
-      » Leia mais...
-      </a>
-    </div>
-
-   </div>
- </div>
- `;
- });
-
+  return { data, body };
 }
+
+<script>
+async function carregarNoticias() {
+  const container = document.getElementById("lista-noticias");
+
+  const lista = await fetch("/noticias/posts.json").then(r => r.json());
+
+  let noticias = [];
+
+  for (const nome of lista) {
+    const markdown = await fetch("/noticias/" + nome).then(r => r.text());
+
+    const tituloMatch = markdown.match(/^title:\s*(.*)/m);
+    const titulo = tituloMatch ? tituloMatch[1].trim() : "Sem título";
+
+    const dataMatch = markdown.match(/^date:\s*(.*)/m);
+    const data = dataMatch ? dataMatch[1].trim() : "";
+
+    const imgMatch = markdown.match(/^thumbnail:\s*(.*)/m);
+    const imagem = imgMatch ? imgMatch[1].trim() : "images/logo.png";
+
+    noticias.push({
+      nome,
+      titulo,
+      data,
+      imagem
+    });
+  }
+
+  // 🔥 Ordenar por data (mais recente primeiro)
+  noticias.sort((a, b) => {
+    const da = new Date(a.data.split("/").reverse().join("-"));
+    const db = new Date(b.data.split("/").reverse().join("-"));
+    return db - da;
+  });
+
+  // 🔥 Pega só as 6 mais recentes
+  noticias = noticias.slice(0, 6);
+
+  // Renderiza
+  for (const n of noticias) {
+    container.innerHTML += `
+      <div class="col-lg-4 mb-4 d-inline-flex">
+        <div class="card m-2 videos h-100">
+          <img src="${n.imagem}" class="card-img-top img-fluid">
+          <div class="card-block">
+            <h4 class="card-nome">${n.titulo}</h4>
+          </div>
+          <div class="card-body data">
+            <a href="/noticia.html?post=${n.nome}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+carregarNoticias();
+</script>
+</script>
+
+
+<script>
+async function carregarNoticias() {
+  const container = document.getElementById("lista-noticias");
+  if (!container) return;
+
+  const lista = await fetch("/noticias/posts.json").then(r => r.json());
+
+  let noticias = [];
+
+  for (const nome of lista) {
+    const md = await fetch("/noticias/" + nome).then(r => r.text());
+
+    // pega do frontmatter do Netlify CMS
+    const tituloMatch = md.match(/^title:\s*(.*)(?:\r?\n\s+(.*))?/m);
+    let titulo = "Sem título";
+    if (tituloMatch) {
+      titulo = ((tituloMatch[1] || "") + " " + (tituloMatch[2] || ""))
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+    const dataMatch = md.match(/^date:\s*(.*)$/m);
+    const data = dataMatch ? dataMatch[1].trim() : "";
+
+    const imgMatch = md.match(/^thumbnail:\s*(.*)$/m);
+    const imagem = imgMatch ? imgMatch[1].trim() : "images/logo.png";
+
+    noticias.push({ nome, titulo, data, imagem });
+  }
+
+  // Ordena por data (DD/MM/YYYY) - mais recente primeiro
+  noticias.sort((a, b) => {
+    const da = new Date(a.data.split("/").reverse().join("-"));
+    const db = new Date(b.data.split("/").reverse().join("-"));
+    return db - da;
+  });
+
+  // pega só as 6 mais recentes
+  noticias = noticias.slice(0, 6);
+
+  // limpa e renderiza
+  container.innerHTML = "";
+  for (const n of noticias) {
+    container.innerHTML += `
+      <div class="col-lg-4 mb-4 d-inline-flex">
+        <div class="card m-2 videos h-100">
+          <img src="${n.imagem}" class="card-img-top img-fluid" alt="">
+          <div class="card-block">
+            <h4 class="card-nome">${n.titulo}</h4>
+          </div>
+          <div class="card-body data">
+            <a href="/noticia.html?post=${n.nome}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+
 carregarNoticias();
 </script>
 
-<script>
+        <script>
 async function carregarBanner(){
 
  const container = document.getElementById("carousel-noticias");
- if(!container) return;
 
- const noticias = await fetch("/noticias/noticias.json")
- .then(r=>r.json());
+ const lista = await fetch("/noticias/posts.json").then(r => r.json());
 
- const destaque = noticias.filter(n =>
- (n.categoria || "").toLowerCase().includes("destaque")
- );
+ let noticias = [];
 
- const lista = destaque.length ? destaque : noticias;
+ for(const nome of lista){
+
+  const md = await fetch("/noticias/" + nome).then(r => r.text());
+
+  const tituloMatch = md.match(/^title:\s*(.*)/m);
+  const titulo = tituloMatch ? tituloMatch[1].trim() : "Sem título";
+
+  const imgMatch = md.match(/^thumbnail:\s*(.*)/m);
+  const imagem = imgMatch ? imgMatch[1].trim() : "images/logo.png";
+
+const catMatch = md.match(/^category:\s*(.*)$/m);
+const categoria = catMatch ? catMatch[1].trim() : "";
+
+noticias.push({
+  nome,
+  titulo,
+  imagem,
+  category: categoria
+});
+ }
+
+// separar destaque e outras
+const destaqueNoticias = noticias.filter(n => 
+ (n.category || "").toLowerCase().split("|").map(c => c.trim()).includes("destaque")
+);
+
+const outrasNoticias = noticias.filter(n => 
+ !(n.category || "").toLowerCase().split("|").map(c => c.trim()).includes("destaque")
+);
+
+// embaralha
+destaqueNoticias.sort(()=> Math.random() - 0.5);
+outrasNoticias.sort(()=> Math.random() - 0.5);
+
+// prioridade: destaque primeiro
+noticias = [...destaqueNoticias, ...outrasNoticias].slice(0,3);
 
  container.innerHTML = "";
 
- lista.slice(0,3).forEach((n,i)=>{
+ noticias.forEach((n, i)=>{
 
- container.innerHTML += `
- <div class="carousel-item ${i==0?'active':''}">
+  const ativo = i === 0 ? "active" : "";
+
+  container.innerHTML += `
+  <div class="carousel-item ${ativo}">
    <a href="/noticia.html?post=${n.nome}">
-    <img src="${n.imagem}" class="card-img img-fluid">
+    <img src="${n.imagem}" class="card-img img-fluid" alt="${n.titulo}">
    </a>
-
    <div class="carousel-caption d-none d-md-block">
     <h5>${n.titulo}</h5>
    </div>
- </div>
- `;
+  </div>
+  `;
  });
 
 }
+
 carregarBanner();
 </script>
-
-
-
-
-
-
         
 </body>
 
