@@ -541,64 +541,7 @@ function parseFrontmatter(md) {
   return { data, body };
 }
 
-<script>
-async function carregarNoticias() {
-  const container = document.getElementById("lista-noticias");
 
-  const lista = await fetch("/noticias/posts.json").then(r => r.json());
-
-  let noticias = [];
-
-  for (const nome of lista) {
-    const markdown = await fetch("/noticias/" + nome).then(r => r.text());
-
-    const tituloMatch = markdown.match(/^title:\s*(.*)/m);
-    const titulo = tituloMatch ? tituloMatch[1].trim() : "Sem título";
-
-    const dataMatch = markdown.match(/^date:\s*(.*)/m);
-    const data = dataMatch ? dataMatch[1].trim() : "";
-
-    const imgMatch = markdown.match(/^thumbnail:\s*(.*)/m);
-    const imagem = imgMatch ? imgMatch[1].trim() : "images/logo.png";
-
-    noticias.push({
-      nome,
-      titulo,
-      data,
-      imagem
-    });
-  }
-
-  // 🔥 Ordenar por data (mais recente primeiro)
-  noticias.sort((a, b) => {
-    const da = new Date(a.data.split("/").reverse().join("-"));
-    const db = new Date(b.data.split("/").reverse().join("-"));
-    return db - da;
-  });
-
-  // 🔥 Pega só as 6 mais recentes
-  noticias = noticias.slice(0, 6);
-
-  // Renderiza
-  for (const n of noticias) {
-    container.innerHTML += `
-      <div class="col-lg-4 mb-4 d-inline-flex">
-        <div class="card m-2 videos h-100">
-          <img src="${n.imagem}" class="card-img-top img-fluid">
-          <div class="card-block">
-            <h4 class="card-nome">${n.titulo}</h4>
-          </div>
-          <div class="card-body data">
-            <a href="/noticia.html?post=${n.nome}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-}
-
-carregarNoticias();
-</script>
 </script>
 
 
