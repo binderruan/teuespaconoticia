@@ -616,7 +616,7 @@ async function carregarBanner(){
 
  let noticias = [];
 
- for(const nome of lista){
+ for(const nome of lista.slice(0,10)){
 
   const md = await fetch("/noticias/" + nome).then(r => r.text());
 
