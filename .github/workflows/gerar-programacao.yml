@@ -1,0 +1,30 @@
+name: Gerar programacao.json
+
+on:
+  push:
+    paths:
+      - "programacao/*.md"
+
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v3
+
+      - name: Instalar Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Gerar JSON da programação
+        run: node gerar-programacao.js
+
+      - name: Commit programacao.json
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add programacao.json
+          git commit -m "Atualiza programacao.json automaticamente" || echo "Nada para commit"
+          git push
