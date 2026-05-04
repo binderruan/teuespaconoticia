@@ -7,10 +7,10 @@ const lista = arquivos.map(file => {
   const conteudo = fs.readFileSync(`${path}/${file}`, 'utf-8');
 
   return {
-    title: conteudo.match(/title:\s*"(.*?)"/)?.[1] || "",
-    image: conteudo.match(/image:\s*"(.*?)"/)?.[1] || "",
-    dias: conteudo.match(/dias:\s*"(.*?)"/)?.[1] || "",
-    horario: conteudo.match(/horario:\s*"(.*?)"/)?.[1] || ""
+    title: conteudo.match(/title:\s*(.*)/)?.[1]?.trim() || "",
+    image: conteudo.match(/image:\s*(.*)/)?.[1]?.trim() || "",
+    dias: conteudo.match(/dias:\s*(.*)/)?.[1]?.trim() || "",
+    horario: conteudo.match(/horario:\s*(.*)/)?.[1]?.trim() || ""
   };
 });
 
