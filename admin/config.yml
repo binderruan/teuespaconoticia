@@ -71,3 +71,15 @@ collections:
         name: "link"
         widget: "string"
 
+  collections:
+  - name: "programacao"
+    label: "Programação Rádio"
+    folder: "content/programacao"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Imagem", name: "image", widget: "image" }
+      - { label: "Dias", name: "dias", widget: "string" }
+      - { label: "Horário", name: "horario", widget: "string" }
+
