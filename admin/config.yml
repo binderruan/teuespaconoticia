@@ -51,7 +51,7 @@ collections:
 
   - name: "programacao"
     label: "Programação Rádio"
-    folder: "content/programacao"
+    folder: "programacao"
     create: true
     slug: "{{slug}}"
 
