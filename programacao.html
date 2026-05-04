@@ -390,33 +390,21 @@ async function carregarProgramacao() {
   const container = document.getElementById("programacao");
 
   try {
-    const arquivos = await fetch("/programacao/");
-    const texto = await arquivos.text();
+    const res = await fetch("/programacao.json");
+    const data = await res.json();
 
-    const matches = [...texto.matchAll(/href="(.*?)"/g)]
-      .map(m => m[1])
-      .filter(link => link.endsWith(".md"));
-
-    for (let file of matches) {
-      const res = await fetch("/programacao/" + file);
-      const conteudo = await res.text();
-
-      const title = conteudo.match(/title:\s*"(.*?)"/)?.[1] || "";
-      const image = conteudo.match(/image:\s*"(.*?)"/)?.[1] || "";
-      const dias = conteudo.match(/dias:\s*"(.*?)"/)?.[1] || "";
-      const horario = conteudo.match(/horario:\s*"(.*?)"/)?.[1] || "";
-
+    data.forEach(item => {
       container.innerHTML += `
         <div class="program">
-          <img src="${image}" alt="${title}">
+          <img src="${item.image}" alt="${item.title}">
           <div class="program-info">
-            <h2>${title}</h2>
-            <p>${dias}</p>
-            <p>Horário: ${horario}</p>
+            <h2>${item.title}</h2>
+            <p>${item.dias}</p>
+            <p>Horário: ${item.horario}</p>
           </div>
         </div>
       `;
-    }
+    });
 
   } catch (e) {
     container.innerHTML = "<p>Erro ao carregar programação.</p>";
