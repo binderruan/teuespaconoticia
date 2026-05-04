@@ -1,5 +1,5 @@
 ---
-title: Testando
+title: Testand
 image: /images/uploads/1.jpeg
 dias: Todos os dias
 horario: 24 horas
