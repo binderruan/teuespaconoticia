@@ -233,117 +233,7 @@
                             </h4>
 
                             <body class="page-background">
-                                <div class="radio-schedule">
-                                    
-                                    <div class="program">
-                                        <img src="images/radio/teuespaconoticia.jpeg" alt="Teu Espaço Notícias">
-                                        <div class="program-info">
-                                            <h2>Teu Espaço Notícias</h2>
-                                            <p>Todos os dias</p>
-                                            <p>Horário: 12:00 - 13:00</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="program">
-                                        <img src="images/radio/emocoes.png" alt="Emoçoes">
-                                        <div class="program-info">
-                                            <h2>Programa Emoções</h2>
-                                            <p>Todos os dias</p>
-                                            <p>Horário: 20:00 - 23:00</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="program">
-                                        <img src="images/radio/gaucho.jpeg" alt="Programa de Gaucho">
-                                        <div class="program-info">
-                                            <h2>Programa de Gaucho</h2>
-                                            <p>Sábado</p>
-                                            <p>Horário: 10:00 - 11:00</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="program">
-                                        <img src="images/radio/tardesertaneja.png" alt="Tarde Sertaneja">
-                                        <div class="program-info">
-                                            <h2>Tarde Sertaneja</h2>
-                                            <p>Sábado</p>
-                                            <p>Horário: 13:00 - 16:00</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="program">
-                                        <img src="images/radio/geracao.png" alt="Geração Teixeirinha">
-                                        <div class="program-info">
-                                            <h2>Geração Teixeirinha</h2>
-                                            <p>Domingo</p>
-                                            <p>Horário: 09:00 </p>
-                                        </div>
-                                    </div>
-
-                                    <div class="program">
-                                        <img src="images/radio/manhasertaneja.png" alt="Manhã Sertaneja">
-                                        <div class="program-info">
-                                            <h2>Manhã Sertaneja</h2>
-                                            <p>Segunda a Sexta</p>
-                                            <p>Horário: 6:00 - 8:00</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="program">
-                                        <img src="images/radio/bandasecompanhia.jpeg" alt="Bandas e Companhia">
-                                        <div class="program-info">
-                                            <h2>Bandas e Companhia</h2>
-                                            <p>Segunda a Sexta</p>
-                                            <p>Horário: 8:00 - 10:00</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="program">
-                                        <img src="images/radio/arenasertaneja.jpeg" alt="Arena Sertaneja">
-                                        <div class="program-info">
-                                            <h2>Arena Sertaneja</h2>
-                                            <p>Segunda a Sexta</p>
-                                            <p>Horário: 10:00 - 12:00</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="program">
-                                        <img src="images/radio/bausertanejo.jpeg" alt="Báu Sertanejo">
-                                        <div class="program-info">
-                                            <h2>Báu Sertanejo</h2>
-                                            <p>Segunda a Sexta</p>
-                                            <p>Horário: 13:00 - 15:00</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="program">
-                                        <img src="images/radio/sertanejobomdemais.png" alt="Sertanejo Bom De Mais">
-                                        <div class="program-info">
-                                            <h2>Sertanejo Bom De Mais</h2>
-                                            <p>Segunda a Sexta</p>
-                                            <p>Horário: 17:00 - 18:30</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="program">
-                                        <img src="images/radio/somodao.jpeg" alt="Só Modão">
-                                        <div class="program-info">
-                                            <h2>Só Modão</h2>
-                                            <p>Segunda a Sexta</p>
-                                            <p>Horário: 18:30 - 20:00</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="program">
-                                        <img src="images/radio/santamissa.jpeg" alt="Só Modão">
-                                        <div class="program-info">
-                                            <h2>Santa Missa</h2>
-                                            <p>Segunda a Sexta</p>
-                                            <p>Horário: 08:00</p>
-                                        </div>
-                                    </div>
-                                                                        
-                                    <!-- Adicione mais programas conforme necessário -->
+                                <div class="radio-schedule" id="programacao"></div>                                    
                                     
                                 </div>
                             </body>
@@ -495,7 +385,46 @@
                 <script src="./teuespaco/jquery.js(1).download"></script>
                 <script src="./teuespaco/popper.js.download"></script>
                 <script src="./teuespaco/bootstrap.js.download"></script>
+<script>
+async function carregarProgramacao() {
+  const container = document.getElementById("programacao");
 
+  try {
+    const arquivos = await fetch("/programacao/");
+    const texto = await arquivos.text();
+
+    const matches = [...texto.matchAll(/href="(.*?)"/g)]
+      .map(m => m[1])
+      .filter(link => link.endsWith(".md"));
+
+    for (let file of matches) {
+      const res = await fetch("/programacao/" + file);
+      const conteudo = await res.text();
+
+      const title = conteudo.match(/title:\s*"(.*?)"/)?.[1] || "";
+      const image = conteudo.match(/image:\s*"(.*?)"/)?.[1] || "";
+      const dias = conteudo.match(/dias:\s*"(.*?)"/)?.[1] || "";
+      const horario = conteudo.match(/horario:\s*"(.*?)"/)?.[1] || "";
+
+      container.innerHTML += `
+        <div class="program">
+          <img src="${image}" alt="${title}">
+          <div class="program-info">
+            <h2>${title}</h2>
+            <p>${dias}</p>
+            <p>Horário: ${horario}</p>
+          </div>
+        </div>
+      `;
+    }
+
+  } catch (e) {
+    container.innerHTML = "<p>Erro ao carregar programação.</p>";
+  }
+}
+
+carregarProgramacao();
+</script>
         </body>
 
 </html>
