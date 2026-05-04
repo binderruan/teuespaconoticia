@@ -1,16 +1,3 @@
-backend:
-  name: git-gateway
-  branch: main
-
-identity_url: https://teuespaco.com.br/.netlify/identity
-gateway_url: https://teuespaco.com.br/.netlify/git
-
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
-
-site_url: https://teuespaco.com.br
-display_url: https://teuespaco.com.br
-
 collections:
 
   - name: "noticias"
@@ -55,6 +42,7 @@ collections:
         name: "body"
         widget: "markdown"
 
+
   - name: "edicoes"
     label: "Edições"
     folder: "edicoes"
@@ -62,6 +50,7 @@ collections:
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
+
     fields:
       - label: "Título"
         name: "titulo"
@@ -71,15 +60,26 @@ collections:
         name: "link"
         widget: "string"
 
-  collections:
+
   - name: "programacao"
     label: "Programação Rádio"
     folder: "content/programacao"
     create: true
     slug: "{{slug}}"
-    fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Imagem", name: "image", widget: "image" }
-      - { label: "Dias", name: "dias", widget: "string" }
-      - { label: "Horário", name: "horario", widget: "string" }
 
+    fields:
+      - label: "Título"
+        name: "title"
+        widget: "string"
+
+      - label: "Imagem"
+        name: "image"
+        widget: "image"
+
+      - label: "Dias"
+        name: "dias"
+        widget: "string"
+
+      - label: "Horário"
+        name: "horario"
+        widget: "string"
