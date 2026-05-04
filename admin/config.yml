@@ -1,3 +1,13 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+site_url: https://teuespaco.com.br
+display_url: https://teuespaco.com.br
+
 collections:
 
   - name: "noticias"
@@ -9,25 +19,10 @@ collections:
     format: "frontmatter"
 
     fields:
-      - label: "Título"
-        name: "title"
-        widget: "string"
-
-      - label: "Data"
-        name: "date"
-        widget: "datetime"
-        default: "{{now}}"
-        format: "DD/MM/YYYY"
-        time_format: false
-
-      - label: "Categoria"
-        name: "category"
-        widget: "string"
-
-      - label: "Imagem de capa"
-        name: "thumbnail"
-        widget: "image"
-        required: false
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime", default: "{{now}}", format: "DD/MM/YYYY", time_format: false }
+      - { label: "Categoria", name: "category", widget: "string" }
+      - { label: "Imagem de capa", name: "thumbnail", widget: "image", required: false }
 
       - label: "Galeria de Fotos"
         name: "gallery"
@@ -38,9 +33,7 @@ collections:
           name: "image"
           widget: "image"
 
-      - label: "Conteúdo da notícia"
-        name: "body"
-        widget: "markdown"
+      - { label: "Conteúdo da notícia", name: "body", widget: "markdown" }
 
 
   - name: "edicoes"
@@ -52,13 +45,8 @@ collections:
     format: "frontmatter"
 
     fields:
-      - label: "Título"
-        name: "titulo"
-        widget: "string"
-
-      - label: "Link da edição"
-        name: "link"
-        widget: "string"
+      - { label: "Título", name: "titulo", widget: "string" }
+      - { label: "Link da edição", name: "link", widget: "string" }
 
 
   - name: "programacao"
@@ -68,18 +56,7 @@ collections:
     slug: "{{slug}}"
 
     fields:
-      - label: "Título"
-        name: "title"
-        widget: "string"
-
-      - label: "Imagem"
-        name: "image"
-        widget: "image"
-
-      - label: "Dias"
-        name: "dias"
-        widget: "string"
-
-      - label: "Horário"
-        name: "horario"
-        widget: "string"
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Imagem", name: "image", widget: "image" }
+      - { label: "Dias", name: "dias", widget: "string" }
+      - { label: "Horário", name: "horario", widget: "string" }
