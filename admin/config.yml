@@ -46,7 +46,7 @@ collections:
 
     fields:
       - { label: "Título", name: "titulo", widget: "string" }
-      - { label: "Link da edição", name: "link", widget: "string" 
+      - { label: "Link da edição", name: "link", widget: "string" }
       
   - name: "programacao"
     label: "Programação Rádio"
