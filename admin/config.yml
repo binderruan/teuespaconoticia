@@ -48,15 +48,16 @@ collections:
       - { label: "Título", name: "titulo", widget: "string" }
       - { label: "Link da edição", name: "link", widget: "string" }
 
+- name: "programacao"
+  label: "Programação Rádio"
+  folder: "programacao"
+  create: true
+  slug: "{{slug}}"
+  extension: "md"
+  format: "frontmatter"
 
-  - name: "programacao"
-    label: "Programação Rádio"
-    folder: "programacao"
-    create: true
-    slug: "{{slug}}"
-
-    fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Imagem", name: "image", widget: "image" }
-      - { label: "Dias", name: "dias", widget: "string" }
-      - { label: "Horário", name: "horario", widget: "string" }
+  fields:
+    - { label: "Título", name: "title", widget: "string" }
+    - { label: "Imagem", name: "image", widget: "image" }
+    - { label: "Dias", name: "dias", widget: "string" }
+    - { label: "Horário", name: "horario", widget: "string" }
