@@ -378,34 +378,69 @@
                 <script src="./teuespaco/jquery.js(1).download"></script>
                 <script src="./teuespaco/popper.js.download"></script>
                 <script src="./teuespaco/bootstrap.js.download"></script>
+<script>
+fetch("/programacao.json")
+  .then(res => res.json())
+  .then(data => {
 
-                <script>
-async function carregarProgramacao() {
-  const container = document.getElementById("programacao");
+    const container = document.getElementById("programacao");
 
-  try {
-    const res = await fetch("/programacao.json");
-    const data = await res.json();
+    const grupos = {};
 
+    // AGRUPAR POR DIA
     data.forEach(item => {
-      container.innerHTML += `
-        <div class="program">
-          <img src="${item.image}" alt="${item.title}">
-          <div class="program-info">
-            <h2>${item.title}</h2>
-            <p>${item.dias}</p>
-            <p>Horário: ${item.horario}</p>
-          </div>
-        </div>
-      `;
+      let dia = item.dias ? item.dias.toLowerCase() : "outros";
+
+      if (!dia.trim()) dia = "outros";
+
+      if (!grupos[dia]) grupos[dia] = [];
+      grupos[dia].push(item);
     });
 
-  } catch (e) {
-    container.innerHTML = "<p>Erro ao carregar programação.</p>";
-  }
-}
+    // ORDEM DOS DIAS
+    const ordemDias = [
+      "todos os dias",
+      "segunda",
+      "terça",
+      "quarta",
+      "quinta",
+      "sexta",
+      "sábado",
+      "domingo",
+      "outros"
+    ];
 
-carregarProgramacao();
+    // LIMPA CONTAINER
+    container.innerHTML = "";
+
+    // EXIBE NA ORDEM
+    ordemDias.forEach(dia => {
+      if (grupos[dia]) {
+
+        const titulo = document.createElement("h2");
+        titulo.innerText = dia === "outros"
+          ? "OUTROS / NÃO INFORMADO"
+          : dia.toUpperCase();
+
+        container.appendChild(titulo);
+
+        grupos[dia].forEach(item => {
+          container.innerHTML += `
+            <div class="program">
+              <img src="${item.image}" alt="${item.title}">
+              <div class="program-info">
+                <h2>${item.title}</h2>
+                <p>${item.dias || "Não informado"}</p>
+                <p>Horário: ${item.horario || "Não informado"}</p>
+              </div>
+            </div>
+          `;
+        });
+
+      }
+    });
+
+  });
 </script>
 
         </body>
