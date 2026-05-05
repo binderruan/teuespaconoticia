@@ -393,7 +393,7 @@ fetch("/programacao.json")
       const t = texto.toLowerCase();
       const dias = [];
 
-      if (t.includes("todos")) return ["todos os dias"];
+      if (t.includes("diariamente")) return ["diariamente"];
 
       if (t.includes("seg")) dias.push("segunda");
       if (t.includes("ter")) dias.push("terça");
@@ -420,7 +420,7 @@ fetch("/programacao.json")
 
     // 📅 ORDEM CERTA
     const ordemDias = [
-      "todos os dias",
+      "diariamente",
       "segunda",
       "terça",
       "quarta",
