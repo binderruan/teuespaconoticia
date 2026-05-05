@@ -384,20 +384,41 @@ fetch("/programacao.json")
   .then(data => {
 
     const container = document.getElementById("programacao");
-
     const grupos = {};
 
-    // AGRUPAR POR DIA
+    // 🔥 NORMALIZA OS DIAS (aceita qualquer jeito escrito)
+    function normalizarDias(texto) {
+      if (!texto) return ["outros"];
+
+      const t = texto.toLowerCase();
+      const dias = [];
+
+      if (t.includes("todos")) return ["todos os dias"];
+
+      if (t.includes("seg")) dias.push("segunda");
+      if (t.includes("ter")) dias.push("terça");
+      if (t.includes("qua")) dias.push("quarta");
+      if (t.includes("qui")) dias.push("quinta");
+      if (t.includes("sex")) dias.push("sexta");
+      if (t.includes("sáb") || t.includes("sab")) dias.push("sábado");
+      if (t.includes("dom")) dias.push("domingo");
+
+      if (dias.length === 0) dias.push("outros");
+
+      return dias;
+    }
+
+    // 🔁 AGRUPA POR DIA
     data.forEach(item => {
-      let dia = item.dias ? item.dias.toLowerCase() : "outros";
+      const dias = normalizarDias(item.dias);
 
-      if (!dia.trim()) dia = "outros";
-
-      if (!grupos[dia]) grupos[dia] = [];
-      grupos[dia].push(item);
+      dias.forEach(dia => {
+        if (!grupos[dia]) grupos[dia] = [];
+        grupos[dia].push(item);
+      });
     });
 
-    // ORDEM DOS DIAS
+    // 📅 ORDEM CERTA
     const ordemDias = [
       "todos os dias",
       "segunda",
@@ -410,12 +431,21 @@ fetch("/programacao.json")
       "outros"
     ];
 
-    // LIMPA CONTAINER
+    // 🧠 ORDENA POR HORÁRIO
+    function extrairHora(horario) {
+      if (!horario) return 9999;
+      const match = horario.match(/(\d{1,2}):(\d{2})/);
+      if (!match) return 9999;
+      return parseInt(match[1]) * 60 + parseInt(match[2]);
+    }
+
     container.innerHTML = "";
 
-    // EXIBE NA ORDEM
+    // 🖥️ EXIBE NA TELA
     ordemDias.forEach(dia => {
       if (grupos[dia]) {
+
+        grupos[dia].sort((a, b) => extrairHora(a.horario) - extrairHora(b.horario));
 
         const titulo = document.createElement("h2");
         titulo.innerText = dia === "outros"
@@ -440,6 +470,9 @@ fetch("/programacao.json")
       }
     });
 
+  })
+  .catch(err => {
+    console.error("Erro ao carregar programação:", err);
   });
 </script>
 
