@@ -36,6 +36,12 @@
     "horario": "18:00 às 20:00"
   },
   {
+    "title": "Santa Missa",
+    "image": "/images/uploads/c3e39f9d-4072-4209-806a-0a5245e5581b.jfif",
+    "dias": "Domingo",
+    "horario": "\"-\""
+  },
+  {
     "title": "Tarde Sertaneja",
     "image": "/images/uploads/648fa7cb-9417-4ab8-9852-b207cbe3a417.jfif",
     "dias": "SÁBADO",
