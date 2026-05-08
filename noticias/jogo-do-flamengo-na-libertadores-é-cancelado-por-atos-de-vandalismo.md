@@ -2,6 +2,7 @@
 title: Jogo do Flamengo na Libertadores é cancelado por atos de vandalismo
 date: 08/05/2026
 category: Esporte | Destaque | Agência Brasil
+thumbnail: https://imagens.ebc.com.br/9lVz_kUayc7Po5COp1YtyAamLZM=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/05/07/2026-05-08t004455z_1058170855_up1em58022tf5_rtrmadp_3_soccer-libertadores-ime-fla.jpg?itok=gTUAFADg
 ---
 <!--StartFragment-->
 
