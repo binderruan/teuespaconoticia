@@ -544,64 +544,88 @@ function parseFrontmatter(md) {
 
 </script>
 
-
-<script>
+        <script>
 async function carregarNoticias() {
+
   const container = document.getElementById("lista-noticias");
   if (!container) return;
 
-  const lista = await fetch("/noticias/posts.json").then(r => r.json());
+  const lista = await fetch("/noticias/posts.json")
+    .then(r => r.json());
 
   let noticias = [];
 
-  for (const nome of lista.slice(0,12)) {
-    const md = await fetch("/noticias/" + nome).then(r => r.text());
+  // pega TODAS para ordenar corretamente
+  for (const nome of lista) {
 
-    // pega do frontmatter do Netlify CMS
+    const md = await fetch("/noticias/" + nome)
+      .then(r => r.text());
+
     const tituloMatch = md.match(/^title:\s*(.*)(?:\r?\n\s+(.*))?/m);
+
     let titulo = "Sem título";
+
     if (tituloMatch) {
       titulo = ((tituloMatch[1] || "") + " " + (tituloMatch[2] || ""))
         .replace(/\s+/g, " ")
         .trim();
-}
+    }
 
     const dataMatch = md.match(/^date:\s*(.*)$/m);
-    const data = dataMatch ? dataMatch[1].trim() : "";
+    const data = dataMatch
+      ? dataMatch[1].trim()
+      : "";
 
     const imgMatch = md.match(/^thumbnail:\s*(.*)$/m);
-    const imagem = imgMatch ? imgMatch[1].trim() : "images/logo.png";
 
-    noticias.push({ nome, titulo, data, imagem });
+    const imagem = imgMatch
+      ? imgMatch[1].trim()
+      : "images/logo.png";
+
+    noticias.push({
+      nome,
+      titulo,
+      data,
+      imagem
+    });
   }
 
-  // Ordena por data (DD/MM/YYYY) - mais recente primeiro
+  // ordena pelas mais recentes
   noticias.sort((a, b) => {
     const da = new Date(a.data.split("/").reverse().join("-"));
     const db = new Date(b.data.split("/").reverse().join("-"));
     return db - da;
   });
 
-  // pega só as 6 mais recentes
+  // AGORA pega as 6 mais recentes
   noticias = noticias.slice(0, 6);
 
-  // limpa e renderiza
-  container.innerHTML = "";
-  for (const n of noticias) {
-    container.innerHTML += `
-      <div class="col-lg-4 mb-4 d-inline-flex">
-        <div class="card m-2 videos h-100">
-          <img src="${n.imagem}" loading="lazy" class="card-img-top img-fluid" alt="">
-          <div class="card-block">
-            <h4 class="card-nome">${n.titulo}</h4>
-          </div>
-          <div class="card-body data">
-            <a href="/noticia.html?post=${n.nome}" class="btn btn-primary btn-sm mtn">» Leia mais...</a>
-          </div>
+  container.innerHTML = noticias.map(n => `
+    <div class="col-lg-4 mb-4 d-inline-flex">
+      <div class="card m-2 videos h-100">
+
+        <img
+          src="${n.imagem}"
+          loading="lazy"
+          decoding="async"
+          class="card-img-top img-fluid"
+          alt="${n.titulo}">
+
+        <div class="card-block">
+          <h4 class="card-nome">${n.titulo}</h4>
         </div>
+
+        <div class="card-body data">
+          <a href="/noticia.html?post=${n.nome}"
+             class="btn btn-primary btn-sm mtn">
+             » Leia mais...
+          </a>
+        </div>
+
       </div>
-    `;
-  }
+    </div>
+  `).join("");
+
 }
 
 carregarNoticias();
