@@ -544,7 +544,7 @@ function parseFrontmatter(md) {
 
 </script>
 
-        <script>
+<script>
 async function carregarNoticias() {
 
   const container = document.getElementById("lista-noticias");
@@ -553,55 +553,64 @@ async function carregarNoticias() {
   const lista = await fetch("/noticias/posts.json")
     .then(r => r.json());
 
-  let noticias = [];
+  // carrega tudo ao mesmo tempo
+  const noticias = await Promise.all(
 
-  // pega TODAS para ordenar corretamente
-  for (const nome of lista) {
+    lista.map(async (nome) => {
 
-    const md = await fetch("/noticias/" + nome)
-      .then(r => r.text());
+      const md = await fetch("/noticias/" + nome)
+        .then(r => r.text());
 
-    const tituloMatch = md.match(/^title:\s*(.*)(?:\r?\n\s+(.*))?/m);
+      const tituloMatch = md.match(/^title:\s*(.*)(?:\r?\n\s+(.*))?/m);
 
-    let titulo = "Sem título";
+      let titulo = "Sem título";
 
-    if (tituloMatch) {
-      titulo = ((tituloMatch[1] || "") + " " + (tituloMatch[2] || ""))
-        .replace(/\s+/g, " ")
-        .trim();
-    }
+      if (tituloMatch) {
+        titulo = ((tituloMatch[1] || "") + " " + (tituloMatch[2] || ""))
+          .replace(/\s+/g, " ")
+          .trim();
+      }
 
-    const dataMatch = md.match(/^date:\s*(.*)$/m);
-    const data = dataMatch
-      ? dataMatch[1].trim()
-      : "";
+      const dataMatch = md.match(/^date:\s*(.*)$/m);
 
-    const imgMatch = md.match(/^thumbnail:\s*(.*)$/m);
+      const data = dataMatch
+        ? dataMatch[1].trim()
+        : "";
 
-    const imagem = imgMatch
-      ? imgMatch[1].trim()
-      : "images/logo.png";
+      const imgMatch = md.match(/^thumbnail:\s*(.*)$/m);
 
-    noticias.push({
-      nome,
-      titulo,
-      data,
-      imagem
-    });
-  }
+      const imagem = imgMatch
+        ? imgMatch[1].trim()
+        : "images/logo.png";
+
+      return {
+        nome,
+        titulo,
+        data,
+        imagem
+      };
+
+    })
+
+  );
 
   // ordena pelas mais recentes
   noticias.sort((a, b) => {
+
     const da = new Date(a.data.split("/").reverse().join("-"));
+
     const db = new Date(b.data.split("/").reverse().join("-"));
+
     return db - da;
+
   });
 
-  // AGORA pega as 6 mais recentes
-  noticias = noticias.slice(0, 6);
+  // pega só as 6 mais recentes
+  const recentes = noticias.slice(0, 6);
 
-  container.innerHTML = noticias.map(n => `
+  container.innerHTML = recentes.map(n => `
     <div class="col-lg-4 mb-4 d-inline-flex">
+
       <div class="card m-2 videos h-100">
 
         <img
@@ -623,13 +632,14 @@ async function carregarNoticias() {
         </div>
 
       </div>
+
     </div>
   `).join("");
 
 }
 
 carregarNoticias();
-</script>
+</script>        
 
 <script>
 async function carregarBanner(){
