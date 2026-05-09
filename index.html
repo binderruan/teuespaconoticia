@@ -554,7 +554,7 @@ async function carregarNoticias() {
 
   let noticias = [];
 
-  for (const nome of lista.slice().reverse().slice(0,12)) {
+  for (const nome of lista.slice(0,12)) {
     const md = await fetch("/noticias/" + nome).then(r => r.text());
 
     // pega do frontmatter do Netlify CMS
@@ -618,7 +618,7 @@ async function carregarBanner(){
  let noticias = [];
 
  // pega só as 12 mais recentes
- for (const nome of lista.slice().reverse().slice(0,12)) {
+ for (const nome of lista.slice(0,12)) {
 
   const md = await fetch("/noticias/" + nome)
     .then(r => r.text());
