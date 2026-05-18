@@ -6,7 +6,7 @@ thumbnail: data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEx
 ---
 <!--StartFragment-->
 
-## Carlo Ancelotti anuncia lista final com 26 jogadores; Neymar está entre os nomes chamados para o Mundial
+## Carlo Ancelotti anuncia lista final com 26 jogadores; Neymar está entre os nomes chamados para o Mundial 
 
 A Seleção Brasileira já tem seus 26 convocados para a Copa do Mundo de 2026. A lista final foi divulgada nesta segunda-feira, 18, pelo técnico Carlo Ancelotti, que comandará o Brasil na busca pelo sexto título mundial.
 
