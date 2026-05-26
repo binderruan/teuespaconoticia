@@ -1,7 +1,7 @@
 ---
 title: Itamaraty lança guia para brasileiros que vão à Copa do Mundo
 date: 26/05/2026
-category: Esportes
+category: Esportes | Destaque
 thumbnail: https://imagens.ebc.com.br/6-GJ6BAwiNPZAxAchqH23MXKd5k=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/05/26/84efea8c-581b-4adf-946a-bda2f3dd27de.jpeg?itok=n9aFFjMd
 ---
 <!--StartFragment-->
