@@ -1,7 +1,7 @@
 ---
 title: Rádio e Jornal Teu Espaço entrevista Azevir, destaque da sinuca catarinense
 date: 17/04/2026
-category: "Destaque "
+category: Esporte
 thumbnail: /images/uploads/f86e6164-62f7-4a54-b997-deafe560.png
 ---
 A Rádio e Jornal Teu Espaço teve a honra de realizar uma entrevista especial com Azevir, reconhecido como o melhor jogador de sinuca de Santa Catarina.
