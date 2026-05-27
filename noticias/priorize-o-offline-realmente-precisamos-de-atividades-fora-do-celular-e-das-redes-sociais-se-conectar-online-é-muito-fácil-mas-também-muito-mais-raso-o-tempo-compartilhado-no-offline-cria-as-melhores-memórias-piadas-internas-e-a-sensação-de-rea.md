@@ -1,9 +1,6 @@
 ---
-title: "Priorize o offline: realmente precisamos de atividades fora do celular e
-  das redes sociais. Se conectar online é muito fácil, mas também muito mais
-  raso. O tempo compartilhado no offline cria as melhores memórias, piadas
-  internas e a sensação de realmente conhecer o outro."
-date: "{{now}}"
+title: Começa primeira etapa do Censo da Educação Básica 2026
+date: 27/05/2026
 category: Educação | Agência Brasil
 thumbnail: https://imagens.ebc.com.br/VegJFZlJUAALKbGpiKrk-3j1WhE=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024/09/05/toms5445.jpg?itok=Cewp6ygv
 ---
