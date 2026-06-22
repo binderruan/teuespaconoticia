@@ -1,7 +1,8 @@
 ---
 title: Saiba usar a versão digital da Carteira de Identidade Nacional
 date: 22/06/2026
-category: https://imagens.ebc.com.br/DgoVvCSCw08oqH5EDcbBfoZ9yDM=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/02/10/whatsapp_image_2025-02-10_at_14.30.50_2.jpeg?itok=flhZKKWW
+category: Geral
+thumbnail: https://imagens.ebc.com.br/DgoVvCSCw08oqH5EDcbBfoZ9yDM=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/02/10/whatsapp_image_2025-02-10_at_14.30.50_2.jpeg?itok=flhZKKWW
 ---
 <!--StartFragment-->
 
