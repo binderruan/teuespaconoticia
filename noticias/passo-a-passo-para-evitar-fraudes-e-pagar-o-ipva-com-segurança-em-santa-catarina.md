@@ -3,6 +3,7 @@ title: Passo a passo para evitar fraudes e pagar o IPVA com segurança em Santa
   Catarina
 date: 06/07/2026
 category: IPVA - SC
+thumbnail: https://noticias.sc.gov.br/wp-content/uploads/2026/07/02-2.jpg
 ---
 <!--StartFragment-->
 
