@@ -2,7 +2,7 @@
 title: Homenagens de Dia dos Pais
 date: 12/08/2026
 category: Destaque
-thumbnail: null
+thumbnail: /images/uploads/7475669.jpg
 ---
 <!--StartFragment-->
 
