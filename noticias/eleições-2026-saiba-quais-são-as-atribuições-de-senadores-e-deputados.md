@@ -58,6 +58,4 @@ Também cabe aos deputados estaduais participar de comissões temáticas ligadas
 
 Cabe aos parlamentares distritais apreciar vetos do governador e aprovar decretos legislativos e resoluções, bem como participar da definição do orçamento do DF. Eles acompanham a aplicação dos recursos públicos e, para tanto, podem solicitar informações e fiscalizar a administração distrital.
 
- 
-
 <!--EndFragment-->
