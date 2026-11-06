@@ -1,6 +1,6 @@
 ---
-title: "# Experiência de Deus, com Padre Reginaldo Manzotti, estreia na
-  programação da Rádio e Jornal Teu Espaço"
+title: Experiência de Deus, com Padre Reginaldo Manzotti, estreia na programação
+  da Rádio e Jornal Teu Espaço
 date: 06/11/2026
 category: Destaque
 thumbnail: https://catve.com/images/2022/12/21/167165125063a35fb2d744b.jpg?1805919642
