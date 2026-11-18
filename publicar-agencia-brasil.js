@@ -164,7 +164,8 @@ async function main() {
         continue;
       }
 
-      const bodyHtml = findDivByClass(html, "field--name-body")
+      const bodyHtml = findDivByClass(html, "conteudo-noticia")
+        || findDivByClass(html, "field--name-body")
         || findDivByClass(html, "article-body")
         || findDivByClass(html, "node__content")
         || item.description;
