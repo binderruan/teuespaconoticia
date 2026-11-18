@@ -30,14 +30,30 @@ jobs:
       - name: Atualizar arquivos de notícias
         run: node gerar-posts.js
 
-      - name: Salvar publicação no GitHub
+      - name: Salvar notícias no GitHub
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email "41898282+users.noreply.github.com"
           git add noticias/*.md noticias/posts.json noticias/noticias.json
           if git diff --cached --quiet; then
             echo "Nenhuma alteração para salvar."
           else
-            git commit -m "Publica notícia da Agência Brasil"
+            git commit -m "Publica notícias da Agência Brasil"
+            git push
+          fi
+
+      - name: Publicar notícias na Página do Facebook
+        run: node publicar-facebook.js
+        env:
+          FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
+          FACEBOOK_PAGE_ACCESS_TOKEN: ${{ secrets.FACEBOOK_PAGE_ACCESS_TOKEN }}
+
+      - name: Salvar controle de publicações do Facebook
+        run: |
+          git add noticias/facebook-publicadas.json
+          if git diff --cached --quiet; then
+            echo "Nenhum novo registro do Facebook para salvar."
+          else
+            git commit -m "Registra publicações no Facebook"
             git push
           fi
