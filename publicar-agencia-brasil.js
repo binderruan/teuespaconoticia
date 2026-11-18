@@ -218,7 +218,8 @@ async function main() {
   }
 
   if (publicadas === 0) {
-    throw new Error("Nenhuma notícia nova, recente e elegível foi encontrada. Nenhum arquivo foi criado.");
+    console.log("Nenhuma notícia nova, recente e elegível foi encontrada. A execução será encerrada sem alterações.");
+    return;
   }
 
   console.log("Total de notícias publicadas nesta execução: " + publicadas + " de " + limitePorExecucao);
