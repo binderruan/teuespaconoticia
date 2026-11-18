@@ -221,10 +221,7 @@ async function main() {
     throw new Error("Nenhuma notícia nova, recente e elegível foi encontrada. Nenhum arquivo foi criado.");
   }
 
-  const saida = process.env.RUNNER_TEMP || __dirname;
-  fs.writeFileSync(path.join(saida, "noticias-facebook-pendentes.json"), JSON.stringify(arquivosCriados, null, 2), "utf8");
   console.log("Total de notícias publicadas nesta execução: " + publicadas + " de " + limitePorExecucao);
-  console.log("Lista de notícias desta execução salva para integração com o Facebook.");
 }
 
 main().catch(error => {
