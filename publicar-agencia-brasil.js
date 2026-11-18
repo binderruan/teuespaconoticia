@@ -64,7 +64,7 @@ function htmlToMarkdown(html) {
       const text = cleanText(label);
       return text ? "[" + text + "](" + decodeEntities(href) + ")" : "";
     })
-    .replace(/<(strong|b)\b[^>]*>([\s\S]*?)<\/\1>/gi, "**$2**")
+    .replace(/<(strong|b)\b[^>]*>([\s\S]*?)<\/\1>/gi, "$2")
     .replace(/<(em|i)\b[^>]*>([\s\S]*?)<\/\1>/gi, "*$2*")
     .replace(/<[^>]+>/g, " ");
   value = decodeEntities(value)
@@ -130,7 +130,7 @@ async function main() {
     let link = linkRaw;
     try { link = new URL(linkRaw, "https://agenciabrasil.ebc.com.br").href; } catch (_) {}
     return {
-      title: tagValue(item, "title"),
+      title: tagValue(item, "title").replace(/^[\s"'“”‘’]+|[\s"'“”‘’]+$/g, ""),
       link,
       description: tagValue(item, "description"),
       category: tagValue(item, "category") || "Geral",
