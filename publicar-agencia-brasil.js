@@ -151,6 +151,7 @@ async function main() {
   console.log("Notícias que passaram pelos filtros: " + candidates.length);
 
   let publicadas = 0;
+  const arquivosCriados = [];
   const limitePorExecucao = 3;
 
   for (const item of candidates) {
@@ -210,6 +211,7 @@ async function main() {
       fs.writeFileSync(filepath, content, "utf8");
       console.log("Notícia adicionada ao repositório: " + filename);
       publicadas++;
+      arquivosCriados.push(filename);
     } catch (error) {
       console.log("Falha ao processar \"" + item.title + "\": " + error.message);
     }
@@ -219,7 +221,10 @@ async function main() {
     throw new Error("Nenhuma notícia nova, recente e elegível foi encontrada. Nenhum arquivo foi criado.");
   }
 
+  const saida = process.env.RUNNER_TEMP || __dirname;
+  fs.writeFileSync(path.join(saida, "noticias-facebook-pendentes.json"), JSON.stringify(arquivosCriados, null, 2), "utf8");
   console.log("Total de notícias publicadas nesta execução: " + publicadas + " de " + limitePorExecucao);
+  console.log("Lista de notícias desta execução salva para integração com o Facebook.");
 }
 
 main().catch(error => {
