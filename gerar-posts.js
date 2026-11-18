@@ -21,10 +21,20 @@ arquivos.forEach(nome => {
    "utf8"
  );
 
- const titulo = (conteudo.match(/title:\s*(.*)/i)||["","Sem título"])[1];
- const data = (conteudo.match(/date:\s*(.*)/i)||["",""])[1];
- const imagem = (conteudo.match(/thumbnail:\s*(.*)/i)||["","images/logo.png"])[1];
- const categoria = (conteudo.match(/category:\s*(.*)/i)||["",""])[1];
+ const lerCampo = (campo, padrao = "") => {
+   let valor = (conteudo.match(new RegExp("^" + campo + ":\\s*(.*)$", "mi")) || ["", padrao])[1].trim();
+   if (valor.startsWith('"')) {
+     try { valor = JSON.parse(valor); } catch (_) {}
+   } else if (valor.startsWith("'") && valor.endsWith("'")) {
+     valor = valor.slice(1, -1).replace(/''/g, "'");
+   }
+   return valor;
+ };
+
+ const titulo = lerCampo("title", "Sem título");
+ const data = lerCampo("date");
+ const imagem = lerCampo("thumbnail", "images/logo.png");
+ const categoria = lerCampo("category");
 
  noticias.push({
    nome,
