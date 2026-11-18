@@ -1,8 +1,8 @@
 ---
 title: Inep divulga gabarito oficial do Enem 2026; veja como consultar
 date: 18/11/2026
-category: https://imagens.ebc.com.br/EprCYw39YlKoyNUUaGOhxXfmnYU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/15/pzzb0388.jpg?itok=LttPBPt7
-thumbnail: null
+category: Educação
+thumbnail: https://imagens.ebc.com.br/EprCYw39YlKoyNUUaGOhxXfmnYU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/15/pzzb0388.jpg?itok=LttPBPt7
 ---
 <!--StartFragment-->
 
