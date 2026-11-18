@@ -19,7 +19,30 @@ function readTitle(markdown) {
   return raw;
 }
 
-async function publishToFacebook(message, link) {
+async function getPageAccessToken() {
+  const endpoint = new URL(`https://graph.facebook.com/${GRAPH_VERSION}/me/accounts`);
+  endpoint.searchParams.set("fields", "id,name,access_token");
+  endpoint.searchParams.set("access_token", ACCESS_TOKEN);
+
+  try {
+    const response = await fetch(endpoint);
+    const result = await response.json();
+    if (response.ok && Array.isArray(result.data)) {
+      const page = result.data.find(item => String(item.id) === String(PAGE_ID));
+      if (page && page.access_token) {
+        console.log("Token de acesso da Página Teu Espaço identificado.");
+        return page.access_token;
+      }
+    }
+  } catch (_) {
+    console.log("Não foi possível consultar /me/accounts; tentando o token informado diretamente.");
+  }
+
+  console.log("Não foi retornado token específico da Página; tentando o token configurado.");
+  return ACCESS_TOKEN;
+}
+
+async function publishToFacebook(message, link, pageToken) {
   const endpoint = `https://graph.facebook.com/${GRAPH_VERSION}/${PAGE_ID}/feed`;
   const body = new URLSearchParams({
     message,
