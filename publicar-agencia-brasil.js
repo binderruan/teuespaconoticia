@@ -3,7 +3,7 @@ const path = require("path");
 
 const FEED_URL = "https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml";
 const NEWS_DIR = path.join(__dirname, "noticias");
-const MAX_AGE_HOURS = 72;
+const MAX_AGE_HOURS = 168;
 
 function decodeEntities(value = "") {
   return value
@@ -125,13 +125,21 @@ async function main() {
 
   const known = existingNews();
   const now = Date.now();
-  const candidates = items.map(item => ({
-    title: tagValue(item, "title"),
-    link: tagValue(item, "link"),
-    description: tagValue(item, "description"),
-    category: tagValue(item, "category") || "Geral",
-    pubDate: tagValue(item, "pubDate")
-  })).filter(item => {
+  const parsed = items.map(item => {
+    const linkRaw = tagValue(item, "link") || tagValue(item, "guid");
+    let link = linkRaw;
+    try { link = new URL(linkRaw, "https://agenciabrasil.ebc.com.br").href; } catch (_) {}
+    return {
+      title: tagValue(item, "title"),
+      link,
+      description: tagValue(item, "description"),
+      category: tagValue(item, "category") || "Geral",
+      pubDate: tagValue(item, "pubDate") || tagValue(item, "dc:date")
+    };
+  });
+  console.log("Itens RSS encontrados: " + items.length);
+  console.log("Primeiro item interpretado: " + JSON.stringify(parsed[0] || {}));
+  const candidates = parsed.filter(item => {
     const timestamp = Date.parse(item.pubDate);
     const age = (now - timestamp) / 3600000;
     return item.title && item.link && item.link.startsWith("https://agenciabrasil.ebc.com.br/")
@@ -140,6 +148,7 @@ async function main() {
       && !known.urls.has(item.link.replace(/[.,;]+$/, ""))
       && !known.titles.has(item.title.toLowerCase());
   }).sort((a, b) => Date.parse(b.pubDate) - Date.parse(a.pubDate));
+  console.log("Notícias que passaram pelos filtros: " + candidates.length);
 
   for (const item of candidates) {
     try {
