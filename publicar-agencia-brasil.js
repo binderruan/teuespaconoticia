@@ -166,7 +166,8 @@ async function main() {
 
       const bodyHtml = findDivByClass(html, "field--name-body")
         || findDivByClass(html, "article-body")
-        || findDivByClass(html, "node__content");
+        || findDivByClass(html, "node__content")
+        || item.description;
       const body = htmlToMarkdown(bodyHtml);
       if (body.length < 250) {
         console.log("Ignorando matéria sem corpo textual identificável: " + item.title);
