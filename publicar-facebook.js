@@ -24,7 +24,7 @@ async function publishToFacebook(message, link) {
   const body = new URLSearchParams({
     message,
     link,
-    access_token: ACCESS_TOKEN
+    access_token: pageToken
   });
 
   const response = await fetch(endpoint, {
@@ -64,6 +64,8 @@ async function main() {
     }
   }
 
+  const pageToken = await getPageAccessToken();
+
   for (const filename of pending) {
     if (state.published[filename]) {
       console.log("Já publicada no Facebook; ignorando: " + filename);
@@ -81,7 +83,7 @@ async function main() {
       + "\n\nAcesse e confira:➡️ www.teuespaco.com.br/\n\n"
       + "#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";
 
-    const postId = await publishToFacebook(message, articleUrl);
+    const postId = await publishToFacebook(message, articleUrl, pageToken);
     state.published[filename] = {
       post_id: postId,
       published_at: new Date().toISOString()
