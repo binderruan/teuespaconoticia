@@ -150,7 +150,11 @@ async function main() {
   }).sort((a, b) => Date.parse(b.pubDate) - Date.parse(a.pubDate));
   console.log("Notícias que passaram pelos filtros: " + candidates.length);
 
+  let publicadas = 0;
+  const limitePorExecucao = 3;
+
   for (const item of candidates) {
+    if (publicadas >= limitePorExecucao) break;
     try {
       const html = await fetchText(item.link);
       const lower = html.toLowerCase();
@@ -204,14 +208,18 @@ async function main() {
       ].join("\n");
 
       fs.writeFileSync(filepath, content, "utf8");
-      console.log("Notícia publicada no repositório: " + filename);
-      return;
+      console.log("Notícia adicionada ao repositório: " + filename);
+      publicadas++;
     } catch (error) {
       console.log("Falha ao processar \"" + item.title + "\": " + error.message);
     }
   }
 
-  throw new Error("Nenhuma notícia nova, recente e elegível foi encontrada. Nenhum arquivo foi criado.");
+  if (publicadas === 0) {
+    throw new Error("Nenhuma notícia nova, recente e elegível foi encontrada. Nenhum arquivo foi criado.");
+  }
+
+  console.log("Total de notícias publicadas nesta execução: " + publicadas + " de " + limitePorExecucao);
 }
 
 main().catch(error => {
