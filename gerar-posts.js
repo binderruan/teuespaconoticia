@@ -52,3 +52,54 @@ fs.writeFileSync(
 );
 
 console.log("Arquivos criados!");
+
+function escaparXml(valor) {
+ return String(valor || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+}
+
+function dataRss(data) {
+ const partes = String(data || "").split("/");
+ if (partes.length !== 3) return new Date().toUTCString();
+ const [dia, mes, ano] = partes;
+ const dataObj = new Date(Date.UTC(Number(ano), Number(mes) - 1, Number(dia), 12, 0, 0));
+ return Number.isNaN(dataObj.getTime()) ? new Date().toUTCString() : dataObj.toUTCString();
+}
+
+const itensRss = [...noticias]
+ .sort((a, b) => {
+   const converter = valor => {
+     const p = String(valor || "").split("/");
+     return p.length === 3 ? new Date(Number(p[2]), Number(p[1]) - 1, Number(p[0])).getTime() : 0;
+   };
+   return converter(b.data) - converter(a.data);
+ })
+ .slice(0, 30)
+ .map(noticia => {
+   const link = "https://teuespaco.com.br/noticia.html?post=" + encodeURIComponent(noticia.nome);
+   const titulo = escaparXml(noticia.titulo);
+   const categoria = escaparXml(noticia.categoria);
+   return `    <item>
+      <title>${titulo}</title>
+      <link>${escaparXml(link)}</link>
+      <guid isPermaLink="true">${escaparXml(link)}</guid>
+      <pubDate>${dataRss(noticia.data)}</pubDate>
+      <category>${categoria}</category>
+    </item>`;
+ }).join("\n");
+
+const rss = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Teu Espaço - Notícias</title>
+    <link>https://teuespaco.com.br/noticias</link>
+    <description>Últimas notícias do Rádio e Jornal Teu Espaço</description>
+    <language>pt-br</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+${itensRss}
+  </channel>
+</rss>
+`;
+
+fs.writeFileSync(path.join(__dirname, "rss.xml"), rss, "utf8");
+console.log("Feed RSS criado!");
+
