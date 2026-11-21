@@ -1,6 +1,7 @@
 name: Gerar arquivos de notícias
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - "noticias/*.md"
