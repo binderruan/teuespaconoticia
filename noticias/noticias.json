@@ -1463,6 +1463,13 @@
     "categoria": "Esportes"
   },
   {
+    "nome": "agencia-brasil-2026-11-21-tv-brasil-exibe-show-do-trio-pieta-no-cena-musical-deste-sabado.md",
+    "titulo": "TV Brasil exibe show do trio Pietá no Cena Musical deste sábado",
+    "data": "21/11/2026",
+    "imagem": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/public/thumbs/thumb_1200x600_agbrasil.png",
+    "categoria": "Cultura"
+  },
+  {
     "nome": "agencia-brasil-2026-11-21-terremoto-de-magnitude-6-8-graus-atinge-o-peru.md",
     "titulo": "Terremoto de magnitude 6,8 graus atinge o Peru",
     "data": "21/11/2026",
@@ -1477,11 +1484,25 @@
     "categoria": "Meio Ambiente"
   },
   {
+    "nome": "agencia-brasil-2026-11-21-paises-vao-negociar-regulamentacao-de-robos-assassinos-ate-2028.md",
+    "titulo": "Países vão negociar regulamentação de “robôs assassinos” até 2028",
+    "data": "21/11/2026",
+    "imagem": "https://imagens.ebc.com.br/8vTxPVGzBYpE72VU11DrE2WNr1c=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/3379833952_292f2ef9d5_o.jpg?itok=HnkqLRB9",
+    "categoria": "Internacional"
+  },
+  {
     "nome": "agencia-brasil-2026-11-21-dossie-mapeia-desafios-do-ensino-de-matematica-e-sugere-solucoes.md",
     "titulo": "Dossiê mapeia desafios do ensino de matemática e sugere soluções",
     "data": "21/11/2026",
     "imagem": "https://imagens.ebc.com.br/ObW6pU69JGOCN3YIMvdiUiUxJJI=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/21/dsc08235.jpg?itok=N6TT5mJu",
     "categoria": "Educação"
+  },
+  {
+    "nome": "agencia-brasil-2026-11-21-arthur-elias-chama-taina-maranhao-para-data-fifa-da-selecao-feminina.md",
+    "titulo": "Arthur Elias chama Taina Maranhão para Data FIFA da Seleção Feminina",
+    "data": "21/11/2026",
+    "imagem": "https://imagens.ebc.com.br/NJp5FOOQ7eLAWRWVHBdQEpggKT0=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/21/11_04_2026_fifa_series_brasil_vs_coreia_do_sul_0869_7b37cebd42.jpeg?itok=-oEENCW7",
+    "categoria": "Esportes"
   },
   {
     "nome": "agencia-brasil-2026-11-20-rs-ex-vereador-esta-entre-as-vitimas-da-tempestade-em-tupancireta.md",
