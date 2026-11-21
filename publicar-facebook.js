@@ -9,7 +9,7 @@ const GRAPH_VERSION = "v27.0";
 const SITE_URL = "https://www.teuespaco.com.br";
 
 function readTitle(markdown) {
-  const match = markdown.match(/^title:\\s*(.*)$/mi);
+  const match = markdown.match(/^title:\s*(.*)$/mi);
   if (!match) return "Notícia";
   const raw = match[1].trim();
   if (raw.startsWith('"')) {
@@ -76,7 +76,7 @@ async function main() {
   if (!fs.existsSync(NEWS_DIR)) throw new Error("Pasta noticias não encontrada.");
 
   const files = fs.readdirSync(NEWS_DIR)
-    .filter(name => /^agencia-brasil-.*\\.md$/i.test(name))
+    .filter(name => /^agencia-brasil-.*\.md$/i.test(name))
     .sort();
 
   let state = loadState();
@@ -91,7 +91,7 @@ async function main() {
     for (const filename of files) {
       state.published[filename] = { status: "baseline" };
     }
-    fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2) + "\\n", "utf8");
+    fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2) + "\n", "utf8");
     console.log("Controle inicial criado com " + files.length + " notícias existentes. Nenhuma publicação antiga foi enviada.");
     return;
   }
@@ -110,7 +110,7 @@ async function main() {
     const title = readTitle(markdown);
     const articleUrl = SITE_URL + "/noticia.html?post=" + encodeURIComponent(filename);
     const message = title
-      + "\\n\\nAcesse e confira:➡️ www.teuespaco.com.br/\\n\\n"
+      + "\n\nAcesse e confira:➡️ www.teuespaco.com.br/\n\n"
       + "#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";
 
     const postId = await publishToFacebook(message, articleUrl);
@@ -118,7 +118,7 @@ async function main() {
       post_id: postId,
       published_at: new Date().toISOString()
     };
-    fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2) + "\\n", "utf8");
+    fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2) + "\n", "utf8");
     console.log("Publicada no Facebook: " + title + " (post " + postId + ")");
   }
 }
