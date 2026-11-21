@@ -1,0 +1,48 @@
+name: Publicar notícias no Facebook
+
+on:
+  workflow_run:
+    workflows: ["Publicar notícias da Agência Brasil"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicar-facebook
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Publicar notícias novas na Página do Facebook
+        env:
+          FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
+          FACEBOOK_PAGE_ACCESS_TOKEN: ${{ secrets.FACEBOOK_PAGE_ACCESS_TOKEN }}
+        run: node publicar-facebook.js
+
+      - name: Salvar controle de publicações do Facebook
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add noticias/facebook-publicadas.json
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração no controle do Facebook."
+          else
+            git commit -m "Atualiza controle de publicações do Facebook"
+            git push
+          fi
