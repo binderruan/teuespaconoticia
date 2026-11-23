@@ -1,105 +1,90 @@
 const fs = require("fs");
 const path = require("path");
 
-const pasta = path.join(__dirname, "noticias");
+const raiz = __dirname;
+const pasta = path.join(raiz, "noticias");
+const modelo = fs.readFileSync(path.join(raiz, "noticia.html"), "utf8");
+const arquivos = fs.readdirSync(pasta).filter(a => a.endsWith(".md")).reverse();
 
-const arquivos = fs.readdirSync(pasta)
-.filter(a => a.endsWith(".md"))
-.reverse();
+fs.writeFileSync(path.join(pasta, "posts.json"), JSON.stringify(arquivos, null, 2));
 
-fs.writeFileSync(
- path.join(pasta,"posts.json"),
- JSON.stringify(arquivos,null,2)
-);
+function escaparHtml(valor) {
+  return String(valor || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+function lerCampo(conteudo, campo, padrao = "") {
+  let valor = (conteudo.match(new RegExp("^" + campo + ":\\s*(.*)$", "mi")) || ["", padrao])[1].trim();
+  if (valor.startsWith('"')) { try { valor = JSON.parse(valor); } catch (_) {} }
+  else if (valor.startsWith("'") && valor.endsWith("'")) valor = valor.slice(1, -1).replace(/''/g, "'");
+  return valor;
+}
+function urlImagem(valor) {
+  if (!valor) return "https://teuespaco.com.br/images/logo.png";
+  if (/^https?:\\/\\//i.test(valor)) return valor;
+  return "https://teuespaco.com.br/" + valor.replace(/^\\.?\\//, "");
+}
+function descricaoDaMateria(markdown) {
+  return String(markdown || "").replace(/^---[\\s\\S]*?---\\s*/m, "")
+    .replace(/!\\[[^\\]]*\\]\\([^)]*\\)/g, "")
+    .replace(/\\[([^\\]]+)\\]\\([^)]*\\)/g, "$1")
+    .replace(/<[^>]*>/g, " ").replace(/[#>*_~]/g, "").replace(/\\s+/g, " ").trim().slice(0, 240);
+}
+function dataRss(data) {
+  const partes = String(data || "").split("/");
+  if (partes.length !== 3) return new Date().toUTCString();
+  const [dia, mes, ano] = partes;
+  const d = new Date(Date.UTC(Number(ano), Number(mes) - 1, Number(dia), 12, 0, 0));
+  return Number.isNaN(d.getTime()) ? new Date().toUTCString() : d.toUTCString();
+}
 
-let noticias = [];
+const noticias = [];
+for (const nome of arquivos) {
+  const conteudo = fs.readFileSync(path.join(pasta, nome), "utf8");
+  const titulo = lerCampo(conteudo, "title", "Sem título");
+  const data = lerCampo(conteudo, "date");
+  const imagem = urlImagem(lerCampo(conteudo, "thumbnail", "images/logo.png"));
+  const categoria = lerCampo(conteudo, "category");
+  const descricao = descricaoDaMateria(conteudo);
+  const arquivoHtml = "materia-" + nome.replace(/\\.md$/i, "") + ".html";
+  const urlPagina = "https://teuespaco.com.br/" + arquivoHtml;
+  const urlComPost = urlPagina + "?post=" + encodeURIComponent(nome);
+  noticias.push({ nome, titulo: titulo.trim(), data: data.trim(), imagem, categoria: categoria.trim() });
 
-arquivos.forEach(nome => {
+  const metas = [
+    '<title>' + escaparHtml(titulo) + ' - Teu Espaço</title>',
+    '<meta name="description" content="' + escaparHtml(descricao) + '">',
+    '<meta property="og:type" content="article">',
+    '<meta property="og:site_name" content="Rádio e Jornal Teu Espaço">',
+    '<meta property="og:title" content="' + escaparHtml(titulo) + '">',
+    '<meta property="og:description" content="' + escaparHtml(descricao) + '">',
+    '<meta property="og:url" content="' + escaparHtml(urlComPost) + '">',
+    '<meta property="og:image" content="' + escaparHtml(imagem) + '" id="og-image">',
+    '<meta property="og:image:secure_url" content="' + escaparHtml(imagem) + '">',
+    '<meta name="twitter:card" content="summary_large_image">',
+    '<meta name="twitter:title" content="' + escaparHtml(titulo) + '">',
+    '<meta name="twitter:description" content="' + escaparHtml(descricao) + '">',
+    '<meta name="twitter:image" content="' + escaparHtml(imagem) + '">',
+    '<link rel="canonical" href="' + escaparHtml(urlComPost) + '">'
+  ].join("\\n    ");
 
- const conteudo = fs.readFileSync(
-   path.join(pasta,nome),
-   "utf8"
- );
+  let pagina = modelo.replace(/<meta property="og:image"[^>]*id="og-image"[^>]*>/i, metas);
+  pagina = pagina.replace(/<title>[\\s\\S]*?<\\/title>/i, "");
+  fs.writeFileSync(path.join(raiz, arquivoHtml), pagina, "utf8");
+}
 
- const lerCampo = (campo, padrao = "") => {
-   let valor = (conteudo.match(new RegExp("^" + campo + ":\\s*(.*)$", "mi")) || ["", padrao])[1].trim();
-   if (valor.startsWith('"')) {
-     try { valor = JSON.parse(valor); } catch (_) {}
-   } else if (valor.startsWith("'") && valor.endsWith("'")) {
-     valor = valor.slice(1, -1).replace(/''/g, "'");
-   }
-   return valor;
- };
-
- const titulo = lerCampo("title", "Sem título");
- const data = lerCampo("date");
- const imagem = lerCampo("thumbnail", "images/logo.png");
- const categoria = lerCampo("category");
-
- noticias.push({
-   nome,
-   titulo: titulo.trim(),
-   data: data.trim(),
-   imagem: imagem.trim(),
-   categoria: categoria.trim()
- });
-
-});
-
-fs.writeFileSync(
- path.join(pasta,"noticias.json"),
- JSON.stringify(noticias,null,2)
-);
-
-console.log("Arquivos criados!");
+fs.writeFileSync(path.join(pasta, "noticias.json"), JSON.stringify(noticias, null, 2));
 
 function escaparXml(valor) {
- return String(valor || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+  return String(valor || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
 }
+const itensRss = [...noticias].sort((a, b) => {
+  const conv = v => { const p = String(v || "").split("/"); return p.length === 3 ? new Date(Number(p[2]), Number(p[1])-1, Number(p[0])).getTime() : 0; };
+  return conv(b.data) - conv(a.data);
+}).slice(0, 30).map(n => {
+  const arquivoHtml = "materia-" + n.nome.replace(/\\.md$/i, "") + ".html";
+  const link = "https://teuespaco.com.br/" + arquivoHtml + "?post=" + encodeURIComponent(n.nome);
+  return '    <item>\\n      <title>' + escaparXml(n.titulo) + '</title>\\n      <link>' + escaparXml(link) + '</link>\\n      <guid isPermaLink="true">' + escaparXml(link) + '</guid>\\n      <pubDate>' + dataRss(n.data) + '</pubDate>\\n      <category>' + escaparXml(n.categoria) + '</category>\\n    </item>';
+}).join("\\n");
 
-function dataRss(data) {
- const partes = String(data || "").split("/");
- if (partes.length !== 3) return new Date().toUTCString();
- const [dia, mes, ano] = partes;
- const dataObj = new Date(Date.UTC(Number(ano), Number(mes) - 1, Number(dia), 12, 0, 0));
- return Number.isNaN(dataObj.getTime()) ? new Date().toUTCString() : dataObj.toUTCString();
-}
-
-const itensRss = [...noticias]
- .sort((a, b) => {
-   const converter = valor => {
-     const p = String(valor || "").split("/");
-     return p.length === 3 ? new Date(Number(p[2]), Number(p[1]) - 1, Number(p[0])).getTime() : 0;
-   };
-   return converter(b.data) - converter(a.data);
- })
- .slice(0, 30)
- .map(noticia => {
-   const link = "https://teuespaco.com.br/noticia.html?post=" + encodeURIComponent(noticia.nome);
-   const titulo = escaparXml(noticia.titulo);
-   const categoria = escaparXml(noticia.categoria);
-   return `    <item>
-      <title>${titulo}</title>
-      <link>${escaparXml(link)}</link>
-      <guid isPermaLink="true">${escaparXml(link)}</guid>
-      <pubDate>${dataRss(noticia.data)}</pubDate>
-      <category>${categoria}</category>
-    </item>`;
- }).join("\n");
-
-const rss = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
-  <channel>
-    <title>Teu Espaço - Notícias</title>
-    <link>https://teuespaco.com.br/noticias</link>
-    <description>Últimas notícias do Rádio e Jornal Teu Espaço</description>
-    <language>pt-br</language>
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-${itensRss}
-  </channel>
-</rss>
-`;
-
-fs.writeFileSync(path.join(__dirname, "rss.xml"), rss, "utf8");
-console.log("Feed RSS criado!");
-
+const rss = '<?xml version="1.0" encoding="UTF-8"?>\\n<rss version="2.0">\\n  <channel>\\n    <title>Teu Espaço - Notícias</title>\\n    <link>https://teuespaco.com.br/noticias</link>\\n    <description>Últimas notícias do Rádio e Jornal Teu Espaço</description>\\n    <language>pt-br</language>\\n    <lastBuildDate>' + new Date().toUTCString() + '</lastBuildDate>\\n' + itensRss + '\\n  </channel>\\n</rss>\\n';
+fs.writeFileSync(path.join(raiz, "rss.xml"), rss, "utf8");
+console.log("Arquivos, páginas individuais e feed RSS criados!");
