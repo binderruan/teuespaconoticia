@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const raiz = __dirname;
 const pasta = path.join(raiz, "noticias");
 const modelo = fs.readFileSync(path.join(raiz, "noticia.html"), "utf8");
@@ -33,6 +34,11 @@ function dataRss(data) {
   return Number.isNaN(d.getTime()) ? new Date().toUTCString() : d.toUTCString();
 }
 const noticias = [];
+function nomeDaPagina(nome) {
+  const base = nome.replace(/\.md$/i, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48);
+  const hash = crypto.createHash("sha1").update(nome).digest("hex").slice(0, 10);
+  return "materia-" + (base || "noticia") + "-" + hash + ".html";
+}
 for (const nome of arquivos) {
   const conteudo = fs.readFileSync(path.join(pasta, nome), "utf8");
   const titulo = lerCampo(conteudo, "title", "Sem título");
@@ -40,7 +46,7 @@ for (const nome of arquivos) {
   const imagem = urlImagem(lerCampo(conteudo, "thumbnail", "images/logo.png"));
   const categoria = lerCampo(conteudo, "category");
   const descricao = descricaoDaMateria(conteudo);
-  const arquivoHtml = "materia-" + nome.replace(/\.md$/i, "") + ".html";
+  const arquivoHtml = nomeDaPagina(nome);
   const urlComPost = "https://teuespaco.com.br/" + arquivoHtml + "?post=" + encodeURIComponent(nome);
   noticias.push({ nome, titulo: titulo.trim(), data: data.trim(), imagem, categoria: categoria.trim() });
 
@@ -71,7 +77,7 @@ const itens = [...noticias].sort((a,b) => {
   const conv = v => { const p=String(v||"").split("/"); return p.length===3 ? new Date(Number(p[2]),Number(p[1])-1,Number(p[0])).getTime() : 0; };
   return conv(b.data)-conv(a.data);
 }).slice(0,30).map(n => {
-  const arquivoHtml = "materia-" + n.nome.replace(/\.md$/i, "") + ".html";
+  const arquivoHtml = nomeDaPagina(n.nome);
   const link = "https://teuespaco.com.br/" + arquivoHtml + "?post=" + encodeURIComponent(n.nome);
   return '    <item>\n      <title>' + escaparXml(n.titulo) + '</title>\n      <link>' + escaparXml(link) + '</link>\n      <guid isPermaLink="true">' + escaparXml(link) + '</guid>\n      <pubDate>' + dataRss(n.data) + '</pubDate>\n      <category>' + escaparXml(n.categoria) + '</category>\n    </item>';
 }).join("\n");
