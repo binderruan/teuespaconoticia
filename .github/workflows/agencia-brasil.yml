@@ -1,44 +1,35 @@
 name: Publicar notícias da Agência Brasil
-
 on:
   schedule:
     - cron: "0 11,15,20 * * *"
   workflow_dispatch:
-
 permissions:
   contents: write
-
 concurrency:
   group: publicar-agencia-brasil
   cancel-in-progress: false
-
 jobs:
   publicar:
     runs-on: ubuntu-latest
     steps:
       - name: Baixar repositório
         uses: actions/checkout@v4
-
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "18"
-
       - name: Buscar e publicar até três notícias
         run: node publicar-agencia-brasil.js
-
-      - name: Atualizar arquivos de notícias
+      - name: Atualizar arquivos de notícias e páginas para compartilhamento
         run: node gerar-posts.js
-
       - name: Salvar notícias no GitHub
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add noticias/*.md noticias/posts.json noticias/noticias.json rss.xml
+          git add noticias/*.md noticias/posts.json noticias/noticias.json rss.xml materia-*.html
           if git diff --cached --quiet; then
             echo "Nenhuma alteração para salvar."
           else
-            git commit -m "Publica notícias da Agência Brasil"
+            git commit -m "Publica notícias e atualiza páginas de compartilhamento"
             git push
           fi
-
