@@ -32,4 +32,22 @@ jobs:
           else
             git commit -m "Publica notícias e atualiza páginas de compartilhamento"
             git push
+
+      - name: Publicar imediatamente as notícias novas no Facebook
+        env:
+          FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
+          FACEBOOK_PAGE_ACCESS_TOKEN: ${{ secrets.FACEBOOK_PAGE_ACCESS_TOKEN }}
+        run: node publicar-facebook.js
+
+      - name: Salvar controle das publicações no Facebook
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add noticias/facebook-publicadas.json
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração no controle do Facebook."
+          else
+            git commit -m "Atualiza controle de publicações do Facebook"
+            git push
+          fi
           fi
