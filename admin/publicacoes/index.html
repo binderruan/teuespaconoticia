@@ -49,24 +49,24 @@
       <div class="muted">PRÉ-VISUALIZAÇÃO</div><img id="previewImage" alt="" src="">
       <h2 id="previewTitle">Selecione uma notícia</h2><p id="previewMeta" class="muted">A prévia aparecerá aqui.</p>
       <p><a id="previewLink" href="#" target="_blank" rel="noopener" hidden>Abrir notícia no site</a></p>
-      <label for="caption" class="muted">LEGENDA PARA O FACEBOOK</label><textarea id="caption" placeholder="Selecione uma notícia..." disabled></textarea><div class="preview-actions"><button id="copyCaption" disabled>Copiar legenda</button><button id="prepareReview" class="primary" disabled>Preparar para aprovação</button></div>
+      <label for="caption" class="muted">LEGENDA PARA O FACEBOOK</label><textarea id="caption" placeholder="Selecione uma notícia..." disabled></textarea><label for="scheduleAt" class="muted">AGENDAR PARA (OPCIONAL)</label><input id="scheduleAt" type="datetime-local" disabled><div class="preview-actions"><button id="copyCaption" disabled>Copiar legenda</button><button id="prepareReview" class="primary" disabled>Adicionar à fila de aprovação</button></div>
       <div id="reviewStatus" class="status">Modo de revisão: nenhuma publicação será enviada nesta etapa.</div>
     </aside>
   </div>
-  <div class="selection"><span id="selectionText">Nenhuma notícia selecionada.</span><span>Modo de teste</span></div>
+  <section class="queue"><h2>Fila de aprovação</h2><p class="muted">Revise os rascunhos e marque como aprovados antes da futura integração de publicação.</p><div id="queueList" class="empty">Nenhum rascunho na fila.</div><div class="status">Atenção: nesta etapa, a fila fica salva somente neste navegador. Aprovar não publica no Facebook.</div></section>\n  <div class="selection"><span id="selectionText">Nenhuma notícia selecionada.</span><span>Modo de revisão</span></div>
 </main>
 <script>
 (() => {
   const $ = id => document.getElementById(id);
-  let news = [], selected = new Set(), visible = [], sortBy = "updated", activeNews = null;
+  let news = [], selected = new Set(), visible = [], sortBy = "updated", activeNews = null;\n  let reviewQueue = [];\n  try { reviewQueue = JSON.parse(localStorage.getItem("teuespaco-review-queue") || "[]"); if (!Array.isArray(reviewQueue)) reviewQueue=[]; } catch(e) { reviewQueue=[]; }
   const setStatus = (message, error=false) => { $("status").textContent=message; $("status").className="status"+(error?" error":""); };
   const esc = value => String(value||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   function updateSelection(){ $("selected").textContent=selected.size; $("selectionText").textContent=selected.size?selected.size+" notícia(s) selecionada(s) nesta sessão.":"Nenhuma notícia selecionada."; }
   function makeCaption(item){return item.titulo+"\n\nAcesse e confira:➡️ "+item.link+"\n\n#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";}
-  function showPreview(item){
+  function saveQueue(){localStorage.setItem("teuespaco-review-queue",JSON.stringify(reviewQueue));renderQueue();}\n  function renderQueue(){const el=$("queueList");if(!reviewQueue.length){el.className="empty";el.textContent="Nenhum rascunho na fila.";return;}el.className="";el.innerHTML=reviewQueue.map((q,i)=>`<div class="queue-item"><div><strong>${esc(q.titulo)}</strong><small>${esc(q.status)}${q.agendado? " · "+esc(new Date(q.agendado).toLocaleString("pt-BR")):" · Sem horário definido"}</small></div><button type="button" data-approve="${i}" ${q.status==="Aprovado"?"disabled":""}>${q.status==="Aprovado"?"Aprovado":"Aprovar"}</button><button type="button" data-remove="${i}">Remover</button></div>`).join("");el.querySelectorAll("[data-approve]").forEach(b=>b.addEventListener("click",()=>{reviewQueue[Number(b.dataset.approve)].status="Aprovado";saveQueue();}));el.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{reviewQueue.splice(Number(b.dataset.remove),1);saveQueue();}));}\n  function showPreview(item){
     activeNews=item; $("previewTitle").textContent=item.titulo;$("previewMeta").textContent=[item.data,item.categoria].filter(Boolean).join(" · ");
     $("previewImage").src=item.imagem||"";$("previewLink").href=item.link;$("previewLink").hidden=false;
-    $("caption").value=makeCaption(item);$("caption").disabled=false;$("copyCaption").disabled=false;$("prepareReview").disabled=false;
+    $("caption").value=makeCaption(item);$("caption").disabled=false;$("scheduleAt").disabled=false;$("copyCaption").disabled=false;$("prepareReview").disabled=false;
   }
   function render(){
     const term=$("search").value.trim().toLocaleLowerCase("pt-BR");
@@ -94,9 +94,9 @@
     window.netlifyIdentity.on("login",user=>{window.netlifyIdentity.close();load(user);});
     $("logout").addEventListener("click",()=>window.netlifyIdentity.logout());
   }else{setStatus("Não foi possível carregar o sistema de autenticação.",true);}
-  $("search").addEventListener("input",render);
+  $("search").addEventListener("input",render);\n  renderQueue();
   $("copyCaption").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("caption").value);$("reviewStatus").textContent="Legenda copiada. Ainda não foi publicada.";}catch(e){$("reviewStatus").textContent="Não foi possível copiar automaticamente. Copie a legenda manualmente."; }});
-  $("prepareReview").addEventListener("click",()=>{if(activeNews)$("reviewStatus").textContent="Revisão preparada para: "+activeNews.titulo+". Ainda não foi enviada ao Facebook.";});
+  $("prepareReview").addEventListener("click",()=>{if(!activeNews)return;const exists=reviewQueue.some(q=>q.nome===activeNews.nome);if(exists){$("reviewStatus").textContent="Esta notícia já está na fila de aprovação.";return;}reviewQueue.unshift({nome:activeNews.nome,titulo:activeNews.titulo,link:activeNews.link,legenda:$("caption").value,agendado:$("scheduleAt").value||"",status:"Aguardando aprovação",criadoEm:new Date().toISOString()});saveQueue();$("reviewStatus").textContent="Notícia adicionada à fila de aprovação neste navegador.";});
   $("sortToggle").addEventListener("click",()=>{const open=$("sortMenu").hidden;$("sortMenu").hidden=!open;$("sortToggle").setAttribute("aria-expanded",String(open));});
   $("sortMenu").querySelectorAll("[data-sort]").forEach(option=>option.addEventListener("click",()=>{sortBy=option.dataset.sort;$("sortCurrent").textContent=option.textContent;$("sortMenu").querySelectorAll("[data-sort]").forEach(item=>item.setAttribute("aria-checked",String(item===option)));$("sortMenu").hidden=true;$("sortToggle").setAttribute("aria-expanded","false");render();}));
   document.addEventListener("click",event=>{if(!event.target.closest(".sort-wrap")){$("sortMenu").hidden=true;$("sortToggle").setAttribute("aria-expanded","false");}});
