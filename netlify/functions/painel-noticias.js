@@ -2,7 +2,7 @@ const SITE_URL = "https://teuespaco.com.br";
 const crypto = require("crypto");
 
 function linkDaNoticia(nome) {
-  const base = String(nome || "").replace(/\\.md$/i, "").normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48);
+  const base = String(nome || "").replace(/\.md$/i, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/-+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48).replace(/-+$/g, "");
   const hash = crypto.createHash("sha1").update(String(nome || "")).digest("hex").slice(0, 10);
   return SITE_URL + "/materia-" + (base || "noticia") + "-" + hash + ".html";
 }
