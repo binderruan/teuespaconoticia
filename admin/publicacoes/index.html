@@ -62,7 +62,7 @@
   const setStatus = (message, error=false) => { $("status").textContent=message; $("status").className="status"+(error?" error":""); };
   const esc = value => String(value||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   function updateSelection(){ $("selected").textContent=selected.size; $("selectionText").textContent=selected.size?selected.size+" notícia(s) selecionada(s) nesta sessão.":"Nenhuma notícia selecionada."; }
-  function makeCaption(item){return item.titulo+"\\n\\nAcesse e confira:➡️ "+item.link+"\\n\\n#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";}
+  function makeCaption(item){return item.titulo+"\n\nAcesse e confira:➡️ "+item.link+"\n\n#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";}
   function showPreview(item){
     activeNews=item; $("previewTitle").textContent=item.titulo;$("previewMeta").textContent=[item.data,item.categoria].filter(Boolean).join(" · ");
     $("previewImage").src=item.imagem||"";$("previewLink").href=item.link;$("previewLink").hidden=false;
