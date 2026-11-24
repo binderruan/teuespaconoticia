@@ -15,7 +15,7 @@
     main{max-width:1240px;margin:0 auto;padding:30px 20px 60px}.intro{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px}
     h1{font-size:28px;margin:0 0 5px}.muted{color:var(--muted)}.stats{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}
     .stat,.toolbar,.news-card,.preview{background:var(--panel);border:1px solid var(--line);border-radius:13px}.stat{padding:14px 18px;min-width:150px}.stat strong{display:block;font-size:24px}
-    .toolbar{padding:13px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:18px}.toolbar input{background:#101114;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:11px;min-width:230px;flex:1}
+    .toolbar{padding:13px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:18px}.toolbar input{background:#101114;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:11px;min-width:230px;flex:1}\n    .sort-wrap{position:relative}.sort-button{display:flex;align-items:center;gap:12px;min-width:145px;justify-content:space-between;background:#f5f6f8;color:#20232a;border:1px solid #bfc4ce;border-radius:6px;padding:8px 12px}.sort-menu{position:absolute;z-index:10;top:calc(100% + 5px);left:0;min-width:180px;background:#fff;color:#30343b;border:1px solid #d5d9e0;border-radius:7px;box-shadow:0 8px 22px #0005;overflow:hidden}.sort-menu[hidden]{display:none}.sort-menu button{display:block;width:100%;text-align:left;border:0;border-radius:0;background:#fff;color:#30343b;padding:9px 13px}.sort-menu button:hover,.sort-menu button[aria-checked=true]{background:#e7f1fb;color:#145aa3}.sort-menu button+button{border-top:1px solid #e5e7eb}.sort-label{font-size:12px;color:#64748b;display:block}
     .layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.8fr);gap:18px}.list{display:grid;gap:12px;align-content:start}
     .news-card{padding:12px;display:grid;grid-template-columns:22px 104px 1fr;gap:12px;align-items:center}.news-card img{width:104px;height:76px;object-fit:cover;border-radius:8px;background:#30333a}
     .news-card h3{font-size:15px;margin:0 0 5px}.news-card small{color:var(--muted)}.news-card input{width:17px;height:17px;accent-color:var(--accent)}
@@ -55,7 +55,7 @@
 <script>
 (() => {
   const $ = id => document.getElementById(id);
-  let news = [], selected = new Set(), visible = [];
+  let news = [], selected = new Set(), visible = [], sortBy = "updated";
   const setStatus = (message, error=false) => { $("status").textContent=message; $("status").className="status"+(error?" error":""); };
   const esc = value => String(value||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   function updateSelection(){ $("selected").textContent=selected.size; $("selectionText").textContent=selected.size?selected.size+" notícia(s) selecionada(s) nesta sessão.":"Nenhuma notícia selecionada."; }
@@ -65,7 +65,7 @@
   }
   function render(){
     const term=$("search").value.trim().toLocaleLowerCase("pt-BR");
-    visible=news.filter(n=>(n.titulo+" "+n.categoria).toLocaleLowerCase("pt-BR").includes(term));
+    visible=news.filter(n=>(n.titulo+" "+n.categoria+" "+(n.autor||"")).toLocaleLowerCase("pt-BR").includes(term));\n    const dateValue = value => { const p=String(value||"").split("/"); return p.length===3 ? new Date(Number(p[2]),Number(p[1])-1,Number(p[0])).getTime() : 0; };\n    visible.sort((a,b)=>{ if(sortBy==="title") return a.titulo.localeCompare(b.titulo,"pt-BR"); if(sortBy==="date"||sortBy==="updated") return dateValue(b.data)-dateValue(a.data); if(sortBy==="author") return String(a.autor||"").localeCompare(String(b.autor||""),"pt-BR") || a.titulo.localeCompare(b.titulo,"pt-BR"); return 0; });
     $("list").innerHTML=visible.length?visible.map((n,i)=>'<article class="news-card"><input type="checkbox" data-index="'+i+'" '+(selected.has(n.nome)?"checked":"")+' aria-label="Selecionar notícia"><img src="'+esc(n.imagem)+'" alt="" loading="lazy"><div><h3>'+esc(n.titulo)+'</h3><small>'+esc(n.data)+' · '+esc(n.categoria)+'</small></div></article>').join(""):'<div class="empty">Nenhuma notícia encontrada.</div>';
     $("list").querySelectorAll("input").forEach(box=>box.addEventListener("change",()=>{const item=visible[Number(box.dataset.index)];if(box.checked)selected.add(item.nome);else selected.delete(item.nome);updateSelection();}));
     $("list").querySelectorAll(".news-card").forEach((card,i)=>card.addEventListener("click",e=>{if(e.target.tagName!=="INPUT")showPreview(visible[i]);}));
@@ -78,7 +78,7 @@
       const response=await fetch("/.netlify/functions/painel-noticias",{headers:{Authorization:"Bearer "+token}});
       const data=await response.json();if(!response.ok)throw new Error(data.error||"Falha ao carregar notícias.");
       news=data.noticias||[];$("total").textContent=data.total??news.length;
-      $("search").disabled=false;$("selectVisible").disabled=false;$("clear").disabled=false;
+      $("search").disabled=false;$("sortToggle").disabled=false;$("selectVisible").disabled=false;$("clear").disabled=false;
       setStatus("Acesso validado. Catálogo carregado com sucesso.");render();
     }catch(error){setStatus(error.message,true);$("list").innerHTML='<div class="empty">Não foi possível carregar o catálogo.</div>';}
   }
@@ -87,7 +87,7 @@
     window.netlifyIdentity.on("login",user=>{window.netlifyIdentity.close();load(user);});
     $("logout").addEventListener("click",()=>window.netlifyIdentity.logout());
   }else{setStatus("Não foi possível carregar o sistema de autenticação.",true);}
-  $("search").addEventListener("input",render);
+  $("search").addEventListener("input",render);\n  $("sortToggle").addEventListener("click",()=>{const open=$("sortMenu").hidden;$("sortMenu").hidden=!open;$("sortToggle").setAttribute("aria-expanded",String(open));});\n  $("sortMenu").querySelectorAll("[data-sort]").forEach(option=>option.addEventListener("click",()=>{sortBy=option.dataset.sort;$("sortCurrent").textContent=option.textContent;$("sortMenu").querySelectorAll("[data-sort]").forEach(item=>item.setAttribute("aria-checked",String(item===option)));$("sortMenu").hidden=true;$("sortToggle").setAttribute("aria-expanded","false");render();}));\n  document.addEventListener("click",event=>{if(!event.target.closest(".sort-wrap")){$("sortMenu").hidden=true;$("sortToggle").setAttribute("aria-expanded","false");}});
   $("selectVisible").addEventListener("click",()=>{visible.forEach(n=>selected.add(n.nome));render();});
   $("clear").addEventListener("click",()=>{selected.clear();render();});
 })();
