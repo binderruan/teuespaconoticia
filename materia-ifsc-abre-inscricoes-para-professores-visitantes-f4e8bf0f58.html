@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="IFSC abre inscrições para professores visitantes">
     <meta property="og:description" content="Estão abertas as inscrições até 10 de fevereiro as inscrições para o cargo de professor visitante em seis câmpus do IFSC. Há reserva de vagas para pessoas com deficiência e candidatos pretos e pardos. As oportunidades são para atuação imedi">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-ifsc-abre-inscricoes-para-professores-visitantes-f4e8bf0f58.html?post=ifsc-abre-inscri%C3%A7%C3%B5es-para-professores-visitantes.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-ifsc-abre-inscricoes-para-professores-visitantes-f4e8bf0f58.html">
     <meta property="og:image" content="https://www.ifsc.edu.br/documents/23504/23634/Foto_C%C3%A2mpusFlorian%C3%B3polis_2015.jpg/7d75432d-a54a-ea9d-b26c-163f224420f2?t=1501702837732" id="og-image">
     <meta property="og:image:secure_url" content="https://www.ifsc.edu.br/documents/23504/23634/Foto_C%C3%A2mpusFlorian%C3%B3polis_2015.jpg/7d75432d-a54a-ea9d-b26c-163f224420f2?t=1501702837732">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="IFSC abre inscrições para professores visitantes">
     <meta name="twitter:description" content="Estão abertas as inscrições até 10 de fevereiro as inscrições para o cargo de professor visitante em seis câmpus do IFSC. Há reserva de vagas para pessoas com deficiência e candidatos pretos e pardos. As oportunidades são para atuação imedi">
     <meta name="twitter:image" content="https://www.ifsc.edu.br/documents/23504/23634/Foto_C%C3%A2mpusFlorian%C3%B3polis_2015.jpg/7d75432d-a54a-ea9d-b26c-163f224420f2?t=1501702837732">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-ifsc-abre-inscricoes-para-professores-visitantes-f4e8bf0f58.html?post=ifsc-abre-inscri%C3%A7%C3%B5es-para-professores-visitantes.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-ifsc-abre-inscricoes-para-professores-visitantes-f4e8bf0f58.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "ifsc-abre-inscrições-para-professores-visitantes.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

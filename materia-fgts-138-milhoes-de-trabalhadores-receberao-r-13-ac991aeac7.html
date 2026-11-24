@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="FGTS: 138 milhões de trabalhadores receberão R$ 13 bilhões de lucros">
     <meta property="og:description" content="O Conselho Curador do Fundo de Garantia do Tempo de Serviço (FGTS) aprovou nesta terça-feira (28) a distribuição de R$ 13,04 bilhões aos trabalhadores referentes ao resultado positivo obtido pelo fundo em 2025. O valor corresponde a 89% do ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-fgts-138-milhoes-de-trabalhadores-receberao-r-13-ac991aeac7.html?post=fgts-138-milh%C3%B5es-de-trabalhadores-receber%C3%A3o-r-13-bilh%C3%B5es-de-lucros.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-fgts-138-milhoes-de-trabalhadores-receberao-r-13-ac991aeac7.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/MH-o6rUVv_IR1ZUan8cSUC65_qk=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/10/img_7648_1.jpg?itok=cITabctg" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/MH-o6rUVv_IR1ZUan8cSUC65_qk=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/10/img_7648_1.jpg?itok=cITabctg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="FGTS: 138 milhões de trabalhadores receberão R$ 13 bilhões de lucros">
     <meta name="twitter:description" content="O Conselho Curador do Fundo de Garantia do Tempo de Serviço (FGTS) aprovou nesta terça-feira (28) a distribuição de R$ 13,04 bilhões aos trabalhadores referentes ao resultado positivo obtido pelo fundo em 2025. O valor corresponde a 89% do ">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/MH-o6rUVv_IR1ZUan8cSUC65_qk=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/10/img_7648_1.jpg?itok=cITabctg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-fgts-138-milhoes-de-trabalhadores-receberao-r-13-ac991aeac7.html?post=fgts-138-milh%C3%B5es-de-trabalhadores-receber%C3%A3o-r-13-bilh%C3%B5es-de-lucros.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-fgts-138-milhoes-de-trabalhadores-receberao-r-13-ac991aeac7.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "fgts-138-milhões-de-trabalhadores-receberão-r-13-bilhões-de-lucros.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

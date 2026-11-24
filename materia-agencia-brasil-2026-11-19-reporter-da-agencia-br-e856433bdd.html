@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Repórter da Agência Brasil vence Prêmio SBIm de Jornalismo em Saúde">
     <meta property="og:description" content="A repórter Tâmara Freire, da Agência Brasil, é vencedora do VII Prêmio SBIm de Jornalismo em Saúde, com a reportagem Resistência às vacinas contra gripe e covid coloca gestantes em risco. A cerimônia de premiação foi nesta quarta-feira (18)">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-19-reporter-da-agencia-br-e856433bdd.html?post=agencia-brasil-2026-11-19-reporter-da-agencia-brasil-vence-premio-sbim-de-jornalismo-em-saude.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-19-reporter-da-agencia-br-e856433bdd.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/L32lhoy_9Tkl1WbmX-maa0c7qhU=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/19/208a3557.jpg?itok=CUj9st7z" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/L32lhoy_9Tkl1WbmX-maa0c7qhU=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/19/208a3557.jpg?itok=CUj9st7z">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Repórter da Agência Brasil vence Prêmio SBIm de Jornalismo em Saúde">
     <meta name="twitter:description" content="A repórter Tâmara Freire, da Agência Brasil, é vencedora do VII Prêmio SBIm de Jornalismo em Saúde, com a reportagem Resistência às vacinas contra gripe e covid coloca gestantes em risco. A cerimônia de premiação foi nesta quarta-feira (18)">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/L32lhoy_9Tkl1WbmX-maa0c7qhU=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/19/208a3557.jpg?itok=CUj9st7z">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-19-reporter-da-agencia-br-e856433bdd.html?post=agencia-brasil-2026-11-19-reporter-da-agencia-brasil-vence-premio-sbim-de-jornalismo-em-saude.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-19-reporter-da-agencia-br-e856433bdd.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "agencia-brasil-2026-11-19-reporter-da-agencia-brasil-vence-premio-sbim-de-jornalismo-em-saude.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Fluminense avança e Flamengo garante melhor campanha da Libertadores">
     <meta property="og:description" content="Quem torce para a dupla Fla-Flu acordou nesta quinta-feira (28) em clima de festa. O tricolor amanheceu celebrando a classificação às oitavas de final da Libertadores, enquanto o rubro-negro comemorou a confirmação da melhor campanha da pri">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-fluminense-avanca-e-flamengo-garante-melhor-camp-7242e29ff4.html?post=fluminense-avan%C3%A7a-e-flamengo-garante-melhor-campanha-da-libertadores.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-fluminense-avanca-e-flamengo-garante-melhor-camp-7242e29ff4.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/08i-tHNUL8_oYjGPS7tQpdx9-EA=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/05/28/fluminense_avanca_e_flamengo_garante_melhor_campanha_da_libertadores.jpg?itok=2G-72fAa" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/08i-tHNUL8_oYjGPS7tQpdx9-EA=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/05/28/fluminense_avanca_e_flamengo_garante_melhor_campanha_da_libertadores.jpg?itok=2G-72fAa">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Fluminense avança e Flamengo garante melhor campanha da Libertadores">
     <meta name="twitter:description" content="Quem torce para a dupla Fla-Flu acordou nesta quinta-feira (28) em clima de festa. O tricolor amanheceu celebrando a classificação às oitavas de final da Libertadores, enquanto o rubro-negro comemorou a confirmação da melhor campanha da pri">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/08i-tHNUL8_oYjGPS7tQpdx9-EA=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/05/28/fluminense_avanca_e_flamengo_garante_melhor_campanha_da_libertadores.jpg?itok=2G-72fAa">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-fluminense-avanca-e-flamengo-garante-melhor-camp-7242e29ff4.html?post=fluminense-avan%C3%A7a-e-flamengo-garante-melhor-campanha-da-libertadores.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-fluminense-avanca-e-flamengo-garante-melhor-camp-7242e29ff4.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "fluminense-avança-e-flamengo-garante-melhor-campanha-da-libertadores.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

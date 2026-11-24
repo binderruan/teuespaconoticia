@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Prazo para cadastro no Programa Defesa Civil na Escola 2026 é prorrogado">
     <meta property="og:description" content="Desde 2021, o programa é obrigatório em todas as escolas catarinenses e incorpora gestão de riscos ao currículo do ensino fundamental – Foto: Divulgação/SPDC A Secretaria de Estado da Proteção e Defesa Civil de Santa Catarina (SPDC/SC) pror">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-prazo-para-cadastro-no-programa-defesa-civil-na--8677633dcc.html?post=prazo-para-cadastro-no-programa-defesa-civil-na-escola-2026-%C3%A9-prorrogado-at%C3%A9-13-de-mar%C3%A7o.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-prazo-para-cadastro-no-programa-defesa-civil-na--8677633dcc.html">
     <meta property="og:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/03/Defesa-civil-na-escola-1.jpeg" id="og-image">
     <meta property="og:image:secure_url" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/03/Defesa-civil-na-escola-1.jpeg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Prazo para cadastro no Programa Defesa Civil na Escola 2026 é prorrogado">
     <meta name="twitter:description" content="Desde 2021, o programa é obrigatório em todas as escolas catarinenses e incorpora gestão de riscos ao currículo do ensino fundamental – Foto: Divulgação/SPDC A Secretaria de Estado da Proteção e Defesa Civil de Santa Catarina (SPDC/SC) pror">
     <meta name="twitter:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/03/Defesa-civil-na-escola-1.jpeg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-prazo-para-cadastro-no-programa-defesa-civil-na--8677633dcc.html?post=prazo-para-cadastro-no-programa-defesa-civil-na-escola-2026-%C3%A9-prorrogado-at%C3%A9-13-de-mar%C3%A7o.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-prazo-para-cadastro-no-programa-defesa-civil-na--8677633dcc.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "prazo-para-cadastro-no-programa-defesa-civil-na-escola-2026-é-prorrogado-até-13-de-março.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

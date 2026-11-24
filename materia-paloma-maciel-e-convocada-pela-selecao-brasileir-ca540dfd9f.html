@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Paloma Maciel é convocada pela Seleção Brasileira e leva o nome de Três">
     <meta property="og:description" content="A jovem atleta Paloma Maciel, natural da localidade de São João dos Cavalheiros, em Três Barras, alcançou um dos momentos mais marcantes de sua carreira ao ser convocada, pela primeira vez, para integrar a Seleção Brasileira de futebol femi">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-paloma-maciel-e-convocada-pela-selecao-brasileir-ca540dfd9f.html?post=paloma-maciel-%C3%A9-convocada-pela-sele%C3%A7%C3%A3o-brasileira-e-leva-o-nome-de-tr%C3%AAs-barras-ao-cen%C3%A1rio-internacional.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-paloma-maciel-e-convocada-pela-selecao-brasileir-ca540dfd9f.html">
     <meta property="og:image" content="https://gazetatresbarrense.com.br/wp-content/uploads/2026/03/foto-77-768x402.jpg" id="og-image">
     <meta property="og:image:secure_url" content="https://gazetatresbarrense.com.br/wp-content/uploads/2026/03/foto-77-768x402.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Paloma Maciel é convocada pela Seleção Brasileira e leva o nome de Três">
     <meta name="twitter:description" content="A jovem atleta Paloma Maciel, natural da localidade de São João dos Cavalheiros, em Três Barras, alcançou um dos momentos mais marcantes de sua carreira ao ser convocada, pela primeira vez, para integrar a Seleção Brasileira de futebol femi">
     <meta name="twitter:image" content="https://gazetatresbarrense.com.br/wp-content/uploads/2026/03/foto-77-768x402.jpg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-paloma-maciel-e-convocada-pela-selecao-brasileir-ca540dfd9f.html?post=paloma-maciel-%C3%A9-convocada-pela-sele%C3%A7%C3%A3o-brasileira-e-leva-o-nome-de-tr%C3%AAs-barras-ao-cen%C3%A1rio-internacional.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-paloma-maciel-e-convocada-pela-selecao-brasileir-ca540dfd9f.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "paloma-maciel-é-convocada-pela-seleção-brasileira-e-leva-o-nome-de-três-barras-ao-cenário-internacional.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

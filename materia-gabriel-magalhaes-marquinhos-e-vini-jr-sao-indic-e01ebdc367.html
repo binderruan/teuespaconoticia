@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Gabriel Magalhães, Marquinhos e Vini Jr. são indicados ao Bola de Ouro">
     <meta property="og:description" content="O Brasil conta com os jogadores brasileiros Vinicius Júnior (Real Madrid), Marquinhos (Paris Saint-Germain) e Gabriel Magalhães (Arsenal) na lista de 30 indicados ao prêmio Bola de Ouro de 2026 de melhor jogador do mundo. A relação de conco">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-gabriel-magalhaes-marquinhos-e-vini-jr-sao-indic-e01ebdc367.html?post=gabriel-magalh%C3%A3es-marquinhos-e-vini-jr-s%C3%A3o-indicados-ao-bola-de-ouro.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-gabriel-magalhaes-marquinhos-e-vini-jr-sao-indic-e01ebdc367.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/tZmgdTZjhW10leLKmbECa2nrq5s=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024-01-14t202512z_1718640074_up1ek1e1kpz3k_rtrmadp_3_soccer-spain-mad-fcb-report.jpg?itok=Bz86cDLL" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/tZmgdTZjhW10leLKmbECa2nrq5s=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024-01-14t202512z_1718640074_up1ek1e1kpz3k_rtrmadp_3_soccer-spain-mad-fcb-report.jpg?itok=Bz86cDLL">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Gabriel Magalhães, Marquinhos e Vini Jr. são indicados ao Bola de Ouro">
     <meta name="twitter:description" content="O Brasil conta com os jogadores brasileiros Vinicius Júnior (Real Madrid), Marquinhos (Paris Saint-Germain) e Gabriel Magalhães (Arsenal) na lista de 30 indicados ao prêmio Bola de Ouro de 2026 de melhor jogador do mundo. A relação de conco">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/tZmgdTZjhW10leLKmbECa2nrq5s=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024-01-14t202512z_1718640074_up1ek1e1kpz3k_rtrmadp_3_soccer-spain-mad-fcb-report.jpg?itok=Bz86cDLL">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-gabriel-magalhaes-marquinhos-e-vini-jr-sao-indic-e01ebdc367.html?post=gabriel-magalh%C3%A3es-marquinhos-e-vini-jr-s%C3%A3o-indicados-ao-bola-de-ouro.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-gabriel-magalhaes-marquinhos-e-vini-jr-sao-indic-e01ebdc367.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "gabriel-magalhães-marquinhos-e-vini-jr-são-indicados-ao-bola-de-ouro.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

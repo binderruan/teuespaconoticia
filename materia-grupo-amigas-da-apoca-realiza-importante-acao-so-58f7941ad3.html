@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Grupo Amigas da APOCA realiza importante ação solidária em Campo da Água Verde">
     <meta property="og:description" content="O grupo Amigas da APOCA segue realizando um belo trabalho de união, solidariedade e dedicação em Canoinhas. Todas as quartas-feiras, as integrantes se reúnem na sede do Conselho de Segurança do Campo da Água Verde, onde produzem diversos tr">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-grupo-amigas-da-apoca-realiza-importante-acao-so-58f7941ad3.html?post=grupo-amigas-da-apoca-realiza-importante-a%C3%A7%C3%A3o-solid%C3%A1ria-em-campo-da-%C3%A1gua-verde.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-grupo-amigas-da-apoca-realiza-importante-acao-so-58f7941ad3.html">
     <meta property="og:image" content="https://teuespaco.com.br/images/uploads/106cda38-4254-4bfb-8726-2724a95a29a7.jfif" id="og-image">
     <meta property="og:image:secure_url" content="https://teuespaco.com.br/images/uploads/106cda38-4254-4bfb-8726-2724a95a29a7.jfif">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Grupo Amigas da APOCA realiza importante ação solidária em Campo da Água Verde">
     <meta name="twitter:description" content="O grupo Amigas da APOCA segue realizando um belo trabalho de união, solidariedade e dedicação em Canoinhas. Todas as quartas-feiras, as integrantes se reúnem na sede do Conselho de Segurança do Campo da Água Verde, onde produzem diversos tr">
     <meta name="twitter:image" content="https://teuespaco.com.br/images/uploads/106cda38-4254-4bfb-8726-2724a95a29a7.jfif">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-grupo-amigas-da-apoca-realiza-importante-acao-so-58f7941ad3.html?post=grupo-amigas-da-apoca-realiza-importante-a%C3%A7%C3%A3o-solid%C3%A1ria-em-campo-da-%C3%A1gua-verde.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-grupo-amigas-da-apoca-realiza-importante-acao-so-58f7941ad3.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "grupo-amigas-da-apoca-realiza-importante-ação-solidária-em-campo-da-água-verde.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Atleta de Canoinhas é selecionada por destaque do futsal feminino catarinense">
     <meta property="og:description" content="O futsal feminino de Canoinhas tem um novo motivo para comemorar. A jovem Ketlyn Gorchinski, de apenas 14 anos, foi aprovada em testes para integrar as categorias de base da APAF Futsal Feminino, na cidade de Guaraciaba, uma das principais ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-atleta-de-canoinhas-e-selecionada-por-destaque-d-c4dea3f0bc.html?post=atleta-de-canoinhas-%C3%A9-selecionada-por-destaque-do-futsal-feminino-catarinense.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-atleta-de-canoinhas-e-selecionada-por-destaque-d-c4dea3f0bc.html">
     <meta property="og:image" content="https://canoinhasonline.com.br/wp-content/uploads/2026/02/aluna-fmel-canoinhas.jpeg" id="og-image">
     <meta property="og:image:secure_url" content="https://canoinhasonline.com.br/wp-content/uploads/2026/02/aluna-fmel-canoinhas.jpeg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Atleta de Canoinhas é selecionada por destaque do futsal feminino catarinense">
     <meta name="twitter:description" content="O futsal feminino de Canoinhas tem um novo motivo para comemorar. A jovem Ketlyn Gorchinski, de apenas 14 anos, foi aprovada em testes para integrar as categorias de base da APAF Futsal Feminino, na cidade de Guaraciaba, uma das principais ">
     <meta name="twitter:image" content="https://canoinhasonline.com.br/wp-content/uploads/2026/02/aluna-fmel-canoinhas.jpeg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-atleta-de-canoinhas-e-selecionada-por-destaque-d-c4dea3f0bc.html?post=atleta-de-canoinhas-%C3%A9-selecionada-por-destaque-do-futsal-feminino-catarinense.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-atleta-de-canoinhas-e-selecionada-por-destaque-d-c4dea3f0bc.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "atleta-de-canoinhas-é-selecionada-por-destaque-do-futsal-feminino-catarinense.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

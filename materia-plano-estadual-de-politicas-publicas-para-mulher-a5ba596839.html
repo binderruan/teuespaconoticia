@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Plano Estadual para Mulheres entra em consulta pública dia 14">
     <meta property="og:description" content="A Secretaria de Estado da Assistência Social, Mulher e Família de Santa Catarina vai colocar em consulta pública o Plano Estadual de Políticas Públicas para Mulheres a partir do dia 14 de fevereiro. A iniciativa tem como objetivo ampliar a ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-plano-estadual-de-politicas-publicas-para-mulher-a5ba596839.html?post=plano-estadual-de-pol%C3%ADticas-p%C3%BAblicas-para-mulheres-ser%C3%A1-colocado-em-consulta-p%C3%BAblica-no-dia-14-de-fevereiro.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-plano-estadual-de-politicas-publicas-para-mulher-a5ba596839.html">
     <meta property="og:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/WhatsApp-Image-2026-02-05-at-16.04.20.jpeg" id="og-image">
     <meta property="og:image:secure_url" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/WhatsApp-Image-2026-02-05-at-16.04.20.jpeg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Plano Estadual para Mulheres entra em consulta pública dia 14">
     <meta name="twitter:description" content="A Secretaria de Estado da Assistência Social, Mulher e Família de Santa Catarina vai colocar em consulta pública o Plano Estadual de Políticas Públicas para Mulheres a partir do dia 14 de fevereiro. A iniciativa tem como objetivo ampliar a ">
     <meta name="twitter:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/WhatsApp-Image-2026-02-05-at-16.04.20.jpeg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-plano-estadual-de-politicas-publicas-para-mulher-a5ba596839.html?post=plano-estadual-de-pol%C3%ADticas-p%C3%BAblicas-para-mulheres-ser%C3%A1-colocado-em-consulta-p%C3%BAblica-no-dia-14-de-fevereiro.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-plano-estadual-de-politicas-publicas-para-mulher-a5ba596839.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "plano-estadual-de-políticas-públicas-para-mulheres-será-colocado-em-consulta-pública-no-dia-14-de-fevereiro.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

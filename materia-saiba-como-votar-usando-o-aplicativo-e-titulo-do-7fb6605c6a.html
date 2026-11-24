@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Saiba como votar usando o aplicativo e-Título do TSE">
     <meta property="og:description" content="Para exercer o direito ao voto no segundo turno neste domingo (25), os eleitores poderão utilizar o e-Título, a versão digital do título de eleitor. O app pode ser utilizado desde que ele contenha a foto do eleitor. Apesar do uso não ser ob">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-saiba-como-votar-usando-o-aplicativo-e-titulo-do-7fb6605c6a.html?post=saiba-como-votar-usando-o-aplicativo-e-t%C3%ADtulo-do-tse.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-saiba-como-votar-usando-o-aplicativo-e-titulo-do-7fb6605c6a.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/3ilIV21Gr_QvU1VIJ-9oiYopcxA=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/09/30/img_1511-2.jpg?itok=OjQFSowv" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/3ilIV21Gr_QvU1VIJ-9oiYopcxA=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/09/30/img_1511-2.jpg?itok=OjQFSowv">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Saiba como votar usando o aplicativo e-Título do TSE">
     <meta name="twitter:description" content="Para exercer o direito ao voto no segundo turno neste domingo (25), os eleitores poderão utilizar o e-Título, a versão digital do título de eleitor. O app pode ser utilizado desde que ele contenha a foto do eleitor. Apesar do uso não ser ob">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/3ilIV21Gr_QvU1VIJ-9oiYopcxA=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/09/30/img_1511-2.jpg?itok=OjQFSowv">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-saiba-como-votar-usando-o-aplicativo-e-titulo-do-7fb6605c6a.html?post=saiba-como-votar-usando-o-aplicativo-e-t%C3%ADtulo-do-tse.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-saiba-como-votar-usando-o-aplicativo-e-titulo-do-7fb6605c6a.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "saiba-como-votar-usando-o-aplicativo-e-título-do-tse.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

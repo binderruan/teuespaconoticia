@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Copa do Mundo 2026 terá cerimônias de abertura em três países">
     <meta property="og:description" content="A FIFA anunciou que a Copa do Mundo FIFA de 2026 contará com cerimônias de abertura separadas nos três países-sede do torneio: México, Canadá e Estados Unidos. A competição será a maior da história do futebol mundial e começará no dia 11 de">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-copa-do-mundo-2026-tera-cerimonias-de-abertura-e-8ff708a5b5.html?post=copa-do-mundo-2026-ter%C3%A1-cerim%C3%B4nias-de-abertura-em-tr%C3%AAs-pa%C3%ADses.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-copa-do-mundo-2026-tera-cerimonias-de-abertura-e-8ff708a5b5.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/xHeJhoXQ61wwpPfgVkQVzDfqxtg=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/04/26/2026-04-26t170831z_1_lynxmpem3p0cl_rtroptp_4_soccer-worldcup-usa-travel.jpg?itok=ZlhNiMvJ" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/xHeJhoXQ61wwpPfgVkQVzDfqxtg=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/04/26/2026-04-26t170831z_1_lynxmpem3p0cl_rtroptp_4_soccer-worldcup-usa-travel.jpg?itok=ZlhNiMvJ">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Copa do Mundo 2026 terá cerimônias de abertura em três países">
     <meta name="twitter:description" content="A FIFA anunciou que a Copa do Mundo FIFA de 2026 contará com cerimônias de abertura separadas nos três países-sede do torneio: México, Canadá e Estados Unidos. A competição será a maior da história do futebol mundial e começará no dia 11 de">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/xHeJhoXQ61wwpPfgVkQVzDfqxtg=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/04/26/2026-04-26t170831z_1_lynxmpem3p0cl_rtroptp_4_soccer-worldcup-usa-travel.jpg?itok=ZlhNiMvJ">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-copa-do-mundo-2026-tera-cerimonias-de-abertura-e-8ff708a5b5.html?post=copa-do-mundo-2026-ter%C3%A1-cerim%C3%B4nias-de-abertura-em-tr%C3%AAs-pa%C3%ADses.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-copa-do-mundo-2026-tera-cerimonias-de-abertura-e-8ff708a5b5.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "copa-do-mundo-2026-terá-cerimônias-de-abertura-em-três-países.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Cirurgias bariátricas crescem mais de 500% na rede pública de SC">
     <meta property="og:description" content="A obesidade é um dos maiores problemas de saúde pública. Diante desse cenário, a Secretaria de Estado da Saúde (SES) tem atuado na ampliação da assistência hospitalar em Santa Catarina, o que resultou em um aumento de 550% no número de ciru">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-santa-catarina-aumenta-em-mais-de-500-as-cirurgi-455ed482d4.html?post=santa-catarina-aumenta-em-mais-de-500-as-cirurgias-bari%C3%A1tricas-na-rede-p%C3%BAblica-de-sa%C3%BAde.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-santa-catarina-aumenta-em-mais-de-500-as-cirurgi-455ed482d4.html">
     <meta property="og:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/OJR_8542-1.jpg" id="og-image">
     <meta property="og:image:secure_url" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/OJR_8542-1.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Cirurgias bariátricas crescem mais de 500% na rede pública de SC">
     <meta name="twitter:description" content="A obesidade é um dos maiores problemas de saúde pública. Diante desse cenário, a Secretaria de Estado da Saúde (SES) tem atuado na ampliação da assistência hospitalar em Santa Catarina, o que resultou em um aumento de 550% no número de ciru">
     <meta name="twitter:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/OJR_8542-1.jpg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-santa-catarina-aumenta-em-mais-de-500-as-cirurgi-455ed482d4.html?post=santa-catarina-aumenta-em-mais-de-500-as-cirurgias-bari%C3%A1tricas-na-rede-p%C3%BAblica-de-sa%C3%BAde.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-santa-catarina-aumenta-em-mais-de-500-as-cirurgi-455ed482d4.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "santa-catarina-aumenta-em-mais-de-500-as-cirurgias-bariátricas-na-rede-pública-de-saúde.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

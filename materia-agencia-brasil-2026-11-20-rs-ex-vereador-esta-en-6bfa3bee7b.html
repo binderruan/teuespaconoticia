@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="RS: ex-vereador está entre as vítimas da tempestade em Tupanciretã">
     <meta property="og:description" content="O temporal que devastou a cidade de Tupanciretã, no Rio Grande do Sul, na madrugada desta sexta-feira (20), resultou na morte do ex-vereador e ex-presidente da Câmara Municipal, Ronaldo Machado Salles, do PSDB. A direção estadual do partido">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-20-rs-ex-vereador-esta-en-6bfa3bee7b.html?post=agencia-brasil-2026-11-20-rs-ex-vereador-esta-entre-as-vitimas-da-tempestade-em-tupancireta.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-20-rs-ex-vereador-esta-en-6bfa3bee7b.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/639LwDDwCfisFm1_TcN4aj3pobA=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/20/saveclip.app_913710003_18653668549024728_1085409618711408506_n.jpg?itok=r7LHseeL" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/639LwDDwCfisFm1_TcN4aj3pobA=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/20/saveclip.app_913710003_18653668549024728_1085409618711408506_n.jpg?itok=r7LHseeL">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="RS: ex-vereador está entre as vítimas da tempestade em Tupanciretã">
     <meta name="twitter:description" content="O temporal que devastou a cidade de Tupanciretã, no Rio Grande do Sul, na madrugada desta sexta-feira (20), resultou na morte do ex-vereador e ex-presidente da Câmara Municipal, Ronaldo Machado Salles, do PSDB. A direção estadual do partido">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/639LwDDwCfisFm1_TcN4aj3pobA=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/20/saveclip.app_913710003_18653668549024728_1085409618711408506_n.jpg?itok=r7LHseeL">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-20-rs-ex-vereador-esta-en-6bfa3bee7b.html?post=agencia-brasil-2026-11-20-rs-ex-vereador-esta-entre-as-vitimas-da-tempestade-em-tupancireta.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-20-rs-ex-vereador-esta-en-6bfa3bee7b.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "agencia-brasil-2026-11-20-rs-ex-vereador-esta-entre-as-vitimas-da-tempestade-em-tupancireta.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

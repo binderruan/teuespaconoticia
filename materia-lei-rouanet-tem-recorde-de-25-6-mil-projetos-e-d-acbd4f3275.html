@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Lei Rouanet tem recorde de 25,6 mil projetos e de R$ 1,67 bi captados">
     <meta property="og:description" content="Encerrado o período de apresentação de propostas, a Lei Rouanet registrou 25.650 projetos culturais em 2026. Apenas nos dez primeiros meses do ano, foram captados R$ 1,67 bilhão em incentivo. Os números são recorde desde a criação da norma,">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-lei-rouanet-tem-recorde-de-25-6-mil-projetos-e-d-acbd4f3275.html?post=lei-rouanet-tem-recorde-de-25-6-mil-projetos-e-de-r-1-67-bi-captados.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-lei-rouanet-tem-recorde-de-25-6-mil-projetos-e-d-acbd4f3275.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/mQPDv0J4Vy3DVwZy3nPgGmwUmQ4=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/10/11/20241012_443_festivalcirco_museudopontal_rtdiniz_h0a0636.jpg?itok=UlGRn_hU" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/mQPDv0J4Vy3DVwZy3nPgGmwUmQ4=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/10/11/20241012_443_festivalcirco_museudopontal_rtdiniz_h0a0636.jpg?itok=UlGRn_hU">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Lei Rouanet tem recorde de 25,6 mil projetos e de R$ 1,67 bi captados">
     <meta name="twitter:description" content="Encerrado o período de apresentação de propostas, a Lei Rouanet registrou 25.650 projetos culturais em 2026. Apenas nos dez primeiros meses do ano, foram captados R$ 1,67 bilhão em incentivo. Os números são recorde desde a criação da norma,">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/mQPDv0J4Vy3DVwZy3nPgGmwUmQ4=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/10/11/20241012_443_festivalcirco_museudopontal_rtdiniz_h0a0636.jpg?itok=UlGRn_hU">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-lei-rouanet-tem-recorde-de-25-6-mil-projetos-e-d-acbd4f3275.html?post=lei-rouanet-tem-recorde-de-25-6-mil-projetos-e-de-r-1-67-bi-captados.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-lei-rouanet-tem-recorde-de-25-6-mil-projetos-e-d-acbd4f3275.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "lei-rouanet-tem-recorde-de-25-6-mil-projetos-e-de-r-1-67-bi-captados.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

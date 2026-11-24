@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Lei cria Junho Vermelho para incentivar doação de sangue">
     <meta property="og:description" content="O mês de junho passará a integrar o calendário de ações de incentivo à doação de sangue. De acordo com a Lei 15.491/2026, o poder público produzirá materiais educativos e campanhas com foco no aumento dos estoques nos hemocentros do país. O">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-lei-cria-junho-vermelho-para-incentivar-doacao-d-1511af5af0.html?post=lei-cria-junho-vermelho-para-incentivar-doa%C3%A7%C3%A3o-de-sangue.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-lei-cria-junho-vermelho-para-incentivar-doacao-d-1511af5af0.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/WcpyjDhZLbFjK7T_PjA74I24pe4=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/img_2738-topaz-enhance-sharpen.jpeg?itok=SMM0JQiM" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/WcpyjDhZLbFjK7T_PjA74I24pe4=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/img_2738-topaz-enhance-sharpen.jpeg?itok=SMM0JQiM">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Lei cria Junho Vermelho para incentivar doação de sangue">
     <meta name="twitter:description" content="O mês de junho passará a integrar o calendário de ações de incentivo à doação de sangue. De acordo com a Lei 15.491/2026, o poder público produzirá materiais educativos e campanhas com foco no aumento dos estoques nos hemocentros do país. O">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/WcpyjDhZLbFjK7T_PjA74I24pe4=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/img_2738-topaz-enhance-sharpen.jpeg?itok=SMM0JQiM">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-lei-cria-junho-vermelho-para-incentivar-doacao-d-1511af5af0.html?post=lei-cria-junho-vermelho-para-incentivar-doa%C3%A7%C3%A3o-de-sangue.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-lei-cria-junho-vermelho-para-incentivar-doacao-d-1511af5af0.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "lei-cria-junho-vermelho-para-incentivar-doação-de-sangue.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

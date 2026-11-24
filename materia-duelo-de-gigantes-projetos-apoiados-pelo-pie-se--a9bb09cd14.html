@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="&quot;Duelo de gigantes: projetos apoiados pelo PIE se enfrentam na Liga">
     <meta property="og:description" content="A quadra foi palco de um confronto estratégico para o esporte catarinense nesta rodada da Liga Nacional Silver. As equipes do Lages Futsal e do Futsal São Lourenço, ambas beneficiadas pelo Programa de Incentivo ao Esporte (PIE), mediram for">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-duelo-de-gigantes-projetos-apoiados-pelo-pie-se--a9bb09cd14.html?post=duelo-de-gigantes-projetos-apoiados-pelo-pie-se-enfrentam-na-liga-nacional-silver.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-duelo-de-gigantes-projetos-apoiados-pelo-pie-se--a9bb09cd14.html">
     <meta property="og:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/04/clasiscopiesite.png" id="og-image">
     <meta property="og:image:secure_url" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/04/clasiscopiesite.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="&quot;Duelo de gigantes: projetos apoiados pelo PIE se enfrentam na Liga">
     <meta name="twitter:description" content="A quadra foi palco de um confronto estratégico para o esporte catarinense nesta rodada da Liga Nacional Silver. As equipes do Lages Futsal e do Futsal São Lourenço, ambas beneficiadas pelo Programa de Incentivo ao Esporte (PIE), mediram for">
     <meta name="twitter:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/04/clasiscopiesite.png">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-duelo-de-gigantes-projetos-apoiados-pelo-pie-se--a9bb09cd14.html?post=duelo-de-gigantes-projetos-apoiados-pelo-pie-se-enfrentam-na-liga-nacional-silver.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-duelo-de-gigantes-projetos-apoiados-pelo-pie-se--a9bb09cd14.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "duelo-de-gigantes-projetos-apoiados-pelo-pie-se-enfrentam-na-liga-nacional-silver.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

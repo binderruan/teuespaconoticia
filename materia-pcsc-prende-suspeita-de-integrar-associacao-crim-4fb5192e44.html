@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="PCSC prende suspeita de integrar associação criminosa voltada ao &quot;golpe">
     <meta property="og:description" content="A Polícia Civil de Santa Catarina, por meio do Setor de Investigações e Capturas (SIC) da Delegacia de Polícia de Camboriú, em ação conjunta com a Polícia Civil do Rio Grande do Sul, cumpriu um mandado de busca e apreensão e efetuou a prisã">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-pcsc-prende-suspeita-de-integrar-associacao-crim-4fb5192e44.html?post=pcsc-prende-suspeita-de-integrar-associa%C3%A7%C3%A3o-criminosa-voltada-ao-golpe-do-bilhete.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-pcsc-prende-suspeita-de-integrar-associacao-crim-4fb5192e44.html">
     <meta property="og:image" content="https://pc.sc.gov.br//wp-content/uploads/2026/04/BANNER_2.jpg" id="og-image">
     <meta property="og:image:secure_url" content="https://pc.sc.gov.br//wp-content/uploads/2026/04/BANNER_2.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="PCSC prende suspeita de integrar associação criminosa voltada ao &quot;golpe">
     <meta name="twitter:description" content="A Polícia Civil de Santa Catarina, por meio do Setor de Investigações e Capturas (SIC) da Delegacia de Polícia de Camboriú, em ação conjunta com a Polícia Civil do Rio Grande do Sul, cumpriu um mandado de busca e apreensão e efetuou a prisã">
     <meta name="twitter:image" content="https://pc.sc.gov.br//wp-content/uploads/2026/04/BANNER_2.jpg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-pcsc-prende-suspeita-de-integrar-associacao-crim-4fb5192e44.html?post=pcsc-prende-suspeita-de-integrar-associa%C3%A7%C3%A3o-criminosa-voltada-ao-golpe-do-bilhete.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-pcsc-prende-suspeita-de-integrar-associacao-crim-4fb5192e44.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "pcsc-prende-suspeita-de-integrar-associação-criminosa-voltada-ao-golpe-do-bilhete.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

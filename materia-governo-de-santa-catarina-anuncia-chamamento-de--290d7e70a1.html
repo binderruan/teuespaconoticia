@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Governo de Santa Catarina anuncia chamamento de cerca de 600">
     <meta property="og:description" content="Com a autorização do governador Jorginho Mello, a Secretaria de Estado da Saúde de Santa Catarina (SES/SC) homologou o concurso público do Edital nº 01/2025, realizado em janeiro deste ano. A medida encerra um período de 14 anos sem a reali">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-governo-de-santa-catarina-anuncia-chamamento-de--290d7e70a1.html?post=governo-de-santa-catarina-anuncia-chamamento-de-cerca-de-600-profissionais-aprovados-no-concurso-da-sa%C3%BAde.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-governo-de-santa-catarina-anuncia-chamamento-de--290d7e70a1.html">
     <meta property="og:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/04/RTR_7012_site_ses.jpg" id="og-image">
     <meta property="og:image:secure_url" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/04/RTR_7012_site_ses.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Governo de Santa Catarina anuncia chamamento de cerca de 600">
     <meta name="twitter:description" content="Com a autorização do governador Jorginho Mello, a Secretaria de Estado da Saúde de Santa Catarina (SES/SC) homologou o concurso público do Edital nº 01/2025, realizado em janeiro deste ano. A medida encerra um período de 14 anos sem a reali">
     <meta name="twitter:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/04/RTR_7012_site_ses.jpg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-governo-de-santa-catarina-anuncia-chamamento-de--290d7e70a1.html?post=governo-de-santa-catarina-anuncia-chamamento-de-cerca-de-600-profissionais-aprovados-no-concurso-da-sa%C3%BAde.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-governo-de-santa-catarina-anuncia-chamamento-de--290d7e70a1.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "governo-de-santa-catarina-anuncia-chamamento-de-cerca-de-600-profissionais-aprovados-no-concurso-da-saúde.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

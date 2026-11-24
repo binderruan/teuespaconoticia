@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Guilherme Schimidt é ouro e país fecha Grand Slam de judô com 3 pódios">
     <meta property="og:description" content="O judoca brasiliense Guilherme Schimidt subiu ao topo do pódio no Grand Slam de Budapeste (Hungria) neste domingo (12), último dia da competição. Em sua primeira final de Grand Slam na categoria até 90 quilios, o brasileiro derrotou o sérvi">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-guilherme-schimidt-e-ouro-e-pais-fecha-grand-sla-dd5e9db830.html?post=guilherme-schimidt-%C3%A9-ouro-e-pa%C3%ADs-fecha-grand-slam-de-jud%C3%B4-com-3-p%C3%B3dios.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-guilherme-schimidt-e-ouro-e-pais-fecha-grand-sla-dd5e9db830.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/RD3BrkYQ7pFqj0pOLn9RJBOW4LM=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/09/13/guilherme_smichdt_ouro_grand_slam_budapeste_2026.jpg?itok=IEL2y5Pr" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/RD3BrkYQ7pFqj0pOLn9RJBOW4LM=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/09/13/guilherme_smichdt_ouro_grand_slam_budapeste_2026.jpg?itok=IEL2y5Pr">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Guilherme Schimidt é ouro e país fecha Grand Slam de judô com 3 pódios">
     <meta name="twitter:description" content="O judoca brasiliense Guilherme Schimidt subiu ao topo do pódio no Grand Slam de Budapeste (Hungria) neste domingo (12), último dia da competição. Em sua primeira final de Grand Slam na categoria até 90 quilios, o brasileiro derrotou o sérvi">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/RD3BrkYQ7pFqj0pOLn9RJBOW4LM=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/09/13/guilherme_smichdt_ouro_grand_slam_budapeste_2026.jpg?itok=IEL2y5Pr">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-guilherme-schimidt-e-ouro-e-pais-fecha-grand-sla-dd5e9db830.html?post=guilherme-schimidt-%C3%A9-ouro-e-pa%C3%ADs-fecha-grand-slam-de-jud%C3%B4-com-3-p%C3%B3dios.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-guilherme-schimidt-e-ouro-e-pais-fecha-grand-sla-dd5e9db830.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "guilherme-schimidt-é-ouro-e-país-fecha-grand-slam-de-judô-com-3-pódios.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

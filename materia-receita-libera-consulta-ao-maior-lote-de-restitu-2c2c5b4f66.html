@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Receita libera consulta ao maior lote de restituição da história">
     <meta property="og:description" content="A Receita Federal libera, nesta sexta-feira (22), a partir das 10 horas, a consulta ao maior lote de restituição do imposto de Renda da história. Um total de 8.749.992 contribuintes receberão R$ 16 bilhões. O pagamento contempla o primeiro ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-receita-libera-consulta-ao-maior-lote-de-restitu-2c2c5b4f66.html?post=receita-libera-consulta-ao-maior-lote-de-restitui%C3%A7%C3%A3o-da-hist%C3%B3ria.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-receita-libera-consulta-ao-maior-lote-de-restitu-2c2c5b4f66.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/q-qOIZefJJtBUVablieTHFCACrQ=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/economia_1609210412_0.jpg?itok=gmIbQxQm" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/q-qOIZefJJtBUVablieTHFCACrQ=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/economia_1609210412_0.jpg?itok=gmIbQxQm">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Receita libera consulta ao maior lote de restituição da história">
     <meta name="twitter:description" content="A Receita Federal libera, nesta sexta-feira (22), a partir das 10 horas, a consulta ao maior lote de restituição do imposto de Renda da história. Um total de 8.749.992 contribuintes receberão R$ 16 bilhões. O pagamento contempla o primeiro ">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/q-qOIZefJJtBUVablieTHFCACrQ=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/economia_1609210412_0.jpg?itok=gmIbQxQm">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-receita-libera-consulta-ao-maior-lote-de-restitu-2c2c5b4f66.html?post=receita-libera-consulta-ao-maior-lote-de-restitui%C3%A7%C3%A3o-da-hist%C3%B3ria.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-receita-libera-consulta-ao-maior-lote-de-restitu-2c2c5b4f66.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "receita-libera-consulta-ao-maior-lote-de-restituição-da-história.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

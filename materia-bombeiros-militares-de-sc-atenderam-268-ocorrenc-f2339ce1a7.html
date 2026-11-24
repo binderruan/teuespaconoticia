@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Bombeiros militares de SC atenderam 268 ocorrências obstétricas e">
     <meta property="og:description" content="Em meio à urgência de um trabalho de parto que evoluiu rapidamente, a pronta resposta de uma equipe do Corpo de Bombeiros Militar de Santa Catarina (CBMSC) foi decisiva para garantir o nascimento seguro de um bebê em São José do Cedro, no O">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-bombeiros-militares-de-sc-atenderam-268-ocorrenc-f2339ce1a7.html?post=bombeiros-militares-de-sc-atenderam-268-ocorr%C3%AAncias-obst%C3%A9tricas-e-auxiliaram-111-partos-entre-janeiro-e-mar%C3%A7o-de-2026.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-bombeiros-militares-de-sc-atenderam-268-ocorrenc-f2339ce1a7.html">
     <meta property="og:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/03/WhatsApp-Image-2026-03-08-at-13.12.03.jpeg" id="og-image">
     <meta property="og:image:secure_url" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/03/WhatsApp-Image-2026-03-08-at-13.12.03.jpeg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Bombeiros militares de SC atenderam 268 ocorrências obstétricas e">
     <meta name="twitter:description" content="Em meio à urgência de um trabalho de parto que evoluiu rapidamente, a pronta resposta de uma equipe do Corpo de Bombeiros Militar de Santa Catarina (CBMSC) foi decisiva para garantir o nascimento seguro de um bebê em São José do Cedro, no O">
     <meta name="twitter:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/03/WhatsApp-Image-2026-03-08-at-13.12.03.jpeg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-bombeiros-militares-de-sc-atenderam-268-ocorrenc-f2339ce1a7.html?post=bombeiros-militares-de-sc-atenderam-268-ocorr%C3%AAncias-obst%C3%A9tricas-e-auxiliaram-111-partos-entre-janeiro-e-mar%C3%A7o-de-2026.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-bombeiros-militares-de-sc-atenderam-268-ocorrenc-f2339ce1a7.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "bombeiros-militares-de-sc-atenderam-268-ocorrências-obstétricas-e-auxiliaram-111-partos-entre-janeiro-e-março-de-2026.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

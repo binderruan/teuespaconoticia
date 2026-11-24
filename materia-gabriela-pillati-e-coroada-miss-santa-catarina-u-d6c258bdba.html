@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Gabriela Pillati é coroada Miss Santa Catarina Universe Beauty 2026 em">
     <meta property="og:description" content="A jovem Gabriela Pillati, natural de Papanduva, conquistou neste fim de semana o título de Miss Santa Catarina Universe Beauty 2026, durante evento realizado em Florianópolis. A vitória colocou o nome da representante do Planalto Norte em d">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-gabriela-pillati-e-coroada-miss-santa-catarina-u-d6c258bdba.html?post=gabriela-pillati-%C3%A9-coroada-miss-santa-catarina-universe-beauty-2026-em-florian%C3%B3polis.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-gabriela-pillati-e-coroada-miss-santa-catarina-u-d6c258bdba.html">
     <meta property="og:image" content="https://demaisnews.fm.br/wp-content/uploads/2026/04/c22d3a31-fa89-4487-82f9-2696524403e1-843x700.jpg" id="og-image">
     <meta property="og:image:secure_url" content="https://demaisnews.fm.br/wp-content/uploads/2026/04/c22d3a31-fa89-4487-82f9-2696524403e1-843x700.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Gabriela Pillati é coroada Miss Santa Catarina Universe Beauty 2026 em">
     <meta name="twitter:description" content="A jovem Gabriela Pillati, natural de Papanduva, conquistou neste fim de semana o título de Miss Santa Catarina Universe Beauty 2026, durante evento realizado em Florianópolis. A vitória colocou o nome da representante do Planalto Norte em d">
     <meta name="twitter:image" content="https://demaisnews.fm.br/wp-content/uploads/2026/04/c22d3a31-fa89-4487-82f9-2696524403e1-843x700.jpg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-gabriela-pillati-e-coroada-miss-santa-catarina-u-d6c258bdba.html?post=gabriela-pillati-%C3%A9-coroada-miss-santa-catarina-universe-beauty-2026-em-florian%C3%B3polis.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-gabriela-pillati-e-coroada-miss-santa-catarina-u-d6c258bdba.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "gabriela-pillati-é-coroada-miss-santa-catarina-universe-beauty-2026-em-florianópolis.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

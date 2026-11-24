@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="País terá Dia D de Multivacinação neste sábado">
     <meta property="og:description" content="Unidades básicas de Saúde e postos de vacinação ficarão abertos neste sábado (22) em todo o país para que crianças e adolescentes menores de 15 anos atualizem a caderneta vacinal. É o Dia D da Campanha de Multivacinação, que começou no iníc">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-pais-tera-dia-d-de-multivacinacao-neste-sabado-786d77bbba.html?post=pa%C3%ADs-ter%C3%A1-dia-d-de-multivacina%C3%A7%C3%A3o-neste-s%C3%A1bado.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-pais-tera-dia-d-de-multivacinacao-neste-sabado-786d77bbba.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/03rqKVFF2QKISDjaUwD87cDizso=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024/04/13/_dsc8066.jpg?itok=NPuP1_MA" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/03rqKVFF2QKISDjaUwD87cDizso=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024/04/13/_dsc8066.jpg?itok=NPuP1_MA">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="País terá Dia D de Multivacinação neste sábado">
     <meta name="twitter:description" content="Unidades básicas de Saúde e postos de vacinação ficarão abertos neste sábado (22) em todo o país para que crianças e adolescentes menores de 15 anos atualizem a caderneta vacinal. É o Dia D da Campanha de Multivacinação, que começou no iníc">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/03rqKVFF2QKISDjaUwD87cDizso=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024/04/13/_dsc8066.jpg?itok=NPuP1_MA">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-pais-tera-dia-d-de-multivacinacao-neste-sabado-786d77bbba.html?post=pa%C3%ADs-ter%C3%A1-dia-d-de-multivacina%C3%A7%C3%A3o-neste-s%C3%A1bado.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-pais-tera-dia-d-de-multivacinacao-neste-sabado-786d77bbba.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "país-terá-dia-d-de-multivacinação-neste-sábado.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

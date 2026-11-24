@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Futebol, política e personagens improváveis: a Copa do Mundo até agora">
     <meta property="og:description" content="Depois de muitos dias de bola rolando sem parar, as redes nos estádios da Copa do Mundo não balançarão nesta quarta-feira (8). Após o fim das oitavas de final, as seleções restantes só entram em campo, já pela fase seguinte, as quartas de f">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-futebol-politica-e-personagens-improvaveis-a-cop-1482b11f8e.html?post=futebol-pol%C3%ADtica-e-personagens-improv%C3%A1veis-a-copa-do-mundo-at%C3%A9-agora.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-futebol-politica-e-personagens-improvaveis-a-cop-1482b11f8e.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/17bDeFDo8EA-G9aMCcaFM1JcflU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/04/mbappe.jpg?itok=34fVEKKZ" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/17bDeFDo8EA-G9aMCcaFM1JcflU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/04/mbappe.jpg?itok=34fVEKKZ">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Futebol, política e personagens improváveis: a Copa do Mundo até agora">
     <meta name="twitter:description" content="Depois de muitos dias de bola rolando sem parar, as redes nos estádios da Copa do Mundo não balançarão nesta quarta-feira (8). Após o fim das oitavas de final, as seleções restantes só entram em campo, já pela fase seguinte, as quartas de f">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/17bDeFDo8EA-G9aMCcaFM1JcflU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/04/mbappe.jpg?itok=34fVEKKZ">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-futebol-politica-e-personagens-improvaveis-a-cop-1482b11f8e.html?post=futebol-pol%C3%ADtica-e-personagens-improv%C3%A1veis-a-copa-do-mundo-at%C3%A9-agora.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-futebol-politica-e-personagens-improvaveis-a-cop-1482b11f8e.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "futebol-política-e-personagens-improváveis-a-copa-do-mundo-até-agora.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

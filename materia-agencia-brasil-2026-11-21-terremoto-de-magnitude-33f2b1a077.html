@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Terremoto de magnitude 6,8 graus atinge o Peru">
     <meta property="og:description" content="Um terremoto de magnitude 6,8 atingiu o centro do Peru nessa sexta-feira (20), informou o Centro Alemão de Pesquisa em Geociências. O tremor levou algumas pessoas na capital Lima, a saírem às ruas, embora não tenha havido relatos imediatos ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-21-terremoto-de-magnitude-33f2b1a077.html?post=agencia-brasil-2026-11-21-terremoto-de-magnitude-6-8-graus-atinge-o-peru.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-21-terremoto-de-magnitude-33f2b1a077.html">
     <meta property="og:image" content="https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/public/thumbs/thumb_1200x600_agbrasil.png" id="og-image">
     <meta property="og:image:secure_url" content="https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/public/thumbs/thumb_1200x600_agbrasil.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Terremoto de magnitude 6,8 graus atinge o Peru">
     <meta name="twitter:description" content="Um terremoto de magnitude 6,8 atingiu o centro do Peru nessa sexta-feira (20), informou o Centro Alemão de Pesquisa em Geociências. O tremor levou algumas pessoas na capital Lima, a saírem às ruas, embora não tenha havido relatos imediatos ">
     <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/public/thumbs/thumb_1200x600_agbrasil.png">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-21-terremoto-de-magnitude-33f2b1a077.html?post=agencia-brasil-2026-11-21-terremoto-de-magnitude-6-8-graus-atinge-o-peru.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-21-terremoto-de-magnitude-33f2b1a077.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "agencia-brasil-2026-11-21-terremoto-de-magnitude-6-8-graus-atinge-o-peru.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

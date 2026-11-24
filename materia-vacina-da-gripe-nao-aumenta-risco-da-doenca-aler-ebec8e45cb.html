@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Vacina da gripe não aumenta risco da doença, alerta ministério">
     <meta property="og:description" content="O Ministério da Saúde alertou nesta quarta-feira (1º) que mensagens que circulam nas redes sociais voltaram a espalhar desinformação sobre vacinas. O alvo da vez, segundo a pasta, é a vacina contra a gripe. “Publicações afirmam, sem qualque">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-vacina-da-gripe-nao-aumenta-risco-da-doenca-aler-ebec8e45cb.html?post=vacina-da-gripe-n%C3%A3o-aumenta-risco-da-doen%C3%A7a-alerta-minist%C3%A9rio.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-vacina-da-gripe-nao-aumenta-risco-da-doenca-aler-ebec8e45cb.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/4G_LduCRdCWlMiD_hJ9ZPhPU23c=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/12/04/pzzb4152.jpg?itok=DEYVAD_a" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/4G_LduCRdCWlMiD_hJ9ZPhPU23c=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/12/04/pzzb4152.jpg?itok=DEYVAD_a">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Vacina da gripe não aumenta risco da doença, alerta ministério">
     <meta name="twitter:description" content="O Ministério da Saúde alertou nesta quarta-feira (1º) que mensagens que circulam nas redes sociais voltaram a espalhar desinformação sobre vacinas. O alvo da vez, segundo a pasta, é a vacina contra a gripe. “Publicações afirmam, sem qualque">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/4G_LduCRdCWlMiD_hJ9ZPhPU23c=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/12/04/pzzb4152.jpg?itok=DEYVAD_a">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-vacina-da-gripe-nao-aumenta-risco-da-doenca-aler-ebec8e45cb.html?post=vacina-da-gripe-n%C3%A3o-aumenta-risco-da-doen%C3%A7a-alerta-minist%C3%A9rio.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-vacina-da-gripe-nao-aumenta-risco-da-doenca-aler-ebec8e45cb.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "vacina-da-gripe-não-aumenta-risco-da-doença-alerta-ministério.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

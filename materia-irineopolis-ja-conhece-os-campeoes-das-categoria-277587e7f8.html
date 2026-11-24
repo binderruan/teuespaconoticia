@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="IRINEÓPOLIS JÁ CONHECE OS CAMPEÕES DAS CATEGORIAS DE BASE">
     <meta property="og:description" content="Irineópolis viveu dias especiais com a realização do Campeonato de Categorias de Base no Campo do Veneski. Mais do que uma competição, o evento foi uma verdadeira celebração do esporte, reunindo jovens talentos, famílias e comunidades em to">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-irineopolis-ja-conhece-os-campeoes-das-categoria-277587e7f8.html?post=irine%C3%B3polis-j%C3%A1-conhece-os-campe%C3%B5es-das-categorias-de-base.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-irineopolis-ja-conhece-os-campeoes-das-categoria-277587e7f8.html">
     <meta property="og:image" content="https://teuespaco.com.br/images/uploads/img_5905.jpg.jpeg" id="og-image">
     <meta property="og:image:secure_url" content="https://teuespaco.com.br/images/uploads/img_5905.jpg.jpeg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="IRINEÓPOLIS JÁ CONHECE OS CAMPEÕES DAS CATEGORIAS DE BASE">
     <meta name="twitter:description" content="Irineópolis viveu dias especiais com a realização do Campeonato de Categorias de Base no Campo do Veneski. Mais do que uma competição, o evento foi uma verdadeira celebração do esporte, reunindo jovens talentos, famílias e comunidades em to">
     <meta name="twitter:image" content="https://teuespaco.com.br/images/uploads/img_5905.jpg.jpeg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-irineopolis-ja-conhece-os-campeoes-das-categoria-277587e7f8.html?post=irine%C3%B3polis-j%C3%A1-conhece-os-campe%C3%B5es-das-categorias-de-base.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-irineopolis-ja-conhece-os-campeoes-das-categoria-277587e7f8.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "irineópolis-já-conhece-os-campeões-das-categorias-de-base.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

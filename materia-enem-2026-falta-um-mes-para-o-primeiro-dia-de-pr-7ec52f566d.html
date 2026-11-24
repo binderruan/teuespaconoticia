@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Enem 2026: falta um mês para o primeiro dia de provas">
     <meta property="og:description" content="A um mês do primeiro dia de provas do Exame Nacional do Ensino Médio (Enem), candidatos e professores do ensino médio e cursinhos preparatórios adotam estratégias que migram do estudo intensivo de conteúdos inéditos para a consolidação do q">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-enem-2026-falta-um-mes-para-o-primeiro-dia-de-pr-7ec52f566d.html?post=enem-2026-falta-um-m%C3%AAs-para-o-primeiro-dia-de-provas.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-enem-2026-falta-um-mes-para-o-primeiro-dia-de-pr-7ec52f566d.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/a8KmMXIeSle4Lean__BX8mvRlFM=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/10/07/pzzb7290.jpg?itok=N0F7Q2U7" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/a8KmMXIeSle4Lean__BX8mvRlFM=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/10/07/pzzb7290.jpg?itok=N0F7Q2U7">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Enem 2026: falta um mês para o primeiro dia de provas">
     <meta name="twitter:description" content="A um mês do primeiro dia de provas do Exame Nacional do Ensino Médio (Enem), candidatos e professores do ensino médio e cursinhos preparatórios adotam estratégias que migram do estudo intensivo de conteúdos inéditos para a consolidação do q">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/a8KmMXIeSle4Lean__BX8mvRlFM=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/10/07/pzzb7290.jpg?itok=N0F7Q2U7">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-enem-2026-falta-um-mes-para-o-primeiro-dia-de-pr-7ec52f566d.html?post=enem-2026-falta-um-m%C3%AAs-para-o-primeiro-dia-de-provas.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-enem-2026-falta-um-mes-para-o-primeiro-dia-de-pr-7ec52f566d.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "enem-2026-falta-um-mês-para-o-primeiro-dia-de-provas.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

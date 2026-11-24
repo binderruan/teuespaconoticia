@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Inflação perde força e fica em 0,14% em outubro; conta de luz cai">
     <meta property="og:description" content="A bandeira verde na conta de luz e o custo dos transportes deram alívio ao bolso dos brasileiros em outubro e ajudaram a inflação oficial a perder força e fechar o mês de outubro em 0,14%. Em setembro, o indicador ficou em 0,82%. No acumula">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-inflacao-perde-forca-e-fica-em-0-14-em-outubro-c-1b5a6ae0aa.html?post=infla%C3%A7%C3%A3o-perde-for%C3%A7a-e-fica-em-0-14-em-outubro-conta-de-luz-cai.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-inflacao-perde-forca-e-fica-em-0-14-em-outubro-c-1b5a6ae0aa.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/PcFi5TfVCumGIYJylTomMpTo5jo=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/energia_eletrica_interruptor_de_luz_energia070720211248.jpg?itok=K-gG8s6b" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/PcFi5TfVCumGIYJylTomMpTo5jo=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/energia_eletrica_interruptor_de_luz_energia070720211248.jpg?itok=K-gG8s6b">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Inflação perde força e fica em 0,14% em outubro; conta de luz cai">
     <meta name="twitter:description" content="A bandeira verde na conta de luz e o custo dos transportes deram alívio ao bolso dos brasileiros em outubro e ajudaram a inflação oficial a perder força e fechar o mês de outubro em 0,14%. Em setembro, o indicador ficou em 0,82%. No acumula">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/PcFi5TfVCumGIYJylTomMpTo5jo=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/energia_eletrica_interruptor_de_luz_energia070720211248.jpg?itok=K-gG8s6b">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-inflacao-perde-forca-e-fica-em-0-14-em-outubro-c-1b5a6ae0aa.html?post=infla%C3%A7%C3%A3o-perde-for%C3%A7a-e-fica-em-0-14-em-outubro-conta-de-luz-cai.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-inflacao-perde-forca-e-fica-em-0-14-em-outubro-c-1b5a6ae0aa.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "inflação-perde-força-e-fica-em-0-14-em-outubro-conta-de-luz-cai.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

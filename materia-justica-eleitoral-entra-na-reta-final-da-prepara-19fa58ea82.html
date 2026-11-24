@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Justiça Eleitoral entra na reta final da preparação das urnas">
     <meta property="og:description" content="A dois dias do primeiro turno das Eleições 2026, a Justiça Eleitoral está na fase final dos preparativos para disponibilizar as urnas eletrônicas nos locais de votação em todo o país. Segundo o Tribunal Superior Eleitoral (TSE), os equipame">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-justica-eleitoral-entra-na-reta-final-da-prepara-19fa58ea82.html?post=justi%C3%A7a-eleitoral-entra-na-reta-final-da-prepara%C3%A7%C3%A3o-das-urnas.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-justica-eleitoral-entra-na-reta-final-da-prepara-19fa58ea82.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/P4Ev74X60IZEbepn08tRB7oESqE=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/10/02/0d4a1615.jpg?itok=thbI77SQ" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/P4Ev74X60IZEbepn08tRB7oESqE=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/10/02/0d4a1615.jpg?itok=thbI77SQ">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Justiça Eleitoral entra na reta final da preparação das urnas">
     <meta name="twitter:description" content="A dois dias do primeiro turno das Eleições 2026, a Justiça Eleitoral está na fase final dos preparativos para disponibilizar as urnas eletrônicas nos locais de votação em todo o país. Segundo o Tribunal Superior Eleitoral (TSE), os equipame">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/P4Ev74X60IZEbepn08tRB7oESqE=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/10/02/0d4a1615.jpg?itok=thbI77SQ">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-justica-eleitoral-entra-na-reta-final-da-prepara-19fa58ea82.html?post=justi%C3%A7a-eleitoral-entra-na-reta-final-da-prepara%C3%A7%C3%A3o-das-urnas.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-justica-eleitoral-entra-na-reta-final-da-prepara-19fa58ea82.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "justiça-eleitoral-entra-na-reta-final-da-preparação-das-urnas.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

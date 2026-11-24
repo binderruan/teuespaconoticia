@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Saiba usar a versão digital da Carteira de Identidade Nacional">
     <meta property="og:description" content="A versão digital da Carteira de Identidade Nacional (CIN) pode ser acessada no aplicativo GOV.BR no celular e usada como documento de identificação. Para lembrar a população sobre esse recurso, o governo federal enviou notificações no Whats">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-saiba-usar-a-versao-digital-da-carteira-de-ident-90f8501ef6.html?post=saiba-usar-a-vers%C3%A3o-digital-da-carteira-de-identidade-nacional.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-saiba-usar-a-versao-digital-da-carteira-de-ident-90f8501ef6.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/DgoVvCSCw08oqH5EDcbBfoZ9yDM=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/02/10/whatsapp_image_2025-02-10_at_14.30.50_2.jpeg?itok=flhZKKWW" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/DgoVvCSCw08oqH5EDcbBfoZ9yDM=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/02/10/whatsapp_image_2025-02-10_at_14.30.50_2.jpeg?itok=flhZKKWW">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Saiba usar a versão digital da Carteira de Identidade Nacional">
     <meta name="twitter:description" content="A versão digital da Carteira de Identidade Nacional (CIN) pode ser acessada no aplicativo GOV.BR no celular e usada como documento de identificação. Para lembrar a população sobre esse recurso, o governo federal enviou notificações no Whats">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/DgoVvCSCw08oqH5EDcbBfoZ9yDM=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/02/10/whatsapp_image_2025-02-10_at_14.30.50_2.jpeg?itok=flhZKKWW">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-saiba-usar-a-versao-digital-da-carteira-de-ident-90f8501ef6.html?post=saiba-usar-a-vers%C3%A3o-digital-da-carteira-de-identidade-nacional.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-saiba-usar-a-versao-digital-da-carteira-de-ident-90f8501ef6.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "saiba-usar-a-versão-digital-da-carteira-de-identidade-nacional.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

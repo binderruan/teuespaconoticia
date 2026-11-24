@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Bombeiros de SC têm os cães de resgate mais preparados do Brasil">
     <meta property="og:description" content="Quando um prédio desaba ou uma criança desaparece na densa mata atlântica, o cronômetro corre contra a vida. Nesses momentos, a atuação técnica mais precisa de Santa Catarina não está ancorada somente em tecnologia ou no efetivo profissiona">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-corpo-de-bombeiros-militar-de-santa-catarina-tem-caaf4363f7.html?post=corpo-de-bombeiros-militar-de-santa-catarina-tem-os-c%C3%A3es-de-resgate-mais-preparados-do-pa%C3%ADs-para-atuar-em-cen%C3%A1rios-extremos.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-corpo-de-bombeiros-militar-de-santa-catarina-tem-caaf4363f7.html">
     <meta property="og:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/WhatsApp-Image-2026-02-09-at-10.19.28.jpg" id="og-image">
     <meta property="og:image:secure_url" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/WhatsApp-Image-2026-02-09-at-10.19.28.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Bombeiros de SC têm os cães de resgate mais preparados do Brasil">
     <meta name="twitter:description" content="Quando um prédio desaba ou uma criança desaparece na densa mata atlântica, o cronômetro corre contra a vida. Nesses momentos, a atuação técnica mais precisa de Santa Catarina não está ancorada somente em tecnologia ou no efetivo profissiona">
     <meta name="twitter:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/WhatsApp-Image-2026-02-09-at-10.19.28.jpg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-corpo-de-bombeiros-militar-de-santa-catarina-tem-caaf4363f7.html?post=corpo-de-bombeiros-militar-de-santa-catarina-tem-os-c%C3%A3es-de-resgate-mais-preparados-do-pa%C3%ADs-para-atuar-em-cen%C3%A1rios-extremos.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-corpo-de-bombeiros-militar-de-santa-catarina-tem-caaf4363f7.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "corpo-de-bombeiros-militar-de-santa-catarina-tem-os-cães-de-resgate-mais-preparados-do-país-para-atuar-em-cenários-extremos.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

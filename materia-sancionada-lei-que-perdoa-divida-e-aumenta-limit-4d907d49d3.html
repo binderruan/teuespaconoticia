@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Sancionada lei que perdoa dívida e aumenta limite de MEI">
     <meta property="og:description" content="Foi sancionado nesta quarta-feira (21) o Projeto de Lei Complementar (PLP) nº 186/2026, que prevê o perdão de dívidas de microempreendedores individuais (MEIs) com a União e amplia o limite anual de faturamento da categoria. O projeto foi a">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-sancionada-lei-que-perdoa-divida-e-aumenta-limit-4d907d49d3.html?post=sancionada-lei-que-perdoa-d%C3%ADvida-e-aumenta-limite-de-mei.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-sancionada-lei-que-perdoa-divida-e-aumenta-limit-4d907d49d3.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/uvYgzVTEw_sme5bpoMOmN2um-sg=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/07/18/14-07-movimentacao_ft_rodrigo_goncalves-2.jpg?itok=GLZvg4Pe" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/uvYgzVTEw_sme5bpoMOmN2um-sg=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/07/18/14-07-movimentacao_ft_rodrigo_goncalves-2.jpg?itok=GLZvg4Pe">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Sancionada lei que perdoa dívida e aumenta limite de MEI">
     <meta name="twitter:description" content="Foi sancionado nesta quarta-feira (21) o Projeto de Lei Complementar (PLP) nº 186/2026, que prevê o perdão de dívidas de microempreendedores individuais (MEIs) com a União e amplia o limite anual de faturamento da categoria. O projeto foi a">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/uvYgzVTEw_sme5bpoMOmN2um-sg=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/07/18/14-07-movimentacao_ft_rodrigo_goncalves-2.jpg?itok=GLZvg4Pe">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-sancionada-lei-que-perdoa-divida-e-aumenta-limit-4d907d49d3.html?post=sancionada-lei-que-perdoa-d%C3%ADvida-e-aumenta-limite-de-mei.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-sancionada-lei-que-perdoa-divida-e-aumenta-limit-4d907d49d3.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "sancionada-lei-que-perdoa-dívida-e-aumenta-limite-de-mei.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

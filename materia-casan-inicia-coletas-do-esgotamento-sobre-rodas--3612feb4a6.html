@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Casan inicia coletas do Esgotamento Sobre Rodas em Major Vieira">
     <meta property="og:description" content="A Companhia Catarinense de Águas e Saneamento (Casan) iniciou a coleta do lodo das fossas nas residências do Município de Major Vieira. A ação faz parte do Programa Esgotamento Sobre Rodas, uma iniciativa para levar a coleta e o tratamento ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-casan-inicia-coletas-do-esgotamento-sobre-rodas--3612feb4a6.html?post=casan-inicia-coletas-do-esgotamento-sobre-rodas-em-major-vieira.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-casan-inicia-coletas-do-esgotamento-sobre-rodas--3612feb4a6.html">
     <meta property="og:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/04/WhatsApp-Image-2026-04-01-at-17.21.48-3.jpeg" id="og-image">
     <meta property="og:image:secure_url" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/04/WhatsApp-Image-2026-04-01-at-17.21.48-3.jpeg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Casan inicia coletas do Esgotamento Sobre Rodas em Major Vieira">
     <meta name="twitter:description" content="A Companhia Catarinense de Águas e Saneamento (Casan) iniciou a coleta do lodo das fossas nas residências do Município de Major Vieira. A ação faz parte do Programa Esgotamento Sobre Rodas, uma iniciativa para levar a coleta e o tratamento ">
     <meta name="twitter:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/04/WhatsApp-Image-2026-04-01-at-17.21.48-3.jpeg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-casan-inicia-coletas-do-esgotamento-sobre-rodas--3612feb4a6.html?post=casan-inicia-coletas-do-esgotamento-sobre-rodas-em-major-vieira.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-casan-inicia-coletas-do-esgotamento-sobre-rodas--3612feb4a6.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "casan-inicia-coletas-do-esgotamento-sobre-rodas-em-major-vieira.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

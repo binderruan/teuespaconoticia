@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Ministérios repudiam ato de machismo contra árbitra no Brasileirão">
     <meta property="og:description" content="Os Ministérios das Mulheres e do Esporte disseram repudiar com veemência as declarações do zagueiro Gustavo Marques, do Red Bull Bragantino, e manifestaram solidariedade à árbitra Daiane Muniz, que apitou o jogo do time contra o São Paulo, ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-ministerios-repudiam-ato-de-machismo-contra-arbi-e65b7ed56d.html?post=minist%C3%A9rios-repudiam-ato-de-machismo-contra-%C3%A1rbitra-no-brasileir%C3%A3o.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-ministerios-repudiam-ato-de-machismo-contra-arbi-e65b7ed56d.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/DhEFSRg7bZ_AfxepaYlfaKbktJw=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/22/54757816007_ecbd492947_o.jpg?itok=aObXs49M" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/DhEFSRg7bZ_AfxepaYlfaKbktJw=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/22/54757816007_ecbd492947_o.jpg?itok=aObXs49M">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Ministérios repudiam ato de machismo contra árbitra no Brasileirão">
     <meta name="twitter:description" content="Os Ministérios das Mulheres e do Esporte disseram repudiar com veemência as declarações do zagueiro Gustavo Marques, do Red Bull Bragantino, e manifestaram solidariedade à árbitra Daiane Muniz, que apitou o jogo do time contra o São Paulo, ">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/DhEFSRg7bZ_AfxepaYlfaKbktJw=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/22/54757816007_ecbd492947_o.jpg?itok=aObXs49M">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-ministerios-repudiam-ato-de-machismo-contra-arbi-e65b7ed56d.html?post=minist%C3%A9rios-repudiam-ato-de-machismo-contra-%C3%A1rbitra-no-brasileir%C3%A3o.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-ministerios-repudiam-ato-de-machismo-contra-arbi-e65b7ed56d.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "ministérios-repudiam-ato-de-machismo-contra-árbitra-no-brasileirão.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Anvisa proíbe lotes de medicamento para tratar câncer">
     <meta property="og:description" content="A Agência Nacional de Vigilância (Anvisa) determinou a apreensão dos lotes Z005197 e Z012354 do medicamento Keytruda (pembrolizumabe) 100 mg/4 mL, indicado para o tratamento de diversos tipos de câncer. A decisão foi publicada nesta segunda">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-anvisa-proibe-lotes-de-medicamento-para-tratar-c-566de1389a.html?post=anvisa-pro%C3%ADbe-lotes-de-medicamento-para-tratar-c%C3%A2ncer.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-anvisa-proibe-lotes-de-medicamento-para-tratar-c-566de1389a.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/op2Q9vOCWjOP67Y4lqes6JiRLL8=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/07/farmacia_medicamentos_01.jpg?itok=LLF4Kk2L" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/op2Q9vOCWjOP67Y4lqes6JiRLL8=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/07/farmacia_medicamentos_01.jpg?itok=LLF4Kk2L">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Anvisa proíbe lotes de medicamento para tratar câncer">
     <meta name="twitter:description" content="A Agência Nacional de Vigilância (Anvisa) determinou a apreensão dos lotes Z005197 e Z012354 do medicamento Keytruda (pembrolizumabe) 100 mg/4 mL, indicado para o tratamento de diversos tipos de câncer. A decisão foi publicada nesta segunda">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/op2Q9vOCWjOP67Y4lqes6JiRLL8=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/07/farmacia_medicamentos_01.jpg?itok=LLF4Kk2L">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-anvisa-proibe-lotes-de-medicamento-para-tratar-c-566de1389a.html?post=anvisa-pro%C3%ADbe-lotes-de-medicamento-para-tratar-c%C3%A2ncer.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-anvisa-proibe-lotes-de-medicamento-para-tratar-c-566de1389a.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "anvisa-proíbe-lotes-de-medicamento-para-tratar-câncer.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

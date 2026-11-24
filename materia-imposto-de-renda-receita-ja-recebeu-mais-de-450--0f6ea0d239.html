@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Imposto de renda: Receita já recebeu mais de 450 mil declarações">
     <meta property="og:description" content="A Receita Federal recebeu, até as 12h desta segunda-feira (23), 450.026 Declarações do Imposto de Renda Pessoa Física 2026 (ano-base 2025). O prazo para envio começou às 8h e segue até as 29h59min59s do dia 29 de maio. Este ano, o Fisco esp">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-imposto-de-renda-receita-ja-recebeu-mais-de-450--0f6ea0d239.html?post=imposto-de-renda-receita-j%C3%A1-recebeu-mais-de-450-mil-declara%C3%A7%C3%B5es.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-imposto-de-renda-receita-ja-recebeu-mais-de-450--0f6ea0d239.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/r9i03VR8JXbiGSZL3bIp4__F1y4=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/03/16/whatsapp_image_2026-03-16_at_16.06.34.jpg?itok=Q18CTb_N" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/r9i03VR8JXbiGSZL3bIp4__F1y4=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/03/16/whatsapp_image_2026-03-16_at_16.06.34.jpg?itok=Q18CTb_N">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Imposto de renda: Receita já recebeu mais de 450 mil declarações">
     <meta name="twitter:description" content="A Receita Federal recebeu, até as 12h desta segunda-feira (23), 450.026 Declarações do Imposto de Renda Pessoa Física 2026 (ano-base 2025). O prazo para envio começou às 8h e segue até as 29h59min59s do dia 29 de maio. Este ano, o Fisco esp">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/r9i03VR8JXbiGSZL3bIp4__F1y4=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/03/16/whatsapp_image_2026-03-16_at_16.06.34.jpg?itok=Q18CTb_N">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-imposto-de-renda-receita-ja-recebeu-mais-de-450--0f6ea0d239.html?post=imposto-de-renda-receita-j%C3%A1-recebeu-mais-de-450-mil-declara%C3%A7%C3%B5es.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-imposto-de-renda-receita-ja-recebeu-mais-de-450--0f6ea0d239.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "imposto-de-renda-receita-já-recebeu-mais-de-450-mil-declarações.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

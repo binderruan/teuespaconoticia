@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="4ª Stammtisch de Canoinhas acontece neste sábado">
     <meta property="og:description" content="A 4ª edição da Stammtisch de Canoinhas acontece neste sábado, 22, das 10h às 18h. O evento celebra a cultura germânica, o empreendedorismo e a confraternização entre famílias e amigos, com música e diversas atrações. A programação estava pr">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-4--stammtisch-de-canoinhas-acontece-neste-sabado-6f25e310f7.html?post=4%C2%AA-stammtisch-de-canoinhas-acontece-neste-s%C3%A1bado.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-4--stammtisch-de-canoinhas-acontece-neste-sabado-6f25e310f7.html">
     <meta property="og:image" content="https://canoinhas.atende.net/static/portal/img/2026/08/18/img_5AD56DE0109D6011CA8ABFAD044442599A9B9671_607x1120.jpeg" id="og-image">
     <meta property="og:image:secure_url" content="https://canoinhas.atende.net/static/portal/img/2026/08/18/img_5AD56DE0109D6011CA8ABFAD044442599A9B9671_607x1120.jpeg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="4ª Stammtisch de Canoinhas acontece neste sábado">
     <meta name="twitter:description" content="A 4ª edição da Stammtisch de Canoinhas acontece neste sábado, 22, das 10h às 18h. O evento celebra a cultura germânica, o empreendedorismo e a confraternização entre famílias e amigos, com música e diversas atrações. A programação estava pr">
     <meta name="twitter:image" content="https://canoinhas.atende.net/static/portal/img/2026/08/18/img_5AD56DE0109D6011CA8ABFAD044442599A9B9671_607x1120.jpeg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-4--stammtisch-de-canoinhas-acontece-neste-sabado-6f25e310f7.html?post=4%C2%AA-stammtisch-de-canoinhas-acontece-neste-s%C3%A1bado.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-4--stammtisch-de-canoinhas-acontece-neste-sabado-6f25e310f7.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "4ª-stammtisch-de-canoinhas-acontece-neste-sábado.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

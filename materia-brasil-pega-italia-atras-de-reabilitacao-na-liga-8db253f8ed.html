@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Brasil pega Itália atrás de reabilitação na Liga das Nações de vôlei">
     <meta property="og:description" content="A seleção masculina de vôlei busca a reabilitação na Liga das Nações nesta sexta-feira (26). Às 15h (horário de Brasília), os brasileiros encaram a Itália em Liubliana (Eslovênia), no segundo compromisso da semana número dois da competição.">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-brasil-pega-italia-atras-de-reabilitacao-na-liga-8db253f8ed.html?post=brasil-pega-it%C3%A1lia-atr%C3%A1s-de-reabilita%C3%A7%C3%A3o-na-liga-das-na%C3%A7%C3%B5es-de-v%C3%B4lei.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-brasil-pega-italia-atras-de-reabilitacao-na-liga-8db253f8ed.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/80ieWg7P3ltYs2tbKqlouPCzh_c=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/06/26/brasil_pega_italia_atras_de_reabilitacao_na_liga_das_nacoes_de_volei.jpg?itok=E-69Kzml" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/80ieWg7P3ltYs2tbKqlouPCzh_c=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/06/26/brasil_pega_italia_atras_de_reabilitacao_na_liga_das_nacoes_de_volei.jpg?itok=E-69Kzml">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Brasil pega Itália atrás de reabilitação na Liga das Nações de vôlei">
     <meta name="twitter:description" content="A seleção masculina de vôlei busca a reabilitação na Liga das Nações nesta sexta-feira (26). Às 15h (horário de Brasília), os brasileiros encaram a Itália em Liubliana (Eslovênia), no segundo compromisso da semana número dois da competição.">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/80ieWg7P3ltYs2tbKqlouPCzh_c=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/06/26/brasil_pega_italia_atras_de_reabilitacao_na_liga_das_nacoes_de_volei.jpg?itok=E-69Kzml">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-brasil-pega-italia-atras-de-reabilitacao-na-liga-8db253f8ed.html?post=brasil-pega-it%C3%A1lia-atr%C3%A1s-de-reabilita%C3%A7%C3%A3o-na-liga-das-na%C3%A7%C3%B5es-de-v%C3%B4lei.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-brasil-pega-italia-atras-de-reabilitacao-na-liga-8db253f8ed.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "brasil-pega-itália-atrás-de-reabilitação-na-liga-das-nações-de-vôlei.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

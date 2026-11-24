@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Saúde está em alerta máximo por aumento do sarampo nas Américas">
     <meta property="og:description" content="O Brasil está em alerta máximo por causa dos surtos de sarampo em outros países do continente americano. De acordo com o diretor do Programa Nacional de Imunizações (PNI), Eder Gatti, ações de prevenção e controle estão sendo realizadas de ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-saude-esta-em-alerta-maximo-por-aumento-do-saram-0db0113267.html?post=sa%C3%BAde-est%C3%A1-em-alerta-m%C3%A1ximo-por-aumento-do-sarampo-nas-am%C3%A9ricas.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-saude-esta-em-alerta-maximo-por-aumento-do-saram-0db0113267.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/Q74RH98N5IxvXEZxq1Fhj0op9l8=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/05/10/toms9414.jpg?itok=BlWo9flr" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/Q74RH98N5IxvXEZxq1Fhj0op9l8=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/05/10/toms9414.jpg?itok=BlWo9flr">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Saúde está em alerta máximo por aumento do sarampo nas Américas">
     <meta name="twitter:description" content="O Brasil está em alerta máximo por causa dos surtos de sarampo em outros países do continente americano. De acordo com o diretor do Programa Nacional de Imunizações (PNI), Eder Gatti, ações de prevenção e controle estão sendo realizadas de ">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/Q74RH98N5IxvXEZxq1Fhj0op9l8=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/05/10/toms9414.jpg?itok=BlWo9flr">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-saude-esta-em-alerta-maximo-por-aumento-do-saram-0db0113267.html?post=sa%C3%BAde-est%C3%A1-em-alerta-m%C3%A1ximo-por-aumento-do-sarampo-nas-am%C3%A9ricas.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-saude-esta-em-alerta-maximo-por-aumento-do-saram-0db0113267.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "saúde-está-em-alerta-máximo-por-aumento-do-sarampo-nas-américas.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

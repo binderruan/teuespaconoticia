@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Eleições do Conseg 91 no Campo da Água Verde têm inscrições abertas até">
     <meta property="og:description" content="A comunidade do bairro Campo da Água Verde, em Canoinhas, já pode se mobilizar para participar da eleição da nova diretoria do Conselho Comunitário de Segurança (Conseg 91). O processo eleitoral será realizado no mês de maio e representa um">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-eleicoes-do-conseg-91-no-campo-da-agua-verde-tem-7020aef97a.html?post=elei%C3%A7%C3%B5es-do-conseg-91-no-campo-da-%C3%A1gua-verde-t%C3%AAm-inscri%C3%A7%C3%B5es-abertas-at%C3%A9-30-de-abril.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-eleicoes-do-conseg-91-no-campo-da-agua-verde-tem-7020aef97a.html">
     <meta property="og:image" content="https://teuespaco.com.br/images/uploads/img-20260401-wa0100.jpg" id="og-image">
     <meta property="og:image:secure_url" content="https://teuespaco.com.br/images/uploads/img-20260401-wa0100.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Eleições do Conseg 91 no Campo da Água Verde têm inscrições abertas até">
     <meta name="twitter:description" content="A comunidade do bairro Campo da Água Verde, em Canoinhas, já pode se mobilizar para participar da eleição da nova diretoria do Conselho Comunitário de Segurança (Conseg 91). O processo eleitoral será realizado no mês de maio e representa um">
     <meta name="twitter:image" content="https://teuespaco.com.br/images/uploads/img-20260401-wa0100.jpg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-eleicoes-do-conseg-91-no-campo-da-agua-verde-tem-7020aef97a.html?post=elei%C3%A7%C3%B5es-do-conseg-91-no-campo-da-%C3%A1gua-verde-t%C3%AAm-inscri%C3%A7%C3%B5es-abertas-at%C3%A9-30-de-abril.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-eleicoes-do-conseg-91-no-campo-da-agua-verde-tem-7020aef97a.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "eleições-do-conseg-91-no-campo-da-água-verde-têm-inscrições-abertas-até-30-de-abril.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

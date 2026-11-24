@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="MEC Livros soma 122 mil empréstimos gratuitos em apenas uma semana">
     <meta property="og:description" content="A plataforma MEC Livros do Ministério da Educação (MEC) registrou 122 mil empréstimos gratuitos de obras literárias, desde o anúncio da nova ferramenta, em 1º de abril. A nova biblioteca digital do Brasil já alcançou 291,6 mil usuários. O a">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-mec-livros-soma-122-mil-emprestimos-gratuitos-em-001cba7625.html?post=mec-livros-soma-122-mil-empr%C3%A9stimos-gratuitos-em-apenas-uma-semana.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-mec-livros-soma-122-mil-emprestimos-gratuitos-em-001cba7625.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/4KM5kHhy7YzcF_y0qtneiPQxNz0=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/04/09/img_5014.jpg?itok=ZSKRgqWv" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/4KM5kHhy7YzcF_y0qtneiPQxNz0=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/04/09/img_5014.jpg?itok=ZSKRgqWv">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="MEC Livros soma 122 mil empréstimos gratuitos em apenas uma semana">
     <meta name="twitter:description" content="A plataforma MEC Livros do Ministério da Educação (MEC) registrou 122 mil empréstimos gratuitos de obras literárias, desde o anúncio da nova ferramenta, em 1º de abril. A nova biblioteca digital do Brasil já alcançou 291,6 mil usuários. O a">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/4KM5kHhy7YzcF_y0qtneiPQxNz0=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/04/09/img_5014.jpg?itok=ZSKRgqWv">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-mec-livros-soma-122-mil-emprestimos-gratuitos-em-001cba7625.html?post=mec-livros-soma-122-mil-empr%C3%A9stimos-gratuitos-em-apenas-uma-semana.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-mec-livros-soma-122-mil-emprestimos-gratuitos-em-001cba7625.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "mec-livros-soma-122-mil-empréstimos-gratuitos-em-apenas-uma-semana.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

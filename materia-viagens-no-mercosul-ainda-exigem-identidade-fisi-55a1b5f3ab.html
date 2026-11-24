@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Viagens no Mercosul ainda exigem identidade física">
     <meta property="og:description" content="Com a proximidade de períodos de férias e aumento do fluxo de viagens ao exterior, a Polícia Científica de Santa Catarina faz um alerta aos cidadãos que pretendem se deslocar para outros países. Apesar da modernização dos documentos oficiai">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-viagens-no-mercosul-ainda-exigem-identidade-fisi-55a1b5f3ab.html?post=viagens-no-mercosul-ainda-exigem-identidade-f%C3%ADsica.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-viagens-no-mercosul-ainda-exigem-identidade-fisi-55a1b5f3ab.html">
     <meta property="og:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/33512214-b91d-4684-bec3-2ef1f214d0e7.jpeg" id="og-image">
     <meta property="og:image:secure_url" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/33512214-b91d-4684-bec3-2ef1f214d0e7.jpeg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Viagens no Mercosul ainda exigem identidade física">
     <meta name="twitter:description" content="Com a proximidade de períodos de férias e aumento do fluxo de viagens ao exterior, a Polícia Científica de Santa Catarina faz um alerta aos cidadãos que pretendem se deslocar para outros países. Apesar da modernização dos documentos oficiai">
     <meta name="twitter:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/33512214-b91d-4684-bec3-2ef1f214d0e7.jpeg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-viagens-no-mercosul-ainda-exigem-identidade-fisi-55a1b5f3ab.html?post=viagens-no-mercosul-ainda-exigem-identidade-f%C3%ADsica.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-viagens-no-mercosul-ainda-exigem-identidade-fisi-55a1b5f3ab.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "viagens-no-mercosul-ainda-exigem-identidade-física.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

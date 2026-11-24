@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Mutirão do Ministério da Saúde atende mulheres neste fim de semana">
     <meta property="og:description" content="O Ministério da Saúde realiza neste final de semana um mutirão inédito destinado exclusivamente a mulheres. Centenas de hospitais públicos, privados e filantrópicos localizados em todas as regiões do país abrirão as portas neste sábado (21)">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-mutirao-do-ministerio-da-saude-atende-mulheres-n-a96e5a7aed.html?post=mutir%C3%A3o-do-minist%C3%A9rio-da-sa%C3%BAde-atende-mulheres-neste-fim-de-semana.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-mutirao-do-ministerio-da-saude-atende-mulheres-n-a96e5a7aed.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/ZaAOl_V0iwzJY2YzMQzKUvCIhEk=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/07/05/mutirao-hospitais-mc_abr_05072025-23.jpg?itok=kKtKuZQw" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/ZaAOl_V0iwzJY2YzMQzKUvCIhEk=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/07/05/mutirao-hospitais-mc_abr_05072025-23.jpg?itok=kKtKuZQw">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mutirão do Ministério da Saúde atende mulheres neste fim de semana">
     <meta name="twitter:description" content="O Ministério da Saúde realiza neste final de semana um mutirão inédito destinado exclusivamente a mulheres. Centenas de hospitais públicos, privados e filantrópicos localizados em todas as regiões do país abrirão as portas neste sábado (21)">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/ZaAOl_V0iwzJY2YzMQzKUvCIhEk=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/07/05/mutirao-hospitais-mc_abr_05072025-23.jpg?itok=kKtKuZQw">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-mutirao-do-ministerio-da-saude-atende-mulheres-n-a96e5a7aed.html?post=mutir%C3%A3o-do-minist%C3%A9rio-da-sa%C3%BAde-atende-mulheres-neste-fim-de-semana.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-mutirao-do-ministerio-da-saude-atende-mulheres-n-a96e5a7aed.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "mutirão-do-ministério-da-saúde-atende-mulheres-neste-fim-de-semana.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

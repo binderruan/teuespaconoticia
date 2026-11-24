@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Operação da PF combate organização que fraudava licitações">
     <meta property="og:description" content="A Polícia Federal (PF) deflagrou, nesta quarta-feira (25), a Operação Vassalos para apurar crimes em licitações. A investigação aponta para uma organização composta por agentes públicos e privados suspeita de desviar recursos públicos oriun">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-operacao-da-pf-combate-organizacao-que-fraudava--68c154b140.html?post=opera%C3%A7%C3%A3o-da-pf-combate-organiza%C3%A7%C3%A3o-que-fraudava-licita%C3%A7%C3%B5es.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-operacao-da-pf-combate-organizacao-que-fraudava--68c154b140.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/XsqOU_ahXydmemy8bhqk9soTRd4=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/25/d425f78c-f212-4556-8e39-840ea61c2e77.jpeg?itok=cRSXpBql" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/XsqOU_ahXydmemy8bhqk9soTRd4=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/25/d425f78c-f212-4556-8e39-840ea61c2e77.jpeg?itok=cRSXpBql">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Operação da PF combate organização que fraudava licitações">
     <meta name="twitter:description" content="A Polícia Federal (PF) deflagrou, nesta quarta-feira (25), a Operação Vassalos para apurar crimes em licitações. A investigação aponta para uma organização composta por agentes públicos e privados suspeita de desviar recursos públicos oriun">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/XsqOU_ahXydmemy8bhqk9soTRd4=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/25/d425f78c-f212-4556-8e39-840ea61c2e77.jpeg?itok=cRSXpBql">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-operacao-da-pf-combate-organizacao-que-fraudava--68c154b140.html?post=opera%C3%A7%C3%A3o-da-pf-combate-organiza%C3%A7%C3%A3o-que-fraudava-licita%C3%A7%C3%B5es.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-operacao-da-pf-combate-organizacao-que-fraudava--68c154b140.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "operação-da-pf-combate-organização-que-fraudava-licitações.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

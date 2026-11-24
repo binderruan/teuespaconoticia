@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Operação conjunta prende dois membros de organização criminosa na Grande">
     <meta property="og:description" content="A Polícia Civil por meio da Delegacia de Repressão ao Crime Organizado (DRACO/DEIC) e a Polícia Militar por meio do Batalhão de Choque (BPCHOQUE) e do 21 BPM deflagraram, na manhã de hoje (19) , uma operação integrada para desarticular uma ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-operacao-conjunta-prende-dois-membros-de-organiz-d33452f057.html?post=opera%C3%A7%C3%A3o-conjunta-prende-dois-membros-de-organiza%C3%A7%C3%A3o-criminosa-na-grande-florian%C3%B3polis.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-operacao-conjunta-prende-dois-membros-de-organiz-d33452f057.html">
     <meta property="og:image" content="https://www.agorafloripa.com.br/wp-content/uploads/2026/02/298-2-Foto-Divulgacao-MPSC-Agora-Floripa-1140x570.png" id="og-image">
     <meta property="og:image:secure_url" content="https://www.agorafloripa.com.br/wp-content/uploads/2026/02/298-2-Foto-Divulgacao-MPSC-Agora-Floripa-1140x570.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Operação conjunta prende dois membros de organização criminosa na Grande">
     <meta name="twitter:description" content="A Polícia Civil por meio da Delegacia de Repressão ao Crime Organizado (DRACO/DEIC) e a Polícia Militar por meio do Batalhão de Choque (BPCHOQUE) e do 21 BPM deflagraram, na manhã de hoje (19) , uma operação integrada para desarticular uma ">
     <meta name="twitter:image" content="https://www.agorafloripa.com.br/wp-content/uploads/2026/02/298-2-Foto-Divulgacao-MPSC-Agora-Floripa-1140x570.png">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-operacao-conjunta-prende-dois-membros-de-organiz-d33452f057.html?post=opera%C3%A7%C3%A3o-conjunta-prende-dois-membros-de-organiza%C3%A7%C3%A3o-criminosa-na-grande-florian%C3%B3polis.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-operacao-conjunta-prende-dois-membros-de-organiz-d33452f057.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "operação-conjunta-prende-dois-membros-de-organização-criminosa-na-grande-florianópolis.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

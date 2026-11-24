@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Nova regra do Pix amplia prazo para contestar golpe">
     <meta property="og:description" content="Uma nova regra do Pix amplia, a partir desta terça-feira (1º), de 30 para 80 dias o prazo para contestar uma devolução realizada pelo Mecanismo Especial de Devolução (MED) quando houver suspeita de fraude. A mudança foi estabelecida pelo Ba">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-nova-regra-do-pix-amplia-prazo-para-contestar-go-1ed87c6e48.html?post=nova-regra-do-pix-amplia-prazo-para-contestar-golpe.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-nova-regra-do-pix-amplia-prazo-para-contestar-go-1ed87c6e48.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/0UkqRTGCjY15ZI7P8spWZgaQotA=/390x240/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/20/_mg_8269.jpg?itok=xlJIWGUE" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/0UkqRTGCjY15ZI7P8spWZgaQotA=/390x240/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/20/_mg_8269.jpg?itok=xlJIWGUE">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Nova regra do Pix amplia prazo para contestar golpe">
     <meta name="twitter:description" content="Uma nova regra do Pix amplia, a partir desta terça-feira (1º), de 30 para 80 dias o prazo para contestar uma devolução realizada pelo Mecanismo Especial de Devolução (MED) quando houver suspeita de fraude. A mudança foi estabelecida pelo Ba">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/0UkqRTGCjY15ZI7P8spWZgaQotA=/390x240/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/20/_mg_8269.jpg?itok=xlJIWGUE">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-nova-regra-do-pix-amplia-prazo-para-contestar-go-1ed87c6e48.html?post=nova-regra-do-pix-amplia-prazo-para-contestar-golpe.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-nova-regra-do-pix-amplia-prazo-para-contestar-go-1ed87c6e48.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "nova-regra-do-pix-amplia-prazo-para-contestar-golpe.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

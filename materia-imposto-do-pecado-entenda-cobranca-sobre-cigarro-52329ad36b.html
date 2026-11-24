@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Imposto do pecado: entenda cobrança sobre cigarros, bebidas e veículos">
     <meta property="og:description" content="Após meses de negociação com os setores atingidos, o governo federal publicou, na quarta-feira (4), a Medida Provisória (MP) 1.399/2026, que estabelece as alíquotas do Imposto Seletivo (IS), conhecido como “Imposto do Pecado”. Criado pela r">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-imposto-do-pecado-entenda-cobranca-sobre-cigarro-52329ad36b.html?post=imposto-do-pecado-entenda-cobran%C3%A7a-sobre-cigarros-bebidas-e-ve%C3%ADculos.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-imposto-do-pecado-entenda-cobranca-sobre-cigarro-52329ad36b.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/TmQNdETt-iTwLh71XPUnXDleRGs=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/vinhos_vac_abr_2907221152.jpg?itok=UCA8yxn-" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/TmQNdETt-iTwLh71XPUnXDleRGs=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/vinhos_vac_abr_2907221152.jpg?itok=UCA8yxn-">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Imposto do pecado: entenda cobrança sobre cigarros, bebidas e veículos">
     <meta name="twitter:description" content="Após meses de negociação com os setores atingidos, o governo federal publicou, na quarta-feira (4), a Medida Provisória (MP) 1.399/2026, que estabelece as alíquotas do Imposto Seletivo (IS), conhecido como “Imposto do Pecado”. Criado pela r">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/TmQNdETt-iTwLh71XPUnXDleRGs=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/vinhos_vac_abr_2907221152.jpg?itok=UCA8yxn-">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-imposto-do-pecado-entenda-cobranca-sobre-cigarro-52329ad36b.html?post=imposto-do-pecado-entenda-cobran%C3%A7a-sobre-cigarros-bebidas-e-ve%C3%ADculos.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-imposto-do-pecado-entenda-cobranca-sobre-cigarro-52329ad36b.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "imposto-do-pecado-entenda-cobrança-sobre-cigarros-bebidas-e-veículos.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Empresas deverão informar trabalhadores sobre cânceres e vacina">
     <meta property="og:description" content="A partir desta segunda-feira (6/4), empresas de todo o país deverão orientar seus funcionários sobre campanhas oficiais de vacinação contra o HPV e sobre o acesso a serviços de diagnósticos de cânceres de mama, próstata e de colo do útero. ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-empresas-deverao-informar-trabalhadores-sobre-ca-320b1197f1.html?post=empresas-dever%C3%A3o-informar-trabalhadores-sobre-c%C3%A2nceres-e-vacina.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-empresas-deverao-informar-trabalhadores-sobre-ca-320b1197f1.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/SfggUUhOqRF5D3RV5mXncY4nv64=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/atoms/image/906768-hpv_vascina_-2788.jpg?itok=vmPKwXUX" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/SfggUUhOqRF5D3RV5mXncY4nv64=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/atoms/image/906768-hpv_vascina_-2788.jpg?itok=vmPKwXUX">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Empresas deverão informar trabalhadores sobre cânceres e vacina">
     <meta name="twitter:description" content="A partir desta segunda-feira (6/4), empresas de todo o país deverão orientar seus funcionários sobre campanhas oficiais de vacinação contra o HPV e sobre o acesso a serviços de diagnósticos de cânceres de mama, próstata e de colo do útero. ">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/SfggUUhOqRF5D3RV5mXncY4nv64=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/atoms/image/906768-hpv_vascina_-2788.jpg?itok=vmPKwXUX">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-empresas-deverao-informar-trabalhadores-sobre-ca-320b1197f1.html?post=empresas-dever%C3%A3o-informar-trabalhadores-sobre-c%C3%A2nceres-e-vacina.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-empresas-deverao-informar-trabalhadores-sobre-ca-320b1197f1.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "empresas-deverão-informar-trabalhadores-sobre-cânceres-e-vacina.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Busto de Dandara é inaugurado em Padre Miguel no Rio de Janeiro">
     <meta property="og:description" content="Na véspera do Dia da Consciência Negra, um busto da líder quilombola Dandara foi inaugurado nesta quinta-feira (19) na Praça RC1, em Padre Miguel, na zona oeste do Rio de Janeiro. Ela está a cerca de 200 metros do busto de Zumbi dos Palmare">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-19-busto-de-dandara-e-ina-5cd6687ad9.html?post=agencia-brasil-2026-11-19-busto-de-dandara-e-inaugurado-em-padre-miguel-no-rio-de-janeiro.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-19-busto-de-dandara-e-ina-5cd6687ad9.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/BfUo_KQ4ZpspSyNjSGO7VjWSPDY=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/19/toms6807.jpg?itok=mIcZEYDT" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/BfUo_KQ4ZpspSyNjSGO7VjWSPDY=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/19/toms6807.jpg?itok=mIcZEYDT">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Busto de Dandara é inaugurado em Padre Miguel no Rio de Janeiro">
     <meta name="twitter:description" content="Na véspera do Dia da Consciência Negra, um busto da líder quilombola Dandara foi inaugurado nesta quinta-feira (19) na Praça RC1, em Padre Miguel, na zona oeste do Rio de Janeiro. Ela está a cerca de 200 metros do busto de Zumbi dos Palmare">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/BfUo_KQ4ZpspSyNjSGO7VjWSPDY=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/19/toms6807.jpg?itok=mIcZEYDT">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-19-busto-de-dandara-e-ina-5cd6687ad9.html?post=agencia-brasil-2026-11-19-busto-de-dandara-e-inaugurado-em-padre-miguel-no-rio-de-janeiro.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-19-busto-de-dandara-e-ina-5cd6687ad9.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "agencia-brasil-2026-11-19-busto-de-dandara-e-inaugurado-em-padre-miguel-no-rio-de-janeiro.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

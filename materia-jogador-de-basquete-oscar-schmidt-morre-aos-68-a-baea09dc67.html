@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Jogador de basquete Oscar Schmidt morre aos 68 anos em São Paulo">
     <meta property="og:description" content="Oscar Schmidt, um dos maiores nomes da história do basquete mundial faleceu nesta sexta-feira (17), em São Paulo. O atleta enfrentou um tumor cerebral por cerca de 15 anos. &quot;Reconhecido por sua trajetória brilhante dentro das quadras e por ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-jogador-de-basquete-oscar-schmidt-morre-aos-68-a-baea09dc67.html?post=jogador-de-basquete-oscar-schmidt-morre-aos-68-anos-em-s%C3%A3o-paulo.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-jogador-de-basquete-oscar-schmidt-morre-aos-68-a-baea09dc67.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/i8liwvsooEroIAVHZNDLEu7-D-o=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/04/17/nossa_lenda_oscarschmidt14_participou_do_jogo_das_celebridades_do_nbaallstar_2017_nesta_s.jpg?itok=U_owzykg" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/i8liwvsooEroIAVHZNDLEu7-D-o=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/04/17/nossa_lenda_oscarschmidt14_participou_do_jogo_das_celebridades_do_nbaallstar_2017_nesta_s.jpg?itok=U_owzykg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Jogador de basquete Oscar Schmidt morre aos 68 anos em São Paulo">
     <meta name="twitter:description" content="Oscar Schmidt, um dos maiores nomes da história do basquete mundial faleceu nesta sexta-feira (17), em São Paulo. O atleta enfrentou um tumor cerebral por cerca de 15 anos. &quot;Reconhecido por sua trajetória brilhante dentro das quadras e por ">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/i8liwvsooEroIAVHZNDLEu7-D-o=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/04/17/nossa_lenda_oscarschmidt14_participou_do_jogo_das_celebridades_do_nbaallstar_2017_nesta_s.jpg?itok=U_owzykg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-jogador-de-basquete-oscar-schmidt-morre-aos-68-a-baea09dc67.html?post=jogador-de-basquete-oscar-schmidt-morre-aos-68-anos-em-s%C3%A3o-paulo.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-jogador-de-basquete-oscar-schmidt-morre-aos-68-a-baea09dc67.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "jogador-de-basquete-oscar-schmidt-morre-aos-68-anos-em-são-paulo.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Investigados na Cash Out moveram R$ 11 bilhões, diz MPF">
     <meta property="og:description" content="O grupo investigado na Operação Cash Out movimentou cerca de R$ 11 bilhões em 2025, mas declarou apenas R$ 2 bilhões às autoridades, segundo o Ministério Público Federal (MPF). De acordo com os investigadores, recursos de origem ilícita for">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-18-investigados-na-cash-o-3595b18e66.html?post=agencia-brasil-2026-11-18-investigados-na-cash-out-moveram-r-11-bilhoes-diz-mpf.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-18-investigados-na-cash-o-3595b18e66.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/BHmnISA12JukuiZNXM4JdXn6guY=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/18/operacao_cash_out.jpg?itok=oQ_UD_L6" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/BHmnISA12JukuiZNXM4JdXn6guY=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/18/operacao_cash_out.jpg?itok=oQ_UD_L6">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Investigados na Cash Out moveram R$ 11 bilhões, diz MPF">
     <meta name="twitter:description" content="O grupo investigado na Operação Cash Out movimentou cerca de R$ 11 bilhões em 2025, mas declarou apenas R$ 2 bilhões às autoridades, segundo o Ministério Público Federal (MPF). De acordo com os investigadores, recursos de origem ilícita for">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/BHmnISA12JukuiZNXM4JdXn6guY=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/18/operacao_cash_out.jpg?itok=oQ_UD_L6">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-18-investigados-na-cash-o-3595b18e66.html?post=agencia-brasil-2026-11-18-investigados-na-cash-out-moveram-r-11-bilhoes-diz-mpf.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-18-investigados-na-cash-o-3595b18e66.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "agencia-brasil-2026-11-18-investigados-na-cash-out-moveram-r-11-bilhoes-diz-mpf.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Receita antecipa liberação do programa do IRPF 2026 para download">
     <meta property="og:description" content="A Receita Federal antecipou a liberação do Programa Gerador da Declaração do Imposto de Renda da Pessoa Física (PGD IRPF 2026), permitindo que contribuintes iniciem o preenchimento antes do prazo inicialmente previsto. A disponibilização do">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-receita-antecipa-liberacao-do-programa-do-irpf-2-c9020525bb.html?post=receita-antecipa-libera%C3%A7%C3%A3o-do-programa-do-irpf-2026-para-download.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-receita-antecipa-liberacao-do-programa-do-irpf-2-c9020525bb.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/lLv-xkAc-G4FNOeXQCakk_MqUcI=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/03/16/whatsapp_image_2026-03-16_at_16.06.333.jpg?itok=vmQkVnqN" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/lLv-xkAc-G4FNOeXQCakk_MqUcI=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/03/16/whatsapp_image_2026-03-16_at_16.06.333.jpg?itok=vmQkVnqN">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Receita antecipa liberação do programa do IRPF 2026 para download">
     <meta name="twitter:description" content="A Receita Federal antecipou a liberação do Programa Gerador da Declaração do Imposto de Renda da Pessoa Física (PGD IRPF 2026), permitindo que contribuintes iniciem o preenchimento antes do prazo inicialmente previsto. A disponibilização do">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/lLv-xkAc-G4FNOeXQCakk_MqUcI=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/03/16/whatsapp_image_2026-03-16_at_16.06.333.jpg?itok=vmQkVnqN">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-receita-antecipa-liberacao-do-programa-do-irpf-2-c9020525bb.html?post=receita-antecipa-libera%C3%A7%C3%A3o-do-programa-do-irpf-2026-para-download.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-receita-antecipa-liberacao-do-programa-do-irpf-2-c9020525bb.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "receita-antecipa-liberação-do-programa-do-irpf-2026-para-download.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

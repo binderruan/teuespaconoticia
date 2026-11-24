@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Deputada de SP tem entrada na Cisjordânia negada por governo de Israel">
     <meta property="og:description" content="A deputada estadual Monica Seixas (PSOL-SP) foi impedida de entrar em território palestino quando desembarcou no Aeroporto Internacional de Ben-Gurion, em Israel, nesse domingo (22). A parlamentar tinha como destino final a Cisjordânia, ond">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-23-deputada-de-sp-tem-ent-0f89323895.html?post=agencia-brasil-2026-11-23-deputada-de-sp-tem-entrada-na-cisjordania-negada-por-governo-de-israel.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-23-deputada-de-sp-tem-ent-0f89323895.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/YbJXpyLKzO8zEebqoSB0p_L8bCY=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/23/f960x540-67818_141893_0.jpg?itok=qUjcGOxp" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/YbJXpyLKzO8zEebqoSB0p_L8bCY=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/23/f960x540-67818_141893_0.jpg?itok=qUjcGOxp">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Deputada de SP tem entrada na Cisjordânia negada por governo de Israel">
     <meta name="twitter:description" content="A deputada estadual Monica Seixas (PSOL-SP) foi impedida de entrar em território palestino quando desembarcou no Aeroporto Internacional de Ben-Gurion, em Israel, nesse domingo (22). A parlamentar tinha como destino final a Cisjordânia, ond">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/YbJXpyLKzO8zEebqoSB0p_L8bCY=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/23/f960x540-67818_141893_0.jpg?itok=qUjcGOxp">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-23-deputada-de-sp-tem-ent-0f89323895.html?post=agencia-brasil-2026-11-23-deputada-de-sp-tem-entrada-na-cisjordania-negada-por-governo-de-israel.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-23-deputada-de-sp-tem-ent-0f89323895.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "agencia-brasil-2026-11-23-deputada-de-sp-tem-entrada-na-cisjordania-negada-por-governo-de-israel.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

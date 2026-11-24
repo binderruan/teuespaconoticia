@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Gustavo Marques é suspenso por fala machista contra árbitra">
     <meta property="og:description" content="O Tribunal de Justiça Desportiva do Estado de São Paulo (TJD-SP) puniu o zagueiro Gustavo Marques, do Bragantino, com uma suspensão de 12 jogos por causa das declarações machistas feitas contra a árbitra Daiane Muniz após partida contra o S">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-gustavo-marques-e-suspenso-por-fala-machista-con-5f35258883.html?post=gustavo-marques-%C3%A9-suspenso-por-fala-machista-contra-%C3%A1rbitra.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-gustavo-marques-e-suspenso-por-fala-machista-con-5f35258883.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/lXi-lWEZo5RRb3cE_K5eIU4AKBk=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/23/55096240009_4a4fc41f9c_o.jpg?itok=B4vPm78Y" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/lXi-lWEZo5RRb3cE_K5eIU4AKBk=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/23/55096240009_4a4fc41f9c_o.jpg?itok=B4vPm78Y">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Gustavo Marques é suspenso por fala machista contra árbitra">
     <meta name="twitter:description" content="O Tribunal de Justiça Desportiva do Estado de São Paulo (TJD-SP) puniu o zagueiro Gustavo Marques, do Bragantino, com uma suspensão de 12 jogos por causa das declarações machistas feitas contra a árbitra Daiane Muniz após partida contra o S">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/lXi-lWEZo5RRb3cE_K5eIU4AKBk=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/23/55096240009_4a4fc41f9c_o.jpg?itok=B4vPm78Y">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-gustavo-marques-e-suspenso-por-fala-machista-con-5f35258883.html?post=gustavo-marques-%C3%A9-suspenso-por-fala-machista-contra-%C3%A1rbitra.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-gustavo-marques-e-suspenso-por-fala-machista-con-5f35258883.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "gustavo-marques-é-suspenso-por-fala-machista-contra-árbitra.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

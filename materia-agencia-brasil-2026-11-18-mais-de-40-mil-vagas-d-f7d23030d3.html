@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Mais de 40 mil vagas de estágio serão abertas até o início de 2027">
     <meta property="og:description" content="Entre o fim de 2026 e o início de 2027, o Centro de Integração Empresa-Escola (CIEE) projeta que 42 mil vagas de estágio e aprendizagem devem abrir em todo o país. O período entre novembro e fevereiro é mais aquecido para quem busca uma opo">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-18-mais-de-40-mil-vagas-d-f7d23030d3.html?post=agencia-brasil-2026-11-18-mais-de-40-mil-vagas-de-estagio-serao-abertas-ate-o-inicio-de-2027.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-18-mais-de-40-mil-vagas-d-f7d23030d3.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/Z2mNsQ5lWQL4xHhftpdFlqEw8ws=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/15/pzzb0527.jpg?itok=LIjqokwH" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/Z2mNsQ5lWQL4xHhftpdFlqEw8ws=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/15/pzzb0527.jpg?itok=LIjqokwH">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mais de 40 mil vagas de estágio serão abertas até o início de 2027">
     <meta name="twitter:description" content="Entre o fim de 2026 e o início de 2027, o Centro de Integração Empresa-Escola (CIEE) projeta que 42 mil vagas de estágio e aprendizagem devem abrir em todo o país. O período entre novembro e fevereiro é mais aquecido para quem busca uma opo">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/Z2mNsQ5lWQL4xHhftpdFlqEw8ws=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/15/pzzb0527.jpg?itok=LIjqokwH">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-18-mais-de-40-mil-vagas-d-f7d23030d3.html?post=agencia-brasil-2026-11-18-mais-de-40-mil-vagas-de-estagio-serao-abertas-ate-o-inicio-de-2027.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-18-mais-de-40-mil-vagas-d-f7d23030d3.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "agencia-brasil-2026-11-18-mais-de-40-mil-vagas-de-estagio-serao-abertas-ate-o-inicio-de-2027.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

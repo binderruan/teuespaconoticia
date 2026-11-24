@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="CBMSC abre inscrições para curso de primeiros socorros na educação">
     <meta property="og:description" content="Pelo terceiro ano consecutivo, o Corpo de Bombeiros Militar de Santa Catarina (CBMSC) disponibiliza o Curso de Noções de Primeiros Socorros para Profissionais da Educação. Com mais de 13 mil pessoas certificadas, a capacitação prepara os pa">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-curso-de-nocoes-de-primeiros-socorros-para-profi-17f5ec724c.html?post=curso-de-no%C3%A7%C3%B5es-de-primeiros-socorros-para-profissionais-da-educa%C3%A7%C3%A3o-do-cbmsc-abre-inscri%C3%A7%C3%B5es.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-curso-de-nocoes-de-primeiros-socorros-para-profi-17f5ec724c.html">
     <meta property="og:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/Banner-CBAE-e-Lei-Lucas_Banner-site-LEI-LUCAS-1138x519-1.png" id="og-image">
     <meta property="og:image:secure_url" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/Banner-CBAE-e-Lei-Lucas_Banner-site-LEI-LUCAS-1138x519-1.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="CBMSC abre inscrições para curso de primeiros socorros na educação">
     <meta name="twitter:description" content="Pelo terceiro ano consecutivo, o Corpo de Bombeiros Militar de Santa Catarina (CBMSC) disponibiliza o Curso de Noções de Primeiros Socorros para Profissionais da Educação. Com mais de 13 mil pessoas certificadas, a capacitação prepara os pa">
     <meta name="twitter:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/Banner-CBAE-e-Lei-Lucas_Banner-site-LEI-LUCAS-1138x519-1.png">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-curso-de-nocoes-de-primeiros-socorros-para-profi-17f5ec724c.html?post=curso-de-no%C3%A7%C3%B5es-de-primeiros-socorros-para-profissionais-da-educa%C3%A7%C3%A3o-do-cbmsc-abre-inscri%C3%A7%C3%B5es.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-curso-de-nocoes-de-primeiros-socorros-para-profi-17f5ec724c.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "curso-de-noções-de-primeiros-socorros-para-profissionais-da-educação-do-cbmsc-abre-inscrições.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

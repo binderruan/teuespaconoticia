@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Caso Master: Fachin encaminha à PGR citações a quatro ministros do STF">
     <meta property="og:description" content="O presidente do Supremo Tribunal Federal (STF), ministro Edson Fachin, decidiu nesta quinta-feira (19) enviar à Procuradoria-Geral da República (PGR) quatro relatórios produzidos pela Polícia Federal (PF) sobre menções a ministros da Corte ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-19-caso-master-fachin-enc-498a81cfec.html?post=agencia-brasil-2026-11-19-caso-master-fachin-encaminha-a-pgr-citacoes-a-quatro-ministros-do-stf.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-19-caso-master-fachin-enc-498a81cfec.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/CAkMlRo1nXtCNzcZ8o43w9Z5W5Y=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/02/abertura-stf-mc_abr_30012026-9.jpg?itok=pwBEFW-j" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/CAkMlRo1nXtCNzcZ8o43w9Z5W5Y=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/02/abertura-stf-mc_abr_30012026-9.jpg?itok=pwBEFW-j">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Caso Master: Fachin encaminha à PGR citações a quatro ministros do STF">
     <meta name="twitter:description" content="O presidente do Supremo Tribunal Federal (STF), ministro Edson Fachin, decidiu nesta quinta-feira (19) enviar à Procuradoria-Geral da República (PGR) quatro relatórios produzidos pela Polícia Federal (PF) sobre menções a ministros da Corte ">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/CAkMlRo1nXtCNzcZ8o43w9Z5W5Y=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/02/abertura-stf-mc_abr_30012026-9.jpg?itok=pwBEFW-j">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-19-caso-master-fachin-enc-498a81cfec.html?post=agencia-brasil-2026-11-19-caso-master-fachin-encaminha-a-pgr-citacoes-a-quatro-ministros-do-stf.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-19-caso-master-fachin-enc-498a81cfec.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "agencia-brasil-2026-11-19-caso-master-fachin-encaminha-a-pgr-citacoes-a-quatro-ministros-do-stf.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Banco Digimais é alvo de operação da Polícia Federal">
     <meta property="og:description" content="A Polícia Federal (23) está desde cedo nas ruas para cumprir mandados judiciais no âmbito da Operação Miragem, deflagrada nesta terça-feira (23) para apurar crimes contra o Sistema Financeiro Nacional, previstos na Lei nº 7.492/1986. O alvo">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-banco-digimais-e-alvo-de-operacao-da-policia-fed-c37b387b1c.html?post=banco-digimais-%C3%A9-alvo-de-opera%C3%A7%C3%A3o-da-pol%C3%ADcia-federal.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-banco-digimais-e-alvo-de-operacao-da-policia-fed-c37b387b1c.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/gTrCuUWOWAKRFB_jUhmSkHTqgBQ=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/03/26/pf_reprime_esquema_de_lavagem_de_capitais_e_de_evasao_de_divisas_em_sp_e_em_sc.jpg?itok=YQvCzeUD" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/gTrCuUWOWAKRFB_jUhmSkHTqgBQ=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/03/26/pf_reprime_esquema_de_lavagem_de_capitais_e_de_evasao_de_divisas_em_sp_e_em_sc.jpg?itok=YQvCzeUD">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Banco Digimais é alvo de operação da Polícia Federal">
     <meta name="twitter:description" content="A Polícia Federal (23) está desde cedo nas ruas para cumprir mandados judiciais no âmbito da Operação Miragem, deflagrada nesta terça-feira (23) para apurar crimes contra o Sistema Financeiro Nacional, previstos na Lei nº 7.492/1986. O alvo">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/gTrCuUWOWAKRFB_jUhmSkHTqgBQ=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/03/26/pf_reprime_esquema_de_lavagem_de_capitais_e_de_evasao_de_divisas_em_sp_e_em_sc.jpg?itok=YQvCzeUD">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-banco-digimais-e-alvo-de-operacao-da-policia-fed-c37b387b1c.html?post=banco-digimais-%C3%A9-alvo-de-opera%C3%A7%C3%A3o-da-pol%C3%ADcia-federal.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-banco-digimais-e-alvo-de-operacao-da-policia-fed-c37b387b1c.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "banco-digimais-é-alvo-de-operação-da-polícia-federal.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

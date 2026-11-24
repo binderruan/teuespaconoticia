@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="PF investiga ligação de policiais com facção criminosa">
     <meta property="og:description" content="A Polícia Federal (PF) cumpre, nesta quarta-feira (7), sete mandados de prisão preventiva e 18 de busca e apreensão contra um grupo acusado de ligações com facção criminosa do Rio de Janeiro. A PF investiga crimes como venda ilegal de fuzis">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-pf-investiga-ligacao-de-policiais-com-faccao-cri-d7c0020f95.html?post=pf-investiga-liga%C3%A7%C3%A3o-de-policiais-com-fac%C3%A7%C3%A3o-criminosa.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-pf-investiga-ligacao-de-policiais-com-faccao-cri-d7c0020f95.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/ITqS-EAFBGEcE9aiJ_L0U-ovLe0=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/06/25/5567b7d4-978e-4fcc-a678-e2eb7228d598.png?itok=tJBS7P2o" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/ITqS-EAFBGEcE9aiJ_L0U-ovLe0=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/06/25/5567b7d4-978e-4fcc-a678-e2eb7228d598.png?itok=tJBS7P2o">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="PF investiga ligação de policiais com facção criminosa">
     <meta name="twitter:description" content="A Polícia Federal (PF) cumpre, nesta quarta-feira (7), sete mandados de prisão preventiva e 18 de busca e apreensão contra um grupo acusado de ligações com facção criminosa do Rio de Janeiro. A PF investiga crimes como venda ilegal de fuzis">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/ITqS-EAFBGEcE9aiJ_L0U-ovLe0=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/06/25/5567b7d4-978e-4fcc-a678-e2eb7228d598.png?itok=tJBS7P2o">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-pf-investiga-ligacao-de-policiais-com-faccao-cri-d7c0020f95.html?post=pf-investiga-liga%C3%A7%C3%A3o-de-policiais-com-fac%C3%A7%C3%A3o-criminosa.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-pf-investiga-ligacao-de-policiais-com-faccao-cri-d7c0020f95.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "pf-investiga-ligação-de-policiais-com-facção-criminosa.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

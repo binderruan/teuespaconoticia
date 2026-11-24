@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="PF mira grupo suspeito de desviar encomendas postais">
     <meta property="og:description" content="A Polícia Federal (PF) cumpre três mandados de prisão preventiva nesta quarta-feira (9), contra suspeitos de furtar encomendas enviadas pelos correios, por meio do uso de documentos falsificados. Também estão sendo cumpridos oito mandados d">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-pf-mira-grupo-suspeito-de-desviar-encomendas-pos-99a77db038.html?post=pf-mira-grupo-suspeito-de-desviar-encomendas-postais.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-pf-mira-grupo-suspeito-de-desviar-encomendas-pos-99a77db038.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/rgmAZtlqzkVBpnsv-qIq2YwPk98=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/23/148071d2-0c90-415c-bacb-ffeddedd7d1a.jpg?itok=P6gW5NdB" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/rgmAZtlqzkVBpnsv-qIq2YwPk98=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/23/148071d2-0c90-415c-bacb-ffeddedd7d1a.jpg?itok=P6gW5NdB">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="PF mira grupo suspeito de desviar encomendas postais">
     <meta name="twitter:description" content="A Polícia Federal (PF) cumpre três mandados de prisão preventiva nesta quarta-feira (9), contra suspeitos de furtar encomendas enviadas pelos correios, por meio do uso de documentos falsificados. Também estão sendo cumpridos oito mandados d">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/rgmAZtlqzkVBpnsv-qIq2YwPk98=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/23/148071d2-0c90-415c-bacb-ffeddedd7d1a.jpg?itok=P6gW5NdB">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-pf-mira-grupo-suspeito-de-desviar-encomendas-pos-99a77db038.html?post=pf-mira-grupo-suspeito-de-desviar-encomendas-postais.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-pf-mira-grupo-suspeito-de-desviar-encomendas-pos-99a77db038.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "pf-mira-grupo-suspeito-de-desviar-encomendas-postais.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

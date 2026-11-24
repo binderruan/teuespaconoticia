@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Estudo revela como redes sociais moldam relação de jovens com política">
     <meta property="og:description" content="Um estudo entre jovens brasileiros com idade de 21 a 34 anos mostrou que a intermediação das redes sociais na forma como a juventude se relaciona com a política tem causado profundas transformações. Isolamento, personificação e polarização ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-estudo-revela-como-redes-sociais-moldam-relacao--ada202fb98.html?post=estudo-revela-como-redes-sociais-moldam-rela%C3%A7%C3%A3o-de-jovens-com-pol%C3%ADtica.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-estudo-revela-como-redes-sociais-moldam-relacao--ada202fb98.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/Xa61eSNRs3GLw3bTeTzNk5THW_0=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/25/fotonosistema.jpg?itok=l0Ijkqfj" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/Xa61eSNRs3GLw3bTeTzNk5THW_0=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/25/fotonosistema.jpg?itok=l0Ijkqfj">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Estudo revela como redes sociais moldam relação de jovens com política">
     <meta name="twitter:description" content="Um estudo entre jovens brasileiros com idade de 21 a 34 anos mostrou que a intermediação das redes sociais na forma como a juventude se relaciona com a política tem causado profundas transformações. Isolamento, personificação e polarização ">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/Xa61eSNRs3GLw3bTeTzNk5THW_0=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/25/fotonosistema.jpg?itok=l0Ijkqfj">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-estudo-revela-como-redes-sociais-moldam-relacao--ada202fb98.html?post=estudo-revela-como-redes-sociais-moldam-rela%C3%A7%C3%A3o-de-jovens-com-pol%C3%ADtica.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-estudo-revela-como-redes-sociais-moldam-relacao--ada202fb98.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "estudo-revela-como-redes-sociais-moldam-relação-de-jovens-com-política.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

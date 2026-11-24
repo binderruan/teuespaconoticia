@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Candidatos ao Enem têm até a noite desta segunda para pagar inscrição">
     <meta property="og:description" content="Os candidatos ao Exame Nacional do Ensino Médio (Enem) 2026 até as 23 horas e 59 minutos desta segunda-feira (22) para pagar os R$ 85 da taxa de inscrição. A Guia de Recolhimento da União (GRU Cobrança) pode ser obtida na Página do Particip">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-candidatos-ao-enem-tem-ate-a-noite-desta-segunda-0b05331e86.html?post=candidatos-ao-enem-t%C3%AAm-at%C3%A9-a-noite-desta-segunda-para-pagar-inscri%C3%A7%C3%A3o.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-candidatos-ao-enem-tem-ate-a-noite-desta-segunda-0b05331e86.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/0wvnd21V8aESIxG0UNUDaIpyfj0=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/sam-balye-w1fwdvirezu-unsplash.jpg?itok=zSYht3Ts" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/0wvnd21V8aESIxG0UNUDaIpyfj0=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/sam-balye-w1fwdvirezu-unsplash.jpg?itok=zSYht3Ts">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Candidatos ao Enem têm até a noite desta segunda para pagar inscrição">
     <meta name="twitter:description" content="Os candidatos ao Exame Nacional do Ensino Médio (Enem) 2026 até as 23 horas e 59 minutos desta segunda-feira (22) para pagar os R$ 85 da taxa de inscrição. A Guia de Recolhimento da União (GRU Cobrança) pode ser obtida na Página do Particip">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/0wvnd21V8aESIxG0UNUDaIpyfj0=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/sam-balye-w1fwdvirezu-unsplash.jpg?itok=zSYht3Ts">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-candidatos-ao-enem-tem-ate-a-noite-desta-segunda-0b05331e86.html?post=candidatos-ao-enem-t%C3%AAm-at%C3%A9-a-noite-desta-segunda-para-pagar-inscri%C3%A7%C3%A3o.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-candidatos-ao-enem-tem-ate-a-noite-desta-segunda-0b05331e86.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "candidatos-ao-enem-têm-até-a-noite-desta-segunda-para-pagar-inscrição.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

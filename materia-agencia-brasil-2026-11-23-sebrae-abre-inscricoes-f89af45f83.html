@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Sebrae abre inscrições para empreendedores negros">
     <meta property="og:description" content="O Serviço Brasileiro de Apoio às Micro e Pequenas Empresas (Sebrae) está com inscrições abertas para formar um grupo de empreendedores para atuar numa plataforma digital de negócios entre os mercados brasileiro e africano. A ideia é selecio">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-23-sebrae-abre-inscricoes-f89af45f83.html?post=agencia-brasil-2026-11-23-sebrae-abre-inscricoes-para-empreendedores-negros.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-23-sebrae-abre-inscricoes-f89af45f83.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/d53aN4g4JLVOhIXtgtbipdmd_0E=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/_dsc6105rj.jpg?itok=9xS4LhDr" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/d53aN4g4JLVOhIXtgtbipdmd_0E=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/_dsc6105rj.jpg?itok=9xS4LhDr">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Sebrae abre inscrições para empreendedores negros">
     <meta name="twitter:description" content="O Serviço Brasileiro de Apoio às Micro e Pequenas Empresas (Sebrae) está com inscrições abertas para formar um grupo de empreendedores para atuar numa plataforma digital de negócios entre os mercados brasileiro e africano. A ideia é selecio">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/d53aN4g4JLVOhIXtgtbipdmd_0E=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/_dsc6105rj.jpg?itok=9xS4LhDr">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-23-sebrae-abre-inscricoes-f89af45f83.html?post=agencia-brasil-2026-11-23-sebrae-abre-inscricoes-para-empreendedores-negros.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-23-sebrae-abre-inscricoes-f89af45f83.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "agencia-brasil-2026-11-23-sebrae-abre-inscricoes-para-empreendedores-negros.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

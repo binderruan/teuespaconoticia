@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="São Paulo e Santa Catarina sofrem 52% do impacto do tarifaço dos EUA">
     <meta property="og:description" content="Os estados de São Paulo e Santa Catarina concentram 52% do impacto do mais recente tarifaço anunciado pelos Estados Unidos (EUA) contra o Brasil. Dos US$ 7,4 bilhões em vendas afetadas pelas tarifas de 25%, US$ 3 bilhões têm origem em São P">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-sao-paulo-e-santa-catarina-sofrem-52-do-impacto--36af0a38a3.html?post=s%C3%A3o-paulo-e-santa-catarina-sofrem-52-do-impacto-do-tarifa%C3%A7o-dos-eua.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-sao-paulo-e-santa-catarina-sofrem-52-do-impacto--36af0a38a3.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/Y8acZ_LKm05wTBTEVK7T7Yf27TA=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/12/15/pzzb4349.jpg?itok=3_akSdXF" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/Y8acZ_LKm05wTBTEVK7T7Yf27TA=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/12/15/pzzb4349.jpg?itok=3_akSdXF">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="São Paulo e Santa Catarina sofrem 52% do impacto do tarifaço dos EUA">
     <meta name="twitter:description" content="Os estados de São Paulo e Santa Catarina concentram 52% do impacto do mais recente tarifaço anunciado pelos Estados Unidos (EUA) contra o Brasil. Dos US$ 7,4 bilhões em vendas afetadas pelas tarifas de 25%, US$ 3 bilhões têm origem em São P">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/Y8acZ_LKm05wTBTEVK7T7Yf27TA=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/12/15/pzzb4349.jpg?itok=3_akSdXF">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-sao-paulo-e-santa-catarina-sofrem-52-do-impacto--36af0a38a3.html?post=s%C3%A3o-paulo-e-santa-catarina-sofrem-52-do-impacto-do-tarifa%C3%A7o-dos-eua.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-sao-paulo-e-santa-catarina-sofrem-52-do-impacto--36af0a38a3.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "são-paulo-e-santa-catarina-sofrem-52-do-impacto-do-tarifaço-dos-eua.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

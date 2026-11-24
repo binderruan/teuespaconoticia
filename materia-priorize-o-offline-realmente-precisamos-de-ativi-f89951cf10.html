@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Começa primeira etapa do Censo da Educação Básica 2026">
     <meta property="og:description" content="\ Escolas de todo o país – públicas ou privadas – precisam repassar ao Ministério da Educação (MEC), a partir desta terça-feira (27), dados sobre matrícula, turmas, profissionais e infraestrutura. As informações devem ser inseridas na plata">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-priorize-o-offline-realmente-precisamos-de-ativi-f89951cf10.html?post=priorize-o-offline-realmente-precisamos-de-atividades-fora-do-celular-e-das-redes-sociais-se-conectar-online-%C3%A9-muito-f%C3%A1cil-mas-tamb%C3%A9m-muito-mais-raso-o-tempo-compartilhado-no-offline-cria-as-melhores-mem%C3%B3rias-piadas-internas-e-a-sensa%C3%A7%C3%A3o-de-rea.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-priorize-o-offline-realmente-precisamos-de-ativi-f89951cf10.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/VegJFZlJUAALKbGpiKrk-3j1WhE=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024/09/05/toms5445.jpg?itok=Cewp6ygv" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/VegJFZlJUAALKbGpiKrk-3j1WhE=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024/09/05/toms5445.jpg?itok=Cewp6ygv">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Começa primeira etapa do Censo da Educação Básica 2026">
     <meta name="twitter:description" content="\ Escolas de todo o país – públicas ou privadas – precisam repassar ao Ministério da Educação (MEC), a partir desta terça-feira (27), dados sobre matrícula, turmas, profissionais e infraestrutura. As informações devem ser inseridas na plata">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/VegJFZlJUAALKbGpiKrk-3j1WhE=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024/09/05/toms5445.jpg?itok=Cewp6ygv">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-priorize-o-offline-realmente-precisamos-de-ativi-f89951cf10.html?post=priorize-o-offline-realmente-precisamos-de-atividades-fora-do-celular-e-das-redes-sociais-se-conectar-online-%C3%A9-muito-f%C3%A1cil-mas-tamb%C3%A9m-muito-mais-raso-o-tempo-compartilhado-no-offline-cria-as-melhores-mem%C3%B3rias-piadas-internas-e-a-sensa%C3%A7%C3%A3o-de-rea.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-priorize-o-offline-realmente-precisamos-de-ativi-f89951cf10.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "priorize-o-offline-realmente-precisamos-de-atividades-fora-do-celular-e-das-redes-sociais-se-conectar-online-é-muito-fácil-mas-também-muito-mais-raso-o-tempo-compartilhado-no-offline-cria-as-melhores-memórias-piadas-internas-e-a-sensação-de-rea.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

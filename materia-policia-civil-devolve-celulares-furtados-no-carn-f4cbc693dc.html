@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Polícia Civil devolve celulares furtados no Carnaval e reforça proteção">
     <meta property="og:description" content="A Polícia Civil de Santa Catarina iniciou a devolução de aparelhos celulares furtados durante o Carnaval em diversas regiões do Estado. A restituição dos dispositivos ocorre de forma coordenada pelas unidades policiais responsáveis pelas oc">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-policia-civil-devolve-celulares-furtados-no-carn-f4cbc693dc.html?post=pol%C3%ADcia-civil-devolve-celulares-furtados-no-carnaval-e-refor%C3%A7a-prote%C3%A7%C3%A3o-%C3%A0s-mulheres.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-policia-civil-devolve-celulares-furtados-no-carn-f4cbc693dc.html">
     <meta property="og:image" content="https://cruzeirodovale.com.br/imgs/noticias/46030/images/home-site-600x400-2026-02-20t105445-628.jpg" id="og-image">
     <meta property="og:image:secure_url" content="https://cruzeirodovale.com.br/imgs/noticias/46030/images/home-site-600x400-2026-02-20t105445-628.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Polícia Civil devolve celulares furtados no Carnaval e reforça proteção">
     <meta name="twitter:description" content="A Polícia Civil de Santa Catarina iniciou a devolução de aparelhos celulares furtados durante o Carnaval em diversas regiões do Estado. A restituição dos dispositivos ocorre de forma coordenada pelas unidades policiais responsáveis pelas oc">
     <meta name="twitter:image" content="https://cruzeirodovale.com.br/imgs/noticias/46030/images/home-site-600x400-2026-02-20t105445-628.jpg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-policia-civil-devolve-celulares-furtados-no-carn-f4cbc693dc.html?post=pol%C3%ADcia-civil-devolve-celulares-furtados-no-carnaval-e-refor%C3%A7a-prote%C3%A7%C3%A3o-%C3%A0s-mulheres.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-policia-civil-devolve-celulares-furtados-no-carn-f4cbc693dc.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "polícia-civil-devolve-celulares-furtados-no-carnaval-e-reforça-proteção-às-mulheres.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

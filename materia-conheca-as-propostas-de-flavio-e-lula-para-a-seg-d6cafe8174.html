@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Conheça as propostas de Flávio e Lula para a segurança pública">
     <meta property="og:description" content="Os dois candidatos à Presidência da República que disputarão o segundo turno da eleição deste ano dedicam parte considerável de seus planos de governo para apresentar propostas para a segurança pública. Com formas diferentes de atuação, tem">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-conheca-as-propostas-de-flavio-e-lula-para-a-seg-d6cafe8174.html?post=conhe%C3%A7a-as-propostas-de-fl%C3%A1vio-e-lula-para-a-seguran%C3%A7a-p%C3%BAblica.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-conheca-as-propostas-de-flavio-e-lula-para-a-seg-d6cafe8174.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/i6LlYBeer_m1Dil-b6wEX5Z6CPU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/10/28/_d6a9627_1.jpg?itok=6LzyQ0Vv" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/i6LlYBeer_m1Dil-b6wEX5Z6CPU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/10/28/_d6a9627_1.jpg?itok=6LzyQ0Vv">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Conheça as propostas de Flávio e Lula para a segurança pública">
     <meta name="twitter:description" content="Os dois candidatos à Presidência da República que disputarão o segundo turno da eleição deste ano dedicam parte considerável de seus planos de governo para apresentar propostas para a segurança pública. Com formas diferentes de atuação, tem">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/i6LlYBeer_m1Dil-b6wEX5Z6CPU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/10/28/_d6a9627_1.jpg?itok=6LzyQ0Vv">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-conheca-as-propostas-de-flavio-e-lula-para-a-seg-d6cafe8174.html?post=conhe%C3%A7a-as-propostas-de-fl%C3%A1vio-e-lula-para-a-seguran%C3%A7a-p%C3%BAblica.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-conheca-as-propostas-de-flavio-e-lula-para-a-seg-d6cafe8174.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "conheça-as-propostas-de-flávio-e-lula-para-a-segurança-pública.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

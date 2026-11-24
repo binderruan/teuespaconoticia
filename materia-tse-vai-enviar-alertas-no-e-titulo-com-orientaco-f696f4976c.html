@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="TSE vai enviar alertas no e-Título com orientações para eleições">
     <meta property="og:description" content="A duas semanas do primeiro turno das Eleições 2026, marcado para 4 de outubro, o Tribunal Superior Eleitoral (TSE) começou a enviar, nesta quinta-feira (17), notificações oficiais aos eleitores pelo aplicativo e-Título. Os alertas trazem or">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-tse-vai-enviar-alertas-no-e-titulo-com-orientaco-f696f4976c.html?post=tse-vai-enviar-alertas-no-e-t%C3%ADtulo-com-orienta%C3%A7%C3%B5es-para-elei%C3%A7%C3%B5es.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-tse-vai-enviar-alertas-no-e-titulo-com-orientaco-f696f4976c.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/4qwrO2G2Ivn0gbp2Y4QhpDALToI=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024/09/03/0d7a0242.jpg?itok=b9rg9EMg" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/4qwrO2G2Ivn0gbp2Y4QhpDALToI=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024/09/03/0d7a0242.jpg?itok=b9rg9EMg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="TSE vai enviar alertas no e-Título com orientações para eleições">
     <meta name="twitter:description" content="A duas semanas do primeiro turno das Eleições 2026, marcado para 4 de outubro, o Tribunal Superior Eleitoral (TSE) começou a enviar, nesta quinta-feira (17), notificações oficiais aos eleitores pelo aplicativo e-Título. Os alertas trazem or">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/4qwrO2G2Ivn0gbp2Y4QhpDALToI=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024/09/03/0d7a0242.jpg?itok=b9rg9EMg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-tse-vai-enviar-alertas-no-e-titulo-com-orientaco-f696f4976c.html?post=tse-vai-enviar-alertas-no-e-t%C3%ADtulo-com-orienta%C3%A7%C3%B5es-para-elei%C3%A7%C3%B5es.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-tse-vai-enviar-alertas-no-e-titulo-com-orientaco-f696f4976c.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "tse-vai-enviar-alertas-no-e-título-com-orientações-para-eleições.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

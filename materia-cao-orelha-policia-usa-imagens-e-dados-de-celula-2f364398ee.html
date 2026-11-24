@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Cão Orelha: polícia usa imagens e dados de celular para desvendar caso">
     <meta property="og:description" content="A Polícia Civil de Santa Catarina encerrou as investigações sobre as agressões que levaram o cão Orelha à morte e pediu a internação de um dos quatro adolescentes envolvidos no crime. Para conseguir provar a participação do autor — que não ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-cao-orelha-policia-usa-imagens-e-dados-de-celula-2f364398ee.html?post=c%C3%A3o-orelha-pol%C3%ADcia-usa-imagens-e-dados-de-celular-para-desvendar-caso.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-cao-orelha-policia-usa-imagens-e-dados-de-celula-2f364398ee.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/tkF3vo4xieS4RUcGkJJO9Irw2dg=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/04/infografico_caso_cachorro_orelha.jpg?itok=t2jyCbUh" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/tkF3vo4xieS4RUcGkJJO9Irw2dg=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/04/infografico_caso_cachorro_orelha.jpg?itok=t2jyCbUh">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Cão Orelha: polícia usa imagens e dados de celular para desvendar caso">
     <meta name="twitter:description" content="A Polícia Civil de Santa Catarina encerrou as investigações sobre as agressões que levaram o cão Orelha à morte e pediu a internação de um dos quatro adolescentes envolvidos no crime. Para conseguir provar a participação do autor — que não ">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/tkF3vo4xieS4RUcGkJJO9Irw2dg=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/02/04/infografico_caso_cachorro_orelha.jpg?itok=t2jyCbUh">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-cao-orelha-policia-usa-imagens-e-dados-de-celula-2f364398ee.html?post=c%C3%A3o-orelha-pol%C3%ADcia-usa-imagens-e-dados-de-celular-para-desvendar-caso.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-cao-orelha-policia-usa-imagens-e-dados-de-celula-2f364398ee.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "cão-orelha-polícia-usa-imagens-e-dados-de-celular-para-desvendar-caso.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

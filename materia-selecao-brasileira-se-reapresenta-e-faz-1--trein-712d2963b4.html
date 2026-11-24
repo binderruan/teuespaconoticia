@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Seleção brasileira se reapresenta e faz 1º treino para encarar Haiti">
     <meta property="og:description" content="A seleção brasileira se reapresentou no fim da tarde desta segunda-feira (15) no Columbia Park, centro de treinamento do New York Red Bulls, em Morristown. Após os jogadores terem o último domingo (14) de folga, o técnico Carlo Ancelotti co">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-selecao-brasileira-se-reapresenta-e-faz-1--trein-712d2963b4.html?post=sele%C3%A7%C3%A3o-brasileira-se-reapresenta-e-faz-1%C2%BA-treino-para-encarar-haiti.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-selecao-brasileira-se-reapresenta-e-faz-1--trein-712d2963b4.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/hVq01CM2SMrRJTiZWE_KyHm1Fos=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/06/15/treino_selecao.jpg?itok=uRkwpCUO" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/hVq01CM2SMrRJTiZWE_KyHm1Fos=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/06/15/treino_selecao.jpg?itok=uRkwpCUO">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Seleção brasileira se reapresenta e faz 1º treino para encarar Haiti">
     <meta name="twitter:description" content="A seleção brasileira se reapresentou no fim da tarde desta segunda-feira (15) no Columbia Park, centro de treinamento do New York Red Bulls, em Morristown. Após os jogadores terem o último domingo (14) de folga, o técnico Carlo Ancelotti co">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/hVq01CM2SMrRJTiZWE_KyHm1Fos=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/06/15/treino_selecao.jpg?itok=uRkwpCUO">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-selecao-brasileira-se-reapresenta-e-faz-1--trein-712d2963b4.html?post=sele%C3%A7%C3%A3o-brasileira-se-reapresenta-e-faz-1%C2%BA-treino-para-encarar-haiti.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-selecao-brasileira-se-reapresenta-e-faz-1--trein-712d2963b4.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "seleção-brasileira-se-reapresenta-e-faz-1º-treino-para-encarar-haiti.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

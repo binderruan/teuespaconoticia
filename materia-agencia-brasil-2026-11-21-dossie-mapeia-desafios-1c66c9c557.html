@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Dossiê mapeia desafios do ensino de matemática e sugere soluções">
     <meta property="og:description" content="A aprendizagem é um direito de todos e todas no Brasil. A afirmação está no “Dossiê Aprendizagens em Matemática: Evidências, políticas e estratégias”, publicado pelo Observatório Fundação Itaú, e lançado nesta sexta-feira (20), em São Luís,">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-21-dossie-mapeia-desafios-1c66c9c557.html?post=agencia-brasil-2026-11-21-dossie-mapeia-desafios-do-ensino-de-matematica-e-sugere-solucoes.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-21-dossie-mapeia-desafios-1c66c9c557.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/ObW6pU69JGOCN3YIMvdiUiUxJJI=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/21/dsc08235.jpg?itok=N6TT5mJu" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/ObW6pU69JGOCN3YIMvdiUiUxJJI=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/21/dsc08235.jpg?itok=N6TT5mJu">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Dossiê mapeia desafios do ensino de matemática e sugere soluções">
     <meta name="twitter:description" content="A aprendizagem é um direito de todos e todas no Brasil. A afirmação está no “Dossiê Aprendizagens em Matemática: Evidências, políticas e estratégias”, publicado pelo Observatório Fundação Itaú, e lançado nesta sexta-feira (20), em São Luís,">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/ObW6pU69JGOCN3YIMvdiUiUxJJI=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/21/dsc08235.jpg?itok=N6TT5mJu">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-21-dossie-mapeia-desafios-1c66c9c557.html?post=agencia-brasil-2026-11-21-dossie-mapeia-desafios-do-ensino-de-matematica-e-sugere-solucoes.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-21-dossie-mapeia-desafios-1c66c9c557.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "agencia-brasil-2026-11-21-dossie-mapeia-desafios-do-ensino-de-matematica-e-sugere-solucoes.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

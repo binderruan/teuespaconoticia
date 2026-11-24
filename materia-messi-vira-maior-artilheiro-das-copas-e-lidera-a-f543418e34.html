@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Messi vira maior artilheiro das copas e lidera Argentina em estreia">
     <meta property="og:description" content="Os atuais campeões iniciaram a busca pelo tetra da Copa do Mundo em noite histórica para Lionel Messi. Com três gols do craque, o chamado hat-trick, a Argentina venceu a Argélia por 3 a 0 nessa terça-feira (16), em Kansas City, pela abertur">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-messi-vira-maior-artilheiro-das-copas-e-lidera-a-f543418e34.html?post=messi-vira-maior-artilheiro-das-copas-e-lidera-argentina-em-estreia.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-messi-vira-maior-artilheiro-das-copas-e-lidera-a-f543418e34.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/SYMvHZdTDtj3MKjtkmeIBbSiDsw=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/06/17/2026-06-17t014627z_784972550_up1em6h04xdws_rtrmadp_3_soccer-worldcup-arg-dza.jpg?itok=N0hb6Y6F" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/SYMvHZdTDtj3MKjtkmeIBbSiDsw=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/06/17/2026-06-17t014627z_784972550_up1em6h04xdws_rtrmadp_3_soccer-worldcup-arg-dza.jpg?itok=N0hb6Y6F">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Messi vira maior artilheiro das copas e lidera Argentina em estreia">
     <meta name="twitter:description" content="Os atuais campeões iniciaram a busca pelo tetra da Copa do Mundo em noite histórica para Lionel Messi. Com três gols do craque, o chamado hat-trick, a Argentina venceu a Argélia por 3 a 0 nessa terça-feira (16), em Kansas City, pela abertur">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/SYMvHZdTDtj3MKjtkmeIBbSiDsw=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/06/17/2026-06-17t014627z_784972550_up1em6h04xdws_rtrmadp_3_soccer-worldcup-arg-dza.jpg?itok=N0hb6Y6F">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-messi-vira-maior-artilheiro-das-copas-e-lidera-a-f543418e34.html?post=messi-vira-maior-artilheiro-das-copas-e-lidera-argentina-em-estreia.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-messi-vira-maior-artilheiro-das-copas-e-lidera-a-f543418e34.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "messi-vira-maior-artilheiro-das-copas-e-lidera-argentina-em-estreia.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

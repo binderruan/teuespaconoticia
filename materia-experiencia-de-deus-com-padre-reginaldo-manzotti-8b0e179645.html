@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Experiência de Deus, com Padre Reginaldo Manzotti, estreia na programação">
     <meta property="og:description" content="A Rádio e Jornal Teu Espaço amplia sua programação e passa a transmitir o programa Experiência de Deus, apresentado pelo Padre Reginaldo Manzotti, uma das atrações de evangelização de maior alcance da Rede Evangelizar. A novidade chega para">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-experiencia-de-deus-com-padre-reginaldo-manzotti-8b0e179645.html?post=experi%C3%AAncia-de-deus-com-padre-reginaldo-manzotti-estreia-na-programa%C3%A7%C3%A3o-da-r%C3%A1dio-e-jornal-teu-espa%C3%A7o.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-experiencia-de-deus-com-padre-reginaldo-manzotti-8b0e179645.html">
     <meta property="og:image" content="https://catve.com/images/2022/12/21/167165125063a35fb2d744b.jpg?1805919642" id="og-image">
     <meta property="og:image:secure_url" content="https://catve.com/images/2022/12/21/167165125063a35fb2d744b.jpg?1805919642">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Experiência de Deus, com Padre Reginaldo Manzotti, estreia na programação">
     <meta name="twitter:description" content="A Rádio e Jornal Teu Espaço amplia sua programação e passa a transmitir o programa Experiência de Deus, apresentado pelo Padre Reginaldo Manzotti, uma das atrações de evangelização de maior alcance da Rede Evangelizar. A novidade chega para">
     <meta name="twitter:image" content="https://catve.com/images/2022/12/21/167165125063a35fb2d744b.jpg?1805919642">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-experiencia-de-deus-com-padre-reginaldo-manzotti-8b0e179645.html?post=experi%C3%AAncia-de-deus-com-padre-reginaldo-manzotti-estreia-na-programa%C3%A7%C3%A3o-da-r%C3%A1dio-e-jornal-teu-espa%C3%A7o.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-experiencia-de-deus-com-padre-reginaldo-manzotti-8b0e179645.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "experiência-de-deus-com-padre-reginaldo-manzotti-estreia-na-programação-da-rádio-e-jornal-teu-espaço.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

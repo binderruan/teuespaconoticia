@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Com presença permanente nos municípios, Polícia Militar reduz furtos e">
     <meta property="og:description" content="Em comparação ao ano passado (2025), houve uma redução de 22% no número de furtos A Polícia Militar de Santa Catarina (PMSC) finalizou na quarta-feira, 18, a Operação Alegria 2026. O levantamento aponta que o policiamento foi intenso e que ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-com-presenca-permanente-nos-municipios-policia-m-521d79a6ed.html?post=com-presen%C3%A7a-permanente-nos-munic%C3%ADpios-pol%C3%ADcia-militar-reduz-furtos-e-roubos-na-opera%C3%A7%C3%A3o-alegria-2026.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-com-presenca-permanente-nos-municipios-policia-m-521d79a6ed.html">
     <meta property="og:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/WhatsApp-Image-2026-02-18-at-15.52.14-2.jpeg" id="og-image">
     <meta property="og:image:secure_url" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/WhatsApp-Image-2026-02-18-at-15.52.14-2.jpeg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Com presença permanente nos municípios, Polícia Militar reduz furtos e">
     <meta name="twitter:description" content="Em comparação ao ano passado (2025), houve uma redução de 22% no número de furtos A Polícia Militar de Santa Catarina (PMSC) finalizou na quarta-feira, 18, a Operação Alegria 2026. O levantamento aponta que o policiamento foi intenso e que ">
     <meta name="twitter:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/02/WhatsApp-Image-2026-02-18-at-15.52.14-2.jpeg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-com-presenca-permanente-nos-municipios-policia-m-521d79a6ed.html?post=com-presen%C3%A7a-permanente-nos-munic%C3%ADpios-pol%C3%ADcia-militar-reduz-furtos-e-roubos-na-opera%C3%A7%C3%A3o-alegria-2026.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-com-presenca-permanente-nos-municipios-policia-m-521d79a6ed.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "com-presença-permanente-nos-municípios-polícia-militar-reduz-furtos-e-roubos-na-operação-alegria-2026.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

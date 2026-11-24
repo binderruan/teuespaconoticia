@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="INSS: entenda casos que permitem auxílio e aposentadoria sem carência">
     <meta property="og:description" content="Atualmente, 18 condições de saúde dão direito ao auxílio por incapacidade temporária, conhecido popularmente como auxílio-doença, e à aposentadoria por incapacidade permanente, a antiga aposentadoria por invalidez, sem que seja necessário p">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-inss-entenda-casos-que-permitem-auxilio-e-aposen-08c6bbdbfd.html?post=inss-entenda-casos-que-permitem-aux%C3%ADlio-e-aposentadoria-sem-car%C3%AAncia.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-inss-entenda-casos-que-permitem-auxilio-e-aposen-08c6bbdbfd.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/SpKaqLLyCMb8TVarDQJzF-sMmTA=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/20231102_131458.jpg?itok=flvKt1ia" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/SpKaqLLyCMb8TVarDQJzF-sMmTA=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/20231102_131458.jpg?itok=flvKt1ia">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="INSS: entenda casos que permitem auxílio e aposentadoria sem carência">
     <meta name="twitter:description" content="Atualmente, 18 condições de saúde dão direito ao auxílio por incapacidade temporária, conhecido popularmente como auxílio-doença, e à aposentadoria por incapacidade permanente, a antiga aposentadoria por invalidez, sem que seja necessário p">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/SpKaqLLyCMb8TVarDQJzF-sMmTA=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/20231102_131458.jpg?itok=flvKt1ia">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-inss-entenda-casos-que-permitem-auxilio-e-aposen-08c6bbdbfd.html?post=inss-entenda-casos-que-permitem-aux%C3%ADlio-e-aposentadoria-sem-car%C3%AAncia.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-inss-entenda-casos-que-permitem-auxilio-e-aposen-08c6bbdbfd.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "inss-entenda-casos-que-permitem-auxílio-e-aposentadoria-sem-carência.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

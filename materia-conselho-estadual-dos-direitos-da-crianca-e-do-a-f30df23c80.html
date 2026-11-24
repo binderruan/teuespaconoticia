@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Conselho Estadual dos Direitos da Criança e do Adolescente orienta sobre">
     <meta property="og:description" content="O Conselho Estadual dos Direitos da Criança e do Adolescente (Cedca/SC) realiza, no dia 6 de abril, uma transmissão ao vivo sobre as Conferências Municipais dos Direitos da Criança e do Adolescente de 2026. O objetivo é orientar sobre as et">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-conselho-estadual-dos-direitos-da-crianca-e-do-a-f30df23c80.html?post=conselho-estadual-dos-direitos-da-crian%C3%A7a-e-do-adolescente-orienta-sobre-as-confer%C3%AAncias-municipais-de-2026.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-conselho-estadual-dos-direitos-da-crianca-e-do-a-f30df23c80.html">
     <meta property="og:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/03/WhatsApp-Image-2026-03-30-at-14.49.54.jpeg" id="og-image">
     <meta property="og:image:secure_url" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/03/WhatsApp-Image-2026-03-30-at-14.49.54.jpeg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Conselho Estadual dos Direitos da Criança e do Adolescente orienta sobre">
     <meta name="twitter:description" content="O Conselho Estadual dos Direitos da Criança e do Adolescente (Cedca/SC) realiza, no dia 6 de abril, uma transmissão ao vivo sobre as Conferências Municipais dos Direitos da Criança e do Adolescente de 2026. O objetivo é orientar sobre as et">
     <meta name="twitter:image" content="https://estado.sc.gov.br/noticias/wp-content/uploads/sites/3/2026/03/WhatsApp-Image-2026-03-30-at-14.49.54.jpeg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-conselho-estadual-dos-direitos-da-crianca-e-do-a-f30df23c80.html?post=conselho-estadual-dos-direitos-da-crian%C3%A7a-e-do-adolescente-orienta-sobre-as-confer%C3%AAncias-municipais-de-2026.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-conselho-estadual-dos-direitos-da-crianca-e-do-a-f30df23c80.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "conselho-estadual-dos-direitos-da-criança-e-do-adolescente-orienta-sobre-as-conferências-municipais-de-2026.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

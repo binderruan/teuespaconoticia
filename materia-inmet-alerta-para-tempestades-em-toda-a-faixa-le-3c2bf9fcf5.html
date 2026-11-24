@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Inmet alerta para tempestades em toda a faixa leste do país">
     <meta property="og:description" content="Uma área de baixa pressão entre o norte da Argentina, o oeste do Paraguai e o sul da Bolívia aumenta as condições para a ocorrência de tempestades em todo o leste do país, nesta quinta-feira (22). As informações são do Instituto Nacional de">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-inmet-alerta-para-tempestades-em-toda-a-faixa-le-3c2bf9fcf5.html?post=inmet-alerta-para-tempestades-em-toda-a-faixa-leste-do-pa%C3%ADs.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-inmet-alerta-para-tempestades-em-toda-a-faixa-le-3c2bf9fcf5.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/pvvQpGvFjLu9MD__FiyRe3gM0eU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/20/v0030538.jpg?itok=s5aChGd0" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/pvvQpGvFjLu9MD__FiyRe3gM0eU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/20/v0030538.jpg?itok=s5aChGd0">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Inmet alerta para tempestades em toda a faixa leste do país">
     <meta name="twitter:description" content="Uma área de baixa pressão entre o norte da Argentina, o oeste do Paraguai e o sul da Bolívia aumenta as condições para a ocorrência de tempestades em todo o leste do país, nesta quinta-feira (22). As informações são do Instituto Nacional de">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/pvvQpGvFjLu9MD__FiyRe3gM0eU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/20/v0030538.jpg?itok=s5aChGd0">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-inmet-alerta-para-tempestades-em-toda-a-faixa-le-3c2bf9fcf5.html?post=inmet-alerta-para-tempestades-em-toda-a-faixa-leste-do-pa%C3%ADs.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-inmet-alerta-para-tempestades-em-toda-a-faixa-le-3c2bf9fcf5.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "inmet-alerta-para-tempestades-em-toda-a-faixa-leste-do-país.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

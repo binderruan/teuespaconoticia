@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Tempestade e granizo causam prejuízo a 43 municípios no RS">
     <meta property="og:description" content="A Defesa Civil do Rio Grande do Sul informou nesta segunda-feira (20) que 43 municípios relataram danos devido às tempestades, granizo e ventanias que atingem o estado desde a semana passada. Os maiores danos são de quedas de árvore, destel">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-tempestade-e-granizo-causam-prejuizo-a-43-munici-64210a3135.html?post=tempestade-e-granizo-causam-preju%C3%ADzo-a-43-munic%C3%ADpios-no-rs.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-tempestade-e-granizo-causam-prejuizo-a-43-munici-64210a3135.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/msvyH-xhmDAOMCSp1I2UbLykAwk=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/20/whatsapp_image_2026-07-19_at_17.48.25_copy.jpg?itok=53if9QGS" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/msvyH-xhmDAOMCSp1I2UbLykAwk=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/20/whatsapp_image_2026-07-19_at_17.48.25_copy.jpg?itok=53if9QGS">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Tempestade e granizo causam prejuízo a 43 municípios no RS">
     <meta name="twitter:description" content="A Defesa Civil do Rio Grande do Sul informou nesta segunda-feira (20) que 43 municípios relataram danos devido às tempestades, granizo e ventanias que atingem o estado desde a semana passada. Os maiores danos são de quedas de árvore, destel">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/msvyH-xhmDAOMCSp1I2UbLykAwk=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/07/20/whatsapp_image_2026-07-19_at_17.48.25_copy.jpg?itok=53if9QGS">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-tempestade-e-granizo-causam-prejuizo-a-43-munici-64210a3135.html?post=tempestade-e-granizo-causam-preju%C3%ADzo-a-43-munic%C3%ADpios-no-rs.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-tempestade-e-granizo-causam-prejuizo-a-43-munici-64210a3135.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "tempestade-e-granizo-causam-prejuízo-a-43-municípios-no-rs.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

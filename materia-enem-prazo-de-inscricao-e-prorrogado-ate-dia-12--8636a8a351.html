@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Enem: prazo de inscrição é prorrogado até dia 12 de junho">
     <meta property="og:description" content="O Ministério da Educação (MEC) e o Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep) prorrogaram o prazo de inscrição para o Enem 2026 até o dia 12 de junho, próxima sexta-feira. Com isso, os interessados ganham ">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-enem-prazo-de-inscricao-e-prorrogado-ate-dia-12--8636a8a351.html?post=enem-prazo-de-inscri%C3%A7%C3%A3o-%C3%A9-prorrogado-at%C3%A9-dia-12-de-junho.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-enem-prazo-de-inscricao-e-prorrogado-ate-dia-12--8636a8a351.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/qDQUtiaIrgmjpWe3CG1GYwjnNes=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/11/16/enem-mc_abr_16112025-12.jpg?itok=UwOhoatF" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/qDQUtiaIrgmjpWe3CG1GYwjnNes=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/11/16/enem-mc_abr_16112025-12.jpg?itok=UwOhoatF">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Enem: prazo de inscrição é prorrogado até dia 12 de junho">
     <meta name="twitter:description" content="O Ministério da Educação (MEC) e o Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep) prorrogaram o prazo de inscrição para o Enem 2026 até o dia 12 de junho, próxima sexta-feira. Com isso, os interessados ganham ">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/qDQUtiaIrgmjpWe3CG1GYwjnNes=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/11/16/enem-mc_abr_16112025-12.jpg?itok=UwOhoatF">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-enem-prazo-de-inscricao-e-prorrogado-ate-dia-12--8636a8a351.html?post=enem-prazo-de-inscri%C3%A7%C3%A3o-%C3%A9-prorrogado-at%C3%A9-dia-12-de-junho.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-enem-prazo-de-inscricao-e-prorrogado-ate-dia-12--8636a8a351.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "enem-prazo-de-inscrição-é-prorrogado-até-dia-12-de-junho.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

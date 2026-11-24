@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Eleitor que pediu voto em trânsito pode consultar local no e-Título">
     <meta property="og:description" content="O eleitor que solicitou o voto em trânsito para o segundo turno das eleições 2026 deverá votar necessariamente no local para o qual pediu transferência. Não será possível votar na seção original. Caso a pessoa não esteja no município para o">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-eleitor-que-pediu-voto-em-transito-pode-consulta-ef18d5240a.html?post=eleitor-que-pediu-voto-em-tr%C3%A2nsito-pode-consultar-local-no-e-t%C3%ADtulo.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-eleitor-que-pediu-voto-em-transito-pode-consulta-ef18d5240a.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/U_PXy6jnuNqefHh0JD_zxjCkvbw=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024/09/03/0d7a0238.jpg?itok=PRL1g000" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/U_PXy6jnuNqefHh0JD_zxjCkvbw=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024/09/03/0d7a0238.jpg?itok=PRL1g000">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Eleitor que pediu voto em trânsito pode consultar local no e-Título">
     <meta name="twitter:description" content="O eleitor que solicitou o voto em trânsito para o segundo turno das eleições 2026 deverá votar necessariamente no local para o qual pediu transferência. Não será possível votar na seção original. Caso a pessoa não esteja no município para o">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/U_PXy6jnuNqefHh0JD_zxjCkvbw=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024/09/03/0d7a0238.jpg?itok=PRL1g000">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-eleitor-que-pediu-voto-em-transito-pode-consulta-ef18d5240a.html?post=eleitor-que-pediu-voto-em-tr%C3%A2nsito-pode-consultar-local-no-e-t%C3%ADtulo.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-eleitor-que-pediu-voto-em-transito-pode-consulta-ef18d5240a.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "eleitor-que-pediu-voto-em-trânsito-pode-consultar-local-no-e-título.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

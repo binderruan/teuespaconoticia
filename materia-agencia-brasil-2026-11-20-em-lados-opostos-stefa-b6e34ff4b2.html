@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Em lados opostos: Stefani e Dabrowski duelarão na Billie Jean King Cup">
     <meta property="og:description" content="Melhor dupla da temporada, a brasileira Luisa Stefani e canadense Gabriela Dabrowski competirão de lados opostos da quadra nos playoffs da Billie Jean King Cup, principal torneio de tênis feminino entre nações, que este ano ocorre em Vitóri">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-20-em-lados-opostos-stefa-b6e34ff4b2.html?post=agencia-brasil-2026-11-20-em-lados-opostos-stefani-e-dabrowski-duelarao-na-billie-jean-king-cup.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-20-em-lados-opostos-stefa-b6e34ff4b2.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/Ch4-xItA6I276ArtQU-_kvaSKGI=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/09/21/luisa_stefani_e_drabowski_campeas_so_open_2026.jpg?itok=7v71CvD9" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/Ch4-xItA6I276ArtQU-_kvaSKGI=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/09/21/luisa_stefani_e_drabowski_campeas_so_open_2026.jpg?itok=7v71CvD9">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Em lados opostos: Stefani e Dabrowski duelarão na Billie Jean King Cup">
     <meta name="twitter:description" content="Melhor dupla da temporada, a brasileira Luisa Stefani e canadense Gabriela Dabrowski competirão de lados opostos da quadra nos playoffs da Billie Jean King Cup, principal torneio de tênis feminino entre nações, que este ano ocorre em Vitóri">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/Ch4-xItA6I276ArtQU-_kvaSKGI=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/09/21/luisa_stefani_e_drabowski_campeas_so_open_2026.jpg?itok=7v71CvD9">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-20-em-lados-opostos-stefa-b6e34ff4b2.html?post=agencia-brasil-2026-11-20-em-lados-opostos-stefani-e-dabrowski-duelarao-na-billie-jean-king-cup.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-20-em-lados-opostos-stefa-b6e34ff4b2.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "agencia-brasil-2026-11-20-em-lados-opostos-stefani-e-dabrowski-duelarao-na-billie-jean-king-cup.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="França e Argentina podem garantir vaga hoje; confira os jogos da copa">
     <meta property="og:description" content="A segunda rodada dos grupos I e J colocará em campo, nesta segunda-feira (22), as duas seleções finalistas da Copa de 2022. A atual campeã, Argentina, joga às 14h em Dallas contra a Áustria. Na sequência, às 18h, a vice-campeã França enfren">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-franca-e-argentina-podem-garantir-vaga-hoje-conf-9ae61d851f.html?post=fran%C3%A7a-e-argentina-podem-garantir-vaga-hoje-confira-os-jogos-da-copa.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-franca-e-argentina-podem-garantir-vaga-hoje-conf-9ae61d851f.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/sNmn5u1TUN2OIblyDkKeJN8qfYc=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/06/17/2026-06-17t015052z_1693482407_up1em6h054rx0_rtrmadp_3_soccer-worldcup-arg-dza.jpg?itok=pEki6CF7" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/sNmn5u1TUN2OIblyDkKeJN8qfYc=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/06/17/2026-06-17t015052z_1693482407_up1em6h054rx0_rtrmadp_3_soccer-worldcup-arg-dza.jpg?itok=pEki6CF7">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="França e Argentina podem garantir vaga hoje; confira os jogos da copa">
     <meta name="twitter:description" content="A segunda rodada dos grupos I e J colocará em campo, nesta segunda-feira (22), as duas seleções finalistas da Copa de 2022. A atual campeã, Argentina, joga às 14h em Dallas contra a Áustria. Na sequência, às 18h, a vice-campeã França enfren">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/sNmn5u1TUN2OIblyDkKeJN8qfYc=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/06/17/2026-06-17t015052z_1693482407_up1em6h054rx0_rtrmadp_3_soccer-worldcup-arg-dza.jpg?itok=pEki6CF7">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-franca-e-argentina-podem-garantir-vaga-hoje-conf-9ae61d851f.html?post=fran%C3%A7a-e-argentina-podem-garantir-vaga-hoje-confira-os-jogos-da-copa.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-franca-e-argentina-podem-garantir-vaga-hoje-conf-9ae61d851f.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "frança-e-argentina-podem-garantir-vaga-hoje-confira-os-jogos-da-copa.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

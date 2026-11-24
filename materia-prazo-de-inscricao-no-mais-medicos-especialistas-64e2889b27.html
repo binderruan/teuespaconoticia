@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Prazo de inscrição no Mais Médicos Especialistas termina no dia 19">
     <meta property="og:description" content="Médicos de todo o país, com formações específicas, podem se inscrever no projeto Mais Médicos Especialistas (PMM-E) do Ministério da Saúde até às 23 horas e 59 minutos do dia 19 de fevereiro. O edital de chamamento público foi aberto no iní">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-prazo-de-inscricao-no-mais-medicos-especialistas-64e2889b27.html?post=prazo-de-inscri%C3%A7%C3%A3o-no-mais-m%C3%A9dicos-especialistas-termina-no-dia-19.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-prazo-de-inscricao-no-mais-medicos-especialistas-64e2889b27.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/1bTEEtuAoa28Sp2uC4a_cXt-64Y=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/revalida_mcamgo_abr_100720211818.jpg?itok=FZNt9dfo" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/1bTEEtuAoa28Sp2uC4a_cXt-64Y=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/revalida_mcamgo_abr_100720211818.jpg?itok=FZNt9dfo">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Prazo de inscrição no Mais Médicos Especialistas termina no dia 19">
     <meta name="twitter:description" content="Médicos de todo o país, com formações específicas, podem se inscrever no projeto Mais Médicos Especialistas (PMM-E) do Ministério da Saúde até às 23 horas e 59 minutos do dia 19 de fevereiro. O edital de chamamento público foi aberto no iní">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/1bTEEtuAoa28Sp2uC4a_cXt-64Y=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/revalida_mcamgo_abr_100720211818.jpg?itok=FZNt9dfo">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-prazo-de-inscricao-no-mais-medicos-especialistas-64e2889b27.html?post=prazo-de-inscri%C3%A7%C3%A3o-no-mais-m%C3%A9dicos-especialistas-termina-no-dia-19.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-prazo-de-inscricao-no-mais-medicos-especialistas-64e2889b27.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "prazo-de-inscrição-no-mais-médicos-especialistas-termina-no-dia-19.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

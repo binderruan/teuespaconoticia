@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Austrália e Egito, Argentina e Cabo Verde, Colômbia e Gana jogam hoje">
     <meta property="og:description" content="Os três últimos jogos da etapa de mata-mata da Copa do Mundo 2026 acontecem nesta sexta-feira (3). A primeira partida será entre Austrália e Egito. As equipes se enfrentam em Dallas (EUA), às 15h (horário de Brasília). Mais tarde, às 19h, é">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-australia-e-egito-argentina-e-cabo-verde-colombi-143fa4e37f.html?post=austr%C3%A1lia-e-egito-argentina-e-cabo-verde-col%C3%B4mbia-e-gana-jogam-hoje.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-australia-e-egito-argentina-e-cabo-verde-colombi-143fa4e37f.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/uvItHazvcZ_0ku0giEF-0RY9Rgs=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2022-12-13t215256z_720160999_up1eicd1j9vm2_rtrmadp_3_soccer-worldcup-arg-cro-report.jpg?itok=xqEh-sBs" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/uvItHazvcZ_0ku0giEF-0RY9Rgs=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2022-12-13t215256z_720160999_up1eicd1j9vm2_rtrmadp_3_soccer-worldcup-arg-cro-report.jpg?itok=xqEh-sBs">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Austrália e Egito, Argentina e Cabo Verde, Colômbia e Gana jogam hoje">
     <meta name="twitter:description" content="Os três últimos jogos da etapa de mata-mata da Copa do Mundo 2026 acontecem nesta sexta-feira (3). A primeira partida será entre Austrália e Egito. As equipes se enfrentam em Dallas (EUA), às 15h (horário de Brasília). Mais tarde, às 19h, é">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/uvItHazvcZ_0ku0giEF-0RY9Rgs=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2022-12-13t215256z_720160999_up1eicd1j9vm2_rtrmadp_3_soccer-worldcup-arg-cro-report.jpg?itok=xqEh-sBs">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-australia-e-egito-argentina-e-cabo-verde-colombi-143fa4e37f.html?post=austr%C3%A1lia-e-egito-argentina-e-cabo-verde-col%C3%B4mbia-e-gana-jogam-hoje.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-australia-e-egito-argentina-e-cabo-verde-colombi-143fa4e37f.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "austrália-e-egito-argentina-e-cabo-verde-colômbia-e-gana-jogam-hoje.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

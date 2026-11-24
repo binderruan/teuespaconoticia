@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Deputada Talíria Petrone é ameaçada de morte e violência sexual">
     <meta property="og:description" content="A deputada federal Talíria Petrone (Psol- RJ) recebeu ameaça de morte às vésperas do Dia da Consciência Negra, lembrado nessa sexta sexta-feira (20). Segundo a parlamentar, trata-se de ameaça explícita de morte, violência sexual e extermíni">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-21-deputada-taliria-petro-ae235c9497.html?post=agencia-brasil-2026-11-21-deputada-taliria-petrone-e-ameacada-de-morte-e-violencia-sexual.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-agencia-brasil-2026-11-21-deputada-taliria-petro-ae235c9497.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/MV9t9dJxujLL0yB4_p6zQeUoSMk=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/03/img20261014194830229.jpg?itok=NZIuAJOf" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/MV9t9dJxujLL0yB4_p6zQeUoSMk=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/03/img20261014194830229.jpg?itok=NZIuAJOf">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Deputada Talíria Petrone é ameaçada de morte e violência sexual">
     <meta name="twitter:description" content="A deputada federal Talíria Petrone (Psol- RJ) recebeu ameaça de morte às vésperas do Dia da Consciência Negra, lembrado nessa sexta sexta-feira (20). Segundo a parlamentar, trata-se de ameaça explícita de morte, violência sexual e extermíni">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/MV9t9dJxujLL0yB4_p6zQeUoSMk=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/03/img20261014194830229.jpg?itok=NZIuAJOf">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-21-deputada-taliria-petro-ae235c9497.html?post=agencia-brasil-2026-11-21-deputada-taliria-petrone-e-ameacada-de-morte-e-violencia-sexual.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-agencia-brasil-2026-11-21-deputada-taliria-petro-ae235c9497.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "agencia-brasil-2026-11-21-deputada-taliria-petrone-e-ameacada-de-morte-e-violencia-sexual.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

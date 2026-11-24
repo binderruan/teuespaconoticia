@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="CPMRv inicia o 2º curso de Formação de Instrutores de Educação para o Trânsito">
     <meta property="og:description" content="Teve início nesta segunda-feira, 4, na sede do Comando de Polícia Militar Rodoviária (CPMRv), em Florianópolis, o 2º Curso de Formação de Instrutores de Educação para o Trânsito. A capacitação, promovida pelo CPMRv, tem como objetivo especi">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-cpmrv-inicia-o-2--curso-de-formacao-de-instrutor-af61eb9481.html?post=cpmrv-inicia-o-2%C2%BA-curso-de-forma%C3%A7%C3%A3o-de-instrutores-de-educa%C3%A7%C3%A3o-para-o-tr%C3%A2nsito.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-cpmrv-inicia-o-2--curso-de-formacao-de-instrutor-af61eb9481.html">
     <meta property="og:image" content="https://www.pm.sc.gov.br/uploads/05952659950/2026/05/01.jpg" id="og-image">
     <meta property="og:image:secure_url" content="https://www.pm.sc.gov.br/uploads/05952659950/2026/05/01.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="CPMRv inicia o 2º curso de Formação de Instrutores de Educação para o Trânsito">
     <meta name="twitter:description" content="Teve início nesta segunda-feira, 4, na sede do Comando de Polícia Militar Rodoviária (CPMRv), em Florianópolis, o 2º Curso de Formação de Instrutores de Educação para o Trânsito. A capacitação, promovida pelo CPMRv, tem como objetivo especi">
     <meta name="twitter:image" content="https://www.pm.sc.gov.br/uploads/05952659950/2026/05/01.jpg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-cpmrv-inicia-o-2--curso-de-formacao-de-instrutor-af61eb9481.html?post=cpmrv-inicia-o-2%C2%BA-curso-de-forma%C3%A7%C3%A3o-de-instrutores-de-educa%C3%A7%C3%A3o-para-o-tr%C3%A2nsito.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-cpmrv-inicia-o-2--curso-de-formacao-de-instrutor-af61eb9481.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "cpmrv-inicia-o-2º-curso-de-formação-de-instrutores-de-educação-para-o-trânsito.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

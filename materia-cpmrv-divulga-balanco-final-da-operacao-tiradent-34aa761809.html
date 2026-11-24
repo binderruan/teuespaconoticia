@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="CPMRv divulga balanço final da Operação Tiradentes 2026">
     <meta property="og:description" content="A Polícia Militar de Santa Catarina (PMSC), por meio do Comando de Polícia Militar Rodoviária (CPMRv) encerrou na manhã de quarta-feira, 22, a Operação Tiradentes 2026, com foco na fiscalização e segurança das rodovias estaduais de Santa Ca">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-cpmrv-divulga-balanco-final-da-operacao-tiradent-34aa761809.html?post=cpmrv-divulga-balan%C3%A7o-final-da-opera%C3%A7%C3%A3o-tiradentes-2026.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-cpmrv-divulga-balanco-final-da-operacao-tiradent-34aa761809.html">
     <meta property="og:image" content="https://www.pm.sc.gov.br/uploads/00628726996/2026/04/tir1-1776883823.jpg" id="og-image">
     <meta property="og:image:secure_url" content="https://www.pm.sc.gov.br/uploads/00628726996/2026/04/tir1-1776883823.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="CPMRv divulga balanço final da Operação Tiradentes 2026">
     <meta name="twitter:description" content="A Polícia Militar de Santa Catarina (PMSC), por meio do Comando de Polícia Militar Rodoviária (CPMRv) encerrou na manhã de quarta-feira, 22, a Operação Tiradentes 2026, com foco na fiscalização e segurança das rodovias estaduais de Santa Ca">
     <meta name="twitter:image" content="https://www.pm.sc.gov.br/uploads/00628726996/2026/04/tir1-1776883823.jpg">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-cpmrv-divulga-balanco-final-da-operacao-tiradent-34aa761809.html?post=cpmrv-divulga-balan%C3%A7o-final-da-opera%C3%A7%C3%A3o-tiradentes-2026.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-cpmrv-divulga-balanco-final-da-operacao-tiradent-34aa761809.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "cpmrv-divulga-balanço-final-da-operação-tiradentes-2026.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());

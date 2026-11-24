@@ -20,14 +20,14 @@
     <meta property="og:site_name" content="Rádio e Jornal Teu Espaço">
     <meta property="og:title" content="Lula celebra avanço do fim da 6x1 e defende investimento público">
     <meta property="og:description" content="O candidato Luiz Inácio Lula da Silva (PT) passou o dia reunido com a coordenação de campanha, em Brasília. No fim da tarde, fez um pronunciamento à imprensa. Ele falou com otimismo da possibilidade de votação do fim da escala 6x1 no Senado">
-    <meta property="og:url" content="https://teuespaco.com.br/materia-lula-celebra-avanco-do-fim-da-6x1-e-defende-inve-4fd410be1c.html?post=lula-celebra-avan%C3%A7o-do-fim-da-6x1-e-defende-investimento-p%C3%BAblico.md">
+    <meta property="og:url" content="https://teuespaco.com.br/materia-lula-celebra-avanco-do-fim-da-6x1-e-defende-inve-4fd410be1c.html">
     <meta property="og:image" content="https://imagens.ebc.com.br/w-K70zNBVPDFVIg_oaDloACITnI=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/10/08/lula_fala_com_a_imprensa_-_ricardo_stuckert.jpg?itok=3pF2JXFi" id="og-image">
     <meta property="og:image:secure_url" content="https://imagens.ebc.com.br/w-K70zNBVPDFVIg_oaDloACITnI=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/10/08/lula_fala_com_a_imprensa_-_ricardo_stuckert.jpg?itok=3pF2JXFi">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Lula celebra avanço do fim da 6x1 e defende investimento público">
     <meta name="twitter:description" content="O candidato Luiz Inácio Lula da Silva (PT) passou o dia reunido com a coordenação de campanha, em Brasília. No fim da tarde, fez um pronunciamento à imprensa. Ele falou com otimismo da possibilidade de votação do fim da escala 6x1 no Senado">
     <meta name="twitter:image" content="https://imagens.ebc.com.br/w-K70zNBVPDFVIg_oaDloACITnI=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/10/08/lula_fala_com_a_imprensa_-_ricardo_stuckert.jpg?itok=3pF2JXFi">
-    <link rel="canonical" href="https://teuespaco.com.br/materia-lula-celebra-avanco-do-fim-da-6x1-e-defende-inve-4fd410be1c.html?post=lula-celebra-avan%C3%A7o-do-fim-da-6x1-e-defende-investimento-p%C3%BAblico.md">
+    <link rel="canonical" href="https://teuespaco.com.br/materia-lula-celebra-avanco-do-fim-da-6x1-e-defende-inve-4fd410be1c.html">
 
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-72.ico">
     <link rel="shortcut icon" href="images/ico/apple-touch-icon-114.ico">
@@ -131,7 +131,8 @@ article {
     <script type="text/javascript" src="./teuespaco/front/jquery.flexslider-min.js.download"></script>
     <script type="text/javascript" src="./teuespaco/front/ytprefs.min.js.download"></script>
 
-        </head>
+        <script>window.__TEUESPACO_POST_FILE__ = "lula-celebra-avanço-do-fim-da-6x1-e-defende-investimento-público.md";<\/script>
+</head>
         <body data-rsssl="1" class="sfsi_2.43">
 
 
@@ -566,7 +567,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -651,7 +652,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());
