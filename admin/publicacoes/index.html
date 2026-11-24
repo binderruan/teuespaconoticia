@@ -53,7 +53,8 @@
       <div id="reviewStatus" class="status">Modo de revisão: nenhuma publicação será enviada nesta etapa.</div>
     </aside>
   </div>
-  <section class="queue"><h2>Fila de aprovação</h2><p class="muted">Revise os rascunhos e marque como aprovados antes da futura integração de publicação.</p><div id="queueList" class="empty">Nenhum rascunho na fila.</div><div class="status">Atenção: nesta etapa, a fila fica salva somente neste navegador. Aprovar não publica no Facebook.</div></section>\n  <div class="selection"><span id="selectionText">Nenhuma notícia selecionada.</span><span>Modo de revisão</span></div>
+  <section class="queue"><h2>Fila de aprovação</h2><p class="muted">Revise os rascunhos e marque como aprovados antes da futura integração de publicação.</p><div id="queueList" class="empty">Nenhum rascunho na fila.</div><div class="status">Atenção: nesta etapa, a fila fica salva somente neste navegador. Aprovar não publica no Facebook.</div></section>
+  <div class="selection"><span id="selectionText">Nenhuma notícia selecionada.</span><span>Modo de revisão</span></div>
 </main>
 <script>
 (() => {
@@ -63,7 +64,9 @@
   const esc = value => String(value||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   function updateSelection(){ $("selected").textContent=selected.size; $("selectionText").textContent=selected.size?selected.size+" notícia(s) selecionada(s) nesta sessão.":"Nenhuma notícia selecionada."; }
   function makeCaption(item){return item.titulo+"\n\nAcesse e confira:➡️ "+item.link+"\n\n#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";}
-  function saveQueue(){localStorage.setItem("teuespaco-review-queue",JSON.stringify(reviewQueue));renderQueue();}\n  function renderQueue(){const el=$("queueList");if(!reviewQueue.length){el.className="empty";el.textContent="Nenhum rascunho na fila.";return;}el.className="";el.innerHTML=reviewQueue.map((q,i)=>`<div class="queue-item"><div><strong>${esc(q.titulo)}</strong><small>${esc(q.status)}${q.agendado? " · "+esc(new Date(q.agendado).toLocaleString("pt-BR")):" · Sem horário definido"}</small></div><button type="button" data-approve="${i}" ${q.status==="Aprovado"?"disabled":""}>${q.status==="Aprovado"?"Aprovado":"Aprovar"}</button><button type="button" data-remove="${i}">Remover</button></div>`).join("");el.querySelectorAll("[data-approve]").forEach(b=>b.addEventListener("click",()=>{reviewQueue[Number(b.dataset.approve)].status="Aprovado";saveQueue();}));el.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{reviewQueue.splice(Number(b.dataset.remove),1);saveQueue();}));}\n  function showPreview(item){
+  function saveQueue(){localStorage.setItem("teuespaco-review-queue",JSON.stringify(reviewQueue));renderQueue();}
+  function renderQueue(){const el=$("queueList");if(!reviewQueue.length){el.className="empty";el.textContent="Nenhum rascunho na fila.";return;}el.className="";el.innerHTML=reviewQueue.map((q,i)=>`<div class="queue-item"><div><strong>${esc(q.titulo)}</strong><small>${esc(q.status)}${q.agendado? " · "+esc(new Date(q.agendado).toLocaleString("pt-BR")):" · Sem horário definido"}</small></div><button type="button" data-approve="${i}" ${q.status==="Aprovado"?"disabled":""}>${q.status==="Aprovado"?"Aprovado":"Aprovar"}</button><button type="button" data-remove="${i}">Remover</button></div>`).join("");el.querySelectorAll("[data-approve]").forEach(b=>b.addEventListener("click",()=>{reviewQueue[Number(b.dataset.approve)].status="Aprovado";saveQueue();}));el.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{reviewQueue.splice(Number(b.dataset.remove),1);saveQueue();}));}
+  function showPreview(item){
     activeNews=item; $("previewTitle").textContent=item.titulo;$("previewMeta").textContent=[item.data,item.categoria].filter(Boolean).join(" · ");
     $("previewImage").src=item.imagem||"";$("previewLink").href=item.link;$("previewLink").hidden=false;
     $("caption").value=makeCaption(item);$("caption").disabled=false;$("scheduleAt").disabled=false;$("copyCaption").disabled=false;$("prepareReview").disabled=false;
