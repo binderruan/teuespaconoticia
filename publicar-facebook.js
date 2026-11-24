@@ -48,6 +48,33 @@ async function validatePageToken() {
   console.log("Token validado para a Página: " + identity.name + " (" + identity.id + ").");
 }
 
+async function waitForArticlePage(link, title) {
+  // O GitHub faz o push antes do deploy terminar. Aguarda a página pública
+  // responder com os metadados Open Graph antes de pedir a prévia ao Facebook.
+  for (let attempt = 1; attempt <= 30; attempt++) {
+    try {
+      const response = await fetch(link, {
+        headers: { "User-Agent": "facebookexternalhit/1.1" },
+        redirect: "follow"
+      });
+      const html = await response.text();
+      const hasOpenGraph = response.ok
+        && /<meta[^>]+property=["']og:title["']/i.test(html)
+        && /<meta[^>]+property=["']og:image["']/i.test(html)
+        && html.includes("og:title");
+      if (hasOpenGraph && html.includes("og:image")) {
+        console.log("Página da notícia disponível para compartilhamento: " + link);
+        return;
+      }
+      console.log("Aguardando deploy da notícia (" + attempt + "/30). HTTP " + response.status);
+    } catch (error) {
+      console.log("Aguardando página da notícia (" + attempt + "/30): " + error.message);
+    }
+    await new Promise(resolve => setTimeout(resolve, 10000));
+  }
+  throw new Error("A página da notícia não ficou disponível com metadados Open Graph após 5 minutos: " + link);
+}
+
 async function publishToFacebook(message, link) {
   const endpoint = `https://graph.facebook.com/${GRAPH_VERSION}/${PAGE_ID}/feed`;
   const body = new URLSearchParams({ message, link, access_token: PAGE_TOKEN });
@@ -116,10 +143,13 @@ async function main() {
     const markdown = fs.readFileSync(filepath, "utf8");
     const title = readTitle(markdown);
     const articleUrl = "https://teuespaco.com.br/" + nomeDaPagina(filename);
-    // O link do artigo é enviado separadamente pela Graph API.
-    // Não incluir a URL da página inicial na legenda: isso cria uma segunda prévia/link.
-    const message = title;
+    // Mantém a chamada para ação e as hashtags, sem colocar um segundo URL
+    // na legenda. O único link é o endereço direto desta notícia.
+    const message = title
+      + "\\n\\nAcesse e confira:➡️"
+      + "\\n\\n#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";
 
+    await waitForArticlePage(articleUrl, title);
     const postId = await publishToFacebook(message, articleUrl);
     state.published[filename] = {
       post_id: postId,
