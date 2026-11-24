@@ -21,7 +21,7 @@
     .news-card{padding:12px;display:grid;grid-template-columns:22px 104px 1fr;gap:12px;align-items:center}.news-card img{width:104px;height:76px;object-fit:cover;border-radius:8px;background:#30333a}
     .news-card h3{font-size:15px;margin:0 0 5px}.news-card small{color:var(--muted)}.news-card input{width:17px;height:17px;accent-color:var(--accent)}
     .preview{padding:18px;position:sticky;top:18px;height:max-content}.preview img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:9px;background:#30333a}.preview h2{font-size:19px;margin:14px 0 6px}
-    .preview a{color:var(--accent);word-break:break-all}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+    .preview a{color:var(--accent);word-break:break-all}.preview textarea{width:100%;min-height:150px;resize:vertical;background:#101114;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:11px;font:14px/1.5 Arial,sans-serif}.preview-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
     .status{padding:12px 14px;border-radius:9px;background:#20232a;color:var(--muted);margin:0 0 16px}.error{color:#ff9b9b}.selection{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:12px 0;color:var(--muted)}
     @media(max-width:800px){.layout{grid-template-columns:1fr}.preview{position:static}.intro{align-items:start;flex-direction:column}.news-card{grid-template-columns:22px 82px 1fr}.news-card img{width:82px;height:68px}}
   </style>
@@ -57,7 +57,7 @@
 <script>
 (() => {
   const $ = id => document.getElementById(id);
-  let news = [], selected = new Set(), visible = [], sortBy = "updated";
+  let news = [], selected = new Set(), visible = [], sortBy = "updated", activeNews = null;
   const setStatus = (message, error=false) => { $("status").textContent=message; $("status").className="status"+(error?" error":""); };
   const esc = value => String(value||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   function updateSelection(){ $("selected").textContent=selected.size; $("selectionText").textContent=selected.size?selected.size+" notícia(s) selecionada(s) nesta sessão.":"Nenhuma notícia selecionada."; }
@@ -91,7 +91,7 @@
     window.netlifyIdentity.on("login",user=>{window.netlifyIdentity.close();load(user);});
     $("logout").addEventListener("click",()=>window.netlifyIdentity.logout());
   }else{setStatus("Não foi possível carregar o sistema de autenticação.",true);}
-  $("search").addEventListener("input",render);
+  $("search").addEventListener("input",render);\n  $("copyCaption").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("caption").value);$("reviewStatus").textContent="Legenda copiada. Ainda não foi publicada.";}catch(e){$("reviewStatus").textContent="Não foi possível copiar automaticamente. Selecione e copie a legenda manualmente.";}});\n  $("prepareReview").addEventListener("click",()=>{if(!activeNews)return;$("reviewStatus").textContent="Revisão preparada para: "+activeNews.titulo+". A publicação ainda não foi enviada nem salva em uma fila permanente.";});
   $("sortToggle").addEventListener("click",()=>{const open=$("sortMenu").hidden;$("sortMenu").hidden=!open;$("sortToggle").setAttribute("aria-expanded",String(open));});
   $("sortMenu").querySelectorAll("[data-sort]").forEach(option=>option.addEventListener("click",()=>{sortBy=option.dataset.sort;$("sortCurrent").textContent=option.textContent;$("sortMenu").querySelectorAll("[data-sort]").forEach(item=>item.setAttribute("aria-checked",String(item===option)));$("sortMenu").hidden=true;$("sortToggle").setAttribute("aria-expanded","false");render();}));
   document.addEventListener("click",event=>{if(!event.target.closest(".sort-wrap")){$("sortMenu").hidden=true;$("sortToggle").setAttribute("aria-expanded","false");}});
