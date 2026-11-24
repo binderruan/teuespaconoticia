@@ -554,7 +554,7 @@ function normalizarUrlImagem(url) {
 
 async function carregarPost() {
   const params = new URLSearchParams(window.location.search);
-  const arquivo = params.get("post");
+  const arquivo = params.get("post") || window.__TEUESPACO_POST_FILE__;
   if (!arquivo) return;
 
   try {
@@ -639,7 +639,7 @@ async function carregarRelacionadas() {
   for (const nome of lista) {
 
     // Pula a notícia atual
-    const atual = new URLSearchParams(window.location.search).get("post");
+    const atual = new URLSearchParams(window.location.search).get("post") || window.__TEUESPACO_POST_FILE__;
     if (nome === atual) continue;
 
     const md = await fetch("/noticias/" + nome).then(r => r.text());
