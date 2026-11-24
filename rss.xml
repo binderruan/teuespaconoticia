@@ -5,7 +5,7 @@
     <link>https://teuespaco.com.br/noticias</link>
     <description>Últimas notícias do Rádio e Jornal Teu Espaço</description>
     <language>pt-br</language>
-    <lastBuildDate>Tue, 24 Nov 2026 20:48:07 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 20:56:46 GMT</lastBuildDate>
     <item>
       <title>Petrobras prevê investimentos de US$ 122 bilhões entre 2027 e 2031</title>
       <link>https://teuespaco.com.br/materia-agencia-brasil-2026-11-24-petrobras-preve-invest-c35da6b2b6.html</link>
@@ -59,6 +59,15 @@
       <media:content url="https://imagens.ebc.com.br/CvcQsiWHGs1jaAFtrtNSfSGqtLs=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/09/24/lula7126.jpg?itok=tUsWU6iY" medium="image" />
       <pubDate>Tue, 24 Nov 2026 12:00:00 GMT</pubDate>
       <category>Justiça</category>
+    </item>
+    <item>
+      <title>Incubadora vai apoiar empreendimentos de afroturismo no país</title>
+      <link>https://teuespaco.com.br/materia-agencia-brasil-2026-11-24-incubadora-vai-apoiar-30e8aa4794.html</link>
+      <guid isPermaLink="true">https://teuespaco.com.br/materia-agencia-brasil-2026-11-24-incubadora-vai-apoiar-30e8aa4794.html</guid>
+      <enclosure url="https://imagens.ebc.com.br/bDyIRQ0IlErxpin4jTCM7E8LCno=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/24/toms6836.jpg?itok=YpAJiAL7" type="image/jpeg" length="0" />
+      <media:content url="https://imagens.ebc.com.br/bDyIRQ0IlErxpin4jTCM7E8LCno=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/24/toms6836.jpg?itok=YpAJiAL7" medium="image" />
+      <pubDate>Tue, 24 Nov 2026 12:00:00 GMT</pubDate>
+      <category>Direitos Humanos</category>
     </item>
     <item>
       <title>Falta de salas e de divulgação limita alcance da animação brasileira</title>
@@ -266,15 +275,6 @@
       <media:content url="https://imagens.ebc.com.br/MV9t9dJxujLL0yB4_p6zQeUoSMk=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/03/img20261014194830229.jpg?itok=NZIuAJOf" medium="image" />
       <pubDate>Sat, 21 Nov 2026 12:00:00 GMT</pubDate>
       <category>Direitos Humanos</category>
-    </item>
-    <item>
-      <title>Arthur Elias chama Taina Maranhão para Data FIFA da Seleção Feminina</title>
-      <link>https://teuespaco.com.br/materia-agencia-brasil-2026-11-21-arthur-elias-chama-tai-9d281b2e6f.html</link>
-      <guid isPermaLink="true">https://teuespaco.com.br/materia-agencia-brasil-2026-11-21-arthur-elias-chama-tai-9d281b2e6f.html</guid>
-      <enclosure url="https://imagens.ebc.com.br/NJp5FOOQ7eLAWRWVHBdQEpggKT0=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/21/11_04_2026_fifa_series_brasil_vs_coreia_do_sul_0869_7b37cebd42.jpeg?itok=-oEENCW7" type="image/jpeg" length="0" />
-      <media:content url="https://imagens.ebc.com.br/NJp5FOOQ7eLAWRWVHBdQEpggKT0=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/21/11_04_2026_fifa_series_brasil_vs_coreia_do_sul_0869_7b37cebd42.jpeg?itok=-oEENCW7" medium="image" />
-      <pubDate>Sat, 21 Nov 2026 12:00:00 GMT</pubDate>
-      <category>Esportes</category>
     </item>
   </channel>
 </rss>
