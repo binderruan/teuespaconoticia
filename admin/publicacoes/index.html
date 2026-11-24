@@ -49,7 +49,8 @@
       <div class="muted">PRÉ-VISUALIZAÇÃO</div><img id="previewImage" alt="" src="">
       <h2 id="previewTitle">Selecione uma notícia</h2><p id="previewMeta" class="muted">A prévia aparecerá aqui.</p>
       <p><a id="previewLink" href="#" target="_blank" rel="noopener" hidden>Abrir notícia no site</a></p>
-      <div class="status">Nesta primeira etapa, o painel está em modo de revisão. A seleção ainda não publica nem agenda conteúdo.</div>
+      <label for="caption" class="muted">LEGENDA PARA O FACEBOOK</label><textarea id="caption" placeholder="Selecione uma notícia..." disabled></textarea><div class="preview-actions"><button id="copyCaption" disabled>Copiar legenda</button><button id="prepareReview" class="primary" disabled>Preparar para aprovação</button></div>
+      <div id="reviewStatus" class="status">Modo de revisão: nenhuma publicação será enviada nesta etapa.</div>
     </aside>
   </div>
   <div class="selection"><span id="selectionText">Nenhuma notícia selecionada.</span><span>Modo de teste</span></div>
@@ -61,9 +62,11 @@
   const setStatus = (message, error=false) => { $("status").textContent=message; $("status").className="status"+(error?" error":""); };
   const esc = value => String(value||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   function updateSelection(){ $("selected").textContent=selected.size; $("selectionText").textContent=selected.size?selected.size+" notícia(s) selecionada(s) nesta sessão.":"Nenhuma notícia selecionada."; }
+  function makeCaption(item){return item.titulo+"\\n\\nAcesse e confira:➡️ "+item.link+"\\n\\n#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";}
   function showPreview(item){
-    $("previewTitle").textContent=item.titulo;$("previewMeta").textContent=[item.data,item.categoria].filter(Boolean).join(" · ");
+    activeNews=item; $("previewTitle").textContent=item.titulo;$("previewMeta").textContent=[item.data,item.categoria].filter(Boolean).join(" · ");
     $("previewImage").src=item.imagem||"";$("previewLink").href=item.link;$("previewLink").hidden=false;
+    $("caption").value=makeCaption(item);$("caption").disabled=false;$("copyCaption").disabled=false;$("prepareReview").disabled=false;
   }
   function render(){
     const term=$("search").value.trim().toLocaleLowerCase("pt-BR");
@@ -91,7 +94,9 @@
     window.netlifyIdentity.on("login",user=>{window.netlifyIdentity.close();load(user);});
     $("logout").addEventListener("click",()=>window.netlifyIdentity.logout());
   }else{setStatus("Não foi possível carregar o sistema de autenticação.",true);}
-  $("search").addEventListener("input",render);\n  $("copyCaption").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("caption").value);$("reviewStatus").textContent="Legenda copiada. Ainda não foi publicada.";}catch(e){$("reviewStatus").textContent="Não foi possível copiar automaticamente. Selecione e copie a legenda manualmente.";}});\n  $("prepareReview").addEventListener("click",()=>{if(!activeNews)return;$("reviewStatus").textContent="Revisão preparada para: "+activeNews.titulo+". A publicação ainda não foi enviada nem salva em uma fila permanente.";});
+  $("search").addEventListener("input",render);
+  $("copyCaption").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("caption").value);$("reviewStatus").textContent="Legenda copiada. Ainda não foi publicada.";}catch(e){$("reviewStatus").textContent="Não foi possível copiar automaticamente. Copie a legenda manualmente.";}});
+  $("prepareReview").addEventListener("click",()=>{if(activeNews)$("reviewStatus").textContent="Revisão preparada para: "+activeNews.titulo+". Ainda não foi enviada ao Facebook.";});\n  $("copyCaption").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("caption").value);$("reviewStatus").textContent="Legenda copiada. Ainda não foi publicada.";}catch(e){$("reviewStatus").textContent="Não foi possível copiar automaticamente. Selecione e copie a legenda manualmente.";}});\n  $("prepareReview").addEventListener("click",()=>{if(!activeNews)return;$("reviewStatus").textContent="Revisão preparada para: "+activeNews.titulo+". A publicação ainda não foi enviada nem salva em uma fila permanente.";});
   $("sortToggle").addEventListener("click",()=>{const open=$("sortMenu").hidden;$("sortMenu").hidden=!open;$("sortToggle").setAttribute("aria-expanded",String(open));});
   $("sortMenu").querySelectorAll("[data-sort]").forEach(option=>option.addEventListener("click",()=>{sortBy=option.dataset.sort;$("sortCurrent").textContent=option.textContent;$("sortMenu").querySelectorAll("[data-sort]").forEach(item=>item.setAttribute("aria-checked",String(item===option)));$("sortMenu").hidden=true;$("sortToggle").setAttribute("aria-expanded","false");render();}));
   document.addEventListener("click",event=>{if(!event.target.closest(".sort-wrap")){$("sortMenu").hidden=true;$("sortToggle").setAttribute("aria-expanded","false");}});
