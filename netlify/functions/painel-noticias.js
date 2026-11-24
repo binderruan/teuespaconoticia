@@ -29,7 +29,7 @@ exports.handler = async (event) => {
       return { statusCode: 401, headers, body: JSON.stringify({ error: "Não foi possível validar o usuário." }) };
     }
 
-    const newsResponse = await fetch(SITE_URL + "/noticias/noticias.json", {
+    const newsResponse = await fetch(SITE_URL + "/noticias.json", {
       headers: { Accept: "application/json" }
     });
 
