@@ -1,6 +1,10 @@
 name: Publicar notícias no Facebook
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'noticias/agencia-brasil-*.md'
   workflow_run:
     workflows: ["Publicar notícias da Agência Brasil"]
     types: [completed]
