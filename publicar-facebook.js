@@ -116,9 +116,9 @@ async function main() {
     const markdown = fs.readFileSync(filepath, "utf8");
     const title = readTitle(markdown);
     const articleUrl = "https://teuespaco.com.br/" + nomeDaPagina(filename);
-    const message = title
-      + "\n\nAcesse e confira:➡️ www.teuespaco.com.br/\n\n"
-      + "#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";
+    // O link do artigo é enviado separadamente pela Graph API.
+    // Não incluir a URL da página inicial na legenda: isso cria uma segunda prévia/link.
+    const message = title;
 
     const postId = await publishToFacebook(message, articleUrl);
     state.published[filename] = {
