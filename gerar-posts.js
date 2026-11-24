@@ -67,7 +67,7 @@ for (const nome of arquivos) {
   ].join("\n    ");
   let pagina = modelo.replace(/<meta property="og:image"[^>]*id="og-image"[^>]*>/i, metas);
   pagina = pagina.replace(/<title>[\s\S]*?<\/title>/i, "<title>" + escaparHtml(titulo) + " - Teu Espaço</title>");
-  pagina = pagina.replace("</head>", "<script>window.__TEUESPACO_POST_FILE__ = " + JSON.stringify(nome) + ";<\\/script>\n</head>");
+  pagina = pagina.replace("</head>", "<script>window.__TEUESPACO_POST_FILE__ = " + JSON.stringify(nome) + ";</scr" + "ipt>\n</head>");
   fs.writeFileSync(path.join(raiz, arquivoHtml), pagina, "utf8");
 }
 fs.writeFileSync(path.join(pasta, "noticias.json"), JSON.stringify(noticias, null, 2));
