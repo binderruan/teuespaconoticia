@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 const PAGE_ID = process.env.FACEBOOK_PAGE_ID;
 const PAGE_TOKEN = process.env.FACEBOOK_PAGE_ACCESS_TOKEN;
@@ -7,6 +8,12 @@ const NEWS_DIR = path.join(__dirname, "noticias");
 const STATE_FILE = path.join(NEWS_DIR, "facebook-publicadas.json");
 const GRAPH_VERSION = "v27.0";
 const SITE_URL = "https://www.teuespaco.com.br";
+
+function nomeDaPagina(nome) {
+  const base = nome.replace(/\\.md$/i, "").normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/-+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48).replace(/-+$/g, "");
+  const hash = crypto.createHash("sha1").update(nome).digest("hex").slice(0, 10);
+  return "materia-" + (base || "noticia") + "-" + hash + ".html";
+}
 
 function readTitle(markdown) {
   const match = markdown.match(/^title:\s*(.*)$/mi);
@@ -108,7 +115,7 @@ async function main() {
     const filepath = path.join(NEWS_DIR, filename);
     const markdown = fs.readFileSync(filepath, "utf8");
     const title = readTitle(markdown);
-    const articleUrl = SITE_URL + "/noticia.html?post=" + encodeURIComponent(filename);
+    const articleUrl = "https://teuespaco.com.br/" + nomeDaPagina(filename);
     const message = title
       + "\n\nAcesse e confira:➡️ www.teuespaco.com.br/\n\n"
       + "#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";
