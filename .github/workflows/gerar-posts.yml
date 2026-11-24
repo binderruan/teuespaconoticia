@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - "noticias/*.md"
+      - "gerar-posts.js"
+      - "noticia.html"
 jobs:
   gerar:
     runs-on: ubuntu-latest
