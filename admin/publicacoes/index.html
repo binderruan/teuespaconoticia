@@ -60,14 +60,13 @@
 (() => {
   const $ = id => document.getElementById(id);
   let news = [], selected = new Set(), visible = [], sortBy = "updated", activeNews = null;
-  let reviewQueue = [];
+  let reviewQueue = [], currentUser = null;
   try { reviewQueue = JSON.parse(localStorage.getItem("teuespaco-review-queue") || "[]"); if (!Array.isArray(reviewQueue)) reviewQueue=[]; } catch(e) { reviewQueue=[]; }
   const setStatus = (message, error=false) => { $("status").textContent=message; $("status").className="status"+(error?" error":""); };
   const esc = value => String(value||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   function updateSelection(){ $("selected").textContent=selected.size; $("selectionText").textContent=selected.size?selected.size+" notícia(s) selecionada(s) nesta sessão.":"Nenhuma notícia selecionada."; }
   function makeCaption(item){return item.titulo+"\n\nAcesse e confira:➡️ "+item.link+"\n\n#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";}
-  function saveQueue(){localStorage.setItem("teuespaco-review-queue",JSON.stringify(reviewQueue));renderQueue();}
-  function renderQueue(){const el=$("queueList");if(!reviewQueue.length){el.className="empty";el.textContent="Nenhum rascunho na fila.";return;}el.className="";el.innerHTML=reviewQueue.map((q,i)=>`<div class="queue-item"><div><strong>${esc(q.titulo)}</strong><small>${esc(q.status)}${q.agendado? " · "+esc(new Date(q.agendado).toLocaleString("pt-BR")):" · Sem horário definido"}</small></div><button type="button" data-approve="${i}" ${q.status==="Aprovado"?"disabled":""}>${q.status==="Aprovado"?"Aprovado":"Aprovar"}</button><button type="button" data-remove="${i}">Remover</button></div>`).join("");el.querySelectorAll("[data-approve]").forEach(b=>b.addEventListener("click",()=>{reviewQueue[Number(b.dataset.approve)].status="Aprovado";saveQueue();}));el.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{reviewQueue.splice(Number(b.dataset.remove),1);saveQueue();}));}
+  async function queueRequest(action,item){if(!currentUser)throw new Error("Sessão expirada. Entre novamente.");const token=await currentUser.jwt();const response=await fetch("/.netlify/functions/fila-publicacoes",{method:action==="list"?"GET":"POST",headers:{Authorization:"Bearer "+token,"Content-Type":"application/json"},body:action==="list"?undefined:JSON.stringify({action,...item})});const data=await response.json();if(!response.ok)throw new Error(data.error||"Falha ao atualizar a fila.");reviewQueue=data.queue||[];renderQueue();return data;}\n  function renderQueue(){const el=$("queueList");if(!reviewQueue.length){el.className="empty";el.textContent="Nenhum agendamento na fila.";return;}el.className="";el.innerHTML=reviewQueue.map((q)=>`<div class="queue-item"><div><strong>${esc(q.titulo)}</strong><small>${esc(q.status)} · ${q.agendado?esc(new Date(q.agendado).toLocaleString("pt-BR")):"Sem horário"}</small></div><button type="button" data-approve="${esc(q.id)}" ${q.status!=="Aguardando aprovação"?"disabled":""}>${q.status==="Aguardando aprovação"?"Aprovar":"Aprovado"}</button><button type="button" data-remove="${esc(q.id)}">Remover</button></div>`).join("");el.querySelectorAll("[data-approve]").forEach(b=>b.addEventListener("click",async()=>{b.disabled=true;try{await queueRequest("approve",{id:b.dataset.approve});$("reviewStatus").textContent="Agendamento aprovado. A publicação será automática no horário escolhido.";}catch(e){$("reviewStatus").textContent=e.message;b.disabled=false;}}));el.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",async()=>{b.disabled=true;try{await queueRequest("remove",{id:b.dataset.remove});}catch(e){$("reviewStatus").textContent=e.message;b.disabled=false;}}));}
   function showPreview(item){
     activeNews=item; $("previewTitle").textContent=item.titulo;$("previewMeta").textContent=[item.data,item.categoria].filter(Boolean).join(" · ");
     $("previewImage").src=item.imagem||"";$("previewLink").href=item.link;$("previewLink").hidden=false;
@@ -84,6 +83,7 @@
     $("selectVisible").disabled=!visible.length;$("clear").disabled=!selected.size;updateSelection();
   }
   async function load(user){
+    currentUser=user;
     $("user").textContent=user.email||"Usuário autenticado";$("logout").hidden=false;
     try{
       const token=await user.jwt();
@@ -91,7 +91,7 @@
       const data=await response.json();if(!response.ok)throw new Error(data.error||"Falha ao carregar notícias.");
       news=data.noticias||[];$("total").textContent=data.total??news.length;
       $("search").disabled=false;$("sortToggle").disabled=false;$("selectVisible").disabled=false;$("clear").disabled=false;
-      setStatus("Acesso validado. Catálogo carregado com sucesso.");render();
+      await queueRequest("list");setStatus("Acesso validado. Catálogo e fila permanente carregados.");render();
     }catch(error){setStatus(error.message,true);$("list").innerHTML='<div class="empty">Não foi possível carregar o catálogo.</div>';}
   }
   if(window.netlifyIdentity){
@@ -100,9 +100,8 @@
     $("logout").addEventListener("click",()=>window.netlifyIdentity.logout());
   }else{setStatus("Não foi possível carregar o sistema de autenticação.",true);}
   $("search").addEventListener("input",render);
-  renderQueue();
   $("copyCaption").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("caption").value);$("reviewStatus").textContent="Legenda copiada. Ainda não foi publicada.";}catch(e){$("reviewStatus").textContent="Não foi possível copiar automaticamente. Copie a legenda manualmente."; }});
-  $("prepareReview").addEventListener("click",()=>{if(!activeNews)return;const exists=reviewQueue.some(q=>q.nome===activeNews.nome);if(exists){$("reviewStatus").textContent="Esta notícia já está na fila de aprovação.";return;}reviewQueue.unshift({nome:activeNews.nome,titulo:activeNews.titulo,link:activeNews.link,legenda:$("caption").value,agendado:$("scheduleAt").value||"",status:"Aguardando aprovação",criadoEm:new Date().toISOString()});saveQueue();$("reviewStatus").textContent="Notícia adicionada à fila de aprovação neste navegador.";});
+  $("prepareReview").addEventListener("click",async()=>{if(!activeNews)return;const raw=$("scheduleAt").value;if(!raw){$("reviewStatus").textContent="Escolha a data e o horário para agendar.";return;}const when=new Date(raw);if(!Number.isFinite(when.getTime())||when.getTime()<=Date.now()){$("reviewStatus").textContent="Escolha um horário futuro.";return;}const button=$("prepareReview");button.disabled=true;try{await queueRequest("add",{item:{nome:activeNews.nome,titulo:activeNews.titulo,link:activeNews.link,legenda:$("caption").value,agendado:when.toISOString()}});$("reviewStatus").textContent="Agendamento salvo no servidor. Aprove na fila para autorizar a publicação automática."; }catch(e){$("reviewStatus").textContent=e.message;}finally{button.disabled=false;}});
   $("sortToggle").addEventListener("click",()=>{const open=$("sortMenu").hidden;$("sortMenu").hidden=!open;$("sortToggle").setAttribute("aria-expanded",String(open));});
   $("sortMenu").querySelectorAll("[data-sort]").forEach(option=>option.addEventListener("click",()=>{sortBy=option.dataset.sort;$("sortCurrent").textContent=option.textContent;$("sortMenu").querySelectorAll("[data-sort]").forEach(item=>item.setAttribute("aria-checked",String(item===option)));$("sortMenu").hidden=true;$("sortToggle").setAttribute("aria-expanded","false");render();}));
   document.addEventListener("click",event=>{if(!event.target.closest(".sort-wrap")){$("sortMenu").hidden=true;$("sortToggle").setAttribute("aria-expanded","false");}});
