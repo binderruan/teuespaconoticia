@@ -35,7 +35,7 @@ function dataRss(data) {
 }
 const noticias = [];
 function nomeDaPagina(nome) {
-  const base = nome.replace(/\.md$/i, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48);
+  const base = nome.replace(/\.md$/i, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/-+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48).replace(/-+$/g, "");
   const hash = crypto.createHash("sha1").update(nome).digest("hex").slice(0, 10);
   return "materia-" + (base || "noticia") + "-" + hash + ".html";
 }
