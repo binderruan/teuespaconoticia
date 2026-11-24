@@ -50,4 +50,3 @@ jobs:
             git commit -m "Atualiza controle de publicações do Facebook"
             git push
           fi
-          fi
