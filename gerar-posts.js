@@ -47,7 +47,7 @@ for (const nome of arquivos) {
   const categoria = lerCampo(conteudo, "category");
   const descricao = descricaoDaMateria(conteudo);
   const arquivoHtml = nomeDaPagina(nome);
-  const urlComPost = "https://teuespaco.com.br/" + arquivoHtml + "?post=" + encodeURIComponent(nome);
+  const urlComPost = "https://teuespaco.com.br/" + arquivoHtml;
   noticias.push({ nome, titulo: titulo.trim(), data: data.trim(), imagem, categoria: categoria.trim() });
 
   const metas = [
@@ -67,6 +67,7 @@ for (const nome of arquivos) {
   ].join("\n    ");
   let pagina = modelo.replace(/<meta property="og:image"[^>]*id="og-image"[^>]*>/i, metas);
   pagina = pagina.replace(/<title>[\s\S]*?<\/title>/i, "<title>" + escaparHtml(titulo) + " - Teu Espaço</title>");
+  pagina = pagina.replace("</head>", "<script>window.__TEUESPACO_POST_FILE__ = " + JSON.stringify(nome) + ";<\\/script>\n</head>");
   fs.writeFileSync(path.join(raiz, arquivoHtml), pagina, "utf8");
 }
 fs.writeFileSync(path.join(pasta, "noticias.json"), JSON.stringify(noticias, null, 2));
@@ -78,9 +79,10 @@ const itens = [...noticias].sort((a,b) => {
   return conv(b.data)-conv(a.data);
 }).slice(0,30).map(n => {
   const arquivoHtml = nomeDaPagina(n.nome);
-  const link = "https://teuespaco.com.br/" + arquivoHtml + "?post=" + encodeURIComponent(n.nome);
-  return '    <item>\n      <title>' + escaparXml(n.titulo) + '</title>\n      <link>' + escaparXml(link) + '</link>\n      <guid isPermaLink="true">' + escaparXml(link) + '</guid>\n      <pubDate>' + dataRss(n.data) + '</pubDate>\n      <category>' + escaparXml(n.categoria) + '</category>\n    </item>';
+  const link = "https://teuespaco.com.br/" + arquivoHtml;
+  const tipoImagem = /\.png(?:\?|$)/i.test(n.imagem) ? "image/png" : /\.webp(?:\?|$)/i.test(n.imagem) ? "image/webp" : "image/jpeg";
+  return '    <item>\n      <title>' + escaparXml(n.titulo) + '</title>\n      <link>' + escaparXml(link) + '</link>\n      <guid isPermaLink="true">' + escaparXml(link) + '</guid>\n      <enclosure url="' + escaparXml(n.imagem) + '" type="' + tipoImagem + '" length="0" />\n      <media:content url="' + escaparXml(n.imagem) + '" medium="image" />\n      <pubDate>' + dataRss(n.data) + '</pubDate>\n      <category>' + escaparXml(n.categoria) + '</category>\n    </item>';
 }).join("\n");
-const rss = '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n  <channel>\n    <title>Teu Espaço - Notícias</title>\n    <link>https://teuespaco.com.br/noticias</link>\n    <description>Últimas notícias do Rádio e Jornal Teu Espaço</description>\n    <language>pt-br</language>\n    <lastBuildDate>' + new Date().toUTCString() + '</lastBuildDate>\n' + itens + '\n  </channel>\n</rss>\n';
+const rss = '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">\n  <channel>\n    <title>Teu Espaço - Notícias</title>\n    <link>https://teuespaco.com.br/noticias</link>\n    <description>Últimas notícias do Rádio e Jornal Teu Espaço</description>\n    <language>pt-br</language>\n    <lastBuildDate>' + new Date().toUTCString() + '</lastBuildDate>\n' + itens + '\n  </channel>\n</rss>\n';
 fs.writeFileSync(path.join(raiz, "rss.xml"), rss, "utf8");
 console.log("Arquivos, páginas individuais e feed RSS criados!");
