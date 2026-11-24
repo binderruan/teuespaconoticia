@@ -146,8 +146,8 @@ async function main() {
     // Mantém a chamada para ação e as hashtags, sem colocar um segundo URL
     // na legenda. O único link é o endereço direto desta notícia.
     const message = title
-      + "\\n\\nAcesse e confira:➡️"
-      + "\\n\\n#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";
+      + "\n\nAcesse e confira:➡️"
+      + "\n\n#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";
 
     await waitForArticlePage(articleUrl, title);
     const postId = await publishToFacebook(message, articleUrl);
