@@ -97,7 +97,8 @@
     window.netlifyIdentity.on("login",user=>{window.netlifyIdentity.close();load(user);});
     $("logout").addEventListener("click",()=>window.netlifyIdentity.logout());
   }else{setStatus("Não foi possível carregar o sistema de autenticação.",true);}
-  $("search").addEventListener("input",render);\n  renderQueue();
+  $("search").addEventListener("input",render);
+  renderQueue();
   $("copyCaption").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("caption").value);$("reviewStatus").textContent="Legenda copiada. Ainda não foi publicada.";}catch(e){$("reviewStatus").textContent="Não foi possível copiar automaticamente. Copie a legenda manualmente."; }});
   $("prepareReview").addEventListener("click",()=>{if(!activeNews)return;const exists=reviewQueue.some(q=>q.nome===activeNews.nome);if(exists){$("reviewStatus").textContent="Esta notícia já está na fila de aprovação.";return;}reviewQueue.unshift({nome:activeNews.nome,titulo:activeNews.titulo,link:activeNews.link,legenda:$("caption").value,agendado:$("scheduleAt").value||"",status:"Aguardando aprovação",criadoEm:new Date().toISOString()});saveQueue();$("reviewStatus").textContent="Notícia adicionada à fila de aprovação neste navegador.";});
   $("sortToggle").addEventListener("click",()=>{const open=$("sortMenu").hidden;$("sortMenu").hidden=!open;$("sortToggle").setAttribute("aria-expanded",String(open));});
