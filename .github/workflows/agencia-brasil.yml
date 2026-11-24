@@ -32,6 +32,7 @@ jobs:
           else
             git commit -m "Publica notícias e atualiza páginas de compartilhamento"
             git push
+          fi
 
       - name: Publicar imediatamente as notícias novas no Facebook
         env:
