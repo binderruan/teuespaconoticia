@@ -1,4 +1,11 @@
 const SITE_URL = "https://teuespaco.com.br";
+const crypto = require("crypto");
+
+function linkDaNoticia(nome) {
+  const base = String(nome || "").replace(/\\.md$/i, "").normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48);
+  const hash = crypto.createHash("sha1").update(String(nome || "")).digest("hex").slice(0, 10);
+  return SITE_URL + "/materia-" + (base || "noticia") + "-" + hash + ".html";
+}
 
 exports.handler = async (event) => {
   const headers = {
@@ -50,7 +57,7 @@ exports.handler = async (event) => {
           data: item.data || "",
           imagem: item.imagem || "",
           categoria: item.categoria || "",
-          link: "https://teuespaco.com.br/noticia.html?post=" + encodeURIComponent(item.nome || "")
+          link: linkDaNoticia(item.nome)
         }))
       })
     };
