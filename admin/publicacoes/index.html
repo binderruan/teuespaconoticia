@@ -59,7 +59,9 @@
 <script>
 (() => {
   const $ = id => document.getElementById(id);
-  let news = [], selected = new Set(), visible = [], sortBy = "updated", activeNews = null;\n  let reviewQueue = [];\n  try { reviewQueue = JSON.parse(localStorage.getItem("teuespaco-review-queue") || "[]"); if (!Array.isArray(reviewQueue)) reviewQueue=[]; } catch(e) { reviewQueue=[]; }
+  let news = [], selected = new Set(), visible = [], sortBy = "updated", activeNews = null;
+  let reviewQueue = [];
+  try { reviewQueue = JSON.parse(localStorage.getItem("teuespaco-review-queue") || "[]"); if (!Array.isArray(reviewQueue)) reviewQueue=[]; } catch(e) { reviewQueue=[]; }
   const setStatus = (message, error=false) => { $("status").textContent=message; $("status").className="status"+(error?" error":""); };
   const esc = value => String(value||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   function updateSelection(){ $("selected").textContent=selected.size; $("selectionText").textContent=selected.size?selected.size+" notícia(s) selecionada(s) nesta sessão.":"Nenhuma notícia selecionada."; }
