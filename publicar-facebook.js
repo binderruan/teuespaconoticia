@@ -15,6 +15,15 @@ function nomeDaPagina(nome) {
   return "materia-" + (base || "noticia") + "-" + hash + ".html";
 }
 
+function readFrontmatterValue(markdown, field) {
+  const match = markdown.match(new RegExp("^" + field + ":\\s*(.*)$", "mi"));
+  if (!match) return "";
+  const raw = match[1].trim();
+  if (raw.startsWith('"')) { try { return JSON.parse(raw); } catch (_) {} }
+  if (raw.startsWith("\'") && raw.endsWith("\'")) return raw.slice(1, -1).replace(/\'\'/g, "\'");
+  return raw;
+}
+
 function readTitle(markdown) {
   const match = markdown.match(/^title:\s*(.*)$/mi);
   if (!match) return "Notícia";
@@ -75,9 +84,9 @@ async function waitForArticlePage(link, title) {
   throw new Error("A página da notícia não ficou disponível com metadados Open Graph após 5 minutos: " + link);
 }
 
-async function publishToFacebook(message, link) {
-  const endpoint = `https://graph.facebook.com/${GRAPH_VERSION}/${PAGE_ID}/feed`;
-  const body = new URLSearchParams({ message, link, access_token: PAGE_TOKEN });
+async function publishToFacebook(message, imageUrl) {
+  const endpoint = `https://graph.facebook.com/${GRAPH_VERSION}/${PAGE_ID}/photos`;
+  const body = new URLSearchParams({ url: imageUrl, caption: message, access_token: PAGE_TOKEN });
   const response = await fetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
