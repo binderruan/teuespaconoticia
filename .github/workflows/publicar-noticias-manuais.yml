@@ -1,0 +1,65 @@
+name: Publicar notícias criadas no painel no Facebook
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'noticias/*.md'
+  workflow_dispatch:
+    inputs:
+      arquivo:
+        description: 'Arquivo Markdown em noticias/ para teste (opcional)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicar-noticias-manuais-facebook
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Gerar páginas individuais e RSS
+        run: node gerar-posts.js
+      - name: Salvar páginas geradas para o site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add noticias/posts.json noticias/noticias.json rss.xml materia-*.html
+          if git diff --cached --quiet; then
+            echo "Páginas e RSS já estavam atualizados."
+          else
+            git commit -m "Gera páginas para notícias criadas no painel"
+            git push
+          fi
+      - name: Publicar notícias manuais no Facebook
+        env:
+          FACEBOOK_PAGE_ID: \${{ secrets.FACEBOOK_PAGE_ID }}
+          FACEBOOK_PAGE_ACCESS_TOKEN: \${{ secrets.FACEBOOK_PAGE_ACCESS_TOKEN }}
+          GITHUB_EVENT_BEFORE: \${{ github.event.before }}
+          GITHUB_SHA: \${{ github.sha }}
+          NEWS_FILE: \${{ inputs.arquivo }}
+        run: node publicar-noticias-manuais.js
+      - name: Salvar controle de publicações manuais
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add noticias/facebook-manuais-publicadas.json
+          if git diff --cached --quiet; then
+            echo "Nenhum novo registro de publicação manual."
+          else
+            git commit -m "Registra notícias manuais publicadas no Facebook"
+            git push
+          fi
