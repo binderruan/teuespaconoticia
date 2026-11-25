@@ -160,14 +160,25 @@ async function main() {
     const markdown = fs.readFileSync(filepath, "utf8");
     const title = readTitle(markdown);
     const articleUrl = "https://teuespaco.com.br/" + nomeDaPagina(filename);
-    // Mantém a chamada para ação e as hashtags, sem colocar um segundo URL
-    // na legenda. O único link é o endereço direto desta notícia.
+    // A legenda leva o link da matéria. A foto usa a capa da notícia;
+    // se ela falhar ou não existir, tenta automaticamente o banner padrão.
     const message = title
-      + "\n\nAcesse e confira:➡️"
+      + "\n\nAcesse e confira: " + articleUrl
       + "\n\n#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";
 
-    await waitForArticlePage(articleUrl, title);
-    const postId = await publishToFacebook(message, articleUrl);
+    const articleImage = await waitForArticlePage(articleUrl, title);
+    let postId;
+    if (articleImage) {
+      try {
+        postId = await publishToFacebook(message, articleImage);
+      } catch (imageError) {
+        console.log("Falha ao publicar com a imagem da notícia. Tentando o banner padrão: " + imageError.message);
+      }
+    }
+    if (!postId) {
+      console.log("Publicando com a imagem reserva: " + FALLBACK_NEWS_IMAGE);
+      postId = await publishToFacebook(message, FALLBACK_NEWS_IMAGE);
+    }
     state.published[filename] = {
       post_id: postId,
       published_at: new Date().toISOString()
