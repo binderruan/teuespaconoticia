@@ -83,15 +83,15 @@ async function waitForArticlePage(link) {
   throw new Error("A página não ficou disponível com metadados Open Graph em até 5 minutos: " + link);
 }
 
-async function publish(message, link) {
-  const response = await fetch("https://graph.facebook.com/" + GRAPH_VERSION + "/" + PAGE_ID + "/feed", {
+async function publishPhoto(message, imageUrl) {
+  const response = await fetch("https://graph.facebook.com/" + GRAPH_VERSION + "/" + PAGE_ID + "/photos", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ message, link, access_token: PAGE_TOKEN })
+    body: new URLSearchParams({ url: imageUrl, caption: message, access_token: PAGE_TOKEN })
   });
   const result = await response.json();
-  if (!response.ok || !result.id) throw new Error("A Meta recusou a publicação: " + JSON.stringify(result));
-  return result.id;
+  if (!response.ok || !(result.post_id || result.id)) throw new Error("A Meta recusou a publicação da foto: " + JSON.stringify(result));
+  return result.post_id || result.id;
 }
 
 function loadState() {
@@ -120,9 +120,11 @@ async function main() {
     const markdown = fs.readFileSync(path.join(NEWS_DIR, filename), "utf8");
     const title = readFrontmatterValue(markdown, "title") || path.basename(filename, ".md");
     const link = SITE_URL + "/" + nomeDaPagina(filename);
-    const message = title + "\n\nAcesse e confira:➡️\n\n#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";
+    const thumbnail = readFrontmatterValue(markdown, "thumbnail");
+    if (!/^https:\/\//i.test(thumbnail)) throw new Error("A notícia " + filename + " não possui uma thumbnail HTTPS válida no frontmatter.");
+    const message = title + "\n\nAcesse e confira: " + link + "\n\n#TeuEspaço #Radio #Jornal #Canoinhas #Brasil #SantaCatarina #Notícia #informação";
     await waitForArticlePage(link);
-    const postId = await publish(message, link);
+    const postId = await publishPhoto(message, thumbnail);
     state.published[filename] = { post_id: postId, title, url: link, published_at: new Date().toISOString() };
     fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2) + "\n", "utf8");
     console.log("Notícia manual publicada no Facebook: " + title + " (post " + postId + ")");
