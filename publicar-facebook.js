@@ -8,6 +8,7 @@ const NEWS_DIR = path.join(__dirname, "noticias");
 const STATE_FILE = path.join(NEWS_DIR, "facebook-publicadas.json");
 const GRAPH_VERSION = "v27.0";
 const SITE_URL = "https://www.teuespaco.com.br";
+const FALLBACK_NEWS_IMAGE = SITE_URL + "/images/clients/bannernews.png";
 
 function nomeDaPagina(nome) {
   const base = nome.replace(/\.md$/i, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/-+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48).replace(/-+$/g, "");
@@ -58,8 +59,7 @@ async function validatePageToken() {
 }
 
 async function waitForArticlePage(link, title) {
-  // O GitHub faz o push antes do deploy terminar. Aguarda a página pública
-  // responder com os metadados Open Graph antes de pedir a prévia ao Facebook.
+  // Aguarda o deploy e tenta obter a imagem de capa da notícia.
   for (let attempt = 1; attempt <= 30; attempt++) {
     try {
       const response = await fetch(link, {
@@ -69,11 +69,19 @@ async function waitForArticlePage(link, title) {
       const html = await response.text();
       const hasOpenGraph = response.ok
         && /<meta[^>]+property=["']og:title["']/i.test(html)
-        && /<meta[^>]+property=["']og:image["']/i.test(html)
-        && html.includes("og:title");
-      if (hasOpenGraph && html.includes("og:image")) {
-        console.log("Página da notícia disponível para compartilhamento: " + link);
-        return;
+        && /<meta[^>]+property=["']og:image["']/i.test(html);
+      if (hasOpenGraph) {
+        const imageMatch = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)
+          || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
+        let imageUrl = imageMatch ? imageMatch[1] : "";
+        if (imageUrl) {
+          imageUrl = imageUrl.replace(/&amp;/g, "&");
+          if (imageUrl.startsWith("/")) imageUrl = new URL(imageUrl, link).href;
+          console.log("Página da notícia disponível. Imagem encontrada: " + imageUrl);
+        } else {
+          console.log("A notícia não informou uma imagem Open Graph. Será usado o banner padrão.");
+        }
+        return imageUrl;
       }
       console.log("Aguardando deploy da notícia (" + attempt + "/30). HTTP " + response.status);
     } catch (error) {
@@ -81,7 +89,7 @@ async function waitForArticlePage(link, title) {
     }
     await new Promise(resolve => setTimeout(resolve, 10000));
   }
-  throw new Error("A página da notícia não ficou disponível com metadados Open Graph após 5 minutos: " + link);
+  throw new Error("A página da notícia não ficou disponível após 5 minutos: " + link);
 }
 
 async function publishToFacebook(message, imageUrl) {
