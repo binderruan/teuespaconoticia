@@ -11,7 +11,20 @@ function escaparHtml(v) {
   return String(v || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 }
 function lerCampo(conteudo, campo, padrao = "") {
-  let valor = (conteudo.match(new RegExp("^" + campo + ":\\s*(.*)$", "mi")) || ["", padrao])[1].trim();
+  const linhas = String(conteudo || "").split(/\\r?\\n/);
+  const indice = linhas.findIndex(linha => new RegExp("^" + campo + ":\\\\s*").test(linha));
+  if (indice < 0) return padrao;
+
+  const prefixo = new RegExp("^" + campo + ":\\\\s*");
+  let valor = linhas[indice].replace(prefixo, "").trim();
+  let i = indice + 1;
+
+  // O Netlify CMS pode quebrar títulos longos em várias linhas YAML indentadas.
+  while (i < linhas.length && /^\\s+\\S/.test(linhas[i]) && !/^\\s+[A-Za-z0-9_-]+:\\s*/.test(linhas[i])) {
+    valor += " " + linhas[i].trim();
+    i++;
+  }
+
   if (valor.startsWith('"')) { try { valor = JSON.parse(valor); } catch (_) {} }
   else if (valor.startsWith("'") && valor.endsWith("'")) valor = valor.slice(1, -1).replace(/''/g, "'");
   return valor;
