@@ -109,7 +109,7 @@ async function main() {
   // O GitHub Actions pode iniciar alguns minutos depois do cron.
   // Aceita o horário programado por até 3 horas, sem confundir execução manual.
   const slot = isScheduledRun
-    ? scheduledSlots.filter(h => currentMinutes >= h * 60 && currentMinutes - h * 60 <= 180)
+    ? scheduledSlots.filter(h => currentMinutes >= h * 60 && currentMinutes - h * 60 <= 60)
         .sort((a, b) => b - a)[0]
     : null;
 
