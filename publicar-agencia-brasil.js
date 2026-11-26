@@ -134,6 +134,21 @@ async function fetchText(url) {
 
 async function main() {
   fs.mkdirSync(NEWS_DIR, { recursive: true });
+  const slot = scheduledSlot();
+  if (process.env.GITHUB_EVENT_NAME === "schedule" && !slot) {
+    console.log("Fora da janela dos horários 08h, 12h e 17h. Aguardando próxima verificação.");
+    return;
+  }
+  const scheduleState = fs.existsSync(SCHEDULE_STATE)
+    ? JSON.parse(fs.readFileSync(SCHEDULE_STATE, "utf8"))
+    : { processed: {} };
+  if (!scheduleState.processed) scheduleState.processed = {};
+  const slotKey = slot ? (localParts().day + "-" + slot) : null;
+  if (slotKey && scheduleState.processed[slotKey]) {
+    console.log("Horário já processado: " + slotKey);
+    return;
+  }
+
   const rss = await fetchText(FEED_URL);
   const items = [...rss.matchAll(/<item\b[^>]*>([\s\S]*?)<\/item>/gi)].map(match => match[1]);
   if (!items.length) throw new Error("O feed da Agência Brasil não retornou notícias.");
@@ -233,10 +248,14 @@ async function main() {
   }
 
   if (publicadas === 0) {
-    console.log("Nenhuma notícia nova, recente e elegível foi encontrada. A execução será encerrada sem alterações.");
+    console.log("Nenhuma notícia nova, recente e elegível foi encontrada. O horário continuará sendo verificado até o fim da janela.");
     return;
   }
 
+  if (slotKey) {
+    scheduleState.processed[slotKey] = { processed_at: new Date().toISOString(), count: publicadas };
+    fs.writeFileSync(SCHEDULE_STATE, JSON.stringify(scheduleState, null, 2) + "\n", "utf8");
+  }
   console.log("Total de notícias publicadas nesta execução: " + publicadas + " de " + limitePorExecucao);
 }
 
