@@ -4,6 +4,21 @@ const path = require("path");
 const FEED_URL = "https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml";
 const NEWS_DIR = path.join(__dirname, "noticias");
 const MAX_AGE_HOURS = 168;
+const SCHEDULE_STATE = path.join(NEWS_DIR, "agencia-brasil-horarios.json");
+const SCHEDULE_HOURS = [8, 12, 17];
+
+function localParts(date = new Date()) {
+  const fmt = new Intl.DateTimeFormat("en-US", { timeZone: "America/Sao_Paulo", year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", hourCycle:"h23" });
+  const p = Object.fromEntries(fmt.formatToParts(date).map(x => [x.type,x.value]));
+  return { day: p.year+"-"+p.month+"-"+p.day, hour:Number(p.hour), minute:Number(p.minute) };
+}
+
+function scheduledSlot() {
+  if (process.env.GITHUB_EVENT_NAME !== "schedule") return null;
+  const t = localParts();
+  const mins = t.hour*60+t.minute;
+  return SCHEDULE_HOURS.filter(h => mins >= h*60 && mins-h*60 <= 60).sort((a,b)=>b-a)[0] || null;
+}
 
 function decodeEntities(value = "") {
   return value
