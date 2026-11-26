@@ -100,7 +100,24 @@ async function main() {
   const hour = Number(new Intl.DateTimeFormat("en-US", {
     timeZone: "America/Sao_Paulo", hour: "2-digit", hourCycle: "h23"
   }).format(now));
-  const slot = [10, 14, 19].find(h => h === hour);
+  const minute = Number(new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Sao_Paulo", minute: "2-digit"
+  }).format(now));
+  const currentMinutes = hour * 60 + minute;
+  const isScheduledRun = process.env.GITHUB_EVENT_NAME === "schedule";
+  const scheduledSlots = [10, 14, 19];
+  // O GitHub Actions pode iniciar alguns minutos depois do cron.
+  // Aceita o horário programado por até 3 horas, sem confundir execução manual.
+  const slot = isScheduledRun
+    ? scheduledSlots.filter(h => currentMinutes >= h * 60 && currentMinutes - h * 60 <= 180)
+        .sort((a, b) => b - a)[0]
+    : null;
+
+  if (isScheduledRun && !slot) {
+    console.log("Execução agendada fora da janela dos horários 10h, 14h e 19h. Nenhuma publicação realizada.");
+    return;
+  }
+
   const publicationKey = local + "-" + (slot || "manual-" + now.toISOString().slice(11,16));
 
   if (config.published[publicationKey]) {
