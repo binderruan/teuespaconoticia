@@ -25,7 +25,7 @@
     "anuncie.png"
   ],
   "caption": "🤝 Quem apoia o Teu Espaço também faz parte dessa história!\n\nConheça nossos patrocinadores e parceiros, prestigie o comércio local e valorize quem acredita na comunicação regional. 💙\n\n📻 Teu Espaço – Informação, comunicação e conexão!\n\n#TeuEspaço #Patrocinadores #Parceiros #ComércioLocal #Canoinhas #Região #SantaCatarina",
-  "last_index": 3,
+  "last_index": 4,
   "published": {
     "2026-11-24-manual-21:29": {
       "file": "2.png",
@@ -42,6 +42,12 @@
     "2026-11-25-19": {
       "file": "4.png",
       "published_at": "2026-11-25T22:04:17.527Z",
+      "facebook": true,
+      "instagram": true
+    },
+    "2026-11-26-manual-18:42": {
+      "file": "5.png",
+      "published_at": "2026-11-26T18:42:47.593Z",
       "facebook": true,
       "instagram": true
     }
