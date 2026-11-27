@@ -2,7 +2,7 @@ name: Publicar patrocinadores no Facebook e Instagram
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 13,17,22 * * *"
   workflow_dispatch:
 
 permissions:
