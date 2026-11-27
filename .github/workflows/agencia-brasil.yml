@@ -1,7 +1,7 @@
 name: Publicar notícias da Agência Brasil
 on:
   schedule:
-    - cron: "17 11,15,20 * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 permissions:
   contents: write
