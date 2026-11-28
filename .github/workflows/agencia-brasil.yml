@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18"
-      - name: Buscar e publicar até três notícias
+      - name: Buscar e preparar uma notícia nova por execução
         run: node publicar-agencia-brasil.js
       - name: Atualizar arquivos de notícias e páginas para compartilhamento
         run: node gerar-posts.js
