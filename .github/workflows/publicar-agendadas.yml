@@ -29,6 +29,42 @@ jobs:
           FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
           FACEBOOK_PAGE_ACCESS_TOKEN: ${{ secrets.FACEBOOK_PAGE_ACCESS_TOKEN }}
         run: node publicar-agendadas.js
+      - name: Buscar uma notícia nova da Agência Brasil
+        if: github.event_name == 'schedule'
+        run: node publicar-agencia-brasil.js
+      - name: Atualizar páginas e feed da notícia
+        if: github.event_name == 'schedule'
+        run: node gerar-posts.js
+      - name: Salvar notícia da Agência Brasil no GitHub
+        if: github.event_name == 'schedule'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add noticias/*.md noticias/posts.json noticias/noticias.json rss.xml materia-*.html
+          if git diff --cached --quiet; then
+            echo "Nenhuma notícia nova para salvar."
+          else
+            git commit -m "Publica notícia nova da Agência Brasil"
+            git push
+          fi
+      - name: Publicar notícia nova da Agência Brasil no Facebook
+        if: github.event_name == 'schedule'
+        env:
+          FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
+          FACEBOOK_PAGE_ACCESS_TOKEN: ${{ secrets.FACEBOOK_PAGE_ACCESS_TOKEN }}
+        run: node publicar-facebook.js
+      - name: Salvar controle da publicação da Agência Brasil
+        if: github.event_name == 'schedule'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add noticias/facebook-publicadas.json
+          if git diff --cached --quiet; then
+            echo "Nenhum controle novo para salvar."
+          else
+            git commit -m "Atualiza controle de publicação da Agência Brasil"
+            git push
+          fi
       - name: Salvar histórico da fila
         run: |
           git config user.name "github-actions[bot]"
