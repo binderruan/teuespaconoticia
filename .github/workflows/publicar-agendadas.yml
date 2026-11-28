@@ -3,6 +3,8 @@ name: Publicar notícias agendadas no Facebook
 on:
   schedule:
     - cron: "*/5 * * * *"
+  repository_dispatch:
+    types: [teuespaco-cada-5-minutos]
   workflow_dispatch:
 
 permissions:
@@ -30,7 +32,7 @@ jobs:
           FACEBOOK_PAGE_ACCESS_TOKEN: ${{ secrets.FACEBOOK_PAGE_ACCESS_TOKEN }}
         run: node publicar-agendadas.js
       - name: Buscar uma notícia nova da Agência Brasil
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
         run: node publicar-agencia-brasil.js
       - name: Atualizar páginas e feed da notícia
         if: github.event_name == 'schedule'
