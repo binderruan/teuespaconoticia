@@ -5,7 +5,16 @@
     <link>https://teuespaco.com.br/noticias</link>
     <description>Últimas notícias do Rádio e Jornal Teu Espaço</description>
     <language>pt-br</language>
-    <lastBuildDate>Sat, 28 Nov 2026 08:28:01 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 28 Nov 2026 14:54:16 GMT</lastBuildDate>
+    <item>
+      <title>Mega-Sena sorteia prêmio de R$ 82 milhões neste domingo</title>
+      <link>https://teuespaco.com.br/materia-agencia-brasil-2026-11-28-mega-sena-sorteia-prem-15177d2082.html</link>
+      <guid isPermaLink="true">https://teuespaco.com.br/materia-agencia-brasil-2026-11-28-mega-sena-sorteia-prem-15177d2082.html</guid>
+      <enclosure url="https://imagens.ebc.com.br/FHmy3erv9J18ISJ-_eyiD5qmOhw=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/mcamg_abr_08052019_8678_1.jpg?itok=TnVYABtq" type="image/jpeg" length="0" />
+      <media:content url="https://imagens.ebc.com.br/FHmy3erv9J18ISJ-_eyiD5qmOhw=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/mcamg_abr_08052019_8678_1.jpg?itok=TnVYABtq" medium="image" />
+      <pubDate>Sat, 28 Nov 2026 12:00:00 GMT</pubDate>
+      <category>Geral</category>
+    </item>
     <item>
       <title>Banda Novos Talentos conquista título estadual e leva o nome de Canoinhas para campeonato nacional</title>
       <link>https://teuespaco.com.br/materia-banda-novos-talentos-conquista-titulo-estadual-e-857c290963.html</link>
@@ -266,15 +275,6 @@
       <media:content url="https://imagens.ebc.com.br/a_3LXYXESs3ZvNypavYqd7AiFY4=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/25/0d9a6488.jpg?itok=i4YDRg1X" medium="image" />
       <pubDate>Wed, 25 Nov 2026 12:00:00 GMT</pubDate>
       <category>Política</category>
-    </item>
-    <item>
-      <title>Anvisa manda apreender medicamentos falsificados para tratar câncer</title>
-      <link>https://teuespaco.com.br/materia-agencia-brasil-2026-11-25-anvisa-manda-apreender-43eff92801.html</link>
-      <guid isPermaLink="true">https://teuespaco.com.br/materia-agencia-brasil-2026-11-25-anvisa-manda-apreender-43eff92801.html</guid>
-      <enclosure url="https://imagens.ebc.com.br/uO9eJaMe5PBo7fSYtnqHT73SWoM=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/01/09/0d7a5833.jpg?itok=ry8qeRZ_" type="image/jpeg" length="0" />
-      <media:content url="https://imagens.ebc.com.br/uO9eJaMe5PBo7fSYtnqHT73SWoM=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/01/09/0d7a5833.jpg?itok=ry8qeRZ_" medium="image" />
-      <pubDate>Wed, 25 Nov 2026 12:00:00 GMT</pubDate>
-      <category>Saúde</category>
     </item>
   </channel>
 </rss>
