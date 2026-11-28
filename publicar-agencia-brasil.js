@@ -4,21 +4,6 @@ const path = require("path");
 const FEED_URL = "https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml";
 const NEWS_DIR = path.join(__dirname, "noticias");
 const MAX_AGE_HOURS = 168;
-const SCHEDULE_STATE = path.join(NEWS_DIR, "agencia-brasil-horarios.json");
-const SCHEDULE_HOURS = [8, 12, 17];
-
-function localParts(date = new Date()) {
-  const fmt = new Intl.DateTimeFormat("en-US", { timeZone: "America/Sao_Paulo", year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", hourCycle:"h23" });
-  const p = Object.fromEntries(fmt.formatToParts(date).map(x => [x.type,x.value]));
-  return { day: p.year+"-"+p.month+"-"+p.day, hour:Number(p.hour), minute:Number(p.minute) };
-}
-
-function scheduledSlot() {
-  if (process.env.GITHUB_EVENT_NAME !== "schedule") return null;
-  const t = localParts();
-  const mins = t.hour*60+t.minute;
-  return SCHEDULE_HOURS.filter(h => mins >= h*60 && mins-h*60 <= 60).sort((a,b)=>b-a)[0] || null;
-}
 
 function decodeEntities(value = "") {
   return value
@@ -134,20 +119,7 @@ async function fetchText(url) {
 
 async function main() {
   fs.mkdirSync(NEWS_DIR, { recursive: true });
-  const slot = scheduledSlot();
-  if (process.env.GITHUB_EVENT_NAME === "schedule" && !slot) {
-    console.log("Fora da janela dos horários 08h, 12h e 17h. Aguardando próxima verificação.");
-    return;
-  }
-  const scheduleState = fs.existsSync(SCHEDULE_STATE)
-    ? JSON.parse(fs.readFileSync(SCHEDULE_STATE, "utf8"))
-    : { processed: {} };
-  if (!scheduleState.processed) scheduleState.processed = {};
-  const slotKey = slot ? (localParts().day + "-" + slot) : null;
-  if (slotKey && scheduleState.processed[slotKey]) {
-    console.log("Horário já processado: " + slotKey);
-    return;
-  }
+  console.log("Execução automática: buscando uma notícia nova para publicar.");
 
   const rss = await fetchText(FEED_URL);
   const items = [...rss.matchAll(/<item\b[^>]*>([\s\S]*?)<\/item>/gi)].map(match => match[1]);
@@ -182,7 +154,7 @@ async function main() {
 
   let publicadas = 0;
   const arquivosCriados = [];
-  const limitePorExecucao = 3;
+  const limitePorExecucao = 1;
 
   for (const item of candidates) {
     if (publicadas >= limitePorExecucao) break;
@@ -252,11 +224,7 @@ async function main() {
     return;
   }
 
-  if (slotKey) {
-    scheduleState.processed[slotKey] = { processed_at: new Date().toISOString(), count: publicadas };
-    fs.writeFileSync(SCHEDULE_STATE, JSON.stringify(scheduleState, null, 2) + "\n", "utf8");
-  }
-  console.log("Total de notícias publicadas nesta execução: " + publicadas + " de " + limitePorExecucao);
+  console.log("Total de notícias preparadas para publicação nesta execução: " + publicadas + " de " + limitePorExecucao);
 }
 
 main().catch(error => {
